@@ -1,0 +1,36 @@
+@import '../../../scss/index.scss';
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 2rem;   
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+.navbar {
+    display: flex;
+    gap: 3.5rem;
+
+}
+.nav-link {
+    font-weight: 600;
+    font-size: 1.7rem;
+    &:hover {
+        color: $primary;
+    }
+}
+.nav-link.active {
+    color: $primary;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+}
