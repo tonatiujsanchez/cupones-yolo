@@ -6,14 +6,14 @@ import styles from './Navbar.module.scss'
 
 export const Navbar = () => {
     return (
-        <div className={`container`}>
+        <header className={`container`}>
             <div className={`${styles['navbar-container']}`}>
                 <div className={`${styles['navbar-content']}`}>
                     <NextLink href={'/'} className="">
                         <Image
-                            width={110}
-                            height={45}
-                            src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/logo-con-slogan.svg`}
+                            width={100}
+                            height={40}
+                            src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/logo.svg`}
                             alt="Logo de Yolostyle"
                             title="Logo de Yolostyle"
                         />
@@ -54,6 +54,6 @@ export const Navbar = () => {
                     </a>
                 </div>
             </div>
-        </div>
+        </header>
     )
 }
