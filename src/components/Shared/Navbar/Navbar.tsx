@@ -9,13 +9,14 @@ export const Navbar = () => {
         <header className={`container`}>
             <div className={`${styles['navbar-container']}`}>
                 <div className={`${styles['navbar-content']}`}>
-                    <NextLink href={'/'} className="">
+                    <NextLink href={'/'}>
                         <Image
                             width={100}
                             height={40}
                             src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/logo.svg`}
                             alt="Logo de Yolostyle"
                             title="Logo de Yolostyle"
+                            className={ styles['navbar-logo'] }
                         />
                     </NextLink>
                     <nav className={styles.navbar}>

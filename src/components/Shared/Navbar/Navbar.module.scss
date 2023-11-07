@@ -11,6 +11,10 @@
     display: flex;
     align-items: center;
     gap: 5rem;
+    
+    .navbar-logo {
+        max-width: 12rem;
+    }
 }
 
 .navbar {
