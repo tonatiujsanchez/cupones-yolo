@@ -4,4 +4,4 @@ export * from './Layouts/SiteLayout'
 
 export * from './Shared/Navbar'
 
-export * from './Home/Hero'
+export * from './Home/HeroSection'

@@ -1,8 +1,8 @@
 import Image from 'next/image'
-import styles from './Hero.module.scss'
+import styles from './HeroSection.module.scss'
 
 
-export const Hero = () => {
+export const HeroSection = () => {
     return (
         <section>
             <div className={`${ styles['hero-content'] }`}>
@@ -28,8 +28,8 @@ export const Hero = () => {
                 <div className={styles['image-center']}>
                     <Image
                         src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/women.webp`}
-                        alt="Modelo YoloStyle"
-                        title="Modelo Yolostyle"
+                        alt="YoloStyle"
+                        title="Yolostyle"
                         width={720}
                         height={960}
                     />

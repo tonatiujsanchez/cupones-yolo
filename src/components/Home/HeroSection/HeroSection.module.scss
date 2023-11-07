@@ -15,7 +15,7 @@
     padding-top: 5.5rem;
     gap: 3rem;
     .logo {
-        width: 60rem;
+        max-width: 60rem;
         height: 24rem;
         margin: 0 auto;
         transform: rotate(-2deg);
@@ -61,7 +61,7 @@
     position: absolute;
     left: 50%;
     bottom: 0;
-    width: 40rem;
+    max-width: 40rem;
     transform: translateX(-50%);
     img {
         height: 100%;
@@ -103,5 +103,6 @@
         right: -20rem;
         transform: rotate(6deg);
     }
-
 }
+
+

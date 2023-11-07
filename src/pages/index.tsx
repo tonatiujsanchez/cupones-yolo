@@ -1,4 +1,4 @@
-import { Hero, SiteLayout } from '@/components'
+import { HeroSection, SiteLayout } from '@/components'
 import NextLink from 'next/link'
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
         <>            
             <SiteLayout>
                 <main>
-                    <Hero />
+                    <HeroSection />
                     <NextLink href={'#'}>Hola Mundo!</NextLink>
                     <h1>Yolo Style</h1>
                 </main>
