@@ -11,8 +11,6 @@ export default function Home() {
                     <HeroSection />
                     <BrandsSection />
                     <CouponsSection />
-                    <NextLink href={'#'}>Hola Mundo!</NextLink>
-                    <h1>Yolo Style</h1>
                 </main>
             </SiteLayout>
         </>

@@ -1,7 +1,10 @@
+import { CouponsForm, SiteLayout } from "@/components"
 
 const CouponsPage = () => {
   return (
-    <div>CuponesPage</div>
+    <SiteLayout>
+        <CouponsForm />
+    </SiteLayout>
   )
 }
 

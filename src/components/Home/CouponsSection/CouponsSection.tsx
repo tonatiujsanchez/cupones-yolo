@@ -9,7 +9,7 @@ import styles from './CouponsSection.module.scss'
 
 export const CouponsSection = () => {
     return (
-        <section className={`${styles['coupons-content']}`}>
+        <section className={`${styles['coupons-container']}`}>
             <h2 className={ styles['title-section'] }>
                 <span>¡Celebra tu</span>
                 <span className={`${DancingScriptFont.className}`}>cumpleaños</span>

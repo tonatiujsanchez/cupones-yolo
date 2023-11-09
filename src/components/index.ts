@@ -8,4 +8,6 @@ export * from './Home/HeroSection'
 export * from './Home/BrandsSection'
 export * from './Home/CouponsSection'
 
+export * from './Coupons/CouponsForm'
+
 

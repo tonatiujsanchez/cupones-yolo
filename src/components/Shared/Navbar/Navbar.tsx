@@ -26,7 +26,7 @@ export const Navbar = () => {
                         <NextLink href={'/'} className={`${styles['nav-link']}`} >
                             Tienda
                         </NextLink>
-                        <NextLink href={'/'} className={`${styles['nav-link']}`} >
+                        <NextLink href={'/cupones'} className={`${styles['nav-link']}`} >
                             Cupones
                         </NextLink>
                     </nav>

@@ -1,0 +1,70 @@
+@import '../../../scss/index.scss';
+
+
+.coupons-container {
+    
+}
+
+.coupons-content {
+    background: rgb(226,207,190);
+    background: radial-gradient(circle, rgba(226,207,190,0.1) 0%, rgba(255,121,84,0.3) 36%, rgba(218,82,3,0.4) 69%), url('https://scontent.fcvj2-1.fna.fbcdn.net/v/t39.30808-6/392939944_722674399880870_7695017363965143280_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=UagueX7BSXcAX9L7ZbM&_nc_ht=scontent.fcvj2-1.fna&oh=00_AfAL2vSXCjsM30OkIEyN5NVK8PXYxxQFi39QmGCFM_ostQ&oe=654EDDA0');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-block-start: 15rem;
+    padding-block-end: 5rem;
+    padding-inline: 10rem;
+    border-radius: 1rem;
+}
+
+.coupons-title {
+    color: $white;
+    font-size: 6rem;
+    text-align: center;
+    font-weight: 900;
+    margin-bottom: 5rem;
+}
+
+.coupons-form {
+    position: relative;
+    background-color: $white;
+}
+
+.form-fields-container {
+    padding-block: 4rem;
+    padding-inline: 4rem;
+    display: flex;
+    gap: 2rem;
+    display: grid;
+}
+
+.form-field {
+    background: $primary-light;
+    border-radius: 0.5rem;
+    padding: 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    label {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    input {
+        border: none;
+        padding: 1rem 1.2rem;
+        border-radius: 0.5rem;
+        font-size: 1.6rem;
+        font-weight: 600;
+        &::placeholder{
+            color: $gray-light;
+            opacity: 0.9;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .form-fields-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+}

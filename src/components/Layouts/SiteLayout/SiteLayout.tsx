@@ -6,7 +6,7 @@ import { Navbar } from "@/components"
 
 import { Raleway } from "next/font/google"
 const RalewayFont = Raleway({
-    weight: ['300', '400', '600', '700', '900'],
+    weight: ['300', '400', '500', '600', '700', '900'],
     style: ['normal', 'italic'],
     subsets: ['latin']
 })
