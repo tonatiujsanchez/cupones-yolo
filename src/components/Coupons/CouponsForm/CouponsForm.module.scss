@@ -1,28 +1,25 @@
 @import '../../../scss/index.scss';
 
 
-.coupons-container {
-    
-}
 
 .coupons-content {
     background: rgb(226,207,190);
-    background: radial-gradient(circle, rgba(226,207,190,0.1) 0%, rgba(255,121,84,0.3) 36%, rgba(218,82,3,0.4) 69%), url('https://scontent.fcvj2-1.fna.fbcdn.net/v/t39.30808-6/392939944_722674399880870_7695017363965143280_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=UagueX7BSXcAX9L7ZbM&_nc_ht=scontent.fcvj2-1.fna&oh=00_AfAL2vSXCjsM30OkIEyN5NVK8PXYxxQFi39QmGCFM_ostQ&oe=654EDDA0');
-    background-position: top;
+    background: radial-gradient(circle, rgba(226,207,190,0.1) 0%, rgba(255,121,84,0.3) 36%, rgba(218,82,3,0.5) 69%), url('https://scontent.fcvj2-1.fna.fbcdn.net/v/t39.30808-6/392939944_722674399880870_7695017363965143280_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=UagueX7BSXcAX9L7ZbM&_nc_ht=scontent.fcvj2-1.fna&oh=00_AfAL2vSXCjsM30OkIEyN5NVK8PXYxxQFi39QmGCFM_ostQ&oe=654EDDA0');
+    background-position: top 35% center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding-block-start: 15rem;
-    padding-block-end: 5rem;
-    padding-inline: 10rem;
     border-radius: 1rem;
+    padding-block-start: 3rem;
+    padding-block-end: 7rem;
+    padding-inline: 2rem;
 }
 
 .coupons-title {
     color: $white;
-    font-size: 6rem;
+    font-size: 4rem;
     text-align: center;
     font-weight: 900;
-    margin-bottom: 5rem;
+    margin-block-end: 3rem;
 }
 
 .coupons-form {
@@ -31,8 +28,9 @@
 }
 
 .form-fields-container {
-    padding-block: 4rem;
-    padding-inline: 4rem;
+    padding-block-start: 4rem;
+    padding-block-end: 6rem;
+    padding-inline: 2rem;
     display: flex;
     gap: 2rem;
     display: grid;
@@ -47,11 +45,11 @@
     label {
         font-size: 1.6rem;
         font-weight: 600;
-        margin-bottom: 0.5rem;
+        margin-block-end: 0.5rem;
     }
     input {
         border: none;
-        padding: 1rem 1.2rem;
+        padding: 1.5rem 1rem;
         border-radius: 0.5rem;
         font-size: 1.6rem;
         font-weight: 600;
@@ -62,9 +60,63 @@
     }
 }
 
-@media (min-width: 992px) {
+.form-border {
+    margin: 0;
+    position: absolute;
+    inset-block-start: 0;
+    height: 100%;
+}
+
+.form-border-end {
+    inset-inline-end: -1.2rem;
+    transform: scale(-1);
+}
+.form-border-start {
+    inset-inline-start: -1.2rem;
+}
+
+.button-container {
+    position: absolute;
+    inset-block-end: -2rem;
+    display: flex;
+    justify-content: center;
+    inset-inline-start: 3rem;
+    inset-inline-end: 3rem;
+    svg {
+        width: 2.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .coupons-container {
+        margin-block-start: 4rem;
+    }
+
+    .coupons-content {
+        padding-block-start: 15rem;
+        padding-block-end: 7rem;
+        padding-inline: 4rem;
+    }
+
     .form-fields-container {
+        padding-block-start: 4rem;
+        padding-block-end: 6rem;
+        padding-inline: 4rem;
         grid-template-columns: repeat(2, 1fr);
     }
-    
+    .coupons-title {
+        font-size: 6rem;
+    }
+
+    .button-container {
+        inset-block-end: -2rem;
+        inset-inline-start: unset;
+        inset-inline-end: 3rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .coupons-content {
+        padding-inline: 10rem;
+    }
 }

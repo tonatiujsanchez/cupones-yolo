@@ -6,8 +6,8 @@ import styles from './Navbar.module.scss'
 
 export const Navbar = () => {
     return (
-        <header className={`container`}>
-            <div className={`${styles['navbar-container']}`}>
+        <header>
+            <div className={`container ${styles['navbar-container']}`}>
                 <div className={`${styles['navbar-content']}`}>
                     <NextLink href={'/'}>
                         <Image
