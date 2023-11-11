@@ -19,6 +19,7 @@ export const ButtonPrimary:FC<Props> = ({ children, onClick, type='button', styl
             style={{
                 ...stylesInline
             }}
+            onClick={onClick}
         >
             { children }
         </button>
