@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import styles from './CouponsForm.module.scss'
 import { ButtonPrimary } from '@/components'
+
+import styles from './CouponsForm.module.scss'
 
 
 export const CouponsForm = () => {

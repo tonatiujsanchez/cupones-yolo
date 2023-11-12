@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import Image from 'next/image'
+import { FacebookIcon, InstagramIcon, MunuIcon, WhatsAppIcon } from '@/components/Icons'
 
 import styles from './Navbar.module.scss'
-import { FacebookIcon, InstagramIcon, WhatsAppIcon } from '@/components'
 
 
 export const Navbar = () => {
@@ -15,17 +15,17 @@ export const Navbar = () => {
     return (
         <header>
             <div className={`container ${styles['navbar-container']}`}>
+                <NextLink href={'/'}>
+                    <Image
+                        width={100}
+                        height={40}
+                        src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/logo.svg`}
+                        alt="Logo de Yolostyle"
+                        title="Logo de Yolostyle"
+                        className={ styles['navbar-logo'] }
+                    />
+                </NextLink>
                 <div className={`${styles['navbar-content']}`}>
-                    <NextLink href={'/'}>
-                        <Image
-                            width={100}
-                            height={40}
-                            src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/logo.svg`}
-                            alt="Logo de Yolostyle"
-                            title="Logo de Yolostyle"
-                            className={ styles['navbar-logo'] }
-                        />
-                    </NextLink>
                     <nav className={styles.navbar}>
                         <NextLink 
                             href={'/'} 
@@ -46,30 +46,33 @@ export const Navbar = () => {
                             Cupones
                         </NextLink>
                     </nav>
+                    <div className={ styles.social }>
+                        <a
+                            href={'https://www.facebook.com/yolostylemx'}
+                            rel="noreferrer"
+                            target="_blank"
+                        >
+                            <FacebookIcon />
+                        </a>
+                        <a
+                            href={'https://www.instagram.com/yolostylemx'}
+                            rel="noreferrer"
+                            target="_blank"
+                        >
+                            <InstagramIcon />
+                        </a>
+                        <a
+                            href={'https://wa.me/7571343567'}
+                            rel="noreferrer"
+                            target="_blank"
+                        >
+                            <WhatsAppIcon />
+                        </a>
+                    </div>
                 </div>
-                <div className={ styles.social }>
-                    <a
-                        href={'https://www.facebook.com/yolostylemx'}
-                        rel="noreferrer"
-                        target="_blank"
-                    >
-                        <FacebookIcon />
-                    </a>
-                    <a
-                        href={'https://www.instagram.com/yolostylemx'}
-                        rel="noreferrer"
-                        target="_blank"
-                    >
-                        <InstagramIcon />
-                    </a>
-                    <a
-                        href={'https://wa.me/7571343567'}
-                        rel="noreferrer"
-                        target="_blank"
-                    >
-                        <WhatsAppIcon />
-                    </a>
-                </div>
+                <button className={ styles['menu-button'] }>
+                    <MunuIcon />
+                </button>
             </div>
         </header>
     )
