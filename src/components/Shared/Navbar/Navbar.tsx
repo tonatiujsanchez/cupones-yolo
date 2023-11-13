@@ -4,9 +4,12 @@ import Image from 'next/image'
 import { FacebookIcon, InstagramIcon, MunuIcon, WhatsAppIcon } from '@/components/Icons'
 
 import styles from './Navbar.module.scss'
+import { useState } from 'react'
 
 
 export const Navbar = () => {
+
+    const [showMenu, setShowMenu] = useState(false)
 
     const router = useRouter()
     const { asPath } = router
@@ -25,7 +28,15 @@ export const Navbar = () => {
                         className={ styles['navbar-logo'] }
                     />
                 </NextLink>
-                <div className={`${styles['navbar-content']}`}>
+                { showMenu && (
+                    <div onClick={ ()=> setShowMenu(false) } className="overlay"></div>
+                )}
+                <div 
+                    className={`${styles['navbar-content']}`}
+                    style={{
+                        transform: showMenu ? 'translateX(0)' : 'translateX(-100%)'
+                    }}
+                >
                     <nav className={styles.navbar}>
                         <NextLink 
                             href={'/'} 
@@ -70,7 +81,10 @@ export const Navbar = () => {
                         </a>
                     </div>
                 </div>
-                <button className={ styles['menu-button'] }>
+                <button
+                    onClick={ ()=> setShowMenu(true) }
+                    className={ styles['menu-button'] }
+                >
                     <MunuIcon />
                 </button>
             </div>
