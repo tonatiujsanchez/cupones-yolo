@@ -1,22 +1,21 @@
 @import '../../../scss/index.scss';
 
 .hero-content {
-    height: 70rem;
+    height: 50rem;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 2fr 1fr;
     gap: 2rem;
-    margin-top: 5rem;
     position: relative;
 }
 
 .hero-left {
     display: flex;
     flex-direction: column;
-    padding-top: 5.5rem;
-    gap: 3rem;
+    padding-top: 1rem;
+    // gap: 3rem;
     .logo {
-        max-width: 60rem;
-        height: 24rem;
+        max-width: 80%;
+        height: 18rem;
         margin: 0 auto;
         transform: rotate(-2deg);
     }
@@ -31,12 +30,12 @@
             transform: rotate(-2deg);
             span {
                 &:first-child {
-                    font-size: 3rem;
+                    font-size: 2.4rem;
                     text-transform: uppercase;
                     color: $orange;
                 }
                 &:last-child {
-                    font-size: 7.5rem;
+                    font-size: 6.5rem;
                     font-weight: 400;
                     display: inline-block;
                     background-color: $primary;
@@ -74,6 +73,7 @@
     color: $orange;
     font-weight: 500;
     font-size: 5.3rem;
+    display: none;
     &.text-one {
         position: absolute;
         top: 2rem;
@@ -106,3 +106,44 @@
 }
 
 
+@media (min-width: 768px) {
+    .hero-content {
+        height: 70rem;
+        grid-template-rows: 1fr;
+    }
+
+    .hero-left {
+        padding-top: 5.5rem;
+        gap: 3rem;
+        .logo {
+            height: 24rem;
+            max-width: 60rem;
+        }
+        .title {
+            display: flex;
+            justify-content: center;
+            h1 {
+                span {
+                    &:first-child {
+                        font-size: 3rem;
+
+                    }
+                    &:last-child {
+                        font-size: 7.5rem;
+                    }
+                }
+            }
+        }
+    }
+    .hero-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-right {
+        min-height: 50rem;
+    }
+
+    .image-center-text {
+        display: block;
+    }
+}

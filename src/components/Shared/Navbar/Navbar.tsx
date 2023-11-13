@@ -16,7 +16,7 @@ export const Navbar = () => {
     
 
     return (
-        <header>
+        <header className={styles['header']}>
             <div className={`container ${styles['navbar-container']}`}>
                 <NextLink href={'/'}>
                     <Image
@@ -29,14 +29,9 @@ export const Navbar = () => {
                     />
                 </NextLink>
                 { showMenu && (
-                    <div onClick={ ()=> setShowMenu(false) } className="overlay"></div>
+                    <div onClick={ ()=> setShowMenu(false) } className={`overlay ${ showMenu ? styles['overlay-hidden']:''}`}></div>
                 )}
-                <div 
-                    className={`${styles['navbar-content']}`}
-                    style={{
-                        transform: showMenu ? 'translateX(0)' : 'translateX(-100%)'
-                    }}
-                >
+                <div className={`${styles['navbar-content']} ${ showMenu ? styles['show-menu'] : '' }`} >
                     <nav className={styles.navbar}>
                         <NextLink 
                             href={'/'} 
