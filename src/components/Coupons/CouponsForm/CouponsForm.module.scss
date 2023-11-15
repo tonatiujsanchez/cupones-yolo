@@ -58,6 +58,7 @@
         font-size: 1.6rem;
         font-weight: 600;
         &::placeholder{
+            font-weight: 500;
             color: $gray-light;
             opacity: 0.9;
         }
@@ -93,14 +94,18 @@
 
 @media (min-width: 768px) {
     .coupons-container {
-        margin-block-start: 4rem;
+        margin-block-start: 2rem;
         padding-inline: 2rem;
     }
 
     .coupons-content {
-        padding-block-start: 15rem;
+        padding-block-start: 12rem;
         padding-block-end: 7rem;
         padding-inline: 4rem;
+    }
+
+    .coupons-title {
+        font-size: 6rem;
     }
 
     .form-fields-container {
@@ -109,14 +114,15 @@
         padding-inline: 4rem;
         grid-template-columns: repeat(2, 1fr);
     }
-    .coupons-title {
-        font-size: 6rem;
+
+    .checkbox-container {
+        grid-column: 1/3;
     }
 
     .button-container {
         inset-block-end: -2rem;
         inset-inline-start: unset;
-        inset-inline-end: 3rem;
+        inset-inline-end: 3.5rem;
     }
 }
 

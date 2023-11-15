@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { ButtonPrimary, DatePicker } from '@/components'
+
+import { useForm } from "react-hook-form"
+
+import { ButtonPrimary, Checkbox, DatePicker } from '@/components'
 import styles from './CouponsForm.module.scss'
 
 
@@ -7,15 +10,25 @@ import styles from './CouponsForm.module.scss'
 export const CouponsForm = () => {
 
     const [loading, setLoading] = useState(false)
+    const [checked, setChecked] = useState(false)
+
+    const { register, handleSubmit, watch, formState: { errors } } = useForm()
+
+    const onCouponsSubmit = () => {
+
+    }
+
 
     
     return (
         <section className={ styles['coupons-container'] }>
             <div className={`container ${ styles['coupons-content'] }`}>
                 <h1 className={styles['coupons-title']}>Cupones de Noviembre</h1>
-                <form className={styles['coupons-form']}>
-                <figure
-                    className={ `${styles['form-border']} ${styles['form-border-start']}` }>
+                <form
+                    onSubmit={ handleSubmit( onCouponsSubmit ) } 
+                    className={styles['coupons-form']}
+                >
+                    <figure className={ `${styles['form-border']} ${styles['form-border-start']}` }>
                         <svg
                             style={{
                                 height: '100%',
@@ -66,12 +79,6 @@ export const CouponsForm = () => {
                         </div>
                         <div className={ styles['form-field'] }>
                             <label htmlFor="datePicker">Fecha de Nacimiento</label>
-                            {/* <input 
-                                type="date" 
-                                name="date" 
-                                id="date"
-                                min="2017-04-01" max="2017-08-30"
-                            /> */}
                             <DatePicker />
                         </div>
                         <div className={ styles['form-field'] }>
@@ -81,6 +88,13 @@ export const CouponsForm = () => {
                                 name="email" 
                                 id="email"
                                 placeholder="Ingresa tu correo"
+                            />
+                        </div>
+                        <div className={ styles['checkbox-container'] }>
+                            <Checkbox
+                                checked={checked}
+                                onChange={( value )=>setChecked(value)}
+                                text="Recibir futuras promociones a mi whatsapp y/o correo"
                             />
                         </div>
                     </div>

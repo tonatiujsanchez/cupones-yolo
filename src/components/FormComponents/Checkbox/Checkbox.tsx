@@ -1,0 +1,39 @@
+import { FC } from 'react'
+import { CheckIcon } from '@/components/Icons'
+import { GRAY_COLOR, PRIMARY_COLOR, WHITE_COLOR } from '@/constants'
+
+import styles from './Checkbox.module.scss'
+
+
+interface Props {
+    checked : boolean
+    onChange: ( value:boolean ) => void
+    text    : string
+}
+
+export const Checkbox:FC<Props> = ({ checked, onChange, text }) => {
+    return (
+        <label
+            htmlFor="checkbox-form"
+            className={ styles['checkbox-label'] }
+        >
+            <input
+                type="checkbox"
+                id="checkbox-form"
+                checked={checked}
+                onChange={() => onChange(!checked)}
+                style={{ display: 'none' }}
+            />
+            <div 
+                className={ styles['custom-check']}
+                style={{
+                    background: checked ? PRIMARY_COLOR : WHITE_COLOR,
+                    border: checked ? 'none' : `0.1rem solid ${ GRAY_COLOR }`
+                }}
+            >
+                { checked && <CheckIcon color={ WHITE_COLOR } />}
+            </div>
+            <span>{ text }</span>
+        </label>
+    )
+}
