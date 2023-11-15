@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { ButtonPrimary } from '@/components'
-
+import { ButtonPrimary, DatePicker } from '@/components'
 import styles from './CouponsForm.module.scss'
+
 
 
 export const CouponsForm = () => {
 
     const [loading, setLoading] = useState(false)
+
     
     return (
         <section className={ styles['coupons-container'] }>
@@ -64,13 +65,14 @@ export const CouponsForm = () => {
                             />
                         </div>
                         <div className={ styles['form-field'] }>
-                            <label>Fecha de Nacimiento</label>
-                            <input 
+                            <label htmlFor="datePicker">Fecha de Nacimiento</label>
+                            {/* <input 
                                 type="date" 
                                 name="date" 
                                 id="date"
                                 min="2017-04-01" max="2017-08-30"
-                            />
+                            /> */}
+                            <DatePicker />
                         </div>
                         <div className={ styles['form-field'] }>
                             <label>Correo</label>

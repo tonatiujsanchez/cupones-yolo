@@ -1,0 +1,40 @@
+
+
+.date-picker__container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    select {
+        border: none;
+        padding: 1.5rem 1rem;
+        border-radius: 0.5rem;
+        font-size: 1.6rem;
+        font-weight: 600;
+        flex: 1;
+        &:nth-child(1) {
+            order: 3;
+        }
+        &:nth-child(2) {
+            text-transform: capitalize;
+            order: 2;
+        }
+        &:nth-child(3) {
+            order: 1;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .date-picker__container {
+        justify-content: flex-end;
+        gap: 1rem;
+        select {
+            flex: 1;
+        }
+    }
+
+
+
+}

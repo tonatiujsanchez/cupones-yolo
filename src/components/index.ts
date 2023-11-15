@@ -12,4 +12,6 @@ export * from './Home/CouponsSection'
 
 export * from './Coupons/CouponsForm'
 
+export * from './FormComponents/DatePicker'
+
 
