@@ -4,8 +4,8 @@ import styles from './ButtonPrimary.module.scss'
 
 interface Props {
     children:  ReactNode
-    onClick: () => void
-    type?: ButtonType
+    onClick?: () => void
+    type?   : ButtonType
     stylesInline?: CSSProperties
 }
 

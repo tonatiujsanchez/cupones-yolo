@@ -48,7 +48,7 @@
     flex-direction: column;
     label {
         font-size: 1.6rem;
-        font-weight: 700;
+        font-weight: 500;
         margin-block-end: 0.5rem;
     }
     input {
@@ -56,7 +56,7 @@
         padding: 1.5rem 1rem;
         border-radius: 0.5rem;
         font-size: 1.6rem;
-        font-weight: 600;
+        font-weight: 500;
         &::placeholder{
             font-weight: 500;
             color: $gray-light;
@@ -110,7 +110,7 @@
 
     .form-fields-container {
         padding-block-start: 4rem;
-        padding-block-end: 6rem;
+        padding-block-end: 5rem;
         padding-inline: 4rem;
         grid-template-columns: repeat(2, 1fr);
     }

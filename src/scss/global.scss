@@ -34,6 +34,17 @@ img {
     display: block;
 }
 
+input[type="number"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  
+    /* Oculta las flechas */
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      display: none;
+    }
+  }
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -49,5 +60,5 @@ img {
     opacity: 0.5;
     transition: all 0.5s ease;
 
-    z-index: 98;
+    z-index: 90;
 }

@@ -68,32 +68,48 @@ export const MunuIcon: FC<IconProps> = ({ color = BLACK_COLOR }) => {
 
 export const XIcon: FC<IconProps> = ({ color = BLACK_COLOR }) => {
     return (
-    <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        viewBox="0 0 24 24" 
-        stroke-width="1.5" stroke="currentColor"
-        width={6} height={6}
-        style={{ fill: color }}
-    >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24" 
+            stroke-width="1.5" stroke="currentColor"
+            width={6} height={6}
+            style={{ fill: color }}
+        >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
     )
 }
 
 export const CheckIcon: FC<IconProps> = ({ color = BLACK_COLOR }) => {
     return (
-    <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        width="100%" 
-        height="100%" 
-        viewBox="0 0 24 24"
-        style={{ 
-            fill: color,
-        }}
-    >
-            <path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path>
-    </svg>
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="100%" 
+            height="100%" 
+            viewBox="0 0 24 24"
+            style={{ 
+                fill: color,
+            }}
+        >
+                <path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path>
+        </svg>
+    )
+}
 
+export const ArrowRightIcon: FC<IconProps> = ({ color = BLACK_COLOR }) => {
+    return (
+        <svg
+        width="100%"
+        height="100%" 
+        xmlns="http://www.w3.org/2000/svg" 
+        fill={ color } viewBox="0 0 24 24" 
+        strokeWidth={1.8} stroke="currentColor"
+        >
+            <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+            />
+        </svg>
     )
 }
