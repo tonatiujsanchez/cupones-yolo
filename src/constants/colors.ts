@@ -1,6 +1,6 @@
 
 export const PRIMARY_COLOR       = '#FF7954'
-export const PRIMARY_LIGHT_COLOR = 'rgba(255, 121, 84, 0.2)'
+export const PRIMARY_LIGHT_COLOR = '#FFE4DD'
 export const ORANGE_COLOR        = '#DA5203'
 export const BROWN_LIGHT_COLOR   = '#E2CFBE'
 export const GRAY_COLOR          = '#747579'

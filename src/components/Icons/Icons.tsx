@@ -3,28 +3,31 @@ import { BLACK_COLOR, PRIMARY_COLOR } from "@/constants"
 
 
 interface IconProps {
-    color?: string
+    fill?       : string
+    stroke?     : string
+    strokeWidth?: number
 }
 
-export const FacebookIcon: FC<IconProps> = ({ color = PRIMARY_COLOR }) => {
+export const FacebookIcon: FC<IconProps> = ({ fill = PRIMARY_COLOR }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="25" height="25"
             viewBox="0 0 24 24"
-            style={{ fill: color }}
+            width="25" height="25"
+            fill={ fill }
         >
             <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z" />
         </svg>
     )
 }
 
-export const InstagramIcon: FC<IconProps> = ({ color = PRIMARY_COLOR }) => {
+export const InstagramIcon: FC<IconProps> = ({ fill = PRIMARY_COLOR }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="25" height="25" viewBox="0 0 24 24"
-            style={{ fill: color }}
+            viewBox="0 0 24 24"
+            width="25" height="25" 
+            fill={ fill }
         >
             <path d="M11.999 7.377a4.623 4.623 0 1 0 0 9.248 4.623 4.623 0 0 0 0-9.248zm0 7.627a3.004 3.004 0 1 1 0-6.008 3.004 3.004 0 0 1 0 6.008z" />
             <circle cx="16.806" cy="7.207" r="1.078"></circle>
@@ -33,12 +36,13 @@ export const InstagramIcon: FC<IconProps> = ({ color = PRIMARY_COLOR }) => {
     )
 }
 
-export const WhatsAppIcon: FC<IconProps> = ({ color = PRIMARY_COLOR }) => {
+export const WhatsAppIcon: FC<IconProps> = ({ fill = PRIMARY_COLOR }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="25" height="25" viewBox="0 0 24 24"
-            style={{ fill: color }}
+            viewBox="0 0 24 24"
+            width="25" height="25" 
+            fill={ fill }
         >
             <path 
                 fillRule="evenodd" 
@@ -49,14 +53,16 @@ export const WhatsAppIcon: FC<IconProps> = ({ color = PRIMARY_COLOR }) => {
     )
 }
 
-export const MunuIcon: FC<IconProps> = ({ color = BLACK_COLOR }) => {
+export const MunuIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke='currentColor', strokeWidth = 1.6 }) => {
     return (
         <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            width={34} height={28} viewBox="0 0 23 20"
-            strokeWidth="1.6"
-            style={{ fill: color }}
-            stroke="currentColor">
+            viewBox="0 0 23 20"
+            width={34} height={28} 
+            fill={ fill }
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
             <path 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
@@ -66,44 +72,49 @@ export const MunuIcon: FC<IconProps> = ({ color = BLACK_COLOR }) => {
     )
 }
 
-export const XIcon: FC<IconProps> = ({ color = BLACK_COLOR }) => {
+export const XIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'currentColor', strokeWidth = 1.5 }) => {
     return (
         <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 24 24" 
-            stroke-width="1.5" stroke="currentColor"
             width={6} height={6}
-            style={{ fill: color }}
+            fill={ fill }
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
         >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                d="M6 18L18 6M6 6l12 12"
+            />
         </svg>
     )
 }
 
-export const CheckIcon: FC<IconProps> = ({ color = BLACK_COLOR }) => {
+export const CheckIcon: FC<IconProps> = ({ fill = BLACK_COLOR }) => {
     return (
         <svg 
             xmlns="http://www.w3.org/2000/svg" 
             width="100%" 
             height="100%" 
             viewBox="0 0 24 24"
-            style={{ 
-                fill: color,
-            }}
+            fill={ fill }
         >
-                <path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path>
+                <path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z" />
         </svg>
     )
 }
 
-export const ArrowRightIcon: FC<IconProps> = ({ color = BLACK_COLOR }) => {
+export const ArrowRightIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'currentColor', strokeWidth=1.6 }) => {
     return (
         <svg
-        width="100%"
-        height="100%" 
-        xmlns="http://www.w3.org/2000/svg" 
-        fill={ color } viewBox="0 0 24 24" 
-        strokeWidth={1.8} stroke="currentColor"
+            width="100%"
+            height="100%" 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24" 
+            fill={ fill }
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
         >
             <path 
                 strokeLinecap="round" 
@@ -111,5 +122,116 @@ export const ArrowRightIcon: FC<IconProps> = ({ color = BLACK_COLOR }) => {
                 d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
             />
         </svg>
+    )
+}
+
+export const ShoppingBagIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none', strokeWidth = 1.5 }) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24" 
+            fill={ fill }
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+        </svg>
+    )
+}
+
+export const GiftIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24" 
+            fill={ fill }
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+        </svg>
+    )
+}
+
+export const CouponIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none', strokeWidth = 0.5 }) => {
+    return (
+        <svg
+            fill={ fill } 
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path d="M21 5H3a1 1 0 00-1 1v4h.893c.996 0 1.92.681 2.08 1.664A2.001 2.001 0 013 14H2v4a1 1 0 001 1h18a1 1 0 001-1v-4h-1a2.001 2.001 0 01-1.973-2.336c.16-.983 1.084-1.664 2.08-1.664H22V6a1 1 0 00-1-1zM11 17H9v-2h2v2zm0-4H9v-2h2v2zm0-4H9V7h2v2z" />
+        </svg>
+    )
+}
+
+export const PercentIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none', strokeWidth = 2.2 }) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            fill={ fill } 
+            stroke={ stroke }
+            strokeWidth={ strokeWidth } 
+        >
+            <line x1="19" y1="5" x2="5" y2="19"></line>
+            <circle cx="6.5" cy="6.5" r="2.5"></circle>
+            <circle cx="17.5" cy="17.5" r="2.5"></circle>
+        </svg>
+    )
+}
+
+export const ShoppingCartIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24" 
+            fill={ fill }
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+        </svg>
+    )
+}
+
+export const StarIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none' }) => {
+    return (
+        <svg 
+            xmlnsXlink="http://www.w3.org/1999/xlink" 
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 784.11 815.53" 
+            version="1.1" xmlSpace="preserve" 
+            fill={ fill }
+            stroke={ stroke } 
+        >
+            <defs></defs>
+            <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z" />
+            </g>
+        </svg>
+    )
+}
+
+export const CakeIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 24 24" 
+        fill={ fill }
+        stroke={ stroke }
+        strokeWidth={ strokeWidth }
+    >
+        <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.87c1.355 0 2.697.055 4.024.165C17.155 8.51 18 9.473 18 10.608v2.513m-3-4.87v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.38a48.474 48.474 0 00-6-.37c-2.032 0-4.034.125-6 .37m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.17c0 .62-.504 1.124-1.125 1.124H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M12.265 3.11a.375.375 0 11-.53 0L12 2.845l.265.265zm-3 0a.375.375 0 11-.53 0L9 2.845l.265.265zm6 0a.375.375 0 11-.53 0L15 2.845l.265.265z" />
+    </svg>
     )
 }

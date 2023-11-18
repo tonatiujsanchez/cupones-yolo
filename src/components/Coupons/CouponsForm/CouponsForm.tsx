@@ -1,6 +1,6 @@
 import { useForm, Controller } from "react-hook-form"
 
-import { ButtonPrimary, Checkbox, DatePicker } from '@/components'
+import { ButtonIconsAnimated, Checkbox, DatePicker } from '@/components'
 import { CouponBorder } from '@/components/shapes'
 import { ArrowRightIcon } from '@/components/Icons'
 
@@ -62,7 +62,7 @@ export const CouponsForm = () => {
                             }
                         </div>
                         <div className={ styles['form-field'] }>
-                            <label>Celular</label>
+                            <label  htmlFor="phone">Celular</label>
                             <input 
                                 type="number" 
                                 id="phone"
@@ -96,7 +96,7 @@ export const CouponsForm = () => {
                             }
                         </div>
                         <div className={ styles['form-field'] }>
-                            <label>Correo <span style={{ fontSize: '1.3rem', opacity: 0.8 }}>(opcional)</span></label>
+                            <label htmlFor="number">Correo <span style={{ fontSize: '1.3rem', opacity: 0.8 }}>(opcional)</span></label>
                             <input 
                                 type="email" 
                                 id="email"
@@ -125,12 +125,12 @@ export const CouponsForm = () => {
                         </div>
                     </div>
                     <div className={styles['button-container']} >
-                        <ButtonPrimary
+                        <ButtonIconsAnimated
                             type="submit"
                         >
                             Obtener cupones
                             <ArrowRightIcon />
-                        </ButtonPrimary>
+                        </ButtonIconsAnimated>
                     </div>
                 </form>
             </div>

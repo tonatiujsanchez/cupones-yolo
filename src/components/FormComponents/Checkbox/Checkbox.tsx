@@ -31,7 +31,7 @@ export const Checkbox:FC<Props> = ({ checked, onChange, text }) => {
                     border: checked ? 'none' : `0.1rem solid ${ GRAY_COLOR }`
                 }}
             >
-                { checked && <CheckIcon color={ WHITE_COLOR } />}
+                { checked && <CheckIcon fill={ WHITE_COLOR } />}
             </div>
             <span>{ text }</span>
         </label>
