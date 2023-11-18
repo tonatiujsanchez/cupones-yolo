@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { useForm, Controller } from "react-hook-form"
 
 import { ButtonPrimary, Checkbox, DatePicker } from '@/components'
@@ -19,14 +17,10 @@ interface FormaData {
 
 export const CouponsForm = () => {
 
-    const [loading, setLoading] = useState(false)
-    const [checked, setChecked] = useState(false)
-
-    const { register, handleSubmit, watch, control, formState: { errors } } = useForm<FormaData>({
+    const { register, handleSubmit, control, formState: { errors } } = useForm<FormaData>({
         defaultValues:{
             name: '',
             phone: null,
-            birthdate: new Date(),
             email: '',
             receivePromotions: false
         }
@@ -62,6 +56,10 @@ export const CouponsForm = () => {
                                     validate: (val) => val && val.length >= 4 ? undefined : 'El nombre es muy corto'
                                 })}
                             />
+                            {
+                                !!errors.name &&
+                                <span className={ styles['error-message'] }>{ errors.name.message }</span>
+                            }
                         </div>
                         <div className={ styles['form-field'] }>
                             <label>Celular</label>
@@ -74,6 +72,10 @@ export const CouponsForm = () => {
                                     validate: (val) => val?.toString().length === 10 ? undefined : 'Nùmero no vàlido'
                                 }) }
                             />
+                            {
+                                !!errors.phone &&
+                                <span className={ styles['error-message'] }>{ errors.phone.message }</span>
+                            }
                         </div>
                         <div className={ styles['form-field'] }>
                             <label htmlFor="datePicker">Fecha de Nacimiento</label>
@@ -86,8 +88,12 @@ export const CouponsForm = () => {
                                         onChange={ field.onChange }
                                     />
                                 )}
-                                rules={{required: true }}
+                                rules={{required: 'Seleccione su fecha de nacimiento' }}
                             />
+                            {
+                                errors.birthdate &&
+                                <span className={ styles['error-message'] }>{ errors.birthdate.message }</span>
+                            }
                         </div>
                         <div className={ styles['form-field'] }>
                             <label>Correo <span style={{ fontSize: '1.3rem', opacity: 0.8 }}>(opcional)</span></label>
@@ -99,6 +105,10 @@ export const CouponsForm = () => {
                                     validate: (value)=> value ? isEmail(value) : undefined
                                 })}
                             />
+                            {
+                                !!errors.email &&
+                                <span className={ styles['error-message'] }>{ errors.email.message }</span>
+                            }
                         </div>
                         <div className={ styles['checkbox-container'] }>
                             <Controller

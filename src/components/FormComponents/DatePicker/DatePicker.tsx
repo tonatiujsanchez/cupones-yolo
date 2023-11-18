@@ -23,14 +23,13 @@ export const DatePicker:FC<Props> = ({ value, onChange }) => {
         firstOptionselectYear.innerText  = 'Año'
         firstOptionselectMonth.innerText = 'Mes'
         firstOptionselectDay.innerText   = 'Día'
-
-    }, [dateSelectRef.current])
+    }, [])
     
 
     return (
         <div ref={ dateSelectRef } className={ styles['date-picker__container'] }>
             <DateSelect 
-                value={ value.toString() } 
+                value={ value ? value.toString() : "" } 
                 onChange={ onChange }
                 monthFormat="MMMM"
                 dayFormat="dd"
