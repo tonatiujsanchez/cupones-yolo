@@ -1,26 +1,22 @@
 import { useState } from 'react'
 import { useForm, Controller } from "react-hook-form"
 
+import { useRegisterClient } from '@/hooks'
 import { ButtonIconsAnimated, Checkbox, DatePicker } from '@/components'
 import { CouponBorder } from '@/components/shapes'
 import { ArrowRightIcon } from '@/components/Icons'
 
 import { isEmail } from '@/utils'
+import { ClientFormData } from '@/interfaces'
 import styles from './CouponsForm.module.scss'
 
-interface FormaData {
-    name: string
-    phone: number | null
-    birthdate: Date
-    email: string
-    receivePromotions: boolean
-}
 
 export const CouponsForm = () => {
 
     // useState => isLoading TODO:
+    const { clientMutation } = useRegisterClient()
 
-    const { register, handleSubmit, control, formState: { errors } } = useForm<FormaData>({
+    const { register, handleSubmit, control, formState: { errors } } = useForm<ClientFormData>({
         defaultValues:{
             name: '',
             phone: null,
@@ -29,8 +25,8 @@ export const CouponsForm = () => {
         }
     })
 
-    const onCouponsSubmit = (data:FormaData) => {
-        console.log( data )
+    const onCouponsSubmit = (data:ClientFormData) => {
+        clientMutation.mutate(data)
     }
     
     return (
@@ -130,9 +126,18 @@ export const CouponsForm = () => {
                     <div className={styles['button-container']} >
                         <ButtonIconsAnimated
                             type="submit"
+                            disabled={ clientMutation.isPending }
                         >
-                            Obtener cupones
-                            <ArrowRightIcon />
+                            {
+                                clientMutation.isPending 
+                                    ? 'Cargando...'
+                                    : (
+                                        <>
+                                            Obtener cupones
+                                            <ArrowRightIcon />
+                                        </>
+                                    )
+                            }
                         </ButtonIconsAnimated>
                     </div>
                 </form>

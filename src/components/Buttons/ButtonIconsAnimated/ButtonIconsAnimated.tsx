@@ -9,12 +9,13 @@ interface Props {
     children     : ReactNode
     onClick?     : () => void
     type?        : ButtonType
+    disabled?    : boolean
     stylesInline?: CSSProperties
 }
 
 type ButtonType = 'button' | 'submit'
 
-export const ButtonIconsAnimated:FC<Props> = ({ children, onClick, type='button', stylesInline }) => {
+export const ButtonIconsAnimated:FC<Props> = ({ children, onClick, type='button', disabled=false, stylesInline }) => {
     return (
         <button
             type={ type }
@@ -22,7 +23,8 @@ export const ButtonIconsAnimated:FC<Props> = ({ children, onClick, type='button'
             style={{
                 ...stylesInline
             }}
-            onClick={onClick}
+            disabled= { disabled }
+            onClick={ onClick }
         >
             { children }
             <div className={ styles['star-1'] }>

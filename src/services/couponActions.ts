@@ -1,10 +1,9 @@
 import { yolostyleApi } from "@/apis"
-import { IClient } from "@/interfaces"
+import { ClientFormData, IClient } from "@/interfaces"
 
 
-export const createCoupons = async():Promise<IClient> => {
-
-    const { data } = await yolostyleApi<IClient>(`/public/register-client`)
-    console.log(data)
+export const createCoupons = async( client: ClientFormData ):Promise<IClient> => {
+    
+    const { data } = await yolostyleApi.post<IClient>(`/public/register-client`, client)
     return data
 }

@@ -37,7 +37,7 @@ const registerClient = async( req: NextApiRequest, res: NextApiResponse<Data> ) 
         return res.status(400).json({ msg: 'El número de celular es requerido' })
     }
 
-    if( phone.toString().trim().lenght !== 10 ){
+    if( phone.toString().trim().length !== 10 ){
         return res.status(400).json({ msg: 'Número de celular no válido' })
     }
 

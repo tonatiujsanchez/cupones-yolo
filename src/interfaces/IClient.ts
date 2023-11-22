@@ -20,11 +20,19 @@ export interface IClient {
 }
 
 
-
 export interface ClientResp {
     page      : number,
     totalPages: number
     totalClientes: number
     count     : number
     clients   : IClient[]
+}
+
+
+export interface ClientFormData {
+    name: string
+    phone: number | null
+    birthdate: Date
+    email: string
+    receivePromotions: boolean
 }
