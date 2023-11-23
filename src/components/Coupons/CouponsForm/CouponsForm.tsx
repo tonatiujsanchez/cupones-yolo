@@ -1,8 +1,7 @@
-import { useState } from 'react'
 import { useForm, Controller } from "react-hook-form"
 
 import { useRegisterClient } from '@/hooks'
-import { ButtonIconsAnimated, Checkbox, DatePicker } from '@/components'
+import { ButtonIconsAnimated, Checkbox, DatePicker, RegisterCompleted } from '@/components'
 import { CouponBorder } from '@/components/shapes'
 import { ArrowRightIcon } from '@/components/Icons'
 
@@ -13,8 +12,7 @@ import styles from './CouponsForm.module.scss'
 
 export const CouponsForm = () => {
 
-    // useState => isLoading TODO:
-    const { clientMutation } = useRegisterClient()
+    const { clientMutation, clientRegistered } = useRegisterClient()
 
     const { register, handleSubmit, control, formState: { errors } } = useForm<ClientFormData>({
         defaultValues:{
@@ -25,8 +23,16 @@ export const CouponsForm = () => {
         }
     })
 
-    const onCouponsSubmit = (data:ClientFormData) => {
-        clientMutation.mutate(data)
+    const onCouponsSubmit = ( data:ClientFormData ) => {
+        clientMutation.mutate( data )
+    }
+
+    if( clientRegistered ){
+        return (
+            <RegisterCompleted
+                clientRegistered={ clientRegistered }
+            />
+        )
     }
     
     return (

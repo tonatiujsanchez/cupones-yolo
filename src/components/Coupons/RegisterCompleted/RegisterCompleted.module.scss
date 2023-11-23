@@ -1,0 +1,122 @@
+@import '../../../scss/index.scss';
+
+
+.register-completed {
+    margin-block-start: 4rem;
+}
+
+.title-container {
+    max-width: 54rem;
+    text-align: center;
+    padding-inline: 1rem;
+    margin-inline: auto;
+
+}
+
+.congratulations-title {
+    font-size: 4rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-block-start: 2rem;
+    margin-block-end: 2rem;
+    color: transparent;
+    background-clip: text;
+    background-image: $gradient-primary-bright;
+}
+
+.client-name {
+    font-weight: 900;
+    font-size: 2.4rem;
+    margin-block-end: 2rem;
+}
+
+.heading {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-block-end: 2rem;
+    span {
+        font-weight: 700;
+        font-style: italic;
+    }
+}
+
+.conditions {
+    font-size: 1.4rem;
+    span {
+        text-decoration: underline;
+    }
+}
+
+.coupons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3.2rem;
+    padding-block: 4rem;
+    padding-inline: 1rem;
+}
+
+.coupons-content {
+    background: $gradient-primary-bright;
+    border-radius: 1rem;
+    color: $white;
+    padding-inline: 1.6rem;
+    padding-block: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+    max-width: 36rem;
+    
+    // Animation
+    // transition: box-shadow 0.1s, transform 0.3s;
+    transition: all 0.3s cubic-bezier(0.03, 0.98, 0.52, 0.99);
+    &:hover {
+        box-shadow: 0 0 25px $primary;
+    }
+
+    .coupons-content__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 8rem;
+    }
+    .coupons-content__description {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.4rem;
+        border-inline-start: dashed 0.1rem;
+        padding-inline: 1.6rem;
+        padding-block: 0.5rem;
+        text-align: center;
+    }
+    
+    .coupons-content__value {
+        font-size: 4.8rem;
+        font-weight: 900;
+    }
+}
+
+.phone-client__container {
+    text-align: center;
+    margin-block-start: 3.2rem;
+    p {
+        font-size: 2rem;
+        span {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .congratulations-title {
+        font-size: 4.8rem;
+    }
+
+    .coupons-container {
+        grid-template-columns: repeat(2, 1fr);
+        padding-block: 6rem;
+        padding-inline: 4rem;
+    }
+}

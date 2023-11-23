@@ -12,6 +12,7 @@ export * from './Home/BrandsSection'
 export * from './Home/CouponsSection'
 
 export * from './Coupons/CouponsForm'
+export * from './Coupons/RegisterCompleted'
 
 export * from './FormComponents/DatePicker'
 export * from './FormComponents/Checkbox'

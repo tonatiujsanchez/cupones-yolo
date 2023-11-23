@@ -111,7 +111,7 @@ export const ArrowRightIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'cu
             width="100%"
             height="100%" 
             xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
+            viewBox="0 0 30 24"
             fill={ fill }
             stroke={ stroke }
             strokeWidth={ strokeWidth }
