@@ -56,47 +56,6 @@
     padding-inline: 1rem;
 }
 
-.coupons-content {
-    background: $gradient-primary-bright;
-    border-radius: 1rem;
-    color: $white;
-    padding-inline: 1.6rem;
-    padding-block: 2rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.6rem;
-    max-width: 36rem;
-    
-    // Animation
-    // transition: box-shadow 0.1s, transform 0.3s;
-    transition: all 0.3s cubic-bezier(0.03, 0.98, 0.52, 0.99);
-    &:hover {
-        box-shadow: 0 0 25px $primary;
-    }
-
-    .coupons-content__icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        max-width: 8rem;
-    }
-    .coupons-content__description {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0.4rem;
-        border-inline-start: dashed 0.1rem;
-        padding-inline: 1.6rem;
-        padding-block: 0.5rem;
-        text-align: center;
-    }
-    
-    .coupons-content__value {
-        font-size: 4.8rem;
-        font-weight: 900;
-    }
-}
-
 .phone-client__container {
     text-align: center;
     margin-block-start: 3.2rem;

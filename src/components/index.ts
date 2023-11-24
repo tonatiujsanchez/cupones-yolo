@@ -11,6 +11,7 @@ export * from './Home/HeroSection'
 export * from './Home/BrandsSection'
 export * from './Home/CouponsSection'
 
+export * from './Coupons/CouponCard'
 export * from './Coupons/CouponsForm'
 export * from './Coupons/RegisterCompleted'
 
