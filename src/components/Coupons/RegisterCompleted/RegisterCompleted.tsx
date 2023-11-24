@@ -6,7 +6,6 @@ import { IClient } from "@/interfaces"
 import styles from './RegisterCompleted.module.scss'
 
 
-
 interface Props {
     clientRegistered: IClient
     onCleanClientRegistered: () => void

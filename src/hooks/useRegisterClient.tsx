@@ -4,6 +4,7 @@ import { AxiosError } from 'axios'
 
 import { couponActions } from '@/services'
 
+import { canvasConfetti } from '@/libs'
 import { IClient } from '@/interfaces'
 
 
@@ -13,8 +14,9 @@ export const useRegisterClient = () => {
 
     const clientMutation = useMutation({
         mutationFn: couponActions.createCoupons,
-        onSuccess: ( data, _variables, context )=>{
+        onSuccess: ( data )=>{
             setClientRegistered(data)
+            canvasConfetti()
         },
         onError: ( error:AxiosError<{ msg:string }> )=> {
             console.log('Hubo un error...')
