@@ -125,6 +125,27 @@ export const ArrowRightIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'cu
     )
 }
 
+export const ArrowLeftIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'currentColor', strokeWidth=1.6 }) => {
+    return (
+        <svg 
+            width="100%"
+            height="100%" 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 30 24"
+            fill={ fill }
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+            />
+        </svg>
+      
+    )
+}
+
 export const ShoppingBagIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none', strokeWidth = 1.5 }) => {
     return (
         <svg
@@ -142,7 +163,7 @@ export const ShoppingBagIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'n
     )
 }
 
-export const GiftIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none', strokeWidth = 1.5 }) => {
+export const GiftIcon: FC<IconProps> = ({ fill = 'none', stroke = BLACK_COLOR, strokeWidth = 1.5 }) => {
     return (
         <svg 
             xmlns="http://www.w3.org/2000/svg"
@@ -152,6 +173,23 @@ export const GiftIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none', s
             strokeWidth={ strokeWidth }
         >
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+        </svg>
+    )
+}
+
+
+export const GiftSolidIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="96" 
+            height="96" 
+            viewBox="0 0 24 24"
+            fill={ fill }
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path d="M5 12H4v8a2 2 0 0 0 2 2h5V12H5zm13 0h-5v10h5a2 2 0 0 0 2-2v-8h-2zm.791-5A4.92 4.92 0 0 0 19 5.5C19 3.57 17.43 2 15.5 2c-1.622 0-2.705 1.482-3.404 3.085C11.407 3.57 10.269 2 8.5 2 6.57 2 5 3.57 5 5.5c0 .596.079 1.089.209 1.5H2v4h9V9h2v2h9V7h-3.209zM7 5.5C7 4.673 7.673 4 8.5 4c.888 0 1.714 1.525 2.198 3H8c-.374 0-1 0-1-1.5zM15.5 4c.827 0 1.5.673 1.5 1.5C17 7 16.374 7 16 7h-2.477c.51-1.576 1.251-3 1.977-3z" />
         </svg>
     )
 }

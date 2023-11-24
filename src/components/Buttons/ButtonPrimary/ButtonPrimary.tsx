@@ -6,6 +6,7 @@ interface Props {
     children     : ReactNode
     onClick?     : () => void
     type?        : ButtonType
+    disabled?    : boolean
     stylesInline?: CSSProperties
 }
 

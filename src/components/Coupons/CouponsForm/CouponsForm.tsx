@@ -12,7 +12,7 @@ import styles from './CouponsForm.module.scss'
 
 export const CouponsForm = () => {
 
-    const { clientMutation, clientRegistered } = useRegisterClient()
+    const { clientMutation, clientRegistered, onCleanClientRegistered } = useRegisterClient()
 
     const { register, handleSubmit, control, formState: { errors } } = useForm<ClientFormData>({
         defaultValues:{
@@ -31,6 +31,7 @@ export const CouponsForm = () => {
         return (
             <RegisterCompleted
                 clientRegistered={ clientRegistered }
+                onCleanClientRegistered = { onCleanClientRegistered }
             />
         )
     }
@@ -136,7 +137,7 @@ export const CouponsForm = () => {
                         >
                             {
                                 clientMutation.isPending 
-                                    ? 'Cargando...'
+                                    ? <div className="custom-loader-white"></div>
                                     : (
                                         <>
                                             Obtener cupones

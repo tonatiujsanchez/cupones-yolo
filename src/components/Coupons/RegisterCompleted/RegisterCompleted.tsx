@@ -1,5 +1,6 @@
 import { FC } from 'react'
-import { CouponCard } from '@/components'
+import { ButtonPrimary, CouponCard } from '@/components'
+import { ArrowLeftIcon } from '@/components/Icons'
 
 import { IClient } from "@/interfaces"
 import styles from './RegisterCompleted.module.scss'
@@ -8,9 +9,10 @@ import styles from './RegisterCompleted.module.scss'
 
 interface Props {
     clientRegistered: IClient
+    onCleanClientRegistered: () => void
 }
 
-export const RegisterCompleted:FC<Props> = ({ clientRegistered }) => {
+export const RegisterCompleted:FC<Props> = ({ clientRegistered, onCleanClientRegistered }) => {
     
     const { name, phone } = clientRegistered
 
@@ -34,6 +36,15 @@ export const RegisterCompleted:FC<Props> = ({ clientRegistered }) => {
             </div>
             <div className={ styles['phone-client__container'] }>
                 <p className="text-xl text-slate-800">Los cupones se enviarán al número <span className="font-bold underline text-slate-800">{ phone }</span></p>
+            </div>
+            <div className={styles['button-container']} >
+                <ButtonPrimary
+                    type="button"
+                    onClick={ onCleanClientRegistered }
+                >
+                    <ArrowLeftIcon />
+                    Regresar
+                </ButtonPrimary>
             </div>
         </section>
     )

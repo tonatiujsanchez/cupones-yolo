@@ -6,20 +6,27 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 12px 35px;
+    padding: 0.5rem 2rem;
     background: $gradient-primary;
-    font-size: 17px;
+    font-size: 1.7rem;
     font-weight: 500;
     color: $white;
     border: none;
-    border-radius: 8px;
+    border-radius: 0.8rem;
     box-shadow: 0 0 0 #fec1958c;
     transition: all .3s ease-in-out;
     cursor: pointer;
     width: 100%;
+    height: 4rem;
     &:hover {
-        box-shadow: 0 0 25px $primary;
+        box-shadow: 0 0 2.5rem $primary;
         background: $gradient-primary-bright;
+        &:disabled {
+            background: $gradient-primary;
+        }
+    }
+    &:active {
+        transform: scale(0.9);
     }
 }
   
