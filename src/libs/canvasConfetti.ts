@@ -14,4 +14,16 @@ export const canvasConfetti = () => {
         decay: 0.95,
         scalar: 1
     })
+    confetti({
+        zIndex: 999,
+        spread: 120,
+        angle: 100,
+        particleCount: Math.floor(200 * 3),
+        origin:{
+            x: 1,
+            y: 1
+        },
+        decay: 0.95,
+        scalar: 1
+    })
 }

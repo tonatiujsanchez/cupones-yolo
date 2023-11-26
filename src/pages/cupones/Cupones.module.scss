@@ -1,0 +1,13 @@
+@import '../../scss/index.scss';
+
+.main-coupons {
+    background-image: radial-gradient(100% 50% at -5% 35%,hsla(13, 100%, 66%, 0.3) 0%,hsla(54,100%,75%,0) 70%),
+    radial-gradient(50% 50% at 95% 35%,hsla(13, 100%, 66%, 0.3) 0%,hsla(313,100%,58%,0) 70%);
+    padding-block-end: 5rem;
+}
+@media (min-width: 640px) {
+    .main-coupons{
+        padding-block-end: 10rem;
+    }
+
+}
