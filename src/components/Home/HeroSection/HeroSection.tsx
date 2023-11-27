@@ -4,7 +4,7 @@ import styles from './HeroSection.module.scss'
 
 export const HeroSection = () => {
     return (
-        <section>
+        <section className={ styles['hero-content-section'] }>
             <div className={`${ styles['hero-content'] }`}>
                 <div className={styles['hero-left']}>
                     <Image
