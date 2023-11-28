@@ -1,7 +1,6 @@
 
 import { CouponsForm, SiteLayout } from "@/components"
-
-import styles from './Cupones.module.scss'
+import styles from './CouponsPage.module.scss'
 
 const CouponsPage = () => {
 

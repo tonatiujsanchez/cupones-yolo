@@ -82,29 +82,60 @@
         top: 2rem;
         right: -9rem;
         transform: rotate(-6deg);
+
+        // opacity: 0;
+        // animation-name: bounceInLeft;
+        // animation-delay: 0.5s;
+        // animation-duration: 0.5s;
+        // animation-fill-mode: forwards;
     }
     &.text-two {
         position: absolute;
         top: 11rem;
         right: -24rem;
         transform: rotate(-6deg);
+
+        // opacity: 0;
+        // animation-name: bounceInLeft;
+        // animation-delay: 0.75s;
+        // animation-duration: 0.5s;
+        // animation-fill-mode: forwards;
+
     }
     &.text-three {
         position: absolute;
         top: 21rem;
         right: -38rem;
+
+        // opacity: 0;
+        // animation-name: bounceInLeft;
+        // animation-delay: 1s;
+        // animation-duration: 0.5s;
+        // animation-fill-mode: forwards;
     }
     &.text-four {
         position: absolute;
         top: 31rem;
         right: -38rem;
         transform: rotate(4deg);
+
+        // opacity: 0;
+        // animation-name: bounceInLeft;
+        // animation-delay: 1.25s;
+        // animation-duration: 0.5s;
+        // animation-fill-mode: forwards;
     }
     &.text-five {
         position: absolute;
         top: 40rem;
         right: -20rem;
         transform: rotate(6deg);
+
+        // opacity: 0;
+        // animation-name: bounceInLeft;
+        // animation-delay: 1.5s;
+        // animation-duration: 0.5s;
+        // animation-fill-mode: forwards;
     }
 }
 

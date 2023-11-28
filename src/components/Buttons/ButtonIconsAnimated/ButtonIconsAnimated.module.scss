@@ -8,8 +8,8 @@
     gap: 0.5rem;
     padding: 0.5rem 2rem;
     background: $gradient-primary;
-    font-size: 1.7rem;
-    font-weight: 500;
+    font-size: 1.6rem;
+    font-weight: 700;
     color: $white;
     border: none;
     border-radius: 0.8rem;
@@ -17,7 +17,7 @@
     transition: all .3s ease-in-out;
     cursor: pointer;
     width: 100%;
-    height: 4rem;
+    height: 4.2rem;
     &:hover {
         box-shadow: 0 0 2.5rem $primary;
         background: $gradient-primary-bright;

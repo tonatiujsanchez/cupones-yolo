@@ -33,7 +33,7 @@ export const HeroSection = () => {
                         width={720}
                         height={960}
                     />
-                    <p className={`${styles['image-center-text']} ${ styles['text-one'] }`}>Ropa</p>
+                    <p className={`bounceInLeft ${styles['image-center-text']} ${ styles['text-one'] }`}>Ropa</p>
                     <p className={`${styles['image-center-text']} ${ styles['text-two'] }`}>Calzado</p>
                     <p className={`${styles['image-center-text']} ${ styles['text-three'] }`}>Accesorios</p>
                     <p className={`${styles['image-center-text']} ${ styles['text-four'] }`}>Cosméticos</p>
