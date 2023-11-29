@@ -1,16 +1,31 @@
+import { FC, ReactNode } from "react"
+import Head from 'next/head'
 
-import { Raleway } from "next/font/google"
-const RalewayFont = Raleway({
-    weight: ['300', '400', '500', '700', '900'],
-    style: ['normal', 'italic'],
-    subsets: ['latin']
-})
+import { SiteLayout } from "../SiteLayout"
+import { Sidebar } from "@/components"
 
-export const DashboardLayout = () => {
+import styles from './DashboardLayout.module.scss'
+
+
+interface Props{
+    children:  ReactNode
+}
+export const DashboardLayout:FC<Props> = ({ children }) => {
 
     return (
-        <div className={`${RalewayFont.className}`}>
-            DashboardLayout
-        </div>
+        <>
+            <Head>
+                <title>YoloStyle - Admin</title>
+                <meta name="description" content="YoloStyle - Encuentra tu estilo" />
+            </Head>
+            <SiteLayout>
+                <div className={`container ${ styles['dashboard-container'] }`}>
+                     <Sidebar />
+                     <main>
+                        { children }
+                     </main>
+                </div>
+            </SiteLayout>        
+        </>
     )
 }

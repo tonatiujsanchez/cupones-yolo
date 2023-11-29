@@ -1,9 +1,15 @@
 
+import { DashboardLayout } from "@/components"
+
 
 const DashboardPage = () => {
-  return (
-    <div>DashboardPage</div>
-  )
+
+    
+    return (
+        <DashboardLayout>
+            <p>Hola</p>
+        </DashboardLayout>
+    )
 }
 
 export default DashboardPage

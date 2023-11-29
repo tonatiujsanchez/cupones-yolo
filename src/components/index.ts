@@ -3,6 +3,7 @@ export * from './Layouts/DashboardLayout'
 export * from './Layouts/SiteLayout'
 
 export * from './Shared/Navbar'
+export * from './Shared/Sidebar'
 
 export * from './Buttons/ButtonPrimary'
 export * from './Buttons/ButtonIconsAnimated'
