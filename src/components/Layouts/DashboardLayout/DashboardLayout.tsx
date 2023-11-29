@@ -8,9 +8,10 @@ import styles from './DashboardLayout.module.scss'
 
 
 interface Props{
-    children:  ReactNode
+    children : ReactNode
+    headding : string
 }
-export const DashboardLayout:FC<Props> = ({ children }) => {
+export const DashboardLayout:FC<Props> = ({ children, headding }) => {
 
     return (
         <>
@@ -21,8 +22,13 @@ export const DashboardLayout:FC<Props> = ({ children }) => {
             <SiteLayout>
                 <div className={`container ${ styles['dashboard-container'] }`}>
                      <Sidebar />
-                     <main>
-                        { children }
+                     <main className={ styles['main'] }>
+                        <div className={ styles['main-headding__container'] }>
+                            <h1>{ headding }</h1>
+                        </div>
+                        <div className={ styles['main-content'] }>
+                            { children }
+                        </div>
                      </main>
                 </div>
             </SiteLayout>        
