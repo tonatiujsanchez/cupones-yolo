@@ -9,7 +9,6 @@ import {
     ShirtIcon,
     ShoppingCartIcon,
     TruckIcon,
-    UserGroupIcon,
     UserIcon 
 } from '@/components/Icons'
 
@@ -28,14 +27,9 @@ const linksAdmin = [
         path: '/dashboard'
     },
     {
-        icon: <UserGroupIcon strokeWidth={1.5} />,
-        label: 'Registros',
-        path: '/dashboard'
-    },
-    {
         icon: <CouponIcon strokeWidth={1.4} />,
         label: 'Cupones',
-        path: '/dashboard'
+        path: '/dashboard/cupones'
     },
 ]
 

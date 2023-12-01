@@ -1,0 +1,11 @@
+@import '../../../scss/index.scss';
+
+.tabs-container {
+    border-block-end: $border-gray-light;
+}
+
+.section {
+    display: flex;
+    justify-content: center;
+    padding-block: 10rem;
+}

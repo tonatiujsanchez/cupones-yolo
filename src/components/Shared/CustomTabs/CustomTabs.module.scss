@@ -1,0 +1,47 @@
+@import '../../../scss/index.scss';
+
+
+.tabs-list {
+    display: flex;
+    justify-content: space-between;
+    
+    .tabs-item {
+        flex: 1;
+    }
+
+    .tabs-button {
+        position: relative;
+        padding: 1rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: color 0.2s ease-in-out;
+
+        svg {
+            width: 2.2rem;
+        }
+        &:hover {
+            color: $primary;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            inset-inline-start: 0;
+            inset-inline-end: 0;
+            inset-block-end: 0;
+            height: 0.3rem;
+            background: transparent;
+            transition: background 0.3s ease-in-out;
+        }
+        &.tab-active {
+            color: $primary;
+        }
+        &.tab-active::after {
+            background: $primary;
+        }
+    }
+}
