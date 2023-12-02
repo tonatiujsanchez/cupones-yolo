@@ -6,7 +6,7 @@ import { CouponBorder } from '@/components/shapes'
 import { ArrowRightIcon } from '@/components/Icons'
 
 import { isEmail } from '@/utils'
-import { ClientFormData } from '@/interfaces'
+import { IClientFormData } from '@/interfaces'
 import styles from './CouponsForm.module.scss'
 
 
@@ -14,7 +14,7 @@ export const CouponsForm = () => {
 
     const { clientMutation, clientRegistered, onCleanClientRegistered } = useRegisterClient()
 
-    const { register, handleSubmit, control, formState: { errors } } = useForm<ClientFormData>({
+    const { register, handleSubmit, control, formState: { errors } } = useForm<IClientFormData>({
         defaultValues:{
             name: '',
             phone: null,
@@ -23,7 +23,7 @@ export const CouponsForm = () => {
         }
     })
 
-    const onCouponsSubmit = ( data:ClientFormData ) => {
+    const onCouponsSubmit = ( data:IClientFormData ) => {
         clientMutation.mutate( data )
     }
 

@@ -19,17 +19,16 @@ export interface IClient {
     updatedAt?  : string
 }
 
-
-export interface ClientResp {
-    page      : number,
-    totalPages: number
+export type IClientsResp = {
+    currentPage  : number,
+    totalPages   : number
     totalClientes: number
-    count     : number
-    clients   : IClient[]
+    pageSize     : number
+    clients      : IClient[]
 }
 
 
-export interface ClientFormData {
+export interface IClientFormData {
     name: string
     phone: number | null
     birthdate: Date

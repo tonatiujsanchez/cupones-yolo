@@ -4,19 +4,13 @@ import { isValidObjectId } from 'mongoose'
 
 import { db } from '@/database'
 import { Client } from '@/models'
-import { IClient } from '@/interfaces'
+import { IClient, IClientsResp } from '@/interfaces'
 
 
 
 type Data = 
     | { msg: string }
-    | {
-        page: number,
-        totalPages: number
-        totalClientes: number
-        count: number
-        clients: IClient[]
-    }
+    | IClientsResp
     | IClient
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -36,15 +30,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 }   
 
 
+const countPerPage = 5;
 const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
 
-    const { page = 1, count = 20 } = req.query
+    const { page = 1, count = countPerPage } = req.query
 
     let skip = Number( page ) - 1
     let limit = Number(count)
 
     if( skip < 0 ){ skip = 0 }
-    if( limit < 0 ){ limit = 20 }
+    if( limit < 0 ){ limit = countPerPage }
 
     skip = skip * limit
 
@@ -63,9 +58,9 @@ const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
         await db.disconnect()
 
         return res.status(200).json({
-            count: clients.length,
-            page: Number(page),
-            totalPages: Math.ceil( total / Number(count) ),
+            currentPage  : Number(page),
+            totalPages   : Math.ceil( total / Number(count) ),
+            pageSize     : clients.length,
             totalClientes: total,
             clients,
         })

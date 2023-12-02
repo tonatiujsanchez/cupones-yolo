@@ -69,7 +69,7 @@ export const Sidebar = () => {
             <div className={ styles['siderbar-header'] }>
                 <div className={ styles['siderbar-header__photo'] }>
                     {
-                        !true
+                        true
                         ?(
                             <Image
                                 priority

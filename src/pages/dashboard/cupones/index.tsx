@@ -1,10 +1,11 @@
-import { CustomTabs, DashboardLayout } from "@/components"
-import { CouponIcon, SettingsIcon, UserGroupIcon } from "@/components/Icons"
+import { useState } from 'react'
+import { CustomTabs, DashboardLayout, RegisterSection } from '@/components'
+import { CouponIcon, SettingsIcon, UserGroupIcon } from '@/components/Icons'
 
-import { ITab } from "@/interfaces";
+import { GRAY_ULTRA_LIGHT_COLOR } from '@/constants'
+import { ITab } from '@/interfaces'
 
 import styles from './CouponsPage.module.scss'
-import { useState } from "react";
 
 
 export const DASHBOARD_COUPONS_PAGE_TABS:ITab[] = [
@@ -36,13 +37,12 @@ const CuponesAdminPage = () => {
                     tabs={ DASHBOARD_COUPONS_PAGE_TABS }
                     value={ tabActive }
                     onChange={ ( value )=> setTabActive( value ) }
+                    bgColor={ GRAY_ULTRA_LIGHT_COLOR }
                 />            
             </div>
             {
                 tabActive.value === 'registros' && (
-                    <section className={ styles['section'] }>
-                        <p>Registros</p>
-                    </section>
+                    <RegisterSection />
                 )
             }
             {

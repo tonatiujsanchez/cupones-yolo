@@ -2,19 +2,24 @@ import { FC } from 'react'
 
 import { ITab } from '@/interfaces'
 import styles from './CustomTabs.module.scss'
+import { WHITE_COLOR } from '../../../constants'
 
 interface Props {
     tabs    : ITab[]
     value   : ITab
     onChange: ( value: ITab ) => void
+    bgColor?: string
 }
 
-export const CustomTabs:FC<Props> = ({ tabs, value, onChange }) => {
+export const CustomTabs:FC<Props> = ({ tabs, value, onChange, bgColor = WHITE_COLOR }) => {
 
     return (
         <ul
             role="tablist"
             className={ styles['tabs-list'] }
+            style={{
+                backgroundColor: bgColor
+            }}
         >
             {
                 tabs.map( tab => (
