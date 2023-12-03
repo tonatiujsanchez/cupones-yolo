@@ -5,6 +5,7 @@ export * from './Layouts/SiteLayout'
 export * from './Shared/Navbar'
 export * from './Shared/Sidebar'
 export * from './Shared/CustomTabs'
+export * from './Shared/Pagination'
 
 export * from './Buttons/ButtonPrimary'
 export * from './Buttons/ButtonIconsAnimated'

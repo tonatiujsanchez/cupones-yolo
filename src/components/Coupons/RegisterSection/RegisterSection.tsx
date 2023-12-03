@@ -1,4 +1,4 @@
-import { RegisterList } from '@/components'
+import { Pagination, RegisterList } from '@/components'
 import { useGetClients } from '@/hooks'
 import styles from './RegisterSection.module.scss'
 
@@ -22,9 +22,24 @@ export const RegisterSection = () => {
         )
     }
 
+    const handlePageClick = ( page: number ) => {
+        console.log( page )
+    }
+
+    console.log( clientsQuery.data )
+
     return (
         <section>
-            <RegisterList clients={ clientsQuery.data } />
+            <div>
+                <RegisterList clients={ clientsQuery.data.clients } />
+            </div>
+            <div>
+                <Pagination
+                    currentPage={ clientsQuery.data.currentPage }
+                    onPageChange={ handlePageClick }
+                    pageCount={ clientsQuery.data.totalPages }
+                />
+            </div>
         </section>
     )
 }

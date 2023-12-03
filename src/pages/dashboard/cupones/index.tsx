@@ -40,25 +40,27 @@ const CuponesAdminPage = () => {
                     bgColor={ GRAY_ULTRA_LIGHT_COLOR }
                 />            
             </div>
-            {
-                tabActive.value === 'registros' && (
-                    <RegisterSection />
-                )
-            }
-            {
-                tabActive.value === 'cupones' && (
-                    <section className={ styles['section'] }>
-                        <p>Cupones</p>
-                    </section>
-                )
-            }
-            {
-                tabActive.value === 'ajustes' && (
-                    <section className={ styles['section'] }>
-                        <p>Ajustes</p>
-                    </section>
-                )
-            }
+            <div className={ styles['sections-container'] }>
+                {
+                    tabActive.value === 'registros' && (
+                        <RegisterSection />
+                    )
+                }
+                {
+                    tabActive.value === 'cupones' && (
+                        <section className={ styles['section'] }>
+                            <p>Cupones</p>
+                        </section>
+                    )
+                }
+                {
+                    tabActive.value === 'ajustes' && (
+                        <section className={ styles['section'] }>
+                            <p>Ajustes</p>
+                        </section>
+                    )
+                }
+            </div>
         </DashboardLayout>
     )
 }

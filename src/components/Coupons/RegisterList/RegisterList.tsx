@@ -1,10 +1,10 @@
 import { FC } from 'react'
 
-import { IClientsResp } from '@/interfaces'
+import { IClient } from '@/interfaces'
 import styles from './RegisterList.module.scss'
 
 interface Props {
-    clients: IClientsResp
+    clients: IClient[]
 }
 export const RegisterList:FC<Props> = ({ clients }) => {
 
@@ -13,7 +13,7 @@ export const RegisterList:FC<Props> = ({ clients }) => {
     return (
         <div>
             {
-                clients.clients.map( client => (
+                clients.map( client => (
                     <p key={ client._id }>{ client.name }</p>
                 ))
             }
