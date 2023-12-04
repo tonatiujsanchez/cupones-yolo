@@ -30,16 +30,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 }   
 
 
-const countPerPage = 5;
+const pageSize = 6;
 const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
 
-    const { page = 1, count = countPerPage } = req.query
+    const { page = 1, count = pageSize } = req.query
 
     let skip = Number( page ) - 1
     let limit = Number(count)
 
     if( skip < 0 ){ skip = 0 }
-    if( limit < 0 ){ limit = countPerPage }
+    if( limit < 0 ){ limit = pageSize }
 
     skip = skip * limit
 

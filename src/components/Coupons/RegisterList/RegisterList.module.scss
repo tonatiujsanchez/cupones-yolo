@@ -1,0 +1,35 @@
+@import '../../../scss/index.scss';
+.table {
+    width: 100%;
+    border-spacing: 0;
+
+    tr {
+        td, th {
+            padding: 1.6rem 1rem;
+            border-width: 0;
+        }
+        th{
+            text-align: start;
+        }
+    }
+
+    .table__thead {
+        background-color: $gray-ultra-light;
+        th:first-child {
+            border-start-start-radius:1rem;
+            border-end-start-radius:1rem;
+        }
+        th:last-child {
+            border-end-end-radius:1rem;
+            border-start-end-radius:1rem;
+        }
+    }
+
+    .table__body {
+        .client-name {
+            max-width: 22rem;
+            font-weight: 700;
+        }
+    }
+
+}

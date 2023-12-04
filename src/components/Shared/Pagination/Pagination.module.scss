@@ -3,12 +3,13 @@
 .pagination {
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 0.5rem;
+    
     a{
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 100%;
         padding: 0.3rem 0.8rem;
         border-radius: 0.5rem;
         background-color: $gray-ultra-light;
@@ -20,9 +21,14 @@
             color: $white;
         }
     }
+    
     .page-active {
         background: $primary;
         color: $white;
         padding-inline: 1.4rem;
+    }
+
+    svg {
+        width: 1.6rem;
     }
 }

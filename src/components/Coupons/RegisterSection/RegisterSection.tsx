@@ -4,7 +4,7 @@ import styles from './RegisterSection.module.scss'
 
 export const RegisterSection = () => {
 
-    const { clientsQuery } = useGetClients({ page: 1 })
+    const { clientsQuery, handlePageClick } = useGetClients({ page: 1 })
 
     if( clientsQuery.isLoading ) {
         return (
@@ -17,13 +17,9 @@ export const RegisterSection = () => {
     if( !clientsQuery.data ) {
         return (
             <div>
-                <p>No hay registros</p>
+                <p>No hay clientes registrados</p>
             </div>
         )
-    }
-
-    const handlePageClick = ( page: number ) => {
-        console.log( page )
     }
 
     console.log( clientsQuery.data )
@@ -33,7 +29,7 @@ export const RegisterSection = () => {
             <div>
                 <RegisterList clients={ clientsQuery.data.clients } />
             </div>
-            <div>
+            <div className={ styles['pagination-container'] }>
                 <Pagination
                     currentPage={ clientsQuery.data.currentPage }
                     onPageChange={ handlePageClick }

@@ -14,10 +14,15 @@ export const useGetClients = ({ page }:Props) => {
         queryKey: ['issues', { currentPage }],
         queryFn: ()=> couponActions.getClients( currentPage ),
         staleTime: 1000 * 60 * 60,
-        // refetchOnWindowFocus: false, //Deshabilita que realice una petición cada vez que se regresa el foco a la aplicación
     })
+
+    const handlePageClick = ( page: number ) => {
+        setCurrentPage( page )
+    }
+    
     
     return {
-        clientsQuery
+        clientsQuery,
+        handlePageClick
     }
 }
