@@ -1,3 +1,4 @@
+@import '../../../scss/index.scss';
 .register-section {
     min-height: 35rem;
 }
@@ -11,6 +12,14 @@
 
 .pagination-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
     margin-block-start: 2rem;
+    
+    .register-count {
+        margin-inline-start: auto;
+        color: $gray;
+        display: flex;
+        gap: 0.4rem;    
+    }
 }

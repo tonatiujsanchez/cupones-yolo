@@ -10,6 +10,10 @@ interface Props {
     pageCount   : number
 }
 export const Pagination:FC<Props> = ({ currentPage, onPageChange, pageCount }) => {
+
+    if( pageCount <= 1 ){
+       return ( <></> ) 
+    }
     return (
         <ReactPaginate
             forcePage={ currentPage - 1 }

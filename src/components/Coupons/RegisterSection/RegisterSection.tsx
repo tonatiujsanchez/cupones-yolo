@@ -1,6 +1,7 @@
 import { Pagination, RegisterList } from '@/components'
 import { useGetClients } from '@/hooks'
 import styles from './RegisterSection.module.scss'
+import { CLIENTS_PAGE_SIZE } from '@/constants'
 
 export const RegisterSection = () => {
 
@@ -37,6 +38,12 @@ export const RegisterSection = () => {
                                 onPageChange={ handlePageClick }
                                 pageCount={ clientsQuery.data.totalPages }
                             />
+                            
+                            <p className={ styles['register-count'] }>
+                                <span>{ CLIENTS_PAGE_SIZE * ( clientsQuery.data.currentPage - 1 ) + 1 }</span> 
+                                - <span>{ CLIENTS_PAGE_SIZE * (clientsQuery.data.currentPage - 1) + clientsQuery.data.pageSize  }</span>
+                                de <span>{ clientsQuery.data.totalClientes }</span> registros
+                            </p>
                         </div>
                     </>
                 )
