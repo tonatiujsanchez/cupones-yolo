@@ -1,9 +1,18 @@
 @import '../../../scss/index.scss';
 
 .tabs-container {
+    background-color: $gray-ultra-light;
     border-block-end: $border-gray-light;
+    overflow-x: auto;
 }
 
 .sections-container {
-    padding: 2rem;
+    padding-block: 2rem;
+    padding-inline: 1rem;
+}
+
+@media (min-width: 768px) {
+    .sections-container {
+        padding-inline: 1.5rem;
+    }
 }

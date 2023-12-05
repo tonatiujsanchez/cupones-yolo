@@ -32,7 +32,7 @@ const CuponesAdminPage = () => {
 
     return (
         <DashboardLayout headding="Cupones">
-            <div className={ styles['tabs-container'] }>
+            <div className={`custom-scroll ${ styles['tabs-container'] }`}>
                 <CustomTabs 
                     tabs={ DASHBOARD_COUPONS_PAGE_TABS }
                     value={ tabActive }

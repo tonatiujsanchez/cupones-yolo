@@ -4,6 +4,8 @@ import { isValidObjectId } from 'mongoose'
 
 import { db } from '@/database'
 import { Client } from '@/models'
+import { CLIENTS_PAGE_SIZE } from '@/constants'
+
 import { IClient, IClientsResp } from '@/interfaces'
 
 
@@ -30,7 +32,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 }   
 
 
-const pageSize = 6;
+const pageSize = CLIENTS_PAGE_SIZE;
 const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
 
     const { page = 1, count = pageSize } = req.query

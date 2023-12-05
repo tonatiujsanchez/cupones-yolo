@@ -8,6 +8,7 @@
     max-width: 27rem;
     position: sticky;
     inset-block-start: 11rem;
+    display: none;
 }
 
 .siderbar-header {
@@ -108,5 +109,11 @@
     }
     &:hover {
         background: $red-light;
+    }
+}
+
+@media (min-width: 768px) {
+    .siderbar-container {
+        display: block;
     }
 }
