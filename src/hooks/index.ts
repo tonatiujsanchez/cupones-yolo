@@ -1,3 +1,4 @@
 
-export * from './useRegisterClient'
-export * from './useGetClients'
+export * from './coupons/useRegisterClient'
+export * from './coupons/useGetClients'
+export * from './coupons/useUpdateClient'

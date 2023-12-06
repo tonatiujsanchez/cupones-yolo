@@ -17,3 +17,10 @@ export const getClients = async ( page:number ):Promise<IClientsResp> => {
     const { data } = await yolostyleApi.get<IClientsResp>(`/admin/clients`, { params })
     return data
 }
+
+
+export const updateClient = async ( client: IClient ):Promise<IClient> => {
+    
+    const { data } = await yolostyleApi.put<IClient>(`/admin/clients`, client)
+    return data
+}

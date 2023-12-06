@@ -9,8 +9,10 @@ import styles from './RegisterListItem.module.scss'
 interface Props {
     client: IClient
     index : number
+    onToggleCouponsSent: ( client: IClient ) => void
 }
-export const RegisterListItem: FC<Props> = ({ client, index }) => {
+export const RegisterListItem: FC<Props> = ({ client, index, onToggleCouponsSent }) => {
+
     return (
         <tr className={ styles['table-row'] }>
             <td className={ styles['client-index'] }>{ index }</td>
@@ -31,11 +33,17 @@ export const RegisterListItem: FC<Props> = ({ client, index }) => {
                 {
                     client.couponsSent
                         ? (
-                            <button className={`${ styles['coupons-sent__button'] } ${ styles['coupons-sent__check'] }`}>
+                            <button
+                                onClick={ ()=> onToggleCouponsSent( client ) } 
+                                className={`${ styles['coupons-sent__button'] } ${ styles['coupons-sent__check'] }`}
+                            >
                                 <CheckIcon stroke={'none'} /> Enviados
                             </button>
                         ):(
-                            <button className={ styles['coupons-sent__button'] }>
+                            <button
+                                onClick={ ()=> onToggleCouponsSent( client ) } 
+                                className={ styles['coupons-sent__button'] }
+                            >
                                 <CheckIcon /> Pendientes
                             </button>
                         )
