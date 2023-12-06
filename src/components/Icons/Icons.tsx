@@ -91,14 +91,16 @@ export const XIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'currentColo
     )
 }
 
-export const CheckIcon: FC<IconProps> = ({ fill = BLACK_COLOR }) => {
+export const CheckIcon: FC<IconProps> = ({ fill = 'currentColor', stroke = 'currentColor', strokeWidth = 1.5 }) => {
     return (
         <svg 
             xmlns="http://www.w3.org/2000/svg" 
             width="100%" 
             height="100%" 
             viewBox="0 0 24 24"
-            fill={ fill }
+            fill={ fill } 
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
         >
                 <path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z" />
         </svg>
@@ -479,3 +481,41 @@ export const ChevronRightIcon: FC<IconProps> = ({ fill = 'none', stroke = 'curre
         </svg>
     )
 }
+
+export const MinusIcon: FC<IconProps> = ({ fill = 'none', stroke = 'currentColor', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill={ fill } 
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                d="M19.5 12h-15"
+            />
+        </svg>
+    )
+}
+
+export const ClockIcon: FC<IconProps> = ({ fill = 'none', stroke = 'currentColor', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill={ fill } 
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+        </svg>
+    )
+}
+
+

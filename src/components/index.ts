@@ -19,6 +19,7 @@ export * from './Coupons/CouponsForm'
 export * from './Coupons/RegisterCompleted'
 export * from './Coupons/RegisterSection'
 export * from './Coupons/RegisterList'
+export * from './Coupons/RegisterListItem'
 
 export * from './FormComponents/DatePicker'
 export * from './FormComponents/Checkbox'

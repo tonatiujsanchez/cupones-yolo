@@ -17,9 +17,10 @@
     margin-block-start: 2rem;
     
     .register-count {
-        margin-inline-start: auto;
-        color: $gray;
         display: flex;
         gap: 0.4rem;    
+        color: $gray;
+        font-size: 1.5rem;
+        margin-inline-start: auto;
     }
 }

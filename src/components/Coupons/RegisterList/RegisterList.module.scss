@@ -8,14 +8,9 @@
     width: 100%;
     border-spacing: 0;
     .table-row {
-        td, th {
-            padding: 1.6rem 1rem;
-        }
         th{
+            padding: 1.6rem 1rem;
             text-align: start;
-        }
-        td {
-            border-block-end: 0.1rem solid $gray-ultra-light;
         }
     }
 
@@ -28,50 +23,6 @@
         th:last-child {
             border-end-end-radius:1rem;
             border-start-end-radius:1rem;
-        }
-    }
-
-    .table__body {
-        .table-row {
-            border-color: $gray-light;
-            border-style: solid;
-            border-width: 0;
-        }
-        .client-index {
-            font-weight: 700;
-        }
-        .client-name {
-            max-width: 22rem;
-            font-weight: 700;
-
-        }
-    }
-
-    .coupons-cell {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-        .coupon {
-            background: $primary-light;
-            color: $primary;
-            border-radius: 0.4rem;
-            padding: 0.6rem 0.5rem;
-            font-size: 1.4rem;
-            cursor: pointer;
-            &:active {
-                transform: scale(0.97);
-            }
-            &:hover {
-                box-shadow: 0 0 0.5rem $primary;
-            }
-            span {
-                padding-inline: 0.5rem;
-                font-weight: 700;
-            }
-            span:first-child {
-                border-inline-end: dashed $white 0.1rem;
-            }
         }
     }
 }

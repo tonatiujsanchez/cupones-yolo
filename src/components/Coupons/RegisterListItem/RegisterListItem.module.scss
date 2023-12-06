@@ -1,0 +1,85 @@
+@import '../../../scss/index.scss';
+
+.table-row {
+    
+    td {
+        padding: 1.6rem 1rem;
+        border-block-end: 0.1rem solid $gray-ultra-light;
+    }
+
+    .client-index {
+        font-weight: 700;
+    }
+
+    .client-name {
+        max-width: 22rem;
+        font-weight: 700;
+    
+    }
+
+    .coupons-sent {
+        .coupons-sent__button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.4rem;
+            border: 0.1rem solid $gray-light;
+            padding-inline: 0.8rem;
+            border-radius: 0.5rem;
+            color: $gray;
+            margin-inline: auto;
+            font-size: 1.5rem;
+            width: 11.5rem;
+            height: 2.5rem;
+            cursor: pointer;
+            transition: color 0.3s, background 0.3s;
+            &:hover {
+                border-color: $gray-light;
+                color: $black;
+                background-color: $gray-light;
+            }
+    
+            svg {
+                width: 2rem;
+            }
+            &.coupons-sent__check {
+                border-color: $green;
+                color: $white;
+                background-color: $green;
+                &:hover {
+                    color: $green;
+                    background-color: $green-light;
+                    
+                }
+            }
+        }
+    }
+    
+    .coupons-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        .coupon {
+            background: $primary-light;
+            color: $primary;
+            border-radius: 0.4rem;
+            padding: 0.6rem 0.5rem;
+            font-size: 1.4rem;
+            cursor: pointer;
+            &:active {
+                transform: scale(0.97);
+            }
+            &:hover {
+                box-shadow: 0 0 0.5rem $primary;
+            }
+            span {
+                padding-inline: 0.5rem;
+                font-weight: 700;
+            }
+            span:first-child {
+                border-inline-end: dashed $white 0.1rem;
+            }
+        }
+    }
+}

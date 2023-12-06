@@ -1,13 +1,12 @@
 import { Pagination, RegisterList } from '@/components'
 import { useGetClients } from '@/hooks'
-import styles from './RegisterSection.module.scss'
 import { CLIENTS_PAGE_SIZE } from '@/constants'
+
+import styles from './RegisterSection.module.scss'
 
 export const RegisterSection = () => {
 
     const { clientsQuery, handlePageClick } = useGetClients({ page: 1 })
-
-    console.log( clientsQuery.data )
 
     return (
         <section className={ styles['register-section'] }>

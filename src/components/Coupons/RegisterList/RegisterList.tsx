@@ -1,10 +1,11 @@
 import { FC } from 'react'
 
-import { dateFormatDayAndMonth } from '@/utils'
+import { RegisterListItem } from '@/components'
 import { CLIENTS_PAGE_SIZE } from '@/constants'
-import { IClient, ICoupon } from '@/interfaces'
 
+import { IClient } from '@/interfaces'
 import styles from './RegisterList.module.scss'
+
 
 interface Props {
     clients    : IClient[]
@@ -19,8 +20,9 @@ export const RegisterList:FC<Props> = ({ clients, currentPage }) => {
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Celular</th>
-                        <th>Fecha de nacimiento</th>
+                        <th>Nacimiento</th>
                         <th>Cupones</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody className={ styles['table__body'] }>
@@ -28,23 +30,7 @@ export const RegisterList:FC<Props> = ({ clients, currentPage }) => {
                         clients.map((client, idx) => {
                             const index = (CLIENTS_PAGE_SIZE * (currentPage - 1)) + (idx + 1);
                             return (
-                                <tr key={ client._id } className={ styles['table-row'] }>
-                                    <td className={ styles['client-index'] }>{ index }</td>
-                                    <td className={ styles['client-name'] }>{ client.name }</td>
-                                    <td>{ client.phone }</td>
-                                    <td>{ dateFormatDayAndMonth( client.birthdate ) }</td>
-                                    <td className={ styles['coupons-cell'] }>
-                                        {
-                                            client.coupons.map( coupon => (
-                                                    <button key={ (coupon as ICoupon)._id } className={ styles['coupon'] }>
-                                                        <span>{ (coupon as ICoupon).value }%</span>
-                                                        <span>{ (coupon as ICoupon).folio }</span>
-                                                    </button>
-                                                )
-                                            )
-                                        }
-                                    </td>
-                                </tr>
+                                <RegisterListItem key={ client._id } client={ client } index={ index } />
                             )
                         })
                     }
