@@ -3,6 +3,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard'
 
 import { CheckIcon } from '@/components/Icons'
 import { dateFormatDayAndMonth } from '@/utils'
+import { toastCustom } from '@/libs'
 
 import { IClient, ICoupon } from '@/interfaces'
 import styles from './RegisterListItem.module.scss'
@@ -14,8 +15,11 @@ interface Props {
 }
 export const RegisterListItem: FC<Props> = ({ client, index, onToggleCouponsSent }) => {
 
-    const onCopy = useCallback(( couponFolio:string ) => {
-        console.log('Se copio el Folio del Cupón', couponFolio)
+    const onCopy = useCallback(( couponFolio:string, value:number ) => {
+        toastCustom(
+            `${couponFolio}`,
+            `Copón ${ value }% de ${ client.name.split(' ')[0] } copiado`
+        )
     }, [])
 
     return (
@@ -29,7 +33,7 @@ export const RegisterListItem: FC<Props> = ({ client, index, onToggleCouponsSent
                     client.coupons.map( coupon => (
                         <CopyToClipboard 
                             key={ (coupon as ICoupon)._id } 
-                            onCopy={onCopy} 
+                            onCopy={ ()=> onCopy( (coupon as ICoupon).folio, (coupon as ICoupon).value ) } 
                             text={ (coupon as ICoupon).folio }
                         >
                             <button className={ styles['coupon'] }>

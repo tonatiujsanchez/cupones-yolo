@@ -67,11 +67,16 @@
             padding: 0.6rem 0.5rem;
             font-size: 1.4rem;
             cursor: pointer;
+            transition: background 0.3s, color 0.3s, transform 0.1s;
             &:active {
-                transform: scale(0.97);
+                transform: scale(0.95);
+                box-shadow: 0 0 0.5rem $primary;
+
             }
             &:hover {
                 box-shadow: 0 0 0.5rem $primary;
+                background: $primary;
+                color: $white;    
             }
             span {
                 padding-inline: 0.5rem;
