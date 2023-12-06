@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
 import { couponActions } from '@/services'
-import { IClient, IClientsResp } from '@/interfaces'
 import { REGISTERS_QUERY_KEY } from '@/constants'
+import { IClient, IClientsResp } from '@/interfaces'
 
 
 interface IUpdatedClient {

@@ -1,4 +1,5 @@
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
+import {CopyToClipboard} from 'react-copy-to-clipboard'
 
 import { CheckIcon } from '@/components/Icons'
 import { dateFormatDayAndMonth } from '@/utils'
@@ -13,6 +14,10 @@ interface Props {
 }
 export const RegisterListItem: FC<Props> = ({ client, index, onToggleCouponsSent }) => {
 
+    const onCopy = useCallback(( couponFolio:string ) => {
+        console.log('Se copio el Folio del Cupón', couponFolio)
+    }, [])
+
     return (
         <tr className={ styles['table-row'] }>
             <td className={ styles['client-index'] }>{ index }</td>
@@ -22,10 +27,16 @@ export const RegisterListItem: FC<Props> = ({ client, index, onToggleCouponsSent
             <td className={ styles['coupons-cell'] }>
                 {
                     client.coupons.map( coupon => (
-                        <button key={ (coupon as ICoupon)._id } className={ styles['coupon'] }>
-                            <span>{ (coupon as ICoupon).value }%</span>
-                            <span>{ (coupon as ICoupon).folio }</span>
-                        </button>
+                        <CopyToClipboard 
+                            key={ (coupon as ICoupon)._id } 
+                            onCopy={onCopy} 
+                            text={ (coupon as ICoupon).folio }
+                        >
+                            <button className={ styles['coupon'] }>
+                                <span>{ (coupon as ICoupon).value }%</span>
+                                <span>{ (coupon as ICoupon).folio }</span>
+                            </button>
+                        </CopyToClipboard>
                     ))
                 }
             </td>
