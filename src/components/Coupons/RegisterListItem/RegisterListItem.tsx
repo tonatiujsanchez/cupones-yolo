@@ -3,7 +3,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard'
 
 import { CheckIcon } from '@/components/Icons'
 import { dateFormatDayAndMonth } from '@/utils'
-import { toastCustom } from '@/libs'
+import { toastBasic } from '@/libs'
 
 import { IClient, ICoupon } from '@/interfaces'
 import styles from './RegisterListItem.module.scss'
@@ -16,11 +16,11 @@ interface Props {
 export const RegisterListItem: FC<Props> = ({ client, index, onToggleCouponsSent }) => {
 
     const onCopy = useCallback(( couponFolio:string, value:number ) => {
-        toastCustom(
+        toastBasic(
             `${couponFolio}`,
             `Copón ${ value }% de ${ client.name.split(' ')[0] } copiado`
         )
-    }, [])
+    }, [client.name])
 
     return (
         <tr className={ styles['table-row'] }>

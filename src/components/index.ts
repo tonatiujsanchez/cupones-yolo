@@ -24,5 +24,6 @@ export * from './Coupons/RegisterListItem'
 export * from './FormComponents/DatePicker'
 export * from './FormComponents/Checkbox'
 export * from './FormComponents/InputText'
+export * from './FormComponents/SearchForm'
 
 

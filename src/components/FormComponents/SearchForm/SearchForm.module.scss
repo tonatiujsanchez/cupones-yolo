@@ -1,0 +1,45 @@
+@import '../../../scss/index.scss';
+
+.search-form {
+    display: flex;
+    border: $border-gray-light;
+    border-radius: 0.5rem;
+    &:hover {
+        border: 0.1rem solid $primary;
+    }
+    &.search-form-focus {
+        border-color: transparent;
+        outline: 0.2rem solid $primary;
+    }
+}
+
+.search-input {
+    outline: none;
+    padding: 1.2rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    width: 100%;
+    &::placeholder {
+        color: $gray-light;
+        font-size: 1.5rem;
+        opacity: 0.9;
+    }
+}
+
+.search-button {
+    display: flex;
+    align-items: center;
+    color: $gray;
+    padding-inline: 1rem;
+    cursor: pointer;
+    &:hover {
+        color: $primary;
+    }
+    &:active {
+        transform: scale(0.9);
+    }
+    svg {
+        width: 2rem;
+    }
+}

@@ -1,4 +1,4 @@
-import { Pagination, RegisterList } from '@/components'
+import { Pagination, RegisterList, SearchForm } from '@/components'
 import { useGetClients } from '@/hooks'
 import { CLIENTS_PAGE_SIZE } from '@/constants'
 
@@ -10,6 +10,9 @@ export const RegisterSection = () => {
 
     return (
         <section className={ styles['register-section'] }>
+            <div className={ styles['filter-container'] }>
+                <SearchForm />
+            </div>
             {
                 clientsQuery.isLoading && (
                     <div className={ styles['loader-container'] }>

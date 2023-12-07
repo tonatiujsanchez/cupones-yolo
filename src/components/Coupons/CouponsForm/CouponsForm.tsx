@@ -59,7 +59,7 @@ export const CouponsForm = () => {
                                 placeholder="Ingrese su nombre completo"
                                 { ...register('name', {
                                     required: 'El nombre es requerido',
-                                    validate: (val) => val && val.length >= 4 ? undefined : 'El nombre es muy corto'
+                                    validate: (val) => val && val.trim().length >= 4 ? undefined : 'El nombre es muy corto'
                                 })}
                             />
                             {
