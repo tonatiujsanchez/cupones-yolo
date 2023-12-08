@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { isValidObjectId } from 'mongoose'
+import { FilterQuery, isValidObjectId } from 'mongoose'
 
 import { db } from '@/database'
 import { Client } from '@/models'
@@ -35,7 +35,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 const pageSize = CLIENTS_PAGE_SIZE;
 const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
 
-    const { page = 1, count = pageSize } = req.query
+    const { page = 1, count = pageSize, searchTerm = '' } = req.query
 
     let skip = Number( page ) - 1
     let limit = Number(count)
@@ -45,7 +45,23 @@ const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
 
     skip = skip * limit
 
-    const query = {}
+    let query:FilterQuery<IClient> = { 
+        status: true
+    }
+    
+    if( searchTerm.toString().trim() !== '' ) {
+        console.log({ searchTerm })
+        query = {
+            ...query,
+            $and: [
+                {
+                    $or: [
+                        { name: { $regex: new RegExp(searchTerm.toString(), "i") } },
+                    ]
+                }
+            ]
+        }
+    }
     
     try {        
         await db.connect()

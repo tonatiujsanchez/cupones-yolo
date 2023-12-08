@@ -2,7 +2,6 @@ import { FC, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 
 import { SearchIcon } from '@/components/Icons'
-import { GRAY_LIGHT_COLOR, PRIMARY_COLOR } from '@/constants'
 
 import styles from './SearchForm.module.scss'
 
@@ -12,8 +11,9 @@ interface IFormData {
 }
 interface Props {
     placeholder?: string
+    onSubmit: ( searchTerm:string ) => void
 }
-export const SearchForm:FC<Props> = ({ placeholder='Buscar' }) => {
+export const SearchForm:FC<Props> = ({ placeholder='Buscar', onSubmit }) => {
 
     const { register, handleSubmit } = useForm<IFormData>({
         defaultValues: {
@@ -45,8 +45,7 @@ export const SearchForm:FC<Props> = ({ placeholder='Buscar' }) => {
     },[])
 
     const onSearchSubmit = (data:IFormData) => {
-        console.log(data)
-        
+        onSubmit( data.searchTerm )        
     }
 
 

@@ -9,10 +9,11 @@ export const createCoupons = async( client: IClientFormData ):Promise<IClient> =
 }
 
 
-export const getClients = async ( page:number ):Promise<IClientsResp> => {
+export const getClients = async ( page:number, searchTerm:string ):Promise<IClientsResp> => {
 
     const params = new URLSearchParams()
     params.append('page', page.toString())
+    params.append('searchTerm', searchTerm)
 
     const { data } = await yolostyleApi.get<IClientsResp>(`/admin/clients`, { params })
     return data

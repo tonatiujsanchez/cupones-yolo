@@ -3,15 +3,25 @@ import { useGetClients } from '@/hooks'
 import { CLIENTS_PAGE_SIZE } from '@/constants'
 
 import styles from './RegisterSection.module.scss'
+import { useState } from 'react'
 
 export const RegisterSection = () => {
 
-    const { clientsQuery, handlePageClick } = useGetClients({ page: 1 })
+    const [searchTerm, setSearchTerm] = useState<string>('')
+
+    const { clientsQuery, handlePageClick } = useGetClients({ page: 1, searchTerm })
+
+
+    const handleSetSearchTerm = ( searchTerm: string ) => {
+        setSearchTerm( searchTerm )
+    }
 
     return (
         <section className={ styles['register-section'] }>
             <div className={ styles['filter-container'] }>
-                <SearchForm />
+                <SearchForm
+                    onSubmit={ handleSetSearchTerm }
+                />
             </div>
             {
                 clientsQuery.isLoading && (
