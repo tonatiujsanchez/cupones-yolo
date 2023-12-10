@@ -25,5 +25,6 @@ export * from './FormComponents/DatePicker'
 export * from './FormComponents/Checkbox'
 export * from './FormComponents/InputText'
 export * from './FormComponents/SearchForm'
+export * from './FormComponents/CustomSelect'
 
 

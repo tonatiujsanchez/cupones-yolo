@@ -1,9 +1,9 @@
-import { Pagination, RegisterList, SearchForm } from '@/components'
+import { useState } from 'react'
+import { Pagination, RegisterList, SearchForm, CustomSelect } from '@/components'
 import { useGetClients } from '@/hooks'
 import { CLIENTS_PAGE_SIZE } from '@/constants'
 
 import styles from './RegisterSection.module.scss'
-import { useState } from 'react'
 
 export const RegisterSection = () => {
 
@@ -21,6 +21,22 @@ export const RegisterSection = () => {
             <div className={ styles['filter-container'] }>
                 <SearchForm
                     onSubmit={ handleSetSearchTerm }
+                />
+                <CustomSelect
+                    options={[
+                        {
+                            value:"",
+                            label:"Todos"
+                        },
+                        {
+                            value:"enviados",
+                            label:"Enviados"
+                        },
+                        {
+                            value:"pendientes",
+                            label:"Pendientes"
+                        },
+                    ]}
                 />
             </div>
             {

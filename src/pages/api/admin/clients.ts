@@ -35,7 +35,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 const pageSize = CLIENTS_PAGE_SIZE;
 const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
 
-    const { page = 1, count = pageSize, searchTerm = '' } = req.query
+    const { page = 1, count = pageSize, searchTerm = '', couponsSent = 'all' } = req.query
 
     let skip = Number( page ) - 1
     let limit = Number(count)
@@ -50,7 +50,6 @@ const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
     }
     
     if( searchTerm.toString().trim() !== '' ) {
-        console.log({ searchTerm })
         query = {
             ...query,
             $and: [

@@ -148,6 +148,27 @@ export const ArrowLeftIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'cur
     )
 }
 
+export const ArrowDownIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'currentColor', strokeWidth=1.6 }) => {
+    return (
+        <svg 
+            width="100%"
+            height="100%" 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 30 24"
+            fill={ fill }
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+            />
+        </svg>
+      
+    )
+}
+
 export const ShoppingBagIcon: FC<IconProps> = ({ fill = BLACK_COLOR, stroke = 'none', strokeWidth = 1.5 }) => {
     return (
         <svg
