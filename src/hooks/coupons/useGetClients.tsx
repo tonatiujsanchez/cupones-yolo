@@ -3,13 +3,19 @@ import { useQuery } from '@tanstack/react-query'
 import { couponActions } from '@/services'
 
 import { REGISTERS_QUERY_KEY } from '@/constants'
+import { ICouponsSentOptions } from '@/interfaces'
+
+
 
 
 interface Props {
-    page      : number
-    searchTerm: string
+    page       : number
+    searchTerm : string
+    couponsSent: ICouponsSentOptions
+    month :string
+    year  :string
 }
-export const useGetClients = ({ page, searchTerm }:Props) => {
+export const useGetClients = ({ page, searchTerm, couponsSent, month, year }:Props) => {
 
     const [currentPage, setCurrentPage] = useState(page)
 

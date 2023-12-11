@@ -7,12 +7,12 @@ import styles from './CustomSelect.module.scss'
 
 interface Props {
     options: ISelectOption[]
-    onChange: ( option:ISelectOption )=> void
+    value  : ISelectOption
+    onChange: ( value:ISelectOption )=> void
 }
 
-export const CustomSelect:FC<Props> = ({ options, onChange }) => {
+export const CustomSelect:FC<Props> = ({ options, value, onChange }) => {
 
-    const [optionSelected, setOptionSelected] = useState<ISelectOption>(options[0])
     const [openOptions, setOpenOptions] = useState<boolean>(false)
 
     const divRef = useRef<HTMLDivElement>(null)
@@ -37,7 +37,8 @@ export const CustomSelect:FC<Props> = ({ options, onChange }) => {
     }
 
     const hendleSelectOption = (option: ISelectOption) => {
-        setOptionSelected( option )
+        if( option.value === value.value ){ return }
+        // setOptionSelected( option )
         onChange( option )
     }
 
@@ -49,7 +50,7 @@ export const CustomSelect:FC<Props> = ({ options, onChange }) => {
                 ref={ divRef }
                 className={ `${ styles['select'] } ${ openOptions ? styles['select-focus']:'' }` } >
                 
-                { optionSelected.label }
+                { value.label }
 
                 <div className={ styles['icon-container'] }>
                     <ArrowDownIcon fill="none" />
@@ -63,7 +64,7 @@ export const CustomSelect:FC<Props> = ({ options, onChange }) => {
                         <li 
                             key={ option.value }
                             onClick={ ()=> hendleSelectOption( option ) }
-                            className={`${ styles['option'] } ${ option.value === optionSelected.value ? styles['option-selected'] : ''} `}
+                            className={`${ styles['option'] } ${ option.value === value.value ? styles['option-selected'] : ''} `}
                         >
                             { option.label }
                         </li>

@@ -35,3 +35,10 @@ export interface IClientFormData {
     email: string
     receivePromotions: boolean
 }
+
+export type ICouponsSentOptions = '' | 'enviados' | 'pendientes'
+
+export interface ICouponsSent {
+    value: ICouponsSentOptions
+    label: string
+}

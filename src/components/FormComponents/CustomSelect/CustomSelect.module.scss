@@ -53,6 +53,7 @@
         height: 0;
         opacity: 0;
         overflow: hidden;
+        z-index: 1;
         .option {        
             padding-block: 1.2rem;
             padding-inline: 1.6rem;

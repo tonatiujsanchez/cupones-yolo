@@ -1,12 +1,12 @@
-import { useRef, useEffect, FC } from 'react';
-import { DateSelect } from "react-ymd-date-select/dist/cjs/presets/vanilla";
+import { useRef, useEffect, FC } from 'react'
+import { DateSelect } from "react-ymd-date-select/dist/cjs/presets/vanilla"
 
-import { es } from 'date-fns/locale';
+import { es } from 'date-fns/locale'
 
 import styles from './DatePicker.module.scss'
 
 interface Props {
-    value: Date
+    value   : Date
     onChange: ( value: string )=>void
 }
 
