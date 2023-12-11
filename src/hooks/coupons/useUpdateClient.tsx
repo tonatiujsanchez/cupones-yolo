@@ -7,20 +7,21 @@ import { IClient, IClientsResp } from '@/interfaces'
 
 
 interface IUpdatedClient {
-    client: IClient, 
-    currentPage:number
+    client     : IClient, 
+    currentPage:number,
+    searchTerm :string
 }
 export const useUpdateClient = () => {
     
     const queryClient = useQueryClient()
 
     const updateClient = useMutation({
-        onMutate: ({ client, currentPage }:IUpdatedClient )=> {
+        onMutate: ({ client, currentPage, searchTerm }:IUpdatedClient )=> {
 
             let oldClientToUpdate:IClient | undefined;
 
             queryClient.setQueryData<IClientsResp>(
-                [REGISTERS_QUERY_KEY, { page: currentPage }],
+                [REGISTERS_QUERY_KEY, { page: currentPage, searchTerm }],
                 ( oldData ) => {
                     if( oldData ){
                         return {
@@ -41,7 +42,8 @@ export const useUpdateClient = () => {
             )
             return { 
                 oldClient: oldClientToUpdate ? oldClientToUpdate : client, 
-                currentPage 
+                currentPage,
+                searchTerm
             }
         },
         mutationFn: ({ client })=> couponActions.updateClient( client ),
@@ -51,10 +53,10 @@ export const useUpdateClient = () => {
         },
         onError: ( error:AxiosError<{ msg:string }>, _variables, context )=> {
 
-            const { oldClient, currentPage } = context as { oldClient:IClient, currentPage:number }
+            const { oldClient, currentPage, searchTerm } = context as { oldClient:IClient, currentPage:number, searchTerm:string }
 
             queryClient.setQueryData<IClientsResp>(
-                [REGISTERS_QUERY_KEY, { page: currentPage }],
+                [REGISTERS_QUERY_KEY, { page: currentPage, searchTerm }],
                 ( oldData )=> {
                     if( oldData ){
                         return {

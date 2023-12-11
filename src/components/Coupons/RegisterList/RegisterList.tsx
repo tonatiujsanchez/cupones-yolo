@@ -10,9 +10,10 @@ import { useUpdateClient } from '@/hooks'
 
 interface Props {
     clients    : IClient[]
-    currentPage: number
+    currentPage: number,
+    searchTerm : string
 }
-export const RegisterList:FC<Props> = ({ clients, currentPage }) => {
+export const RegisterList:FC<Props> = ({ clients, currentPage, searchTerm }) => {
 
     const { updateClient } = useUpdateClient()
 
@@ -22,7 +23,8 @@ export const RegisterList:FC<Props> = ({ clients, currentPage }) => {
                 ...client,
                 couponsSent: !client.couponsSent
             }, 
-            currentPage
+            currentPage,
+            searchTerm
         })
     }
 

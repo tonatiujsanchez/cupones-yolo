@@ -1,89 +1,75 @@
-import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { ArrowDownIcon } from '@/components/Icons'
 
+import { ISelectOption } from '@/interfaces'
 import styles from './CustomSelect.module.scss'
 
-interface ISelectOption {
-    value: string
-    label: string
-}
 
 interface Props {
     options: ISelectOption[]
+    onChange: ( option:ISelectOption )=> void
 }
 
-export const CustomSelect:FC<Props> = ({ options }) => {
+export const CustomSelect:FC<Props> = ({ options, onChange }) => {
 
-    const [optionActive, setOptionActive] = useState<ISelectOption>(options[0])
+    const [optionSelected, setOptionSelected] = useState<ISelectOption>(options[0])
     const [openOptions, setOpenOptions] = useState<boolean>(false)
 
-    const selectRef = useRef<HTMLSelectElement>(null)
+    const divRef = useRef<HTMLDivElement>(null)
 
-
-    const selectFocus = () => { setOpenOptions(true) }
-    const selectBlur = () => { setOpenOptions(true) }
-
+    const handleOutsideClick = (ev:MouseEvent) => {
+        if( ev.target !== divRef.current ){
+            setOpenOptions(false)
+        }
+    }
 
     useEffect(()=>{
-        selectRef.current?.addEventListener('focus', selectFocus)
-        selectRef.current?.addEventListener('blur', selectBlur)
+        const body = document.querySelector('body')
+        body?.addEventListener('click', handleOutsideClick )
+
         return () => {
-            selectRef.current?.removeEventListener('focus', selectFocus)
-            selectRef.current?.removeEventListener('blur', selectBlur)
+            body?.removeEventListener('click', handleOutsideClick)
         }
     },[])
 
+    const handleToggleOptions = () => {
+        setOpenOptions( !openOptions )
+    }
+
     const hendleSelectOption = (option: ISelectOption) => {
-        setOptionActive( option )
-        setOpenOptions(false)
+        setOptionSelected( option )
+        onChange( option )
     }
 
 
     return (
-        <div className={ styles['select-container'] }>
-            <div>
-                <select
-                    ref={ selectRef }
-                    className={ styles['select'] }
-                >
-                    <option
-                        value={ optionActive.value } 
-                        className={ styles['option'] }
-                    >
-                        { optionActive.label }
-                    </option>
-                    <option
-                        value={ optionActive.value } 
-                        className={ styles['option'] }
-                    >
-                        { optionActive.label }
-                    </option>
-                </select>
-                {/* <div 
-                    className={ styles['select-boxlabel'] }
-                    style={{
-                        display: openOptions ? 'flex' : 'none'
-                    }}
-                >
-                    { optionActive.label }
-                </div> */}
+        <div className={`${ styles['select-container'] } ${ openOptions ? styles['select-container-focus'] : '' }`} >
+            <div 
+                onClick={ handleToggleOptions }
+                ref={ divRef }
+                className={ `${ styles['select'] } ${ openOptions ? styles['select-focus']:'' }` } >
+                
+                { optionSelected.label }
+
                 <div className={ styles['icon-container'] }>
                     <ArrowDownIcon fill="none" />
                 </div>
             </div>
-            <div className={`${ styles['option-list'] } ${ openOptions ? styles['open-option-list'] : '' } `}>
+            <ul 
+                className={`${ styles['option-list'] } ${ openOptions ? styles['open-option-list'] : '' } `}
+            >
                 {
                     options.map( option => (
-                        <div 
+                        <li 
                             key={ option.value }
                             onClick={ ()=> hendleSelectOption( option ) }
-                            className={ styles['option'] }
+                            className={`${ styles['option'] } ${ option.value === optionSelected.value ? styles['option-selected'] : ''} `}
                         >
                             { option.label }
-                        </div>
+                        </li>
                     ))
                 }
-            </div>
+            </ul>
         </div>
     )
 }

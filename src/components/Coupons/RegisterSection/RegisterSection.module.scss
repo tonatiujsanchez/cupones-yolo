@@ -3,10 +3,14 @@
     min-height: 35rem;
 }
 
-.filter-container {
+.register-filter__container {
     padding-block-end: 2rem;
     display: flex;
-    gap: 1.5rem
+    gap: 1.5rem;
+
+    .register-filter__select-coupons-sent {
+        min-width: 18rem;
+    }
 }
 
 .loader-container {
