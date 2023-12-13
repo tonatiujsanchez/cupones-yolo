@@ -47,7 +47,7 @@ const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
 
     skip = skip * limit
 
-    
+
     let query:FilterQuery<IClient> = { 
         status: true
     }
@@ -69,15 +69,23 @@ const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
         const endOfYear = new Date(`${year}-12-31T23:59:59.999Z`)
         query = {
             ...query,
-            createdAt: {
+            registeredAt: {
                 $gte: startOfYear,
                 $lt: endOfYear,
             }
         }
     }
-    
 
-    
+    if( month !== '' ){
+        const targetMonth = parseInt(month.toString(), 10);
+        query = {
+            ...query,
+            $expr: {
+                $eq: [{ $month: '$birthdate' }, targetMonth],
+            },
+        }
+    }
+        
     if( queriesFilterOr.length > 0 ){
         query = {
             ...query,
