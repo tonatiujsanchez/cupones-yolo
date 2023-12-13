@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { RegisterListItem } from '@/components'
 import { CLIENTS_PAGE_SIZE } from '@/constants'
 
-import { IClient } from '@/interfaces'
+import { IClient, ICouponsSentOptions } from '@/interfaces'
 import styles from './RegisterList.module.scss'
 import { useUpdateClient } from '@/hooks'
 
@@ -12,8 +12,11 @@ interface Props {
     clients    : IClient[]
     currentPage: number,
     searchTerm : string
+    couponsSent: ICouponsSentOptions
+    month      : string
+    year       : string
 }
-export const RegisterList:FC<Props> = ({ clients, currentPage, searchTerm }) => {
+export const RegisterList:FC<Props> = ({ clients, currentPage, searchTerm, couponsSent, month, year }) => {
 
     const { updateClient } = useUpdateClient()
 
@@ -24,7 +27,10 @@ export const RegisterList:FC<Props> = ({ clients, currentPage, searchTerm }) => 
                 couponsSent: !client.couponsSent
             }, 
             currentPage,
-            searchTerm
+            searchTerm,
+            couponsSent,
+            month,
+            year
         })
     }
 

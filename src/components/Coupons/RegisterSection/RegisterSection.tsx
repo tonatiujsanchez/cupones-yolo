@@ -92,6 +92,9 @@ export const RegisterSection = () => {
                             clients={ clientsQuery.data.clients }
                             currentPage={ clientsQuery.data.currentPage }
                             searchTerm={ searchTerm }
+                            couponsSent={ couponsSent.value }
+                            month={ month.value }
+                            year={ year.value }
                         />
                         <div className={ styles['pagination-container'] }>
                             <Pagination

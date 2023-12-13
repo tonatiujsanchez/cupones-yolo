@@ -1,4 +1,4 @@
-import { ICouponsSent } from "@/interfaces"
+import { ICouponsSent, ICouponsSentOptions } from "@/interfaces"
 
 export const REGISTERS_QUERY_KEY = 'registers'
 
@@ -18,3 +18,5 @@ export const OPTIONS_COUPONS_SENT_OF_CLIENT:ICouponsSent[] = [
         label:"Pendientes"
     },
 ]
+
+export const COUPONS_SENT_OPTIONS = [ 'enviados', 'pendientes' ]

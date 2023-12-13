@@ -4,7 +4,7 @@ import { FilterQuery, isValidObjectId } from 'mongoose'
 
 import { db } from '@/database'
 import { Client } from '@/models'
-import { CLIENTS_PAGE_SIZE } from '@/constants'
+import { CLIENTS_PAGE_SIZE, COUPONS_SENT_OPTIONS } from '@/constants'
 
 import { IClient, IClientsResp } from '@/interfaces'
 
@@ -35,7 +35,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 const pageSize = CLIENTS_PAGE_SIZE;
 const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
 
-    const { page = 1, count = pageSize, searchTerm = '', couponsSent = 'all' } = req.query
+    const { page = 1, count = pageSize, searchTerm = '', couponsSent = '', month='', year='' } = req.query
+
+    console.log({searchTerm, couponsSent, month, year})
 
     let skip = Number( page ) - 1
     let limit = Number(count)
@@ -48,19 +50,41 @@ const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
     let query:FilterQuery<IClient> = { 
         status: true
     }
+    const queriesFilterOr = []
     
     if( searchTerm.toString().trim() !== '' ) {
+        queriesFilterOr.push({ name: { $regex: new RegExp(searchTerm.toString(), "i") } })
+        // query = {
+        //     ...query,
+        //     $and: [
+        //         {
+        //             $or: [
+        //                 { name: { $regex: new RegExp(searchTerm.toString(), "i") } },
+        //             ]
+        //         }
+        //     ]
+        // }
+    }
+
+    // Filtro por couponsSent
+    if(  COUPONS_SENT_OPTIONS.includes(couponsSent.toString()) ){
+        query = {
+            ...query,
+            couponsSent: couponsSent === 'enviados'
+        }
+    }
+    
+    if( queriesFilterOr.length > 0 ){
         query = {
             ...query,
             $and: [
                 {
-                    $or: [
-                        { name: { $regex: new RegExp(searchTerm.toString(), "i") } },
-                    ]
+                    $or: queriesFilterOr
                 }
             ]
         }
     }
+
     
     try {        
         await db.connect()

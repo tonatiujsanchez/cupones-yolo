@@ -20,8 +20,8 @@ export const useGetClients = ({ page, searchTerm, couponsSent, month, year }:Pro
     const [currentPage, setCurrentPage] = useState(page)
 
     const clientsQuery = useQuery({
-        queryKey: [ REGISTERS_QUERY_KEY, { page: currentPage, searchTerm }],
-        queryFn: ()=> couponActions.getClients( currentPage, searchTerm ),
+        queryKey: [ REGISTERS_QUERY_KEY, { page: currentPage, searchTerm, couponsSent, month, year }],
+        queryFn: ()=> couponActions.getClients( currentPage, searchTerm, couponsSent, month, year ),
         staleTime: 1000 * 60 * 60,
     })
 

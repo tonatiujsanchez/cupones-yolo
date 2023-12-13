@@ -38,7 +38,6 @@ export const CustomSelect:FC<Props> = ({ options, value, onChange }) => {
 
     const hendleSelectOption = (option: ISelectOption) => {
         if( option.value === value.value ){ return }
-        // setOptionSelected( option )
         onChange( option )
     }
 

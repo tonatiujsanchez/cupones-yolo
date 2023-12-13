@@ -3,25 +3,32 @@ import { AxiosError } from 'axios'
 
 import { couponActions } from '@/services'
 import { REGISTERS_QUERY_KEY } from '@/constants'
-import { IClient, IClientsResp } from '@/interfaces'
+import { IClient, IClientsResp, ICouponsSentOptions } from '@/interfaces'
 
 
 interface IUpdatedClient {
-    client     : IClient, 
-    currentPage:number,
+    client     : IClient
+    currentPage:number
     searchTerm :string
+    couponsSent: ICouponsSentOptions
+    month      :string
+    year       :string
+}
+
+interface IUpdatedClientContext extends IUpdatedClient { 
+    oldClient:IClient, 
 }
 export const useUpdateClient = () => {
     
     const queryClient = useQueryClient()
 
     const updateClient = useMutation({
-        onMutate: ({ client, currentPage, searchTerm }:IUpdatedClient )=> {
+        onMutate: ({ client, currentPage, searchTerm, couponsSent, month, year }:IUpdatedClient )=> {
 
             let oldClientToUpdate:IClient | undefined;
 
             queryClient.setQueryData<IClientsResp>(
-                [REGISTERS_QUERY_KEY, { page: currentPage, searchTerm }],
+                [REGISTERS_QUERY_KEY, { page: currentPage, searchTerm, couponsSent, month, year }],
                 ( oldData ) => {
                     if( oldData ){
                         return {
@@ -43,7 +50,10 @@ export const useUpdateClient = () => {
             return { 
                 oldClient: oldClientToUpdate ? oldClientToUpdate : client, 
                 currentPage,
-                searchTerm
+                searchTerm,
+                couponsSent,
+                month,
+                year,
             }
         },
         mutationFn: ({ client })=> couponActions.updateClient( client ),
@@ -53,10 +63,10 @@ export const useUpdateClient = () => {
         },
         onError: ( error:AxiosError<{ msg:string }>, _variables, context )=> {
 
-            const { oldClient, currentPage, searchTerm } = context as { oldClient:IClient, currentPage:number, searchTerm:string }
+            const { oldClient, currentPage, searchTerm, couponsSent, month, year } = context as IUpdatedClientContext
 
             queryClient.setQueryData<IClientsResp>(
-                [REGISTERS_QUERY_KEY, { page: currentPage, searchTerm }],
+                [REGISTERS_QUERY_KEY, { page: currentPage, searchTerm, couponsSent, month, year }],
                 ( oldData )=> {
                     if( oldData ){
                         return {
