@@ -47,6 +47,7 @@ const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
 
     skip = skip * limit
 
+    
     let query:FilterQuery<IClient> = { 
         status: true
     }
@@ -54,25 +55,28 @@ const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
     
     if( searchTerm.toString().trim() !== '' ) {
         queriesFilterOr.push({ name: { $regex: new RegExp(searchTerm.toString(), "i") } })
-        // query = {
-        //     ...query,
-        //     $and: [
-        //         {
-        //             $or: [
-        //                 { name: { $regex: new RegExp(searchTerm.toString(), "i") } },
-        //             ]
-        //         }
-        //     ]
-        // }
     }
 
-    // Filtro por couponsSent
     if(  COUPONS_SENT_OPTIONS.includes(couponsSent.toString()) ){
         query = {
             ...query,
             couponsSent: couponsSent === 'enviados'
         }
     }
+
+    if( year !== '' ){
+        const startOfYear = new Date(`${year}-01-01T00:00:00.000Z`)
+        const endOfYear = new Date(`${year}-12-31T23:59:59.999Z`)
+        query = {
+            ...query,
+            createdAt: {
+                $gte: startOfYear,
+                $lt: endOfYear,
+            }
+        }
+    }
+    
+
     
     if( queriesFilterOr.length > 0 ){
         query = {

@@ -55,7 +55,7 @@ export const RegisterSection = () => {
                     />
                 </div>
                 <div className={`${ styles['register-filter__field'] } ${styles['register-filter__select']}`}>
-                    <label htmlFor="">Mes</label>
+                    <label htmlFor="">Mes de nacimiento</label>
                     <CustomSelect
                         options={ MONTHS_OPTIONS }
                         value={ month }
@@ -63,7 +63,7 @@ export const RegisterSection = () => {
                     />
                 </div>
                 <div className={`${ styles['register-filter__field'] } ${styles['register-filter__select']}`}>
-                    <label htmlFor="">Año</label>
+                    <label htmlFor="">Año de registro</label>
                     <CustomSelect
                         options={ YEARS }
                         value={ year }
