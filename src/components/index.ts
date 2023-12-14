@@ -7,6 +7,7 @@ export * from './Shared/Sidebar'
 export * from './Shared/CustomTabs'
 export * from './Shared/Pagination'
 export * from './Shared/RegisterCount'
+export * from './Shared/MessageWithoutResults'
 
 export * from './Buttons/ButtonPrimary'
 export * from './Buttons/ButtonIconsAnimated'

@@ -11,9 +11,10 @@ interface IFormData {
 }
 interface Props {
     placeholder?: string
-    onSubmit: ( searchTerm:string ) => void
+    onSubmit    : ( searchTerm:string ) => void
+    fieldName   : string
 }
-export const SearchForm:FC<Props> = ({ placeholder='Buscar', onSubmit }) => {
+export const SearchForm:FC<Props> = ({ placeholder='Buscar', onSubmit, fieldName }) => {
 
     const { register, handleSubmit } = useForm<IFormData>({
         defaultValues: {
@@ -57,6 +58,7 @@ export const SearchForm:FC<Props> = ({ placeholder='Buscar', onSubmit }) => {
         >
             <input
                 type="text"
+                id={ fieldName }
                 placeholder={ placeholder }
                 className={ styles['search-input'] }
                 { ...register('searchTerm', {

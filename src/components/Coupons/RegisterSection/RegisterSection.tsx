@@ -40,14 +40,15 @@ export const RegisterSection = () => {
         <section className={ styles['register-section'] }>
             <div className={ styles['register-filter__container'] }>
                 <div className={`${ styles['register-filter__field'] } ${ styles['register-filter__input-search'] }`}>
-                    <label htmlFor="">Buscar por nombre</label>
+                    <label htmlFor="search">Buscar por nombre</label>
                     <SearchForm
+                        fieldName="search"
                         onSubmit={ handleSetSearchTerm }
                         placeholder="Nombre del cliente"
                     />
                 </div>
                 <div className={`${ styles['register-filter__field'] } ${styles['register-filter__select']}`}>
-                    <label htmlFor="">Estado</label>
+                    <p>Estado</p>
                     <CustomSelect
                         options={ OPTIONS_COUPONS_SENT_OF_CLIENT }
                         value={ couponsSent }
@@ -55,7 +56,7 @@ export const RegisterSection = () => {
                     />
                 </div>
                 <div className={`${ styles['register-filter__field'] } ${styles['register-filter__select']}`}>
-                    <label htmlFor="">Mes de nacimiento</label>
+                    <p>Mes de nacimiento</p>
                     <CustomSelect
                         options={ MONTHS_OPTIONS }
                         value={ month }
@@ -63,7 +64,7 @@ export const RegisterSection = () => {
                     />
                 </div>
                 <div className={`${ styles['register-filter__field'] } ${styles['register-filter__select']}`}>
-                    <label htmlFor="">Año de registro</label>
+                    <p>Año de registro</p>
                     <CustomSelect
                         options={ YEARS }
                         value={ year }

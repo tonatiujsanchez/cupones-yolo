@@ -6,9 +6,9 @@ import styles from './CustomSelect.module.scss'
 
 
 interface Props {
-    options: ISelectOption[]
-    value  : ISelectOption
-    onChange: ( value:ISelectOption )=> void
+    options   : ISelectOption[]
+    value     : ISelectOption
+    onChange  : ( value:ISelectOption )=> void
 }
 
 export const CustomSelect:FC<Props> = ({ options, value, onChange }) => {
@@ -47,7 +47,8 @@ export const CustomSelect:FC<Props> = ({ options, value, onChange }) => {
             <div 
                 onClick={ handleToggleOptions }
                 ref={ divRef }
-                className={ `${ styles['select'] } ${ openOptions ? styles['select-focus']:'' }` } >
+                className={ `${ styles['select'] } ${ openOptions ? styles['select-focus']:'' }` }
+            >
                 
                 { value.label }
 

@@ -1,11 +1,12 @@
 import { FC } from 'react'
 
-import { RegisterListItem } from '@/components'
+import { MessageWithoutResults, RegisterListItem } from '@/components'
 import { CLIENTS_PAGE_SIZE } from '@/constants'
 
 import { IClient, ICouponsSentOptions } from '@/interfaces'
 import styles from './RegisterList.module.scss'
 import { useUpdateClient } from '@/hooks'
+import { ArchiveBoxArrowDownIcon } from '@/components/Icons'
 
 
 interface Props {
@@ -36,33 +37,40 @@ export const RegisterList:FC<Props> = ({ clients, currentPage, searchTerm, coupo
 
     return (
         <div className={`custom-scroll ${ styles['table-container'] }`}>
-            <table className={ styles['table'] }>
-                <thead className={ styles['table__thead'] }>
-                    <tr className={ styles['table-row'] }>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Celular</th>
-                        <th>Nacimiento</th>
-                        <th>Cupones</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody className={ styles['table__body'] }>
-                    {
-                        clients.map((client, idx) => {
-                            const index = (CLIENTS_PAGE_SIZE * (currentPage - 1)) + (idx + 1);
-                            return (
-                                <RegisterListItem 
-                                    key={ client._id } 
-                                    client={ client } 
-                                    index={ index }
-                                    onToggleCouponsSent = { onToggleCouponsSent }
-                                />
-                            )
-                        })
-                    }
-                </tbody>
-            </table>
+            {
+                clients.length === 0 
+                ? (
+                    <MessageWithoutResults />
+                ):(
+                    <table className={ styles['table'] }>
+                        <thead className={ styles['table__thead'] }>
+                            <tr className={ styles['table-row'] }>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Celular</th>
+                                <th>Nacimiento</th>
+                                <th>Cupones</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody className={ styles['table__body'] }>
+                            {
+                                clients.map((client, idx) => {
+                                    const index = (CLIENTS_PAGE_SIZE * (currentPage - 1)) + (idx + 1);
+                                    return (
+                                        <RegisterListItem 
+                                            key={ client._id } 
+                                            client={ client } 
+                                            index={ index }
+                                            onToggleCouponsSent = { onToggleCouponsSent }
+                                        />
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+                )
+            }
         </div>
     )
 }
