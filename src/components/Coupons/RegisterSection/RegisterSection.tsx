@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useGetClients } from '@/hooks'
-import { Pagination, RegisterList, SearchForm, CustomSelect } from '@/components'
+import { Pagination, RegisterList, SearchForm, CustomSelect, RegisterCount } from '@/components'
 import { CLIENTS_PAGE_SIZE, OPTIONS_COUPONS_SENT_OF_CLIENT, MONTHS } from '@/constants'
 import { getYears } from '@/utils'
 
@@ -17,7 +17,7 @@ export const RegisterSection = () => {
     const [month, setMonth] = useState<ISelectOption>( MONTHS_OPTIONS[0] )
     const [year, setYear] = useState<ISelectOption>(YEARS[0])
 
-    const { clientsQuery, handlePageClick } = useGetClients({ 
+    const { clientsQuery, handlePageClick } = useGetClients({
         page : 1, 
         searchTerm, 
         couponsSent:couponsSent.value, 
@@ -102,17 +102,16 @@ export const RegisterSection = () => {
                                 onPageChange={ handlePageClick }
                                 pageCount={ clientsQuery.data.totalPages }
                             />
-                            
-                            <p className={ styles['register-count'] }>
-                                <span>{ CLIENTS_PAGE_SIZE * ( clientsQuery.data.currentPage - 1 ) + 1 }</span> 
-                                - <span>{ CLIENTS_PAGE_SIZE * (clientsQuery.data.currentPage - 1) + clientsQuery.data.pageSize  }</span>
-                                de <span>{ clientsQuery.data.totalClientes }</span> registros
-                            </p>
+                            <RegisterCount
+                                pageSize={ CLIENTS_PAGE_SIZE }
+                                currentPage={ clientsQuery.data.currentPage }
+                                currentPageSize={ clientsQuery.data.pageSize }
+                                totalClientes={ clientsQuery.data.totalClientes }
+                            />
                         </div>
                     </>
                 )
             }
-
         </section>
     )
 }
