@@ -8,6 +8,7 @@ export * from './Shared/CustomTabs'
 export * from './Shared/Pagination'
 export * from './Shared/RegisterCount'
 export * from './Shared/MessageWithoutResults'
+export * from './Shared/ErrorMessage'
 
 export * from './Buttons/ButtonPrimary'
 export * from './Buttons/ButtonIconsAnimated'

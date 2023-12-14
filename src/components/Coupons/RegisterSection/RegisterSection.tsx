@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useGetClients } from '@/hooks'
-import { Pagination, RegisterList, SearchForm, CustomSelect, RegisterCount } from '@/components'
+import { Pagination, RegisterList, SearchForm, CustomSelect, RegisterCount, ErrorMessage } from '@/components'
 import { CLIENTS_PAGE_SIZE, OPTIONS_COUPONS_SENT_OF_CLIENT, MONTHS } from '@/constants'
 import { getYears } from '@/utils'
 
@@ -40,7 +40,7 @@ export const RegisterSection = () => {
         <section className={ styles['register-section'] }>
             <div className={ styles['register-filter__container'] }>
                 <div className={`${ styles['register-filter__field'] } ${ styles['register-filter__input-search'] }`}>
-                    <label htmlFor="search">Buscar por nombre</label>
+                    <label className={ styles['register-filter__field-label'] } htmlFor="search">Buscar por nombre</label>
                     <SearchForm
                         fieldName="search"
                         onSubmit={ handleSetSearchTerm }
@@ -48,7 +48,7 @@ export const RegisterSection = () => {
                     />
                 </div>
                 <div className={`${ styles['register-filter__field'] } ${styles['register-filter__select']}`}>
-                    <p>Estado</p>
+                    <p className={ styles['register-filter__field-label'] }>Estado</p>
                     <CustomSelect
                         options={ OPTIONS_COUPONS_SENT_OF_CLIENT }
                         value={ couponsSent }
@@ -56,7 +56,7 @@ export const RegisterSection = () => {
                     />
                 </div>
                 <div className={`${ styles['register-filter__field'] } ${styles['register-filter__select']}`}>
-                    <p>Mes de nacimiento</p>
+                    <p className={ styles['register-filter__field-label'] }>Mes de nacimiento</p>
                     <CustomSelect
                         options={ MONTHS_OPTIONS }
                         value={ month }
@@ -64,7 +64,7 @@ export const RegisterSection = () => {
                     />
                 </div>
                 <div className={`${ styles['register-filter__field'] } ${styles['register-filter__select']}`}>
-                    <p>Año de registro</p>
+                    <p className={ styles['register-filter__field-label'] }>Año de registro</p>
                     <CustomSelect
                         options={ YEARS }
                         value={ year }
@@ -80,10 +80,10 @@ export const RegisterSection = () => {
                 )
             }
             {
-                !clientsQuery.isLoading && !clientsQuery.data && (
-                    <div>
-                        <p>No hay clientes registrados</p>
-                    </div>
+                clientsQuery.error && (
+                    <ErrorMessage
+                        message="Hubo un error al cargar los registros"
+                    />
                 )
             }
             {

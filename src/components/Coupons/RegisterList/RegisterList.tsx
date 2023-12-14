@@ -1,12 +1,11 @@
 import { FC } from 'react'
 
+import { useUpdateClient } from '@/hooks'
 import { MessageWithoutResults, RegisterListItem } from '@/components'
 import { CLIENTS_PAGE_SIZE } from '@/constants'
 
 import { IClient, ICouponsSentOptions } from '@/interfaces'
 import styles from './RegisterList.module.scss'
-import { useUpdateClient } from '@/hooks'
-import { ArchiveBoxArrowDownIcon } from '@/components/Icons'
 
 
 interface Props {
