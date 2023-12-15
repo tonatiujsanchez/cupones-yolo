@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CustomTabs, DashboardLayout, RegisterSection } from '@/components'
 import { CouponIcon, SettingsIcon, UserGroupIcon } from '@/components/Icons'
 
@@ -6,6 +6,7 @@ import { GRAY_ULTRA_LIGHT_COLOR } from '@/constants'
 import { ITab } from '@/interfaces'
 
 import styles from './CouponsPage.module.scss'
+import { useRouter } from 'next/router'
 
 
 export const DASHBOARD_COUPONS_PAGE_TABS:ITab[] = [
@@ -29,6 +30,16 @@ export const DASHBOARD_COUPONS_PAGE_TABS:ITab[] = [
 const CuponesAdminPage = () => {
 
     const [tabActive, setTabActive] = useState<ITab>(DASHBOARD_COUPONS_PAGE_TABS[0])
+    
+    const router = useRouter()
+
+    useEffect(()=>{
+        router.push(`?tab=${ tabActive.value }`)
+    },[ tabActive ])
+
+    const handleSetTabActive = ( currentTab: ITab ) => {
+        setTabActive( currentTab )
+    }
 
     return (
         <DashboardLayout headding="Cupones">
@@ -36,7 +47,7 @@ const CuponesAdminPage = () => {
                 <CustomTabs 
                     tabs={ DASHBOARD_COUPONS_PAGE_TABS }
                     value={ tabActive }
-                    onChange={ ( value )=> setTabActive( value ) }
+                    onChange={ handleSetTabActive }
                     bgColor={ GRAY_ULTRA_LIGHT_COLOR }
                 />            
             </div>

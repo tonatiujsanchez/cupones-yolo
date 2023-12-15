@@ -1,0 +1,42 @@
+.register-filter__container {
+    padding-block-start: 1rem;
+    padding-block-end: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    .register-filter__field {
+        flex:1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        .register-filter__field-label {
+            font-weight: 600;
+        }
+    }
+
+    .register-filter__select {
+        min-width: 100%;
+    }
+}
+
+@media (min-width: 640px) {
+    .register-filter__container {
+        flex-direction: row;
+        .register-filter__input-search {
+            min-width: 26rem;
+        }
+        .register-filter__select {
+            min-width: 26rem;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .register-filter__container {    
+        .register-filter__select {
+            min-width: auto;
+        }
+    }
+}

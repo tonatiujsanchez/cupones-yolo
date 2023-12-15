@@ -37,8 +37,6 @@ const getClients = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
 
     const { page = 1, count = pageSize, searchTerm = '', couponsSent = '', month='', year='' } = req.query
 
-    console.log({searchTerm, couponsSent, month, year})
-
     let skip = Number( page ) - 1
     let limit = Number(count)
 

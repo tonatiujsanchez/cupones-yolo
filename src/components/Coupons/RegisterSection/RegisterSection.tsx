@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useGetClients } from '@/hooks'
-import { Pagination, RegisterList, SearchForm, CustomSelect, RegisterCount, ErrorMessage } from '@/components'
+import { Pagination, RegisterList, RegisterCount, ErrorMessage, RegistersSectionFilter } from '@/components'
 import { CLIENTS_PAGE_SIZE, OPTIONS_COUPONS_SENT_OF_CLIENT, MONTHS } from '@/constants'
 import { getYears } from '@/utils'
 
@@ -36,42 +36,28 @@ export const RegisterSection = () => {
         })
     }
 
+    const handleSetMonth = (value:ISelectOption ) => {
+        setMonth(value)
+    }
+
+    const handleSetYear = (value:ISelectOption ) => {
+        setYear(value)
+    }
+
     return (
         <section className={ styles['register-section'] }>
-            <div className={ styles['register-filter__container'] }>
-                <div className={`${ styles['register-filter__field'] } ${ styles['register-filter__input-search'] }`}>
-                    <label className={ styles['register-filter__field-label'] } htmlFor="search">Buscar por nombre</label>
-                    <SearchForm
-                        fieldName="search"
-                        onSubmit={ handleSetSearchTerm }
-                        placeholder="Nombre del cliente"
-                    />
-                </div>
-                <div className={`${ styles['register-filter__field'] } ${styles['register-filter__select']}`}>
-                    <p className={ styles['register-filter__field-label'] }>Estado</p>
-                    <CustomSelect
-                        options={ OPTIONS_COUPONS_SENT_OF_CLIENT }
-                        value={ couponsSent }
-                        onChange={ handleSetCouponsSent }
-                    />
-                </div>
-                <div className={`${ styles['register-filter__field'] } ${styles['register-filter__select']}`}>
-                    <p className={ styles['register-filter__field-label'] }>Mes de nacimiento</p>
-                    <CustomSelect
-                        options={ MONTHS_OPTIONS }
-                        value={ month }
-                        onChange={ setMonth }
-                    />
-                </div>
-                <div className={`${ styles['register-filter__field'] } ${styles['register-filter__select']}`}>
-                    <p className={ styles['register-filter__field-label'] }>Año de registro</p>
-                    <CustomSelect
-                        options={ YEARS }
-                        value={ year }
-                        onChange={ setYear }
-                    />
-                </div>
-            </div>
+            <RegistersSectionFilter
+                handleSetSearchTerm={ handleSetSearchTerm }
+                optionsCouponsSent={ OPTIONS_COUPONS_SENT_OF_CLIENT }
+                couponsSent={ couponsSent }
+                handleSetCouponsSent={ handleSetCouponsSent }
+                monthOptions={ MONTHS_OPTIONS }
+                month={ month }
+                handleSetMonth={ handleSetMonth }
+                yearOptions={ YEARS }
+                year={ year }
+                handleSetYear={ handleSetYear }
+            />
             {
                 clientsQuery.isLoading && (
                     <div className={ styles['loader-container'] }>
