@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect } from 'react';
+import { FC, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { SearchIcon } from '@/components/Icons'
@@ -46,9 +46,8 @@ export const SearchForm:FC<Props> = ({ placeholder='Buscar', onSubmit, fieldName
     },[])
 
     const onSearchSubmit = (data:IFormData) => {
-        onSubmit( data.searchTerm )        
+        onSubmit( data.searchTerm.trim() )        
     }
-
 
     return (
         <form
@@ -61,10 +60,7 @@ export const SearchForm:FC<Props> = ({ placeholder='Buscar', onSubmit, fieldName
                 id={ fieldName }
                 placeholder={ placeholder }
                 className={ styles['search-input'] }
-                { ...register('searchTerm', {
-                    required: true,
-                    validate: (val) => val && val.trim().length >= 1 ? undefined : ''
-                })}
+                { ...register('searchTerm')}
             />
             <button
                 type="submit"
