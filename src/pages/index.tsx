@@ -1,4 +1,9 @@
-import { BrandsSection, CouponsSection, HeroSection, SiteLayout } from '@/components'
+import { 
+    BrandsSection, 
+    CouponsSection, 
+    HeroSection, 
+    SiteLayout 
+} from '@/components'
 
 
 export default function Home() {
@@ -9,7 +14,7 @@ export default function Home() {
                 <main>
                     <HeroSection />
                     <BrandsSection />
-                    <CouponsSection />
+                    {/* <CouponsSection /> */}
                 </main>
             </SiteLayout>
         </>

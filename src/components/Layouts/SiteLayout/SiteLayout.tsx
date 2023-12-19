@@ -14,6 +14,8 @@ export const SiteLayout:FC<Props> = ({ children }) => {
             <Head>
                 <title>YoloStyle - Encuentra tu estilo</title>
                 <meta name="description" content="YoloStyle - Encuentra tu estilo" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+
             </Head>
             <div className={ fonts.Raleway.className }>
                 <Navbar />

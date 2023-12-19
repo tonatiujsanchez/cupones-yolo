@@ -1,23 +1,43 @@
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import Image from 'next/image'
 import { FacebookIcon, InstagramIcon, MunuIcon, WhatsAppIcon } from '@/components/Icons'
 
 import styles from './Navbar.module.scss'
-import { useState } from 'react'
 
 
 export const Navbar = () => {
 
     const [showMenu, setShowMenu] = useState(false)
+    const headerRef = useRef<HTMLElement>(null)
 
     const router = useRouter()
     const { asPath } = router
+
+    const scrollEvent = () => {
+        const navbarContainer = headerRef.current
+        if (window.scrollY > 20) {
+            navbarContainer?.classList.add(styles['scroll-active'])
+        } else {
+            navbarContainer?.classList.remove(styles['scroll-active'])
+        }
+    }
+
+    useEffect(()=>{
+        window.addEventListener('scroll', scrollEvent)
+        return () => {
+            window.removeEventListener('scroll', scrollEvent )
+        }
+    },[])
     
 
     return (
-        <header className={styles['header']}>
-            <div className={`container ${styles['navbar-container']}`}>
+        <header 
+            ref={ headerRef } 
+            className={styles['header']}
+        >
+            <div className={`container ${styles['navbar-container']}`} >
                 <NextLink href={'/'}>
                     <Image
                         width={100}

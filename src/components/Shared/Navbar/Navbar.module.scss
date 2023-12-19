@@ -20,6 +20,7 @@
 
     .navbar-logo {
         max-width: 12rem;
+        transition: all 0.5s;
     }
 }
 
@@ -94,10 +95,23 @@
 
 @media (min-width: 768px) {
     .header {
+        position: relative;
         box-shadow: none;
+
+        &.scroll-active {
+            position: sticky;
+            box-shadow: 0 0 0.5rem $gray-light;
+            .navbar-container{
+                padding-block: 0;
+                .navbar-logo {
+                    max-width: 11rem;
+                }
+            }
+        }
     }
     .navbar-container{
-        padding-block: 2rem;   
+        margin-block: 1rem;
+        transition: all 0.5s;
         .overlay-hidden{
             display: none;
         }
