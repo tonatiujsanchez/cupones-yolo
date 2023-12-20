@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { CustomTabs, DashboardLayout, RegisterSection } from '@/components'
+import { CouponSection, CustomTabs, DashboardLayout, RegisterSection } from '@/components'
 import { CouponIcon, SettingsIcon, UserGroupIcon } from '@/components/Icons'
 
 import { GRAY_ULTRA_LIGHT_COLOR } from '@/constants'
@@ -29,7 +29,7 @@ export const DASHBOARD_COUPONS_PAGE_TABS:ITab[] = [
 
 const CuponesAdminPage = () => {
 
-    const [tabActive, setTabActive] = useState<ITab>(DASHBOARD_COUPONS_PAGE_TABS[0])
+    const [tabActive, setTabActive] = useState<ITab>(DASHBOARD_COUPONS_PAGE_TABS[1])
     
     const router = useRouter()
 
@@ -59,9 +59,7 @@ const CuponesAdminPage = () => {
                 }
                 {
                     tabActive.value === 'cupones' && (
-                        <section className={ styles['section'] }>
-                            <p>Cupones</p>
-                        </section>
+                        <CouponSection />
                     )
                 }
                 {

@@ -1,5 +1,5 @@
 import { yolostyleApi } from "@/apis"
-import { IClientFormData, IClient, IClientsResp, ICouponsSentOptions } from "@/interfaces"
+import { IClientFormData, IClient, IClientsResp, ICouponsSentOptions, ICouponsResp } from "@/interfaces"
 
 
 export const createCoupons = async( client: IClientFormData ):Promise<IClient> => {
@@ -7,9 +7,6 @@ export const createCoupons = async( client: IClientFormData ):Promise<IClient> =
     const { data } = await yolostyleApi.post<IClient>(`/public/register-client`, client)
     return data
 }
-
-
-
 
 export const getClients = async ( page:number, searchTerm:string, couponsSent: ICouponsSentOptions, month :string, year :string ):Promise<IClientsResp> => {
 
@@ -24,9 +21,19 @@ export const getClients = async ( page:number, searchTerm:string, couponsSent: I
     return data
 }
 
-
 export const updateClient = async ( client: IClient ):Promise<IClient> => {
     
     const { data } = await yolostyleApi.put<IClient>(`/admin/clients`, client)
+    return data
+}
+
+
+
+export const getCoupons = async ( page:number ):Promise<ICouponsResp> => {
+
+    const params = new URLSearchParams()
+    params.append('page', page.toString())
+
+    const { data } = await yolostyleApi.get<ICouponsResp>(`/admin/coupons`, { params })
     return data
 }

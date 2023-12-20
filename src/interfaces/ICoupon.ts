@@ -16,11 +16,10 @@ export interface ICoupon {
     updatedAt? : string
 }
 
-
-export interface CouponsResp {
-    count: number
-    page: number,
-    totalPages: number
-    totalCoupons: number
-    coupons: ICoupon[]
+export type ICouponsResp = {
+    currentPage  : number,
+    totalPages   : number
+    totalCoupons : number
+    pageSize     : number
+    coupons      : ICoupon[]
 }

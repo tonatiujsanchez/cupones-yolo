@@ -1,8 +1,10 @@
-import { ICouponsSent, ICouponsSentOptions } from "@/interfaces"
+import { ICouponsSent } from "@/interfaces"
 
 export const REGISTERS_QUERY_KEY = 'registers'
+export const COUPONS_QUERY_KEY = 'coupons'
 
 export const CLIENTS_PAGE_SIZE = 6
+export const COUPONS_PAGE_SIZE = 5
 
 export const OPTIONS_COUPONS_SENT_OF_CLIENT:ICouponsSent[] = [
     {

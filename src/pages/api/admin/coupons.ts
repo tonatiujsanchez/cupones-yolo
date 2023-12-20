@@ -3,18 +3,13 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { isValidObjectId } from 'mongoose'
 import { db } from '@/database'
 import { Coupon } from '@/models'
-import { ICoupon } from '@/interfaces'
+import { ICoupon, ICouponsResp } from '@/interfaces'
+import { COUPONS_PAGE_SIZE } from '@/constants'
 
 
 type Data = 
     | { msg: string }
-    | {
-        count: number
-        page: number,
-        totalPages: number
-        totalCoupons: number
-        coupons: ICoupon[]
-    }
+    | ICouponsResp
     | ICoupon
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -33,16 +28,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
 }
 
-
+const pageSize = COUPONS_PAGE_SIZE;
 const getCoupons = async( req: NextApiRequest, res:NextApiResponse<Data> ) => {
 
-    const { page = 1, count = 20 } = req.query
+    const { page = 1, count = pageSize, } = req.query
 
     let skip = Number( page ) - 1
     let limit = Number(count)
 
     if( skip < 0 ) { skip = 0 }
-    if( limit < 0 ) { limit = 20 }
+    if( limit < 0 ) { limit = pageSize }
 
     skip = skip * limit
 
@@ -62,9 +57,9 @@ const getCoupons = async( req: NextApiRequest, res:NextApiResponse<Data> ) => {
         await db.disconnect()
         
         return res.status(200).json({
-            count: coupons.length,
-            page: Number(page),
-            totalPages: Math.ceil( total / Number(count) ),
+            currentPage : Number(page),
+            totalPages  : Math.ceil( total / Number(count) ),
+            pageSize    : coupons.length,
             totalCoupons: total,
             coupons
         })
