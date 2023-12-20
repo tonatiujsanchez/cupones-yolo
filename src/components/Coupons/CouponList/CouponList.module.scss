@@ -1,0 +1,28 @@
+@import '../../../scss/index.scss';
+
+.table-container{
+    overflow-x: auto;    
+}
+
+.table {
+    width: 100%;
+    border-spacing: 0;
+    .table-row {
+        th{
+            padding: 1.6rem 1rem;
+            text-align: start;
+        }
+    }
+
+    .table__thead {
+        background-color: $gray-ultra-light;
+        th:first-child {
+            border-start-start-radius:1rem;
+            border-end-start-radius:1rem;
+        }
+        th:last-child {
+            border-end-end-radius:1rem;
+            border-start-end-radius:1rem;
+        }
+    }
+}

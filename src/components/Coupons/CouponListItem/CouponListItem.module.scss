@@ -1,0 +1,33 @@
+@import '../../../scss/index.scss';
+
+.table-row {
+    
+    td {
+        padding: 1.6rem 1rem;
+        border-block-end: 0.1rem solid $gray-ultra-light;
+    }
+
+    .coupon-index {
+        font-weight: 700;
+    }
+
+    .coupon-folio {
+        max-width: 12rem;
+        font-weight: 600;
+    }
+
+    .coupon-value {
+        width: 11rem;
+        font-weight: 600;
+        padding-inline-start: 2.5rem;
+    }
+
+    .coupon-date {
+        color: $gray;
+    }
+    
+    .coupon-client__name {
+        max-width: 12rem;
+        text-transform: capitalize;
+    }
+}

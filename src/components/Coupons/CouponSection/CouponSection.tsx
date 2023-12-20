@@ -1,6 +1,6 @@
 
 import { useGetCoupons } from '@/hooks'
-import { ErrorMessage, Pagination, RegisterCount } from '@/components'
+import { CouponList, ErrorMessage, Pagination, RegisterCount } from '@/components'
 import { COUPONS_PAGE_SIZE } from '@/constants'
 
 import styles from './CouponSection.module.scss'
@@ -31,10 +31,10 @@ export const CouponSection = () => {
             {
                 !couponsQuery.isLoading && couponsQuery.data && (
                     <>
-                        <div>
-                            Lista de cupones
-                        </div>
-
+                        <CouponList 
+                            coupons={ couponsQuery.data.coupons }
+                            currentPage={ couponsQuery.data.currentPage }
+                        />
                         <div className={ styles['pagination-container'] }>
                             <Pagination
                                 currentPage={ couponsQuery.data.currentPage }

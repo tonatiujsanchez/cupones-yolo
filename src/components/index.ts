@@ -25,6 +25,8 @@ export * from './Coupons/RegisterList'
 export * from './Coupons/RegisterListItem'
 export * from './Coupons/RegistersSectionFilter'
 export * from './Coupons/CouponSection'
+export * from './Coupons/CouponList'
+export * from './Coupons/CouponListItem'
 
 export * from './FormComponents/DatePicker'
 export * from './FormComponents/Checkbox'

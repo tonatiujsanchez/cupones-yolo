@@ -1,4 +1,17 @@
 
+export const dateFormat = ( date:Date|string ):string => {
+    
+    const longDate = new Date(date)
+        .toLocaleDateString('es-ES',{
+            year: 'numeric',
+            month: 'numeric',
+            day: '2-digit',
+            timeZone: 'UTC' // Establece la zona horaria a UTC
+        })
+    
+    return longDate.substring(0,1).toUpperCase() + longDate.substring(1)
+}
+
 export const dateFormatLong = ( date:Date ):string => {
     
     const longDate = new Date(date)
@@ -12,6 +25,7 @@ export const dateFormatLong = ( date:Date ):string => {
     
     return longDate.substring(0,1).toUpperCase() + longDate.substring(1)
 }
+
 
 export const dateFormatDayAndMonth = ( date:Date ):string => {
     

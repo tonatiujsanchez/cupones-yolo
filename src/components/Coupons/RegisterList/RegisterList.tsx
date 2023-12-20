@@ -10,7 +10,7 @@ import styles from './RegisterList.module.scss'
 
 interface Props {
     clients    : IClient[]
-    currentPage: number,
+    currentPage: number
     searchTerm : string
     couponsSent: ICouponsSentOptions
     month      : string
@@ -52,7 +52,7 @@ export const RegisterList:FC<Props> = ({ clients, currentPage, searchTerm, coupo
                                 <th>Estado</th>
                             </tr>
                         </thead>
-                        <tbody className={ styles['table__body'] }>
+                        <tbody>
                             {
                                 clients.map((client, idx) => {
                                     const index = (CLIENTS_PAGE_SIZE * (currentPage - 1)) + (idx + 1);
