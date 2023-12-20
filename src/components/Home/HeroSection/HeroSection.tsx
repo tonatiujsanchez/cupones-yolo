@@ -13,9 +13,9 @@ export const HeroSection = () => {
                         title="Logo de Yolostyle"
                         width={100}
                         height={40}
-                        className={styles.logo}
+                        className={styles['logo']}
                     />
-                    <div className={styles.title}>
+                    <div className={styles['title']}>
                         <h1>
                             <span>Encuentra</span>
                             <span>tu estilo</span>

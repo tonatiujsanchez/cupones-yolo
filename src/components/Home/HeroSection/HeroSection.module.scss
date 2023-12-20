@@ -10,12 +10,14 @@
     grid-template-rows: 2fr 1fr;
     gap: 2rem;
     position: relative;
+    overflow-x: hidden;
 }
 
 .hero-left {
     display: flex;
     flex-direction: column;
     padding-top: 1rem;
+    
     .logo {
         max-width: 80%;
         height: 18rem;
@@ -26,19 +28,23 @@
     .title {
         display: flex;
         justify-content: center;
+
         h1 {
             display: flex;
             flex-direction: column;
             padding-inline: 3rem;
             transform: rotate(-2deg);
+
             span {
+
                 &:first-child {
                     font-size: 2.4rem;
                     text-transform: uppercase;
                     color: $orange;
                 }
+
                 &:last-child {
-                    font-size: 6.5rem;
+                    font-size: 6rem;
                     font-weight: 400;
                     display: inline-block;
                     background-color: $primary;
@@ -63,8 +69,9 @@
     position: absolute;
     left: 50%;
     bottom: 0;
-    max-width: 40rem;
+    max-width: 30rem;
     transform: translateX(-50%);
+
     img {
         height: 100%;
         width: 100%;
@@ -77,10 +84,11 @@
     font-weight: 500;
     font-size: 5.3rem;
     display: none;
+
     &.text-one {
         position: absolute;
         top: 2rem;
-        right: -9rem;
+        right: -6rem;
         transform: rotate(-6deg);
 
         // opacity: 0;
@@ -89,10 +97,11 @@
         // animation-duration: 0.5s;
         // animation-fill-mode: forwards;
     }
+
     &.text-two {
         position: absolute;
         top: 11rem;
-        right: -24rem;
+        right: -21rem;
         transform: rotate(-6deg);
 
         // opacity: 0;
@@ -102,10 +111,11 @@
         // animation-fill-mode: forwards;
 
     }
+
     &.text-three {
         position: absolute;
         top: 21rem;
-        right: -38rem;
+        right: -34rem;
 
         // opacity: 0;
         // animation-name: bounceInLeft;
@@ -113,10 +123,11 @@
         // animation-duration: 0.5s;
         // animation-fill-mode: forwards;
     }
+
     &.text-four {
         position: absolute;
         top: 31rem;
-        right: -38rem;
+        right: -35rem;
         transform: rotate(4deg);
 
         // opacity: 0;
@@ -125,10 +136,11 @@
         // animation-duration: 0.5s;
         // animation-fill-mode: forwards;
     }
+
     &.text-five {
         position: absolute;
         top: 40rem;
-        right: -20rem;
+        right: -16rem;
         transform: rotate(6deg);
 
         // opacity: 0;
@@ -139,11 +151,25 @@
     }
 }
 
+@media (min-width: 640px) {
+    .hero-left {
+        .title {
+            h1 {
+                span {
+                    &:last-child {
+                        font-size: 6.5rem;
+                    }
+                }
+            }
+        }
+    }    
+}
 
 @media (min-width: 768px) {
     .hero-content-section {
         background-image: radial-gradient(50% 80% at 15% 60%,hsla(13, 100%, 70%, 0.3) 10%,hsla(54,100%,75%,0) 50%);
     }
+
     .hero-content {
         height: 70rem;
         grid-template-rows: 1fr;
@@ -152,10 +178,13 @@
     .hero-left {
         padding-top: 5.5rem;
         gap: 3rem;
+
         .logo {
             height: 24rem;
             max-width: 60rem;
+            padding-inline: 2rem;
         }
+
         .title {
             display: flex;
             justify-content: center;
@@ -165,13 +194,11 @@
                         font-size: 3rem;
 
                     }
-                    &:last-child {
-                        font-size: 7.5rem;
-                    }
                 }
             }
         }
     }
+
     .hero-content {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -180,7 +207,50 @@
         min-height: 50rem;
     }
 
+    .image-center {
+        max-width: 40rem;
+    }
+
     .image-center-text {
         display: block;
+    }
+}
+
+
+@media (min-width: 992px) {
+    .hero-left {
+        .title {
+            h1 {
+                span {
+                    &:last-child {
+                        font-size: 7.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .image-center-text {
+        &.text-one {
+            right: -9rem;
+        }
+    
+        &.text-two {
+            right: -24rem;    
+        }
+    
+        &.text-three {
+            right: -38rem;
+        }
+    
+        &.text-four {
+            right: -38rem;
+        }
+    
+        &.text-five {
+            right: -20rem;
+        }
     }
 }
