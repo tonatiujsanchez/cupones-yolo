@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { isValidObjectId } from 'mongoose'
+import { FilterQuery, isValidObjectId } from 'mongoose'
 import { db } from '@/database'
-import { Coupon } from '@/models'
-import { ICoupon, ICouponsResp } from '@/interfaces'
+import { Client, Coupon } from '@/models'
+import { IClient, ICoupon, ICouponsResp } from '@/interfaces'
 import { COUPONS_PAGE_SIZE } from '@/constants'
 
 
@@ -41,13 +41,38 @@ const getCoupons = async( req: NextApiRequest, res:NextApiResponse<Data> ) => {
 
     skip = skip * limit
 
+    let query:FilterQuery<ICoupon> = { 
+        status: true
+    }
+
+    const queriesFilterOr = []
+
+    if( searchTerm.toString().trim() !== '' ) {
+        queriesFilterOr.push({ folio: { $regex: new RegExp(searchTerm.toString(), "i") } })
+        queriesFilterOr.push({
+            client: {
+                $in: await Client.find({
+                    name: { $regex: new RegExp(searchTerm.toString(), 'i') },
+                }).distinct('_id'),
+            },
+        },)
+    }
+
     // TODO: Añadir filtros de búsqueda
-    // Buscar por folio y nombre del cliente
     console.log({ searchTerm, exchangeStatus })
-    const query = {}
+
+    if( queriesFilterOr.length > 0 ){
+        query = {
+            ...query,
+            $and: [
+                {
+                    $or: queriesFilterOr
+                }
+            ]
+        }
+    }
 
     try {
-
         await db.connect()
         const [ coupons, total ] = await Promise.all([
             Coupon.find(query)
