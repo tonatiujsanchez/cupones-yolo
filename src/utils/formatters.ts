@@ -4,7 +4,7 @@ export const dateFormat = ( date:Date|string ):string => {
     const longDate = new Date(date)
         .toLocaleDateString('es-ES',{
             year: 'numeric',
-            month: 'numeric',
+            month: '2-digit',
             day: '2-digit',
             timeZone: 'UTC' // Establece la zona horaria a UTC
         })

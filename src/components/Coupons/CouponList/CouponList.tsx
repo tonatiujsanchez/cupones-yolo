@@ -31,14 +31,15 @@ export const CouponList:FC<Props> = ({ coupons, currentPage }) => {
                     <tbody>
                         {
                             coupons.map( ( coupon, idx ) => {
-                            const index = (COUPONS_PAGE_SIZE * (currentPage - 1)) + (idx + 1);
-                            return (
-                                <CouponListItem
-                                    key={ coupon._id }
-                                    coupon={ coupon }
-                                    index={ index }
-                                />
-                            )})
+                                const index = (COUPONS_PAGE_SIZE * (currentPage - 1)) + (idx + 1);
+                                return (
+                                    <CouponListItem
+                                        key={ coupon._id }
+                                        coupon={ coupon }
+                                        index={ index }
+                                    />
+                                )
+                            })
                         }
                     </tbody>
                 </table>

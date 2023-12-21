@@ -8,26 +8,82 @@
     }
 
     .coupon-index {
-        font-weight: 700;
+        font-weight: 800;
     }
 
     .coupon-folio {
         max-width: 12rem;
-        font-weight: 600;
+        font-weight: 700;
     }
 
     .coupon-value {
         width: 11rem;
         font-weight: 600;
         padding-inline-start: 2.5rem;
+        
+        span {
+            display: inline-block;
+            border: dashed 0.1rem $gray-light;
+            padding: 0.4rem 0.8rem;
+        }
     }
 
     .coupon-date {
-        color: $gray;
+        font-weight: 500;
+
+        &.expired-at {
+            color: $red-dark;
+            font-weight: normal;
+        }
+
+        &.expired-at__issued-at {
+            color: $gray-light;
+            font-weight: normal;
+        }
     }
     
     .coupon-client__name {
         max-width: 12rem;
         text-transform: capitalize;
+        font-weight: 600;
+    }
+
+    .exchanged-at {
+        .exchanged-at__msg-expired {
+            color: $red-dark;
+            font-weight: normal;
+            font-size: 1.5rem;
+        }
+
+        span {
+            display: block;
+            width: 11rem;
+            margin-inline: auto;
+            text-align: center;
+            font-weight: 500;
+            font-size: 1.5rem;
+        }
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-inline: 0.8rem;
+            margin-inline: auto;
+            border-radius: 0.5rem;
+            font-size: 1.5rem;
+            width: 11rem;
+            height: 2.5rem;
+            cursor: pointer;
+            background: $primary-light;
+            color: $primary;
+            transition: box-shadow 0.2s, color 0.3s, background 0.3s;
+
+            &:hover {
+                box-shadow: 0 0 0.5rem $primary;
+                background: $primary;
+                color: $white;    
+            }
+        }
     }
 }
