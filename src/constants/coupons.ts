@@ -1,4 +1,4 @@
-import { ICouponsSent } from "@/interfaces"
+import { ICouponsSent, IStatusCouponExchange } from "@/interfaces"
 
 export const REGISTERS_QUERY_KEY = 'registers'
 export const COUPONS_QUERY_KEY = 'coupons'
@@ -22,3 +22,19 @@ export const OPTIONS_COUPONS_SENT_OF_CLIENT:ICouponsSent[] = [
 ]
 
 export const COUPONS_SENT_OPTIONS = [ 'enviados', 'pendientes' ]
+
+
+export const  STATUS_OPTIONS_COUPON_EXCHANGE:IStatusCouponExchange[] = [
+    {
+        value: "",
+        label: "Todos"
+    },
+    {
+        value: "canjeados",
+        label: "Canjeados"
+    },
+    {
+        value: "sin_canjear",
+        label: "Sin canjear"
+    }
+]

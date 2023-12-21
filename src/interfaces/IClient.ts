@@ -20,13 +20,12 @@ export interface IClient {
 }
 
 export type IClientsResp = {
-    currentPage  : number,
+    currentPage  : number
     totalPages   : number
     totalClientes: number
     pageSize     : number
     clients      : IClient[]
 }
-
 
 export interface IClientFormData {
     name: string

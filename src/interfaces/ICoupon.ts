@@ -23,3 +23,11 @@ export type ICouponsResp = {
     pageSize     : number
     coupons      : ICoupon[]
 }
+
+export type IStatusCouponExchangeOptions = '' | 'canjeados' | 'sin_canjear'
+
+
+export interface IStatusCouponExchange {
+    value:IStatusCouponExchangeOptions
+    label:string
+}

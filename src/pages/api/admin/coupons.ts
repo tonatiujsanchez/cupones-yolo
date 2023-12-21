@@ -31,7 +31,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 const pageSize = COUPONS_PAGE_SIZE;
 const getCoupons = async( req: NextApiRequest, res:NextApiResponse<Data> ) => {
 
-    const { page = 1, count = pageSize, } = req.query
+    const { page = 1, count = pageSize, searchTerm = '', exchangeStatus = '' } = req.query
 
     let skip = Number( page ) - 1
     let limit = Number(count)
@@ -41,6 +41,9 @@ const getCoupons = async( req: NextApiRequest, res:NextApiResponse<Data> ) => {
 
     skip = skip * limit
 
+    // TODO: Añadir filtros de búsqueda
+    // Buscar por folio y nombre del cliente
+    console.log({ searchTerm, exchangeStatus })
     const query = {}
 
     try {
