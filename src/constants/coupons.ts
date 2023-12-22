@@ -36,5 +36,11 @@ export const  STATUS_OPTIONS_COUPON_EXCHANGE:IStatusCouponExchange[] = [
     {
         value: "sin_canjear",
         label: "Sin canjear"
-    }
+    },
+    {
+        value: "expirados",
+        label: "Expirados"
+    },
 ]
+
+export const COUPON_EXCHANGE_OPTIONS = [ 'canjeados', 'sin_canjear', 'expirados' ]

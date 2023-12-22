@@ -1,10 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { FilterQuery, isValidObjectId } from 'mongoose'
+
 import { db } from '@/database'
 import { Client, Coupon } from '@/models'
-import { IClient, ICoupon, ICouponsResp } from '@/interfaces'
-import { COUPONS_PAGE_SIZE } from '@/constants'
+import { COUPONS_PAGE_SIZE, COUPON_EXCHANGE_OPTIONS } from '@/constants'
+
+import { ICoupon, ICouponsResp } from '@/interfaces'
 
 
 type Data = 
@@ -58,8 +60,32 @@ const getCoupons = async( req: NextApiRequest, res:NextApiResponse<Data> ) => {
         },)
     }
 
-    // TODO: Añadir filtros de búsqueda
-    console.log({ searchTerm, exchangeStatus })
+    if( COUPON_EXCHANGE_OPTIONS.includes( exchangeStatus.toString() ) ) {
+
+        if(exchangeStatus === COUPON_EXCHANGE_OPTIONS[0]){ // canjeados
+            query = {
+                ...query,
+                exchangedAt: { $exists: true, $ne: null },
+                expiredAt: { $gte: new Date() }
+            }
+        }
+
+        if(exchangeStatus === COUPON_EXCHANGE_OPTIONS[1]){ // sin_canjear
+            query = {
+                ...query,
+                exchangedAt: null,
+                expiredAt: { $gte: new Date() }
+            }
+        }
+        
+        if(exchangeStatus === COUPON_EXCHANGE_OPTIONS[2]){ // expirados
+            query = {
+                ...query,
+                exchangedAt: null,
+                expiredAt: { $lt: new Date() }
+            }
+        }
+    }
 
     if( queriesFilterOr.length > 0 ){
         query = {
@@ -72,6 +98,7 @@ const getCoupons = async( req: NextApiRequest, res:NextApiResponse<Data> ) => {
         }
     }
 
+
     try {
         await db.connect()
         const [ coupons, total ] = await Promise.all([
@@ -79,7 +106,7 @@ const getCoupons = async( req: NextApiRequest, res:NextApiResponse<Data> ) => {
                 .populate('client', 'name registeredAt')
                 .skip(skip)
                 .limit(limit)
-                .sort({ issuedAt: 'desc' }),
+                .sort({ createdAt: 'desc' }),
             Coupon.countDocuments(query)
         ])
         await db.disconnect()

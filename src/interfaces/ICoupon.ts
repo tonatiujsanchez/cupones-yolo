@@ -24,7 +24,7 @@ export type ICouponsResp = {
     coupons      : ICoupon[]
 }
 
-export type IStatusCouponExchangeOptions = '' | 'canjeados' | 'sin_canjear'
+export type IStatusCouponExchangeOptions = '' | 'canjeados' | 'sin_canjear' | 'expirados'
 
 
 export interface IStatusCouponExchange {
