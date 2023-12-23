@@ -28,6 +28,7 @@ export * from './Coupons/CouponSection'
 export * from './Coupons/CouponList'
 export * from './Coupons/CouponListItem'
 export * from './Coupons/CouponsSectionFilter'
+export * from './Coupons/CouponSettingsSection'
 
 export * from './FormComponents/DatePicker'
 export * from './FormComponents/Checkbox'
