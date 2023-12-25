@@ -29,7 +29,7 @@ export const DASHBOARD_COUPONS_PAGE_TABS:ITab[] = [
 
 const CuponesAdminPage = () => {
 
-    const [tabActive, setTabActive] = useState<ITab>(DASHBOARD_COUPONS_PAGE_TABS[1])
+    const [tabActive, setTabActive] = useState<ITab>(DASHBOARD_COUPONS_PAGE_TABS[2])
     
     const router = useRouter()
 

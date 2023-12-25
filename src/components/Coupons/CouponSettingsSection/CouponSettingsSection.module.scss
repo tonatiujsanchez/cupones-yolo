@@ -1,0 +1,44 @@
+@import '../../../scss/index.scss';
+
+.coupon-settings-section {
+    min-height: 35rem;
+}
+
+.coupon-settings-section__form {
+
+    .label {
+        font-size: 1.6rem;
+        margin-block-end: 0.7rem;
+        color: $gray;
+        font-weight: 500;
+    }
+
+    .coupon-settings-section__subtitle {
+        margin-block-end: 1rem;
+        font-size: 1.7rem;
+    }
+    .coupon-settings-section__content {
+        // border: $border-gray-light;
+        border-radius: 0.7rem;
+        padding-inline: 1.5rem;
+        padding-block-start: 1.8rem;
+        padding-block-end: 1.2rem;
+    }
+
+    .calidity-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10rem;
+
+        .calidity-date {
+            flex: 1;
+
+        }
+    }
+
+    .button-container {
+        margin-block-start: 2rem;
+        max-width: 16rem;
+        margin-inline-start: auto;
+    }
+}
