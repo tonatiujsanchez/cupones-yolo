@@ -36,5 +36,6 @@ export * from './FormComponents/InputText'
 export * from './FormComponents/SearchForm'
 export * from './FormComponents/CustomSelect'
 export * from './FormComponents/DatePickerBox'
+export * from './FormComponents/WYSIWYGEditorLite'
 
 

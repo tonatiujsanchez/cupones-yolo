@@ -1,5 +1,5 @@
 import { Controller, useForm } from 'react-hook-form'
-import { ButtonPrimary, DatePickerBox, InputText } from '@/components'
+import { ButtonPrimary, DatePickerBox, InputText, WYSIWYGEditorLite } from '@/components'
 
 import styles from './CouponSettingsSection.module.scss'
 
@@ -95,28 +95,43 @@ export const CouponSettingsSection = () => {
                 </div>
                 <h6 className={ styles['coupon-settings-section__subtitle'] }>Registro completado</h6>
                 <div className={ styles['coupon-settings-section__content'] }>
-                    <div>                        
-                        <InputText
-                            type="text"
-                            label="Título de la felicitación"
-                            fieldName="congratulationTitle"
-                            placeholder="Facilidades"
-                            error={ errors.congratulationTitle }
-                            { ...register('congratulationTitle', {
-                                required: 'El título de la felicitación es requerido'
-                            })}
-                        />
-                        <InputText
-                            type="text"
-                            label="Subtítulo"
-                            fieldName="congratulationsubtitle"
-                            placeholder="Registro completado, has ganado 2 cupones."
-                            error={ errors.congratulationsubtitle }
-                            { ...register('congratulationsubtitle',{
-                                required: 'El subtítulo de la felicitación es requerido'
-                            })}
-                        />                         
-                    </div>
+                    <InputText
+                        type="text"
+                        label="Título de la felicitación"
+                        fieldName="congratulationTitle"
+                        placeholder="Facilidades"
+                        error={ errors.congratulationTitle }
+                        { ...register('congratulationTitle', {
+                            required: 'El título de la felicitación es requerido'
+                        })}
+                    />
+                    <InputText
+                        type="text"
+                        label="Subtítulo"
+                        fieldName="congratulationsubtitle"
+                        placeholder="Registro completado, has ganado 2 cupones."
+                        error={ errors.congratulationsubtitle }
+                        { ...register('congratulationsubtitle',{
+                            required: 'El subtítulo de la felicitación es requerido'
+                        })}
+                    />
+                    <Controller
+                        control={ control }
+                        name="conditions"
+                        render={({ field })=> (
+                            <WYSIWYGEditorLite
+                                label="Condiciones"
+                                fieldName="conditions"
+                                placeholder="Válidos solo durante este mes"
+                                onChange={ field.onChange }
+                                value={ field.value }
+                                error={ errors.conditions }
+                                className={ styles['html-editor'] }
+                                isRequired
+                            />
+                        )}
+                        rules={{ required: 'Los terminos y condiciones son requeridos' }}
+                    />
                     <div className={ styles['date-picker'] }>
                         <p className={ styles['label'] }>Vigencia de los cupones</p>
                         <div className={ styles['date-picker__content'] }>
@@ -151,7 +166,7 @@ export const CouponSettingsSection = () => {
                                 rules={{ required: 'Seleccione la fecha caducidad' }}
                             />
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div className={ styles['button-container'] }>
                     <ButtonPrimary type="submit">

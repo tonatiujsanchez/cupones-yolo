@@ -1,0 +1,58 @@
+@import '../../../scss/index.scss';
+
+.editor-container {
+    position: relative;
+    padding-block-end: 1rem;
+    margin-block-end: 0.5rem;
+
+    .label {
+        display: flex;
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: $gray;
+        margin-block-end: 0.5rem;
+    }
+}
+
+.editor {
+    width: 100%;
+    height: 12rem;
+    border-radius: 0.5rem;
+    padding-block-end: 5rem;
+
+    .editor__toolbar {
+        border-top-right-radius: 0.5rem;
+        border-top-left-radius: 0.5rem;
+        background-color: rgb(250, 250, 255);
+        padding-block-start: 0.8rem;
+        padding-block-end: 0.8rem;
+        border-block-end: none;
+
+
+        .toolbar__btn-clean svg {
+            display: none;
+        }
+    }
+
+    .editor__content {
+        border-bottom-right-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+        border: $border-gray-light;
+        &:hover {
+            border: $border-primary;
+        }
+
+        &.focus {
+            border-color: transparent;
+            border-top-right-radius: 0.5rem;
+            border-top-left-radius: 0.5rem;
+            outline: $outline-primary;
+        }
+    }
+}
+
+.editor__error-message {
+    position: absolute;
+    inset-block-end: 0;
+    padding-inline: 0.4rem;
+}

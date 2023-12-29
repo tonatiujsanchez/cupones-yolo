@@ -6,12 +6,12 @@ import styles from './DatePickerBox.module.scss'
 
 
 interface Props {
-    label      : string
-    fieldName  : string
-    value      : Date
-    onChange   : ( value:string )=> void
-    error?     : FieldError
-    className? : string
+    label     : string
+    fieldName : string
+    value     : Date
+    onChange  : ( value:string )=> void
+    error?    : FieldError
+    className?: string
 }
 export const DatePickerBox:FC<Props> = ({ label, fieldName, value, onChange, error, className = '' }) => {
     return (

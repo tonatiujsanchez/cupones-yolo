@@ -85,8 +85,16 @@ input[type="number"] {
     z-index: 90;
 }
 
-// === === === Loaders === === ===
+.error-message {
+    color: $red;
+    font-size: 1.3rem;
+}
 
+.required-asterisk {
+    color: $red-dark;
+}
+
+// === === === Loaders === === ===
 .custom-loader-white {
     min-width:24px;
     min-height:24px;
@@ -185,5 +193,39 @@ input[type="number"] {
 .custom-scroll::-webkit-scrollbar-track {
     border-radius: 8px;  
 }
-  
+
+
+// Editor
+div.ql-toolbar.ql-snow + .ql-container.ql-snow {
+    border: $border-gray-light;
+    &:hover {
+        border: $border-primary;
+    }
+}
+
+.ql-editor::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.ql-editor::-webkit-scrollbar:vertical {
+    width:8px;
+}
+
+.ql-editor::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.ql-editor::-webkit-scrollbar:horizontal {
+    height: 8px;
+}
+
+.ql-editor::-webkit-scrollbar-thumb {
+    background-color: #dbdbdb;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.ql-editor::-webkit-scrollbar-track {
+    border-radius: 8px;  
+}
   
