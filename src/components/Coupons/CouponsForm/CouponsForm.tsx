@@ -52,7 +52,7 @@ export const CouponsForm = () => {
                     </figure>
                     <div className={ styles['form-fields-container'] }>
                         <div className={ styles['form-field'] }>
-                            <label htmlFor="name">Nombre completo</label>
+                            <label htmlFor="name">Nombre completo<span className="required-asterisk">*</span></label>
                             <input 
                                 type="text"
                                 id="name"
@@ -68,7 +68,7 @@ export const CouponsForm = () => {
                             }
                         </div>
                         <div className={ styles['form-field'] }>
-                            <label  htmlFor="phone">Celular</label>
+                            <label  htmlFor="phone">Celular<span className="required-asterisk">*</span></label>
                             <input 
                                 type="number" 
                                 id="phone"
@@ -84,7 +84,7 @@ export const CouponsForm = () => {
                             }
                         </div>
                         <div className={ styles['form-field'] }>
-                            <label htmlFor="datePicker">Fecha de Nacimiento</label>
+                            <label htmlFor="datePicker">Fecha de Nacimiento<span className="required-asterisk">*</span></label>
                             <Controller
                                 control={ control }
                                 name="birthdate"

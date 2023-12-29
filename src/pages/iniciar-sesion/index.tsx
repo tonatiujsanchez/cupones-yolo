@@ -3,7 +3,6 @@ import NextLink from 'next/link'
 import { useForm } from "react-hook-form"
 import { fonts } from "@/fonts"
 
-
 import { ButtonPrimary, InputText } from "@/components"
 import styles from './LoginPage.module.scss'
 
@@ -58,6 +57,7 @@ const LoginPage = () => {
                             { ...register("user", {
                                 required: 'Ingrese su usuario'
                             })}
+                            isRequired
                         />
                         <InputText
                             type="password"
@@ -68,6 +68,7 @@ const LoginPage = () => {
                             { ...register("password", {
                                     required: 'Ingrese su contraseña'
                             })}
+                            isRequired
                         />
                         <div className={ styles['login-form__button-container'] }>       
                             <ButtonPrimary type="submit" >

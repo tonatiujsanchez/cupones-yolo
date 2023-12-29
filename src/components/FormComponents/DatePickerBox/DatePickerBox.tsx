@@ -6,14 +6,15 @@ import styles from './DatePickerBox.module.scss'
 
 
 interface Props {
-    label     : string
-    fieldName : string
-    value     : Date
-    onChange  : ( value:string )=> void
-    error?    : FieldError
-    className?: string
+    label      : string
+    fieldName  : string
+    value      : Date
+    onChange   : ( value:string )=> void
+    error?     : FieldError
+    isRequired?: boolean
+    className? : string
 }
-export const DatePickerBox:FC<Props> = ({ label, fieldName, value, onChange, error, className = '' }) => {
+export const DatePickerBox:FC<Props> = ({ label, fieldName, value, onChange, error, isRequired, className = '' }) => {
     return (
         <div className={ `${ styles['datepicker'] } ${ className }` }>
             <label
@@ -21,6 +22,7 @@ export const DatePickerBox:FC<Props> = ({ label, fieldName, value, onChange, err
                 htmlFor={ fieldName }
             >
                 { label }
+                { isRequired && <span className="required-asterisk">*</span> }
             </label>
             <DatePicker
                 value={value}

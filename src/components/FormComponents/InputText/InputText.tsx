@@ -9,13 +9,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
     fieldName   : string
     placeholder?: string
     error?      : FieldError
+    isRequired? : boolean
 }
 
 export const InputText:FC<Props> = forwardRef(
-    ({ type, label, fieldName, error, ...props }, ref) => {
+    ({ type, label, fieldName, error, isRequired, ...props }, ref) => {
         return (
             <div className={styles['field-container']}>
-                <label htmlFor={ fieldName }>{ label }</label>
+                <label htmlFor={ fieldName }>{ label }{ isRequired && <span className="required-asterisk">*</span> }</label>
                 <input
                     type={ type }
                     id={ fieldName }

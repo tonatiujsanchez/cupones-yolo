@@ -11,7 +11,7 @@ interface ICouponPageForm {
     dateToRegisterEnd   : Date
 
     congratulationTitle   : string
-    congratulationsubtitle: string
+    congratulationSubtitle: string
     conditions : string
     couponValidityStart: Date
     couponValidityEnd  : Date
@@ -24,7 +24,7 @@ export const CouponSettingsSection = () => {
             pageTitle: '',
             pageSubtitle: '',
             congratulationTitle: '',
-            congratulationsubtitle: '',
+            congratulationSubtitle: '',
         }
     })
 
@@ -49,6 +49,7 @@ export const CouponSettingsSection = () => {
                         { ...register('pageTitle', {
                             required: 'El título de la página es requerido'
                         })}
+                        isRequired
                     />
                     <InputText
                         type="text"
@@ -71,6 +72,7 @@ export const CouponSettingsSection = () => {
                                         onChange={ field.onChange }
                                         error={ errors.dateToRegisterStart }
                                         className={ styles['date-picker__date'] }
+                                        isRequired
                                     />
                                 )}
                                 rules={{ required: 'Seleccione la fecha de inicio para registrarse' }}
@@ -86,6 +88,7 @@ export const CouponSettingsSection = () => {
                                         onChange={ field.onChange }
                                         error={ errors.dateToRegisterEnd }
                                         className={ styles['date-picker__date'] }
+                                        isRequired
                                     />
                                 )}
                                 rules={{ required: 'Seleccione la fecha limite para registrarse' }}
@@ -104,16 +107,23 @@ export const CouponSettingsSection = () => {
                         { ...register('congratulationTitle', {
                             required: 'El título de la felicitación es requerido'
                         })}
+                        isRequired
                     />
-                    <InputText
-                        type="text"
-                        label="Subtítulo"
-                        fieldName="congratulationsubtitle"
-                        placeholder="Registro completado, has ganado 2 cupones."
-                        error={ errors.congratulationsubtitle }
-                        { ...register('congratulationsubtitle',{
-                            required: 'El subtítulo de la felicitación es requerido'
-                        })}
+                    <Controller
+                        control={ control }
+                        name="congratulationSubtitle"
+                        render={({ field })=>(
+                            <WYSIWYGEditorLite
+                                label="Subtítulo"
+                                fieldName="congratulationSubtitle"
+                                placeholder="Registro completado, has ganado 2 cupones"
+                                onChange={ field.onChange }
+                                value={ field.value }
+                                error={ errors.congratulationSubtitle }
+                                isRequired
+                            />
+                        )}
+                        rules={{ required: 'El subtítulo de la felicitación es requerido' }}
                     />
                     <Controller
                         control={ control }
@@ -126,7 +136,7 @@ export const CouponSettingsSection = () => {
                                 onChange={ field.onChange }
                                 value={ field.value }
                                 error={ errors.conditions }
-                                className={ styles['html-editor'] }
+                                className={ styles['html-editor__conditions'] }
                                 isRequired
                             />
                         )}
@@ -140,12 +150,13 @@ export const CouponSettingsSection = () => {
                                 name="couponValidityStart"
                                 render={({ field })=> (
                                     <DatePickerBox
-                                        label="Inicio de vigencia"
+                                        label="Inicio"
                                         fieldName="couponValidityStart"
                                         value={ field.value }
                                         onChange={ field.onChange }
                                         error={ errors.couponValidityStart }
                                         className={ styles['date-picker__date'] }
+                                        isRequired
                                     />
                                 )}
                                 rules={{ required: 'Seleccione la fecha inicio' }}
@@ -161,6 +172,7 @@ export const CouponSettingsSection = () => {
                                         onChange={ field.onChange }
                                         error={ errors.couponValidityEnd }
                                         className={ styles['date-picker__date'] }
+                                        isRequired
                                     />
                                 )}
                                 rules={{ required: 'Seleccione la fecha caducidad' }}

@@ -28,7 +28,7 @@ interface Props {
     className? : string
     isRequired?: boolean
 }
-export const WYSIWYGEditorLite:FC<Props> = ({ label, fieldName, placeholder, onChange, value, error, processing, className = '', isRequired = false }) => {
+export const WYSIWYGEditorLite:FC<Props> = ({ label, fieldName, placeholder, onChange, value, error, processing, isRequired, className = '' }) => {
     
     const toolbar = `toolbar${ fieldName }`
 
@@ -46,29 +46,33 @@ export const WYSIWYGEditorLite:FC<Props> = ({ label, fieldName, placeholder, onC
         }
     },[quill])
 
+
+    const textChangeEvent = () => {
+        if(quill!.getText().trim() === ''){
+            onChange('')
+        }else {
+            onChange(quill!.root.innerHTML)
+        } 
+    }
+
+    const selectionChangeEvent = () => {
+        if( quill!.hasFocus() ){
+            quillRef.current.classList.add(styles['focus'])
+        }else {
+            quillRef.current.classList.remove(styles['focus'])
+        }
+    }
+
     useEffect(() => {
         if (quill) {
-            quill.on('text-change', () => {
-                if(quill.getText().trim() === ''){
-                    onChange('')
-                }else {
-                    onChange(quill.root.innerHTML)
-                }              
-            })
-
-            quill.on('selection-change', () => {
-                if( quill.hasFocus() ){
-                    quillRef.current.classList.add(styles['focus'])
-                }else {
-                    quillRef.current.classList.remove(styles['focus'])
-                }
-            })
+            quill.on('text-change', textChangeEvent )
+            quill.on('selection-change', selectionChangeEvent )
         }
         
         return () => {
             if(quill){
-                quill.off('text-change',()=>{})
-                quill.off('selection-change',()=>{})
+                quill.off('text-change', textChangeEvent )
+                quill.off('selection-change', selectionChangeEvent )
             }
         }
     }, [quill])
