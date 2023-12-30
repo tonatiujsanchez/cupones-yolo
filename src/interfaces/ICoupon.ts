@@ -31,3 +31,8 @@ export interface IStatusCouponExchange {
     value:IStatusCouponExchangeOptions
     label:string
 }
+
+export interface ICouponLite {
+    value: number
+    title: string
+}

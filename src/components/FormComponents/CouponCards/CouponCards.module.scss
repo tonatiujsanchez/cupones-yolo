@@ -1,0 +1,58 @@
+@import '../../../scss/index.scss';
+
+.coupons__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.coupons__content {
+    position: relative;
+    width: 25rem;
+    height: 11rem;
+    article {
+        height: 100%;
+        div{
+            height: 100%;
+            border-radius: 0.5rem;
+            padding-block: 1.5rem;
+            div:last-child {
+                padding: 0 0.5rem;
+            }
+        }
+        p{
+            font-size: 1.2rem;
+            &:first-child{
+                font-size: 3rem;
+            } 
+        }
+        svg {
+            width: 4rem;
+            height: 5rem;
+        }   
+    }
+}
+
+.coupons__add-button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border: dashed $gray-light 0.1rem;
+    padding-block: 1rem;
+    padding-inline: 1.5rem;
+    border-radius: 0.5rem;
+    color: $gray-light;
+    cursor: pointer;
+
+    svg {
+        max-width: 2.4rem;
+    }
+
+    &:hover {
+        border-color: $gray;
+        color: $gray;
+    }
+}

@@ -1,20 +1,32 @@
 import { Controller, useForm } from 'react-hook-form'
-import { ButtonPrimary, DatePickerBox, InputText, WYSIWYGEditorLite } from '@/components'
+import { ButtonPrimary, CouponCards, DatePickerBox, InputText, WYSIWYGEditorLite } from '@/components'
 
 import styles from './CouponSettingsSection.module.scss'
+import { ICouponLite } from '@/interfaces'
 
+const coupons:ICouponLite[] = [
+    {
+        value: 15,
+        title:'En productos de nuestra tienda física'
+    },
+    {
+        value: 10,
+        title:'En productos de la página oficial de SHEIN'
+    },
+]
 
 interface ICouponPageForm {
-    pageTitle   : string
-    pageSubtitle: string
-    dateToRegisterStart : Date
-    dateToRegisterEnd   : Date
+    pageTitle          : string
+    pageSubtitle       : string
+    dateToRegisterStart: Date
+    dateToRegisterEnd  : Date
+    coupons            : ICouponLite[]
 
     congratulationTitle   : string
     congratulationSubtitle: string
-    conditions : string
-    couponValidityStart: Date
-    couponValidityEnd  : Date
+    conditions            : string
+    couponValidityStart   : Date
+    couponValidityEnd     : Date
 }
 
 export const CouponSettingsSection = () => {
@@ -23,8 +35,11 @@ export const CouponSettingsSection = () => {
         defaultValues: {
             pageTitle: '',
             pageSubtitle: '',
+            coupons: coupons,
+
             congratulationTitle: '',
             congratulationSubtitle: '',
+            conditions: '',
         }
     })
 
@@ -94,7 +109,26 @@ export const CouponSettingsSection = () => {
                                 rules={{ required: 'Seleccione la fecha limite para registrarse' }}
                             />
                         </div>
-                    </div>   
+                    </div>
+                    {/* FIXME: */}
+                    <div className={ styles['coupons'] }>
+                        <p className={ styles['label'] }>Cupones</p>
+                        <Controller
+                            control={ control }
+                            name="coupons"
+                            render={({ field })=>(
+                                <CouponCards
+                                    value={ field.value }
+                                    onChange={ field.onChange }
+                                    // error={ errors.coupons }
+                                />
+                            )}
+                            rules={{
+                                required: 'hola',
+                                validate: ( value )=> value.length === 0 ? 'Es requerido al menos un cupón' : ''
+                            }}
+                        />
+                    </div>
                 </div>
                 <h6 className={ styles['coupon-settings-section__subtitle'] }>Registro completado</h6>
                 <div className={ styles['coupon-settings-section__content'] }>

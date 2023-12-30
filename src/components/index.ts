@@ -37,5 +37,6 @@ export * from './FormComponents/SearchForm'
 export * from './FormComponents/CustomSelect'
 export * from './FormComponents/DatePickerBox'
 export * from './FormComponents/WYSIWYGEditorLite'
+export * from './FormComponents/CouponCards'
 
 
