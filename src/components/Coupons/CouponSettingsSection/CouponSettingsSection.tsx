@@ -2,7 +2,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { ButtonPrimary, CouponCards, DatePickerBox, InputText, WYSIWYGEditorLite } from '@/components'
 
 import styles from './CouponSettingsSection.module.scss'
-import { ICouponLite } from '@/interfaces'
+import { ICouponLite, ICouponSettingsForm } from '@/interfaces'
 
 const coupons:ICouponLite[] = [
     {
@@ -15,23 +15,9 @@ const coupons:ICouponLite[] = [
     },
 ]
 
-interface ICouponPageForm {
-    pageTitle          : string
-    pageSubtitle       : string
-    dateToRegisterStart: Date
-    dateToRegisterEnd  : Date
-    coupons            : ICouponLite[]
-
-    congratulationTitle   : string
-    congratulationSubtitle: string
-    conditions            : string
-    couponValidityStart   : Date
-    couponValidityEnd     : Date
-}
-
 export const CouponSettingsSection = () => {
 
-    const { register, handleSubmit, control, formState:{ errors } } = useForm<ICouponPageForm>({
+    const { register, handleSubmit, control, formState:{ errors } } = useForm<ICouponSettingsForm>({
         defaultValues: {
             pageTitle: '',
             pageSubtitle: '',
@@ -43,7 +29,7 @@ export const CouponSettingsSection = () => {
         }
     })
 
-    const onCouponPageSubmit = (data:ICouponPageForm) => {
+    const onCouponPageSubmit = (data:ICouponSettingsForm) => {
         console.log( data )
     }
 
@@ -110,7 +96,6 @@ export const CouponSettingsSection = () => {
                             />
                         </div>
                     </div>
-                    {/* FIXME: */}
                     <div className={ styles['coupons'] }>
                         <p className={ styles['label'] }>Cupones</p>
                         <Controller
@@ -120,12 +105,11 @@ export const CouponSettingsSection = () => {
                                 <CouponCards
                                     value={ field.value }
                                     onChange={ field.onChange }
-                                    // error={ errors.coupons }
+                                    error={ errors.coupons }
                                 />
                             )}
                             rules={{
-                                required: 'hola',
-                                validate: ( value )=> value.length === 0 ? 'Es requerido al menos un cupón' : ''
+                                validate: ( value )=> value.length === 0 ? 'Es requerido al menos un cupón' : undefined
                             }}
                         />
                     </div>
@@ -154,6 +138,7 @@ export const CouponSettingsSection = () => {
                                 onChange={ field.onChange }
                                 value={ field.value }
                                 error={ errors.congratulationSubtitle }
+                                className={ styles['html-editor__congratulation-subtitle'] }
                                 isRequired
                             />
                         )}

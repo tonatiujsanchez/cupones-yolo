@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { FieldError } from 'react-hook-form'
+import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
 import { CouponCard } from '@/components'
 import { PlusCircleIcon } from '@/components/Icons'
 
@@ -10,7 +10,7 @@ import styles from './CouponCards.module.scss'
 interface Props {
     value   : ICouponLite[]
     onChange: ( value: ICouponLite[] )=> void
-    error?  : FieldError
+    error?  : Merge<FieldError, Merge<FieldError, FieldErrorsImpl<ICouponLite>>>
 }
 export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
     return (
@@ -42,9 +42,15 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
                 </div>
                 {
                     error &&
-                    <span className={`error-message ${styles['error']}`}>{error.message}</span>
+                    <span className={`error-message ${styles['error']}`}>{ error.message }</span>
                 }
             </div>
+            {/* TODO: Añadir modal */}
+            {/* 
+                <ModalContainer>
+                    <AddCouponForm />
+                </ModalContainer>
+            */}
         </>
     )
 }

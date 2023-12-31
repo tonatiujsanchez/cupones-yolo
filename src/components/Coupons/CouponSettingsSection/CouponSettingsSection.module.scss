@@ -26,8 +26,12 @@
         margin-block-end: 2rem;
     }
 
+    .html-editor__congratulation-subtitle {
+        height: 16rem;
+    }
+
     .html-editor__conditions {
-        height: 14rem;
+        height: 16rem;
     }
     
     .date-picker__content {
@@ -45,9 +49,20 @@
         margin-inline-start: auto;
     }
 
-
-    // Temp
     .coupons {
         margin-block-start: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .coupon-settings-section__form {
+
+        .html-editor__congratulation-subtitle {
+            height: 10rem;
+        }
+
+        .html-editor__conditions {
+            height: 14rem;
+        }
     }
 }

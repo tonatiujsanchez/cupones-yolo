@@ -26,7 +26,6 @@ export type ICouponsResp = {
 
 export type IStatusCouponExchangeOptions = '' | 'canjeados' | 'sin_canjear' | 'expirados'
 
-
 export interface IStatusCouponExchange {
     value:IStatusCouponExchangeOptions
     label:string
@@ -35,4 +34,17 @@ export interface IStatusCouponExchange {
 export interface ICouponLite {
     value: number
     title: string
+}
+
+export interface ICouponSettingsForm {
+    pageTitle             : string
+    pageSubtitle          : string
+    dateToRegisterStart   : Date
+    dateToRegisterEnd     : Date
+    coupons               : ICouponLite[]
+    congratulationTitle   : string
+    congratulationSubtitle: string
+    conditions            : string
+    couponValidityStart   : Date
+    couponValidityEnd     : Date
 }
