@@ -100,7 +100,7 @@
 
         &.scroll-active {
             position: sticky;
-            box-shadow: 0 0 0.5rem $gray-light;
+            box-shadow : -0.4rem 0 0.5rem $gray-light;
             .navbar-container{
                 padding-block: 0;
                 .navbar-logo {
@@ -112,9 +112,6 @@
     .navbar-container{
         margin-block: 1rem;
         transition: all 0.5s;
-        .overlay-hidden{
-            display: none;
-        }
     }
 
     .navbar-content {

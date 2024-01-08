@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import Image from 'next/image'
+import { Overlay } from '@/components'
 import { FacebookIcon, InstagramIcon, MunuIcon, WhatsAppIcon } from '@/components/Icons'
 
 import styles from './Navbar.module.scss'
+
 
 
 export const Navbar = () => {
@@ -49,7 +51,7 @@ export const Navbar = () => {
                     />
                 </NextLink>
                 { showMenu && (
-                    <div onClick={ ()=> setShowMenu(false) } className={`overlay ${ showMenu ? styles['overlay-hidden']:''}`}></div>
+                    <Overlay onClick={ ()=> setShowMenu(false) } />
                 )}
                 <div className={`${styles['navbar-content']} ${ showMenu ? styles['show-menu'] : '' }`} >
                     <nav className={styles.navbar}>

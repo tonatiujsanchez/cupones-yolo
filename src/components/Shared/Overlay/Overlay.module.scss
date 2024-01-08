@@ -1,0 +1,10 @@
+@import '../../../scss/index.scss';
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: $black;
+    opacity: 0.5;
+    transition: all 0.5s ease;
+    z-index: 90;
+}

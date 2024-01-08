@@ -8,7 +8,7 @@ export default function Document() {
             <Head>
                 <link rel="icon" href="/favicon-yolostyle.png" />
             </Head>
-            <body>
+            <body className="custom-scroll">
                 <Main />
                 <NextScript />
             </body>

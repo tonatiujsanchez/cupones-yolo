@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
-import { CouponCard, ModalContainer } from '@/components'
+import { CouponAddForm, CouponCard, ModalContainer } from '@/components'
 import { PlusCircleIcon } from '@/components/Icons'
 
 import { ICouponLite } from '@/interfaces'
@@ -15,6 +15,11 @@ interface Props {
 export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
 
     const [showAddCouponModal, setShowAddCouponModal] = useState(false)
+
+
+    const onAddCouponSubmit = ( coupon:ICouponLite ) => {
+        onChange([ ...value, coupon ])
+    }
 
     return (
         <>
@@ -36,7 +41,6 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
                     <div className={ styles['coupons__content'] }>
                         <button
                             type="button" 
-                            // onClick={ ()=>  onChange([ ...value, ...value ]) }
                             onClick={ ()=>  setShowAddCouponModal(true) }
                             className={ styles['coupons__add-button'] }
                         >
@@ -54,8 +58,7 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
                 show={ showAddCouponModal }
                 onHidden={ ()=> setShowAddCouponModal(false) }
             >
-                <p>Hola desde modal</p>
-                {/* <AddCouponForm /> */}
+                <CouponAddForm onSubmit={ onAddCouponSubmit } />
             </ModalContainer>
            
         </>

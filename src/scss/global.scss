@@ -2,6 +2,7 @@
 
 html {
     font-size: 62.5%;
+    // scrollbar-gutter: stable;
 }
 
 *,*::before,*::after{
@@ -14,6 +15,7 @@ body {
     font-size: 1.6rem;
     line-height: 1.2;
     color: $black;
+    // overflow-y: scroll;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -68,21 +70,12 @@ input[type="number"] {
 }
 
 body.fixed-body {
-    overflow:hidden
+    overflow: hidden;
 }
 
 .container {
     max-width: 1280px;
     margin: 0 auto;
-}
-
-.overlay {
-    position: fixed;
-    inset: 0;
-    background: $black;
-    opacity: 0.5;
-    transition: all 0.5s ease;
-    z-index: 90;
 }
 
 .error-message {
@@ -172,7 +165,8 @@ body.fixed-body {
 }
 
 .custom-scroll::-webkit-scrollbar:vertical {
-    width:8px;
+    width:0.8rem;
+    background-color: $gray-ultra-light;
 }
 
 .custom-scroll::-webkit-scrollbar-button:increment,
@@ -181,17 +175,17 @@ body.fixed-body {
 } 
 
 .custom-scroll::-webkit-scrollbar:horizontal {
-    height: 8px;
+    height: 0.8rem;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
     background-color: #b4b4b4;
-    border-radius: 20px;
-    border: 2px solid #f1f2f3;
+    border-radius: 2rem;
+    border: 0.2rem solid #f1f2f3;
 }
 
 .custom-scroll::-webkit-scrollbar-track {
-    border-radius: 8px;  
+    border-radius: 0.8rem;  
 }
 
 
@@ -208,7 +202,7 @@ div.ql-toolbar.ql-snow + .ql-container.ql-snow {
 }
 
 .ql-editor::-webkit-scrollbar:vertical {
-    width:8px;
+    width:0.8rem;
 }
 
 .ql-editor::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
@@ -216,16 +210,23 @@ div.ql-toolbar.ql-snow + .ql-container.ql-snow {
 } 
 
 .ql-editor::-webkit-scrollbar:horizontal {
-    height: 8px;
+    height: 0.8rem;
 }
 
 .ql-editor::-webkit-scrollbar-thumb {
     background-color: #dbdbdb;
-    border-radius: 20px;
-    border: 2px solid #f1f2f3;
+    border-radius: 2rem;
+    border: 0.2rem solid #f1f2f3;
 }
 
 .ql-editor::-webkit-scrollbar-track {
-    border-radius: 8px;  
+    border-radius: 0.8rem;  
 }
-  
+
+
+@media (min-width: 992px) {
+    body.fixed-body {
+        overflow: hidden;
+        padding-inline-end: 0.8rem;
+    }
+}
