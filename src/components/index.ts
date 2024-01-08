@@ -9,6 +9,7 @@ export * from './Shared/Pagination'
 export * from './Shared/RegisterCount'
 export * from './Shared/MessageWithoutResults'
 export * from './Shared/ErrorMessage'
+export * from './Shared/ModalContainer'
 
 export * from './Buttons/ButtonPrimary'
 export * from './Buttons/ButtonIconsAnimated'
