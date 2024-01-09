@@ -58,7 +58,10 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
                 show={ showAddCouponModal }
                 onHidden={ ()=> setShowAddCouponModal(false) }
             >
-                <CouponAddForm onSubmit={ onAddCouponSubmit } />
+                <CouponAddForm 
+                    onSubmit={ onAddCouponSubmit }
+                    onClose={ ()=> setShowAddCouponModal(false) }
+                />
             </ModalContainer>
            
         </>

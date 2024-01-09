@@ -1,0 +1,32 @@
+@import '../../../scss/index.scss';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    border-block-end: $border-gray-light;
+    padding-block-end: 0.8rem;
+}
+
+.header__title {
+    font-size: 1.8rem;
+}
+
+.header__close-button {
+    border: solid 0.1rem  $gray-ultra-light;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    padding: 0.4rem;
+    display: grid;
+    place-content: center;
+
+    &:hover {
+        background-color: $gray-ultra-light;
+    }
+    svg {
+        width: 1.9rem;
+        height: 1.7rem;
+    }
+}
