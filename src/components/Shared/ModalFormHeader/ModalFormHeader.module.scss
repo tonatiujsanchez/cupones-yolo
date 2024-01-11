@@ -21,9 +21,11 @@
     padding: 0.4rem;
     display: grid;
     place-content: center;
-
+    color: $gray;
+    
     &:hover {
         background-color: $gray-ultra-light;
+        color: $black;
     }
     svg {
         width: 1.9rem;

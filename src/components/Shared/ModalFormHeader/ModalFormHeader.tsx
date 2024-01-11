@@ -11,6 +11,7 @@ export const ModalFormHeader:FC<Props> = ({ title, onClose }) => {
         <header className={ styles['header'] }>
             <h3 className={ styles['header__title'] }>{ title }</h3>
             <button
+                type="button"
                 onClick={ onClose }
                 className={ styles['header__close-button'] }
             >

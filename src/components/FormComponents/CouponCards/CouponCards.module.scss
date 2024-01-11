@@ -18,6 +18,7 @@
             padding-block: 1.5rem;
             div:last-child {
                 padding: 0 0.5rem;
+                flex: 1;
             }
         }
         p{
@@ -30,6 +31,29 @@
             width: 4rem;
             height: 5rem;
         }   
+    }
+
+    .coupons__dropdown-content {
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        z-index: 10;
+        button {
+            color: $white;
+            width: 2rem;
+            &:hover {
+                background-color: $primary-light;
+                svg {
+                    transform: scale(1.2);
+                    stroke-width: 0.2rem;
+                    fill: white;
+                }
+            }
+            svg {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+        }
     }
 }
 

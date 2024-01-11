@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { ButtonPrimary, InputText, ModalFormHeader } from '@/components'
 import { ICouponLite } from '@/interfaces'
 
@@ -8,20 +8,26 @@ import { useForm } from 'react-hook-form'
 
 interface Props {
     onSubmit: ( coupon:ICouponLite )=> void
-    coupon? : ICouponLite
     onClose : ()=> void
+    coupon? : ICouponLite
 }
-export const CouponAddForm:FC<Props> = ({ onSubmit, coupon, onClose }) => {
+export const CouponAddForm:FC<Props> = ({ onSubmit, onClose, coupon }) => {
 
-    const { register, handleSubmit, formState:{ errors } } = useForm<ICouponLite>({
+    const { register, handleSubmit, formState:{ errors }, reset } = useForm<ICouponLite>({
         defaultValues: {
             title: '',
-            value: 0
         }
     })
 
+    useEffect(()=>{
+        if( coupon ) {
+            reset(coupon)
+        }
+    },[reset, coupon])
+
     const onAddCoupon = ( data:ICouponLite ) => {
-        console.log( data )
+        onSubmit( data )
+        reset()
     }
 
     return (
@@ -42,9 +48,24 @@ export const CouponAddForm:FC<Props> = ({ onSubmit, coupon, onClose }) => {
                     })}
                     isRequired
                 />
+                <InputText
+                    type="number"
+                    label="Porcentaje de descuento"
+                    fieldName="value"
+                    placeholder="10%"
+                    error={ errors.value }
+                    { ...register("value", {
+                        required: 'Ingrese el porcentaje de descuento',
+                        validate: ( value )=> Number(value) <= 0 || Number(value) > 100 ? 'Valor no válido, min 1 - max 100' : undefined
+                    })}
+                    min={ 1 }
+                    max={ 100 }
+                    isRequired
+                />
             </div>
             <div className="button-container">
                 <ButtonPrimary
+                    type="submit"
                     onClick={ handleSubmit( onAddCoupon ) }
                 >
                     Agregar

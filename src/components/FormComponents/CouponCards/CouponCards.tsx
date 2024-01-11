@@ -1,7 +1,8 @@
 import { FC, useState } from 'react'
 import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
-import { CouponAddForm, CouponCard, ModalContainer } from '@/components'
-import { PlusCircleIcon } from '@/components/Icons'
+import { CouponAddForm, CouponCard, Dropdown, ModalContainer } from '@/components'
+import { EllipsisVerticalIcon, PlusCircleIcon } from '@/components/Icons'
+import { toastSuccess } from '@/libs'
 
 import { ICouponLite } from '@/interfaces'
 import styles from './CouponCards.module.scss'
@@ -15,10 +16,12 @@ interface Props {
 export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
 
     const [showAddCouponModal, setShowAddCouponModal] = useState(false)
+    const [editCoupon, setEditCoupon] = useState<ICouponLite>()
 
 
     const onAddCouponSubmit = ( coupon:ICouponLite ) => {
         onChange([ ...value, coupon ])
+        toastSuccess('Cupón agregado')
     }
 
     return (
@@ -28,13 +31,29 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
                     {   value.length >= 1 &&
                         value.map( coupon => (
                             <div 
-                                key={ coupon.title } 
+                                key={ coupon.title + coupon.value } 
                                 className={ styles['coupons__content'] }
                             >
                                 <CouponCard
                                     value={ coupon.value }
                                     title={ coupon.title }
                                 />
+                                <div className={ styles['coupons__dropdown-content'] }>
+                                    <Dropdown
+                                        options={[
+                                            {
+                                                label: 'Editar',
+                                                action: ()=> console.log('editar...')
+                                            },
+                                            {
+                                                label: 'Eliminar',
+                                                action: ()=> console.log('Eliminar...')
+                                            }
+                                        ]}
+                                    >
+                                        <EllipsisVerticalIcon />
+                                    </Dropdown>
+                                </div>
                             </div>
                         ))
                     }
@@ -53,7 +72,6 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
                     <span className={`error-message ${styles['error']}`}>{ error.message }</span>
                 }
             </div>
-            {/* TODO: Añadir modal */}
             <ModalContainer
                 show={ showAddCouponModal }
                 onHidden={ ()=> setShowAddCouponModal(false) }
@@ -61,6 +79,7 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
                 <CouponAddForm 
                     onSubmit={ onAddCouponSubmit }
                     onClose={ ()=> setShowAddCouponModal(false) }
+                    coupon={ editCoupon }
                 />
             </ModalContainer>
            

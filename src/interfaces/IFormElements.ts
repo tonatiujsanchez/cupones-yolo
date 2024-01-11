@@ -3,3 +3,9 @@ export interface ISelectOption {
     label: string
     icon?: JSX.Element
 }
+
+export interface IDropdownOption {
+    label : string
+    action: ()=> void
+    icon? : JSX.Element
+}
