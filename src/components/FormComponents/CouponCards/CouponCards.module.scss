@@ -54,6 +54,27 @@
                 height: 2.5rem;
             }
         }
+        li {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            svg {
+                width: 1.6rem;
+                height: 1.6rem;
+                stroke-width: 1.4;
+            }
+
+            &:first-of-type {
+                svg {
+                    color: $blue-dark;
+                }
+            }
+            &:last-of-type {
+                svg {
+                    color: $red-dark;
+                }
+            }
+        }
     }
 }
 

@@ -27,7 +27,7 @@ export const CouponAddForm:FC<Props> = ({ onSubmit, onClose, coupon }) => {
 
     const onAddCoupon = ( data:ICouponLite ) => {
         onSubmit( data )
-        reset()
+        onClose()
     }
 
     return (
@@ -68,7 +68,7 @@ export const CouponAddForm:FC<Props> = ({ onSubmit, onClose, coupon }) => {
                     type="submit"
                     onClick={ handleSubmit( onAddCoupon ) }
                 >
-                    Agregar
+                    { coupon ? 'Editar' : 'Agregar' }
                 </ButtonPrimary>
             </div>
         </div>

@@ -53,7 +53,7 @@ export const Dropdown:FC<Props> = ({ children, options }) => {
                             onClick={ option.action }
                             className={ styles['dropdown__option'] }
                         >
-                            { option.label }
+                            { option.icon } { option.label }
                         </li>
                     ))
                 }

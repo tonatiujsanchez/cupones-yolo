@@ -6,10 +6,12 @@ import { ICouponLite, ICouponSettingsForm } from '@/interfaces'
 
 const coupons:ICouponLite[] = [
     {
+        _id: '123',
         value: 15,
         title:'En productos de nuestra tienda física'
     },
     {
+        _id: '456',
         value: 10,
         title:'En productos de la página oficial de SHEIN'
     },

@@ -32,6 +32,7 @@ export interface IStatusCouponExchange {
 }
 
 export interface ICouponLite {
+    _id? : string
     value: number
     title: string
 }
