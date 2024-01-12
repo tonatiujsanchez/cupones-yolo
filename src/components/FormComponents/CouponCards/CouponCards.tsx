@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
-import { CouponAddForm, CouponCard, Dropdown, ModalContainer } from '@/components'
+import { CouponAddForm, CouponCard, Dropdown, ModalContainer, ModalDelete } from '@/components'
 import { EditIcon, EllipsisVerticalIcon, PlusCircleIcon, TrashIcon } from '@/components/Icons'
 
 import { ICouponLite } from '@/interfaces'
@@ -16,6 +16,7 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
 
     const [showAddCouponModal, setShowAddCouponModal] = useState(false)
     const [editCoupon, setEditCoupon] = useState<ICouponLite>()
+    const [removeCoupon, setRemoveCoupon] = useState<ICouponLite>()
 
 
     const onAddCouponSubmit = ( coupon:ICouponLite ) => {
@@ -26,24 +27,23 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
             onChange([ ...value, coupon ])
         }
     }
-
-    const onSetEditCoupon = ( value:ICouponLite ) => {
-        setEditCoupon( value )
-        setShowAddCouponModal(true)
-    }
-
-    const onCloseShowAddCouponModal = () => {
-        setShowAddCouponModal(false)
+    
+    const onCloseAddCouponModal = () => {
         setEditCoupon(undefined)
+        setShowAddCouponModal(false)
     }
 
+    // Remove
+    const onCloseDeleteCouponModal = () => {
+        setRemoveCoupon( undefined )
+    }
+    //TODO: IMPEMENTAR
     const onShowDeleteModal = ( confirm:boolean ) => {
         
-        if( !confirm ){
-            return onCloseShowAddCouponModal()
+        if( confirm ){
+            onChange( value.filter( couponState => couponState._id !== removeCoupon?._id ) )
         }
-        
-        // TODO: Remover cupón 
+        onCloseDeleteCouponModal()
     }
 
     return (
@@ -66,12 +66,12 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
                                             {
                                                 icon: <EditIcon />,
                                                 label: 'Editar',
-                                                action: ()=> onSetEditCoupon( coupon )
+                                                action: ()=> setEditCoupon( coupon )
                                             },
                                             {
                                                 icon: <TrashIcon />,
                                                 label: 'Quitar',
-                                                action: ()=> console.log('Eliminar...')
+                                                action: ()=> setRemoveCoupon( coupon )
                                             }
                                         ]}
                                     >
@@ -97,15 +97,25 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
                 }
             </div>
             <ModalContainer
-                show={ showAddCouponModal }
-                onHidden={ onCloseShowAddCouponModal }
+                show={ showAddCouponModal || !!editCoupon }
+                onHidden={ onCloseAddCouponModal }
             >
                 <CouponAddForm 
                     onSubmit={ onAddCouponSubmit }
-                    onClose={ onCloseShowAddCouponModal }
+                    onClose={ onCloseAddCouponModal }
                     coupon={ editCoupon }
                 />
             </ModalContainer>
+            <ModalContainer
+                show={ !!removeCoupon }
+                onHidden={ onCloseDeleteCouponModal }
+            >
+                <ModalDelete
+                    title="Remover cupón"
+                    subtitle="Desae remover este cupón"
+                />
+            </ModalContainer>
+
            
         </>
     )
