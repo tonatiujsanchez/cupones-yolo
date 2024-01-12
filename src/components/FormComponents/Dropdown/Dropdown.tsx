@@ -4,17 +4,30 @@ import { IDropdownOption } from '@/interfaces'
 import styles from './Dropdown.module.scss'
 
 
+const isDescendant = (element: Node | null, parent: HTMLButtonElement | null): boolean => {
+    if (!element) return false;
+
+    if (element === parent) return true;
+
+    return isDescendant(element.parentNode, parent);
+  };
+
+
 interface Props {
-    children: ReactNode
-    options : IDropdownOption[]
+    children  : ReactNode
+    options   : IDropdownOption[]
+    className?: string
 }
-export const Dropdown:FC<Props> = ({ children, options }) => {
+export const Dropdown:FC<Props> = ({ children, options, className='' }) => {
 
     const [openOptions, setOpenOptions] = useState<boolean>(false)
     const divRef = useRef<HTMLButtonElement>(null)
 
     const handleOutsideClick = (ev:MouseEvent) => {
-        if( ev.target !== divRef.current && (ev.target as HTMLDivElement).parentNode !== divRef.current ){
+        if( 
+            ev.target !== divRef.current && 
+            !isDescendant(ev.target as Node, divRef.current)
+        ){
             setOpenOptions(false)
         }
     }
@@ -39,7 +52,7 @@ export const Dropdown:FC<Props> = ({ children, options }) => {
                 type="button"
                 onClick={ handleToggleOptions }
                 ref={ divRef }
-                className={ styles['dropdown__button'] }
+                className={`${ styles['dropdown__button'] } ${ className }`}
             >
                 { children }
             </button>
@@ -51,7 +64,7 @@ export const Dropdown:FC<Props> = ({ children, options }) => {
                         <li 
                             key={ option.label }
                             onClick={ option.action }
-                            className={ styles['dropdown__option'] }
+                            className={`${ styles['dropdown__option'] } ${ option.className }` }
                         >
                             { option.icon } { option.label }
                         </li>

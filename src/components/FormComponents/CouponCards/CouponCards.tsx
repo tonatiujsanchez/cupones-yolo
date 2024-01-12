@@ -64,14 +64,17 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
                                             {
                                                 icon: <EditIcon />,
                                                 label: 'Editar',
-                                                action: ()=> setEditCoupon( coupon )
+                                                action: ()=> setEditCoupon( coupon ),
+                                                className: styles['edit-option']
                                             },
                                             {
                                                 icon: <TrashIcon />,
                                                 label: 'Remover',
-                                                action: ()=> setRemoveCoupon( coupon )
+                                                action: ()=> setRemoveCoupon( coupon ),
+                                                className: styles['remove-option']
                                             }
                                         ]}
+                                        className={ styles['dropdown'] }
                                     >
                                         <EllipsisVerticalIcon />
                                     </Dropdown>

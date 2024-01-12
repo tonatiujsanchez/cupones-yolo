@@ -5,9 +5,10 @@ export interface ISelectOption {
 }
 
 export interface IDropdownOption {
-    label : string
-    action: ()=> void
-    icon? : JSX.Element
+    label     : string
+    action    : ()=> void
+    icon?     : JSX.Element
+    className?: string
 }
 
 export type ButtonType = 'button' | 'submit'

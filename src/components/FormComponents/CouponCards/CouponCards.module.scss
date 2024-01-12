@@ -38,41 +38,26 @@
         inset-block-start: 0;
         inset-inline-end: 0;
         z-index: 10;
-        button {
+        .dropdown {
             color: $white;
-            width: 2rem;
+            background-color: transparent;
+            padding-inline: 0.2rem;
             &:hover {
                 background-color: $primary-light;
                 svg {
                     transform: scale(1.2);
                     stroke-width: 0.2rem;
-                    fill: white;
                 }
-            }
-            svg {
-                width: 2.5rem;
-                height: 2.5rem;
             }
         }
-        li {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
+        .edit-option {
             svg {
-                width: 1.6rem;
-                height: 1.6rem;
-                stroke-width: 1.4;
+                color: $blue-dark;
             }
-
-            &:first-of-type {
-                svg {
-                    color: $blue-dark;
-                }
-            }
-            &:last-of-type {
-                svg {
-                    color: $red-dark;
-                }
+        }
+        .remove-option {
+            svg {
+                color: $red-dark;
             }
         }
     }
