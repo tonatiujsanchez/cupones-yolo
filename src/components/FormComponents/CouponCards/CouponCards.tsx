@@ -33,13 +33,11 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
         setShowAddCouponModal(false)
     }
 
-    // Remove
     const onCloseDeleteCouponModal = () => {
         setRemoveCoupon( undefined )
     }
-    //TODO: IMPEMENTAR
+
     const onShowDeleteModal = ( confirm:boolean ) => {
-        
         if( confirm ){
             onChange( value.filter( couponState => couponState._id !== removeCoupon?._id ) )
         }
@@ -70,7 +68,7 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
                                             },
                                             {
                                                 icon: <TrashIcon />,
-                                                label: 'Quitar',
+                                                label: 'Remover',
                                                 action: ()=> setRemoveCoupon( coupon )
                                             }
                                         ]}
@@ -112,7 +110,12 @@ export const CouponCards:FC<Props> = ({ value, onChange, error }) => {
             >
                 <ModalDelete
                     title="Remover cupón"
-                    subtitle="Desae remover este cupón"
+                    subtitle={
+                        <p>
+                            ¿Desea remover el cupón <strong>{ removeCoupon?.title }</strong> con el <strong>{ removeCoupon?.value }%</strong> de descuento?
+                        </p>
+                    }
+                    onChange={ onShowDeleteModal }
                 />
             </ModalContainer>
 

@@ -1,4 +1,6 @@
 import { FC, CSSProperties, ReactNode } from 'react'
+import { ButtonType } from '@/interfaces'
+
 import styles from './ButtonPrimary.module.scss'
 
 
@@ -9,9 +11,6 @@ interface Props {
     disabled?    : boolean
     stylesInline?: CSSProperties
 }
-
-type ButtonType = 'button' | 'submit'
-
 export const ButtonPrimary:FC<Props> = ({ children, onClick, type='button', stylesInline }) => {
     return (
         <button 

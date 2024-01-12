@@ -14,3 +14,11 @@
     flex-direction: column;
     padding-block-start: 2rem;
 }
+
+@media (min-width: 768px) {
+    .form {
+        min-width: 40rem;
+        padding-inline: 2.8rem;
+        padding-block: 2.8rem;
+    }
+}

@@ -1,13 +1,16 @@
-import { FC } from 'react'
-import styles from './ModalDelete.module.scss'
-import { ButtonDelete } from '@/components'
+import { FC, ReactNode } from 'react'
+import { ButtonDelete, ButtonLight } from '@/components'
 import { TrashIcon } from '@/components/Icons'
+
+import styles from './ModalDelete.module.scss'
+
 
 interface Props {
     title   : string
-    subtitle: string
+    subtitle: ReactNode
+    onChange: ( confirm: boolean )=> void
 }
-export const ModalDelete: FC<Props> = ({ title, subtitle }) => {
+export const ModalDelete: FC<Props> = ({ title, subtitle, onChange }) => {
     return (
         <div className={ styles['modal'] }>
             <div className={ styles['modal__content'] }>
@@ -22,13 +25,14 @@ export const ModalDelete: FC<Props> = ({ title, subtitle }) => {
                 </div>
             </div>
             <div className={ styles['modal__actions'] }>
-                <button
-                    type="button"
+                <ButtonLight
+                    onClick={ ()=> onChange(false) }
                 >
                     Cancelar
-                </button>
+                </ButtonLight>
                 <ButtonDelete
-                    onClick={ ()=>{} }
+                    title="Remover"
+                    onClick={ ()=> onChange(true) }
                 />
             </div>
         </div>

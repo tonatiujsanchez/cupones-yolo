@@ -9,3 +9,5 @@ export interface IDropdownOption {
     action: ()=> void
     icon? : JSX.Element
 }
+
+export type ButtonType = 'button' | 'submit'

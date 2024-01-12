@@ -1,6 +1,7 @@
 import { FC, CSSProperties, ReactNode } from 'react'
 import { CakeIcon, CouponIcon, GiftIcon, PercentIcon, ShoppingBagIcon, ShoppingCartIcon, StarIcon } from '@/components/Icons'
 import { PRIMARY_COLOR, PRIMARY_LIGHT_COLOR } from '@/constants'
+import { ButtonType } from '@/interfaces'
 
 import styles from './ButtonIconsAnimated.module.scss'
 
@@ -12,9 +13,6 @@ interface Props {
     disabled?    : boolean
     stylesInline?: CSSProperties
 }
-
-type ButtonType = 'button' | 'submit'
-
 export const ButtonIconsAnimated:FC<Props> = ({ children, onClick, type='button', disabled=false, stylesInline }) => {
     return (
         <button
