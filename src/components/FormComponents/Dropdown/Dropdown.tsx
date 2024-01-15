@@ -4,14 +4,13 @@ import { IDropdownOption } from '@/interfaces'
 import styles from './Dropdown.module.scss'
 
 
-const isDescendant = (element: Node | null, parent: HTMLButtonElement | null): boolean => {
+const isDescendant = (element: Node | null, parent: HTMLElement | null): boolean => {
     if (!element) return false;
 
     if (element === parent) return true;
 
     return isDescendant(element.parentNode, parent);
-  };
-
+}
 
 interface Props {
     children  : ReactNode

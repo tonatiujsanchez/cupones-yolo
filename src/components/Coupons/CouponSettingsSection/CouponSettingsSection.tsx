@@ -2,7 +2,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { ButtonPrimary, CouponCards, DatePickerBox, InputText, WYSIWYGEditorLite } from '@/components'
 
 import styles from './CouponSettingsSection.module.scss'
-import { ICouponLite, ICouponSettingsForm } from '@/interfaces'
+import { ICouponLite, ICouponSettingsPage } from '@/interfaces'
 
 const coupons:ICouponLite[] = [
     {
@@ -19,7 +19,7 @@ const coupons:ICouponLite[] = [
 
 export const CouponSettingsSection = () => {
 
-    const { register, handleSubmit, control, formState:{ errors } } = useForm<ICouponSettingsForm>({
+    const { register, handleSubmit, control, formState:{ errors } } = useForm<ICouponSettingsPage>({
         defaultValues: {
             pageTitle: '',
             pageSubtitle: '',
@@ -31,7 +31,7 @@ export const CouponSettingsSection = () => {
         }
     })
 
-    const onCouponPageSubmit = (data:ICouponSettingsForm) => {
+    const onCouponPageSubmit = (data:ICouponSettingsPage) => {
         console.log( data )
     }
 

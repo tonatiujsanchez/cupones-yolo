@@ -37,7 +37,7 @@ export interface ICouponLite {
     title: string
 }
 
-export interface ICouponSettingsForm {
+export interface ICouponSettingsPage {
     pageTitle             : string
     pageSubtitle          : string
     dateToRegisterStart   : Date
@@ -48,4 +48,7 @@ export interface ICouponSettingsForm {
     conditions            : string
     couponValidityStart   : Date
     couponValidityEnd     : Date
+
+    createdAt? : string
+    updatedAt? : string
 }
