@@ -38,6 +38,20 @@ export const CouponAddForm:FC<Props> = ({ onSubmit, onClose, coupon }) => {
             />
             <div className={ styles['form_fields-container'] }>
                 <InputText
+                    type="number"
+                    label="Porcentaje de descuento"
+                    fieldName="value"
+                    placeholder="10"
+                    error={ errors.value }
+                    { ...register("value", {
+                        required: 'Ingrese el porcentaje de descuento',
+                        validate: ( value )=> Number(value) <= 0 || Number(value) > 100 ? 'Valor no válido, min 1 - max 100' : undefined
+                    })}
+                    min={ 1 }
+                    max={ 100 }
+                    isRequired
+                />
+                <InputText
                     type="text"
                     label="Título del cupón"
                     fieldName="title"
@@ -46,20 +60,6 @@ export const CouponAddForm:FC<Props> = ({ onSubmit, onClose, coupon }) => {
                     { ...register("title", {
                         required: 'Ingrese el título del cupón'
                     })}
-                    isRequired
-                />
-                <InputText
-                    type="number"
-                    label="Porcentaje de descuento"
-                    fieldName="value"
-                    placeholder="10%"
-                    error={ errors.value }
-                    { ...register("value", {
-                        required: 'Ingrese el porcentaje de descuento',
-                        validate: ( value )=> Number(value) <= 0 || Number(value) > 100 ? 'Valor no válido, min 1 - max 100' : undefined
-                    })}
-                    min={ 1 }
-                    max={ 100 }
                     isRequired
                 />
             </div>

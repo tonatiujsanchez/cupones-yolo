@@ -3,6 +3,7 @@ import { ButtonPrimary, CouponCards, DatePickerBox, InputText, WYSIWYGEditorLite
 
 import styles from './CouponSettingsSection.module.scss'
 import { ICouponLite, ICouponSettingsPage } from '@/interfaces'
+import { useUpdateCouponSettingsPage } from '@/hooks'
 
 const coupons:ICouponLite[] = [
     {
@@ -31,8 +32,11 @@ export const CouponSettingsSection = () => {
         }
     })
 
+    const { updateCouponSettingsPage } = useUpdateCouponSettingsPage()
+
+
     const onCouponPageSubmit = (data:ICouponSettingsPage) => {
-        console.log( data )
+        updateCouponSettingsPage.mutate( data )
     }
 
     return (

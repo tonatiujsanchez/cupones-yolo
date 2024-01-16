@@ -26,7 +26,7 @@ const getCouponSettingsPage = async(req: NextApiRequest, res: NextApiResponse<Da
         await db.connect()
         const couponSettingsPage = await CouponSettingsPage.findOne().sort({ createdAt: -1 })
         await db.disconnect()
-
+        console.log( couponSettingsPage )
         if( !couponSettingsPage ){
             return res.status(400).json({ msg: 'No hay cupones activos' })
         }
