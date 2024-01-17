@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { ButtonPrimary, CouponCards, DatePickerBox, ErrorMessage, InputText, WYSIWYGEditorLite } from '@/components'
 
 import { useGetCouponSettingsPage, useUpdateCouponSettingsPage } from '@/hooks'
-import { ICouponLite, ICouponSettingsPage } from '@/interfaces'
+import { ICouponSettingsPage } from '@/interfaces'
 import styles from './CouponSettingsSection.module.scss'
 
 export const CouponSettingsSection = () => {

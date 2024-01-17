@@ -38,3 +38,14 @@ export const dateFormatDayAndMonth = ( date:Date ):string => {
     
     return longDate.substring(0,1).toUpperCase() + longDate.substring(1)
 }
+
+
+export const getDay = (date: Date|string ) => {
+    const day = new Date(date)
+        .toLocaleDateString('es-ES', {
+            day: 'numeric',
+            timeZone: 'UTC'
+        })
+
+    return Number( day )
+}

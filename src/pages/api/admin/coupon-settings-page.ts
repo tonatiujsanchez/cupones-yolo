@@ -33,32 +33,32 @@ const updateCouponSettingsPage = async(req: NextApiRequest, res: NextApiResponse
         }
 
         const { 
-            pageTitle = couponSettingsPage.pageTitle,
-            pageSubtitle = couponSettingsPage.pageSubtitle,
+            pageTitle           = couponSettingsPage.pageTitle,
+            pageSubtitle        = couponSettingsPage.pageSubtitle,
             dateToRegisterStart = couponSettingsPage.dateToRegisterStart,
-            dateToRegisterEnd = couponSettingsPage.dateToRegisterEnd,
-            coupons = couponSettingsPage.coupons,
+            dateToRegisterEnd   = couponSettingsPage.dateToRegisterEnd,
+            coupons             = couponSettingsPage.coupons,
             congratulationTitle = couponSettingsPage.congratulationTitle,
             congratulationSubtitle = couponSettingsPage.congratulationSubtitle,
-            conditions = couponSettingsPage.conditions,
+            conditions          = couponSettingsPage.conditions,
             couponValidityStart = couponSettingsPage.couponValidityStart,
-            couponValidityEnd = couponSettingsPage.couponValidityEnd
+            couponValidityEnd   = couponSettingsPage.couponValidityEnd
         } = req.body
 
         coupons.forEach(( coupon:ICouponLite ) => {
             delete coupon._id
         })
 
-        couponSettingsPage.pageTitle = pageTitle,
-        couponSettingsPage.pageSubtitle = pageSubtitle,
-        couponSettingsPage.dateToRegisterStart = dateToRegisterStart,
-        couponSettingsPage.dateToRegisterEnd = dateToRegisterEnd,
-        couponSettingsPage.coupons = coupons,
-        couponSettingsPage.congratulationTitle = congratulationTitle,
+        couponSettingsPage.pageTitle            = pageTitle,
+        couponSettingsPage.pageSubtitle         = pageSubtitle,
+        couponSettingsPage.dateToRegisterStart  = dateToRegisterStart,
+        couponSettingsPage.dateToRegisterEnd    = dateToRegisterEnd,
+        couponSettingsPage.coupons              = coupons,
+        couponSettingsPage.congratulationTitle  = congratulationTitle,
         couponSettingsPage.congratulationSubtitle = congratulationSubtitle,
-        couponSettingsPage.conditions = conditions,
-        couponSettingsPage.couponValidityStart = couponValidityStart,
-        couponSettingsPage.couponValidityEnd = couponValidityEnd,
+        couponSettingsPage.conditions           = conditions,
+        couponSettingsPage.couponValidityStart  = couponValidityStart,
+        couponSettingsPage.couponValidityEnd    = couponValidityEnd,
 
         await couponSettingsPage.save()
         await db.disconnect()

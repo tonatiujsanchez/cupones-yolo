@@ -25,8 +25,8 @@ export const DatePickerBox:FC<Props> = ({ label, fieldName, value, onChange, err
                 { isRequired && <span className="required-asterisk">*</span> }
             </label>
             <DatePicker
-                value={value}
-                onChange={ onChange }
+                value={ value }
+                onChange={ ( value )=> onChange(value + 'T00:00:00Z') }
             />
             {
                 error &&

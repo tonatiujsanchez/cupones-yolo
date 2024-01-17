@@ -19,7 +19,6 @@ const CouponSettingsPageSchema = new Schema<ICouponSettingsPage>({
     },
     pageSubtitle: {
         type: String,
-        required: true,
     },
     dateToRegisterStart: {
         type: Date,

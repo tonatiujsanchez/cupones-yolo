@@ -1,9 +1,11 @@
 import { useRef, useEffect, FC } from 'react'
 import { DateSelect } from "react-ymd-date-select/dist/cjs/presets/vanilla"
 
+import { addDays } from 'date-fns'
 import { es } from 'date-fns/locale'
 
 import styles from './DatePicker.module.scss'
+
 
 interface Props {
     value   : Date
@@ -24,12 +26,13 @@ export const DatePicker:FC<Props> = ({ value, onChange }) => {
         firstOptionselectMonth.innerText = 'Mes'
         firstOptionselectDay.innerText   = 'Día'
     }, [])
-    
+
+    const formattedDate = addDays( new Date(value), 1 ).toString()
 
     return (
         <div ref={ dateSelectRef } className={ styles['date-picker__container'] }>
             <DateSelect 
-                value={ value ? value.toString() : "" } 
+                value={ formattedDate ? formattedDate : '' } 
                 onChange={ onChange }
                 monthFormat="MMMM"
                 dayFormat="dd"
