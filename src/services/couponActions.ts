@@ -45,3 +45,9 @@ export const updateCouponSettingsPage = async ( couponSettingsPage: ICouponSetti
     const { data } = await yolostyleApi.put<ICouponSettingsPage>('/admin/coupon-settings-page', couponSettingsPage)
     return data
 }
+
+export const getCouponSettingsPage = async () => {
+
+    const { data } = await yolostyleApi.get<ICouponSettingsPage>('/public/coupon-settings-page')
+    return data
+}

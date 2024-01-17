@@ -39,10 +39,12 @@ export const WYSIWYGEditorLite:FC<Props> = ({ label, fieldName, placeholder, onC
     })
 
     useEffect(()=>{
-        if(value){
-            if (quill) {
-                quill.clipboard.dangerouslyPasteHTML(value);
+        if (quill) {
+            quill.disable()
+            if(value){
+                quill.clipboard.dangerouslyPasteHTML(value)
             }
+            quill.enable()
         }
     },[quill])
 
