@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { toastError, toastSuccess } from '@/libs'
 import { couponActions } from '@/services'
+import { COUPONS_SETTINGS_PAGE_QUERY_KEY } from '@/constants'
 
 
 
@@ -13,7 +14,7 @@ export const useUpdateCouponSettingsPage = () => {
         mutationFn: couponActions.updateCouponSettingsPage,
         onSuccess: ( couponSettingsPage )=> {
             queryClient.setQueryData(
-                ['couponSettingsPage'],
+                [ COUPONS_SETTINGS_PAGE_QUERY_KEY ],
                 ()=> couponSettingsPage
             )
             toastSuccess('Configuraciones guardadas correctamente')
