@@ -71,7 +71,7 @@ export const Navbar = () => {
                         </NextLink>
                         {
                             !routesQuery.isLoading && routesQuery.data 
-                            ? (
+                            && (
                                 routesQuery.data.map( route => (
                                 <NextLink 
                                     key={ route.slug }
@@ -81,8 +81,6 @@ export const Navbar = () => {
                                     { route.title }
                                 </NextLink>
                                 ))
-                            ): (
-                                <p>cargando...</p>
                             )
                         }
                     </nav>
