@@ -218,7 +218,11 @@ export const CouponSettingsSection = () => {
                         </div>
                         <div className={ styles['button-container'] }>
                             <ButtonPrimary type="submit">
-                                Guardar
+                                {
+                                    updateCouponSettingsPage.isPending 
+                                    ? ( <div className="custom-loader-white"></div> )
+                                    : ( 'Guardar' )
+                                }
                             </ButtonPrimary>
                         </div>
                     </form>

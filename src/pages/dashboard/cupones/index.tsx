@@ -29,17 +29,34 @@ export const DASHBOARD_COUPONS_PAGE_TABS:ITab[] = [
 
 const CuponesAdminPage = () => {
 
-    const [tabActive, setTabActive] = useState<ITab>(DASHBOARD_COUPONS_PAGE_TABS[2])
-    
+    const [tabActive, setTabActive] = useState<ITab>()
     const router = useRouter()
 
     useEffect(()=>{
-        router.push(`?tab=${ tabActive.value }`)
-    },[ tabActive ])
+        const { tab } = router.query
+
+        if( tab ) {
+            const existTab = DASHBOARD_COUPONS_PAGE_TABS.find( tabOption =>  tab === tabOption.value  )
+            if( existTab ){
+                setTabActive( existTab )
+            } else {
+                setTabActive( DASHBOARD_COUPONS_PAGE_TABS[0] )
+            }
+        }else {
+            setTabActive( DASHBOARD_COUPONS_PAGE_TABS[0] )
+        }
+    },[router])
 
     const handleSetTabActive = ( currentTab: ITab ) => {
-        setTabActive( currentTab )
+        router.push(`?tab=${ currentTab?.value }`)
     }
+
+    if( !tabActive ){
+        return (
+            <>Cargando---</>
+        )
+    }
+
 
     return (
         <DashboardLayout headding="Cupones">

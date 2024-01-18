@@ -10,7 +10,7 @@ import { IClient } from '@/interfaces'
 
 export const useRegisterClient = () => {
 
-    const [ clientRegistered, setClientRegistered ] = useState<IClient>({
+    const [ clientRegistered, setClientRegistered ] = useState<IClient>(/* {
         name: 'Tonatiuj Sánchez',
         phone: 7571250112,
         email: null,
@@ -20,7 +20,7 @@ export const useRegisterClient = () => {
         coupons: [],
         couponsSent: false,
         status: true
-    })
+    } */)
 
     const clientMutation = useMutation({
         mutationFn: couponActions.createCoupons,

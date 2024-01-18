@@ -24,6 +24,7 @@ export const RegisterSection = () => {
         month: month.value, 
         year : year.value 
     })
+    
 
     const handleSetSearchTerm = ( searchTerm: string ) => {
         setSearchTerm( searchTerm )
