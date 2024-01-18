@@ -8,6 +8,7 @@ type Data =
     | IRoute[]
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+    
     switch (req.method) {
         
         case 'GET':
@@ -18,11 +19,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     }
 }
 
-const getRoutes = async(res: NextApiResponse<Data>, res1: NextApiResponse<Data>) => {
+const getRoutes = async(req: NextApiResponse<Data>, res: NextApiResponse<Data>) => {
     
     try {
         await db.connect()
-        const routes = await Route.find({ status: true, active: true })
+        const routes = await Route.find({ status: true, active: true }).select('title slug -_id')
         await db.disconnect()
         
         return res.status(200).json( routes )

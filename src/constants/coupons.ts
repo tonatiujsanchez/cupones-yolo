@@ -2,7 +2,7 @@ import { ICouponsSent, IStatusCouponExchange } from "@/interfaces"
 
 export const REGISTERS_QUERY_KEY = 'registers'
 export const COUPONS_QUERY_KEY = 'coupons'
-export const COUPONS_SETTINGS_PAGE_QUERY_KEY = 'coupons-settings-page'
+export const COUPONS_SETTINGS_PAGE_QUERY_KEY = 'coupons_settings_page'
 
 export const CLIENTS_PAGE_SIZE = 6
 export const COUPONS_PAGE_SIZE = 12

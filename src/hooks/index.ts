@@ -5,3 +5,5 @@ export * from './coupons/useUpdateClient'
 export * from './coupons/useGetCoupons'
 export * from './coupons/useUpdateCouponSettingsPage'
 export * from './coupons/useGetCouponSettingsPage'
+
+export * from './routes/useGetPublicRoutes'

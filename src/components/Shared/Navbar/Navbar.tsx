@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import Image from 'next/image'
+import { useGetPublicRoutes } from '@/hooks'
 import { Overlay } from '@/components'
 import { FacebookIcon, InstagramIcon, MunuIcon, WhatsAppIcon } from '@/components/Icons'
 
@@ -16,6 +17,8 @@ export const Navbar = () => {
 
     const router = useRouter()
     const { asPath } = router
+
+    const { routesQuery } = useGetPublicRoutes()
 
     const scrollEvent = () => {
         const navbarContainer = headerRef.current
@@ -33,7 +36,6 @@ export const Navbar = () => {
         }
     },[])
     
-
     return (
         <header 
             ref={ headerRef } 
@@ -67,12 +69,22 @@ export const Navbar = () => {
                         >
                             Tienda
                         </NextLink>
-                        <NextLink 
-                            href={'/cupones'} 
-                            className={`${styles['nav-link']} ${asPath === '/cupones' ? styles.active : ''}`}
-                        >
-                            Cupones
-                        </NextLink>
+                        {
+                            !routesQuery.isLoading && routesQuery.data 
+                            ? (
+                                routesQuery.data.map( route => (
+                                <NextLink 
+                                    key={ route.slug }
+                                    href={`/${ route.slug }`} 
+                                    className={`${styles['nav-link']} ${asPath === `/${ route.slug }` ? styles.active : ''}`}
+                                >
+                                    { route.title }
+                                </NextLink>
+                                ))
+                            ): (
+                                <p>cargando...</p>
+                            )
+                        }
                     </nav>
                     <div className={ styles.social }>
                         <a
