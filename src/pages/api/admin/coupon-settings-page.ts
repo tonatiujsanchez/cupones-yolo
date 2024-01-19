@@ -11,6 +11,10 @@ type Data =
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
  
     switch (req.method) {
+
+        case 'GET':
+            return getCouponSettingsPage( req, res )
+
         case 'PUT':
             return updateCouponSettingsPage( req, res )
     
@@ -18,6 +22,39 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
             return res.status(400).json({ msg: 'Bad Request' })
     }
 }
+
+const getCouponSettingsPage = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+
+    try {
+        await db.connect()
+        const [couponSettingsPage, route] = await Promise.all([
+            CouponSettingsPage.findOne().sort({ createdAt: -1 }),
+            Route.findOne({ slug: COUPONS_PAGE_SLUG }).select('-_id -status -__v')
+        ])
+
+        await db.disconnect()
+    
+        if( !couponSettingsPage ){
+            return res.status(400).json({ msg: 'No hay configuraciones establecidas' })
+        }
+
+        if( !route ){
+            return res.status(400).json({ msg: 'Ruta no encontrada' })
+        }
+
+        return res.status(200).json({
+            ...JSON.parse( JSON.stringify(couponSettingsPage) ) ,
+            route
+        })
+
+    } catch (error) {
+        await db.disconnect()
+        console.log( error )
+        return res.status(500).json({ msg: 'Algo salio mal, hable con el administrador' }) 
+    }
+
+}
+
 
 const updateCouponSettingsPage = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
 

@@ -46,7 +46,7 @@ export const CouponSettingsSection = () => {
             {
                 couponSettingsPageQuery.error && (
                     <ErrorMessage
-                        message="Hubo un error al cargar los registros"
+                        message="Hubo un error al cargar los ajustes"
                     />
                 )
             }
