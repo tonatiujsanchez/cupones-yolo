@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { ButtonPrimary, CouponCards, DatePickerBox, ErrorMessage, InputText, WYSIWYGEditorLite } from '@/components'
+import { ButtonPrimary, CouponCards, DatePickerBox, ErrorMessage, InputText, Toggle, WYSIWYGEditorLite } from '@/components'
 
 import { useGetCouponSettingsPage, useUpdateCouponSettingsPage } from '@/hooks'
 import { ICouponSettingsPage } from '@/interfaces'
@@ -17,6 +17,7 @@ export const CouponSettingsSection = () => {
             congratulationTitle: '',
             congratulationSubtitle: '',
             conditions: '',
+            pageActive: false
         }
     })
     const { couponSettingsPageQuery } = useGetCouponSettingsPage()
@@ -32,6 +33,11 @@ export const CouponSettingsSection = () => {
 
     const onCouponPageSubmit = (data:ICouponSettingsPage) => {
         updateCouponSettingsPage.mutate( data )
+
+        if( couponSettingsPageQuery.data?.pageActive !== data.pageActive ){
+            // Actualizar rutas en la DB
+            console.log('Se cambio')
+        }
     }
 
     return (
@@ -56,7 +62,19 @@ export const CouponSettingsSection = () => {
                         className={ styles['coupon-settings-section__form'] } 
                         onSubmit={ handleSubmit( onCouponPageSubmit ) }
                     >
-                        <h6 className={ styles['coupon-settings-section__subtitle'] }>Página principal</h6>
+                        <div>
+                            <h6 className={ styles['coupon-settings-section__subtitle'] }>Página principal</h6>
+                            <div>
+                                <label>hola</label>
+                                <Controller
+                                    control={ control }
+                                    name="pageActive"
+                                    render={({ field })=>(
+                                        <Toggle value={ field.value } onChange={ field.onChange }  />
+                                    )}
+                                />
+                            </div>
+                        </div>
                         <div className={ styles['coupon-settings-section__content'] }>
                             <InputText
                                 type="text"

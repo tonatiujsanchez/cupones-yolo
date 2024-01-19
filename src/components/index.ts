@@ -46,5 +46,6 @@ export * from './FormComponents/DatePickerBox'
 export * from './FormComponents/WYSIWYGEditorLite'
 export * from './FormComponents/CouponCards'
 export * from './FormComponents/Dropdown'
+export * from './FormComponents/Toggle'
 
 

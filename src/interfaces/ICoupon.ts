@@ -49,6 +49,8 @@ export interface ICouponSettingsPage {
     couponValidityStart   : Date
     couponValidityEnd     : Date
 
+    pageActive            : boolean
+
     createdAt? : string
     updatedAt? : string
 }
