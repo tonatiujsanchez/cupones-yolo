@@ -1,3 +1,4 @@
+import { IRoute } from "./IRoute"
 import { IClient } from "./IClient"
 
 export interface ICoupon {
@@ -49,7 +50,7 @@ export interface ICouponSettingsPage {
     couponValidityStart   : Date
     couponValidityEnd     : Date
 
-    pageActive            : boolean
+    route                 : IRoute
 
     createdAt? : string
     updatedAt? : string

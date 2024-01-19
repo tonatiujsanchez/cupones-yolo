@@ -23,7 +23,7 @@ const getRoutes = async(req: NextApiResponse<Data>, res: NextApiResponse<Data>) 
     
     try {
         await db.connect()
-        const routes = await Route.find({ status: true, active: true }).select('title slug -_id')
+        const routes = await Route.find({ status: true, active: true }).select('title slug active -_id')
         await db.disconnect()
         
         return res.status(200).json( routes )

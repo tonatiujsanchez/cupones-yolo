@@ -1,6 +1,6 @@
-import { PUBLIC_ROUTES_QUERY_KEY } from "@/constants/routes"
-import { routesActions } from "@/services"
 import { useQuery } from "@tanstack/react-query"
+import { routesActions } from "@/services"
+import { PUBLIC_ROUTES_QUERY_KEY } from "@/constants"
 
 export const useGetPublicRoutes = () => {
     

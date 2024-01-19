@@ -17,7 +17,6 @@ export const CouponSettingsSection = () => {
             congratulationTitle: '',
             congratulationSubtitle: '',
             conditions: '',
-            pageActive: false
         }
     })
     const { couponSettingsPageQuery } = useGetCouponSettingsPage()
@@ -33,11 +32,6 @@ export const CouponSettingsSection = () => {
 
     const onCouponPageSubmit = (data:ICouponSettingsPage) => {
         updateCouponSettingsPage.mutate( data )
-
-        if( couponSettingsPageQuery.data?.pageActive !== data.pageActive ){
-            // Actualizar rutas en la DB
-            console.log('Se cambio')
-        }
     }
 
     return (
@@ -68,9 +62,9 @@ export const CouponSettingsSection = () => {
                                 <label>hola</label>
                                 <Controller
                                     control={ control }
-                                    name="pageActive"
+                                    name="route"
                                     render={({ field })=>(
-                                        <Toggle value={ field.value } onChange={ field.onChange }  />
+                                        <Toggle value={ field.value?.active } onChange={ (value)=> field.onChange({ ...field.value, active: value }) }  />
                                     )}
                                 />
                             </div>

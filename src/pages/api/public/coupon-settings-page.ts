@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '@/database'
-import { CouponSettingsPage } from '@/models'
-
+import { CouponSettingsPage, Route } from '@/models'
+import { COUPONS_PAGE_SLUG } from '@/constants'
 import { ICouponSettingsPage } from '@/interfaces'
 
 type Data = 
@@ -24,14 +24,31 @@ const getCouponSettingsPage = async(req: NextApiRequest, res: NextApiResponse<Da
 
     try {
         await db.connect()
-        const couponSettingsPage = await CouponSettingsPage.findOne().sort({ createdAt: -1 })
+        const [couponSettingsPage, route] = await Promise.all([
+            CouponSettingsPage.findOne().sort({ createdAt: -1 }),
+            Route.findOne({ slug: COUPONS_PAGE_SLUG }).select('-_id -status -__v')
+        ])
+
         await db.disconnect()
     
         if( !couponSettingsPage ){
-            return res.status(400).json({ msg: 'No hay cupones activos' })
+            return res.status(400).json({ msg: 'No hay configuraciones establecidas' })
         }
 
-        return res.status(200).json( couponSettingsPage )
+        if( !route ){
+            return res.status(400).json({ msg: 'Ruta no encontrada' })
+        }
+
+
+        if( !route.active ){
+        // Si la ruta no esta active===false, solo es un usuario ADMIN tendrá acceso a esta DATA 
+        // return res.status(401).json({ msg: 'Not authorized' })
+        }
+
+        return res.status(200).json({
+            ...JSON.parse( JSON.stringify(couponSettingsPage) ) ,
+            route
+        })
 
     } catch (error) {
         await db.disconnect()
