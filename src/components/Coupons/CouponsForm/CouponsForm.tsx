@@ -1,4 +1,5 @@
-import { useForm, Controller } from "react-hook-form"
+import { FC } from 'react'
+import { useForm, Controller } from 'react-hook-form'
 
 import { useRegisterClient } from '@/hooks'
 import { ButtonIconsAnimated, Checkbox, DatePicker, RegisterCompleted } from '@/components'
@@ -9,8 +10,13 @@ import { isEmail } from '@/utils'
 import { IClientFormData } from '@/interfaces'
 import styles from './CouponsForm.module.scss'
 
-
-export const CouponsForm = () => {
+interface Props {
+    pageTitle          : string
+    pageSubtitle?      : string
+    dateToRegisterStart: Date
+    dateToRegisterEnd  : Date
+}
+export const CouponsForm:FC<Props> = ({ pageTitle, pageSubtitle, dateToRegisterStart, dateToRegisterEnd }) => {
 
     const { clientMutation, clientRegistered, onCleanClientRegistered } = useRegisterClient()
 
@@ -24,6 +30,7 @@ export const CouponsForm = () => {
     })
 
     const onCouponsSubmit = ( data:IClientFormData ) => {
+        //TODO: Verificar la fecha permitida de registro
         clientMutation.mutate( data )
     }
 
@@ -39,7 +46,7 @@ export const CouponsForm = () => {
     return (
         <section className={ styles['coupons-container'] }>
             <div className={`container ${ styles['coupons-content'] }`}>
-                <h1 className={styles['coupons-title']}>Cupones de Noviembre</h1>
+                <h1 className={styles['coupons-title']}>{ pageTitle }</h1>
                 <form
                     onSubmit={ handleSubmit( onCouponsSubmit ) } 
                     className={styles['coupons-form']}

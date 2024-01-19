@@ -1,16 +1,50 @@
-
+import { GetServerSideProps, NextPage } from 'next'
 import { CouponsForm, SiteLayout } from "@/components"
+import { coupons } from "@/database"
+
 import styles from './CouponsPage.module.scss'
 
-const CouponsPage = () => {
+interface Props {
+    pageTitle          : string
+    pageSubtitle?      : string
+    dateToRegisterStart: Date
+    dateToRegisterEnd  : Date
+}
+const CouponsPage:NextPage<Props> = ({ pageTitle, pageSubtitle, dateToRegisterStart, dateToRegisterEnd }) => {
 
     return (
         <SiteLayout>
             <main className={ styles['main-coupons'] }>
-                <CouponsForm />
+                <CouponsForm
+                    pageTitle={ pageTitle }
+                    pageSubtitle={ pageSubtitle }
+                    dateToRegisterStart={ dateToRegisterStart }
+                    dateToRegisterEnd={ dateToRegisterEnd }
+                />
             </main>
         </SiteLayout>
     )
+}
+
+
+export const getServerSideProps: GetServerSideProps = async () => {
+
+    const couponSettingsPage = await coupons.useGetCouponSettingsPage()
+    
+    if( !couponSettingsPage ){
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
+
+    return {
+        props: {
+            ...couponSettingsPage
+        }
+    }
 }
 
 export default CouponsPage
