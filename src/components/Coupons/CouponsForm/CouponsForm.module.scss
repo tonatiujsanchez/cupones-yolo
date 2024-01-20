@@ -17,12 +17,23 @@
     padding-inline: 2rem;
 }
 
+.coupons-title__container {
+    margin-block-end: 3rem;
+}
+
 .coupons-title {
     color: $white;
     font-size: 4rem;
     text-align: center;
     font-weight: 900;
-    margin-block-end: 3rem;
+}
+
+.coupons-subtitle {
+    color: $white;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 500;
+    text-shadow: 0 0 0.3rem $black;
 }
 
 .coupons-form {

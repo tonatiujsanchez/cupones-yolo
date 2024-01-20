@@ -2,15 +2,17 @@ import { FC } from "react"
 import styles from './Toggle.module.scss'
 
 interface Props {
-    value: boolean,
-    onChange: ( value: boolean )=>void
+    value    : boolean,
+    onChange : ( value: boolean )=>void
+    fieldName: string
 }
-export const Toggle:FC<Props> = ({ value=false, onChange }) => {
+export const Toggle:FC<Props> = ({ value=true, onChange, fieldName }) => {
     return (
         <label className={ styles['switch'] }>
             <input 
                 type="checkbox" 
-                checked={ value } 
+                checked={ value }
+                id={ fieldName }
                 onChange={ ()=> onChange( !value ) }
             />
             <div className={ styles['slider'] }>

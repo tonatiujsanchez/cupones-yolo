@@ -56,15 +56,19 @@ export const CouponSettingsSection = () => {
                         className={ styles['coupon-settings-section__form'] } 
                         onSubmit={ handleSubmit( onCouponPageSubmit ) }
                     >
-                        <div>
+                        <div className={styles['coupon-settings-section__subtitle-container']}>
                             <h6 className={ styles['coupon-settings-section__subtitle'] }>Página principal</h6>
-                            <div>
-                                <label>hola</label>
+                            <div className={ styles['coupon-settings-section__toggle'] }>
+                                <label htmlFor="route">Mostrar página</label>
                                 <Controller
                                     control={ control }
                                     name="route"
                                     render={({ field })=>(
-                                        <Toggle value={ field.value?.active } onChange={ (value)=> field.onChange({ ...field.value, active: value }) }  />
+                                        <Toggle
+                                            fieldName="route" 
+                                            value={ field.value?.active } 
+                                            onChange={ (value)=> field.onChange({ ...field.value, active: value }) }
+                                        />
                                     )}
                                 />
                             </div>

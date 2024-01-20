@@ -30,11 +30,15 @@ export const RegisterCompleted:FC<Props> = ({ clientRegistered, onCleanClientReg
             <div className={ styles['coupons-container'] }>
                 {
                     coupons.map( (coupon) => (
-                        <CouponCard
+                        <div
                             key={ (coupon as ICoupon)._id }
-                            value={ ( coupon as ICoupon ).value }
-                            title={ (coupon as ICoupon).title }
-                        />
+                            className={ styles['coupon'] }
+                        >
+                            <CouponCard
+                                value={ ( coupon as ICoupon ).value }
+                                title={ (coupon as ICoupon).title }
+                            />
+                        </div>
                     ))
                 }
             </div>

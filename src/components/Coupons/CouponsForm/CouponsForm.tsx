@@ -46,7 +46,14 @@ export const CouponsForm:FC<Props> = ({ pageTitle, pageSubtitle, dateToRegisterS
     return (
         <section className={ styles['coupons-container'] }>
             <div className={`container ${ styles['coupons-content'] }`}>
-                <h1 className={styles['coupons-title']}>{ pageTitle }</h1>
+                <div className={ styles['coupons-title__container'] }>
+                    <h1 className={styles['coupons-title']}>{ pageTitle }</h1>
+                    {
+                        pageSubtitle && (
+                            <p className={ styles['coupons-subtitle'] }>{ pageSubtitle }</p>
+                        )
+                    }
+                </div>
                 <form
                     onSubmit={ handleSubmit( onCouponsSubmit ) } 
                     className={styles['coupons-form']}

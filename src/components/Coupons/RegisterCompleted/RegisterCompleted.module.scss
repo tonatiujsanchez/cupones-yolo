@@ -54,6 +54,18 @@
     gap: 3.2rem;
     padding-block: 4rem;
     padding-inline: 1rem;
+    max-width: 102.4rem;
+    margin-inline: auto;
+    .coupon {
+        width: 100%;
+        article {
+            min-width: 100%;
+            div {
+                min-height: 11rem;
+                margin-inline: auto;
+            }
+        }
+    }
 }
 
 .phone-client__container {
@@ -96,3 +108,11 @@
         margin-inline: auto;
     }
 }
+
+@media (min-width: 640px) {
+    .coupons-container {
+        .coupon {
+            width: 36rem;
+        }
+    }
+} 
