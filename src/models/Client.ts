@@ -2,6 +2,17 @@ import mongoose, { Schema, model, Model } from 'mongoose'
 import { IClient } from '../interfaces'
 
 const ClientSchema = new Schema({
+    congratulationTitle: {
+        type: String,
+        required: true
+    },
+    congratulationSubtitle: {
+        type: String,
+    },
+    conditions: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true

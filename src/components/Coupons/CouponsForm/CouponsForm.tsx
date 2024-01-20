@@ -11,10 +11,10 @@ import { IClientFormData } from '@/interfaces'
 import styles from './CouponsForm.module.scss'
 
 interface Props {
-    pageTitle          : string
-    pageSubtitle?      : string
-    dateToRegisterStart: Date
-    dateToRegisterEnd  : Date
+    pageTitle             : string
+    pageSubtitle?         : string
+    dateToRegisterStart   : Date
+    dateToRegisterEnd     : Date
 }
 export const CouponsForm:FC<Props> = ({ pageTitle, pageSubtitle, dateToRegisterStart, dateToRegisterEnd }) => {
 

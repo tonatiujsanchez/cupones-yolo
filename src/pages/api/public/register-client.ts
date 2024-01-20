@@ -102,6 +102,9 @@ const registerClient = async( req: NextApiRequest, res: NextApiResponse<Data> ) 
 
         // Crear nuevo cliente
         const newClient = new Client({
+            congratulationTitle: couponSettingsPage.congratulationTitle,
+            congratulationSubtitle : couponSettingsPage.congratulationSubtitle,
+            conditions: couponSettingsPage.conditions,
             name: name.trim(),
             phone,
             birthdate,
