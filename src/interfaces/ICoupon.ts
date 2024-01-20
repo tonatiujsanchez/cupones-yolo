@@ -4,7 +4,9 @@ import { IClient } from "./IClient"
 export interface ICoupon {
     _id?       : string
  
+    title      : string
     value      : number
+    code       : string
     issuedAt   : string | Date
     expiredAt  : string | Date
     exchangedAt: Date   | null
