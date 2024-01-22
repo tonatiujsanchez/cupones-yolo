@@ -74,7 +74,7 @@ const registerClient = async( req: NextApiRequest, res: NextApiResponse<Data> ) 
         }
 
         if( today > dateEnd ){
-            return res.status(400).json({ msg: 'La fecha limite para registrarse a terminado' })
+            return res.status(400).json({ msg: `La fecha limite para registrarse fue el día ${ dateFormatLong( couponSettingsPage.dateToRegisterEnd ) }`})
         }
 
         // Validación que el mes actual coincida con el mes de cumpleaños del usuario

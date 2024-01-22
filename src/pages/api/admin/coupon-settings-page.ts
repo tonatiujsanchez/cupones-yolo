@@ -85,7 +85,8 @@ const updateCouponSettingsPage = async(req: NextApiRequest, res: NextApiResponse
             conditions          = couponSettingsPage.conditions,
             couponValidityStart = couponSettingsPage.couponValidityStart,
             couponValidityEnd   = couponSettingsPage.couponValidityEnd,
-            route               = routeDB
+            route               = routeDB,
+            backgroundImage     = couponSettingsPage.backgroundImage
         } = req.body
         
         coupons.forEach(( coupon:ICouponLite ) => {
@@ -102,6 +103,7 @@ const updateCouponSettingsPage = async(req: NextApiRequest, res: NextApiResponse
         couponSettingsPage.conditions           = conditions
         couponSettingsPage.couponValidityStart  = couponValidityStart
         couponSettingsPage.couponValidityEnd    = couponValidityEnd
+        couponSettingsPage.backgroundImage      = backgroundImage
 
         routeDB.active = route.active
 

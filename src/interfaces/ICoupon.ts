@@ -1,5 +1,5 @@
-import { IRoute } from "./IRoute"
-import { IClient } from "./IClient"
+import { IRoute } from './IRoute'
+import { IClient } from './IClient'
 
 export interface ICoupon {
     _id?       : string
@@ -41,6 +41,7 @@ export interface ICouponLite {
 }
 
 export interface ICouponSettingsPage {
+    backgroundImage       : string
     pageTitle             : string
     pageSubtitle          : string
     dateToRegisterStart   : Date

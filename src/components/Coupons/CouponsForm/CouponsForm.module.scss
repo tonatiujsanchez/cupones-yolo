@@ -6,11 +6,6 @@
 }
 
 .coupons-content {
-    background: rgb(226,207,190);
-    background: radial-gradient(circle, rgba(226,207,190,0.1) 0%, rgba(255,121,84,0.3) 36%, rgba(218,82,3,0.5) 69%), url('https://scontent.fcvj2-2.fna.fbcdn.net/v/t39.30808-6/392939944_722674399880870_7695017363965143280_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=3635dc&_nc_ohc=nHfthtDNPLQAX87E03I&_nc_ht=scontent.fcvj2-2.fna&oh=00_AfCk-B0t_yJZg0nVCUYJTcTPUbSwALKVZJlAR-T8KaP8cQ&oe=65ADC9A0');
-    background-position: top 35% center;
-    background-repeat: no-repeat;
-    background-size: cover;
     border-radius: 1rem;
     padding-block-start: 3rem;
     padding-block-end: 7rem;
@@ -34,6 +29,10 @@
     text-align: center;
     font-weight: 500;
     text-shadow: 0 0 0.3rem $black;
+    max-width: 75rem;
+    text-align: center;
+    text-wrap: pretty;
+    margin-inline: auto;
 }
 
 .coupons-form {

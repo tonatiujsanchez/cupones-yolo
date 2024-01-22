@@ -13,6 +13,10 @@ const couponLiteSchema = new Schema<ICouponLite>({
 })
 
 const CouponSettingsPageSchema = new Schema<ICouponSettingsPage>({
+    backgroundImage: {
+        type: String,
+        required: true,
+    },
     pageTitle: {
         type: String,
         required: true,

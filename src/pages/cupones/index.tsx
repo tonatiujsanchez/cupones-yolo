@@ -5,12 +5,13 @@ import { coupons } from "@/database"
 import styles from './CouponsPage.module.scss'
 
 interface Props {
-    pageTitle             : string
-    pageSubtitle?         : string
-    dateToRegisterStart   : Date
-    dateToRegisterEnd     : Date
+    pageTitle          : string
+    pageSubtitle?      : string
+    dateToRegisterStart: Date
+    dateToRegisterEnd  : Date
+    backgroundImage    : string
 }
-const CouponsPage:NextPage<Props> = ({ pageTitle, pageSubtitle, dateToRegisterStart, dateToRegisterEnd }) => {
+const CouponsPage:NextPage<Props> = ({ pageTitle, pageSubtitle, dateToRegisterStart, dateToRegisterEnd, backgroundImage }) => {
 
     return (
         <SiteLayout>
@@ -20,6 +21,7 @@ const CouponsPage:NextPage<Props> = ({ pageTitle, pageSubtitle, dateToRegisterSt
                     pageSubtitle={ pageSubtitle }
                     dateToRegisterStart={ dateToRegisterStart }
                     dateToRegisterEnd={ dateToRegisterEnd }
+                    backgroundImage={ backgroundImage }
                 />
             </main>
         </SiteLayout>
