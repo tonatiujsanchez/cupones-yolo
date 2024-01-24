@@ -8,8 +8,32 @@
     justify-content: center;
     align-items: center;
     z-index: 90;
+    animation: fadeIn 0.2s ease-out;
+
 }
 
 .modal-content {
     z-index: 90;
+    animation: slideInFromTop 0.2s ease-out;
 }
+
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-15%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+

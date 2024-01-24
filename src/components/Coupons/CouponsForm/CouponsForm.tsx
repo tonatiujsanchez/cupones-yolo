@@ -61,7 +61,7 @@ export const CouponsForm:FC<Props> = ({ pageTitle, pageSubtitle, dateToRegisterS
 
     useEffect(()=> {
         if( clientMutation.error ) {
-            setErrorMessage( clientMutation.error.response?.data.msg || 'Hubo un error a realizar el registro' )
+            setErrorMessage( clientMutation.error.response?.data.msg || 'Hubo un error al realizar el registro' )
         }
     },[clientMutation.error])
 
