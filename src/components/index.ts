@@ -13,6 +13,7 @@ export * from './Shared/ModalContainer'
 export * from './Shared/Overlay'
 export * from './Shared/ModalFormHeader'
 export * from './Shared/ModalDelete'
+export * from './Shared/WarningModal'
 
 export * from './Buttons/ButtonPrimary'
 export * from './Buttons/ButtonIconsAnimated'

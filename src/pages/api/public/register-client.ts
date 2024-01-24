@@ -74,7 +74,7 @@ const registerClient = async( req: NextApiRequest, res: NextApiResponse<Data> ) 
         }
 
         if( today > dateEnd ){
-            return res.status(400).json({ msg: `La fecha limite para registrarse fue el día ${ dateFormatLong( couponSettingsPage.dateToRegisterEnd ) }`})
+            return res.status(400).json({ msg: `La fecha límite para registrarse fue el día ${ dateFormatLong( couponSettingsPage.dateToRegisterEnd ) }`})
         }
 
         // Validación que el mes actual coincida con el mes de cumpleaños del usuario
@@ -82,7 +82,7 @@ const registerClient = async( req: NextApiRequest, res: NextApiResponse<Data> ) 
         const birthdateMonth = new Date(birthdate).getMonth()
         
         if( currentMonth !== birthdateMonth ){
-            return res.status(400).json({ msg: `Lo sentimos, pero en este momento solo estamos aceptando registros de usuarios que cumplan años en el mes de enero. Apreciamos tu interés y te invitamos a intentarlo nuevamente en tu mes de cumpleaños. ¡Gracias!`})
+            return res.status(400).json({ msg: `Lo sentimos, pero en este momento solo estamos aceptando registros de personas que cumplan años en el mes de enero. Apreciamos tu interés y te invitamos a intentarlo nuevamente en tu mes de cumpleaños`})
         }
 
         // Buscar si el cliente ya se registro en el año actual

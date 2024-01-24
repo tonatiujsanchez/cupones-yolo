@@ -1,9 +1,9 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { addDays, isAfter, isBefore, isSameDay } from 'date-fns'
 
 import { useRegisterClient } from '@/hooks'
-import { ButtonIconsAnimated, Checkbox, DatePicker, ModalContainer, RegisterCompleted } from '@/components'
+import { ButtonIconsAnimated, Checkbox, DatePicker, ModalContainer, RegisterCompleted, WarningModal } from '@/components'
 import { CouponBorder } from '@/components/shapes'
 import { ArrowRightIcon } from '@/components/Icons'
 
@@ -20,7 +20,7 @@ interface Props {
 }
 export const CouponsForm:FC<Props> = ({ pageTitle, pageSubtitle, dateToRegisterStart, dateToRegisterEnd, backgroundImage }) => {
 
-    const [showAlertModal, setShowAlertModal] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
     const { clientMutation, clientRegistered, onCleanClientRegistered } = useRegisterClient()
 
@@ -41,11 +41,11 @@ export const CouponsForm:FC<Props> = ({ pageTitle, pageSubtitle, dateToRegisterS
         const dateEnd = addDays( new Date(dateToRegisterEnd), 1 )
 
         if( isBefore(today, dateStart) && !isSameDay(today, dateStart) ){
-            return onShowAlertModal(`El registro estará disponible a partir del día ${ dateFormatLong(dateToRegisterStart) }`)
+            return setErrorMessage(`El registro estará disponible a partir del día ${ dateFormatLong(dateToRegisterStart) }`)
         }
     
         if( isAfter(today, dateEnd) && !isSameDay(today, dateStart) ){
-            return onShowAlertModal(`La fecha limite para registrarse fue el día ${ dateFormatLong( dateToRegisterEnd ) }`)
+            return setErrorMessage(`La fecha límite para registrarse fue el día ${ dateFormatLong( dateToRegisterEnd ) }`)
         }
 
         // Validación que el mes actual coincida con el mes de cumpleaños del usuario
@@ -53,20 +53,18 @@ export const CouponsForm:FC<Props> = ({ pageTitle, pageSubtitle, dateToRegisterS
         const birthdateMonth = new Date(data.birthdate).getMonth()
         
         if( currentMonth !== birthdateMonth ){
-            return onShowAlertModal('Mes de cumpleaños no válido')
+            return setErrorMessage('Lo sentimos, pero en este momento solo estamos aceptando registros de personas que cumplan años en el mes de enero. Apreciamos tu interés y te invitamos a intentarlo nuevamente en tu mes de cumpleaños.')
         }
         
         clientMutation.mutate( data )
     }
 
+    useEffect(()=> {
+        if( clientMutation.error ) {
+            setErrorMessage( clientMutation.error.response?.data.msg || 'Hubo un error a realizar el registro' )
+        }
+    },[clientMutation.error])
 
-    const onShowAlertModal = ( msg:string ) => {
-        console.log(msg)
-        setShowAlertModal(true)
-    }
-    const onCloseAlertModal = () => {
-        setShowAlertModal(false)
-    }
 
     if( clientRegistered ){
         return (
@@ -76,7 +74,7 @@ export const CouponsForm:FC<Props> = ({ pageTitle, pageSubtitle, dateToRegisterS
             />
         )
     }
-    // TODO: Añadir el cover para la página
+
     return (
         <>
             <section className={ styles['coupons-container'] }>
@@ -209,11 +207,15 @@ export const CouponsForm:FC<Props> = ({ pageTitle, pageSubtitle, dateToRegisterS
                 </div>
             </section>
             <ModalContainer
-                show={ showAlertModal }
-                onHidden={ onCloseAlertModal }
+                show={ !!errorMessage }
+                onHidden={ ()=> setErrorMessage('') }
 
             >
-                <p>Alerta</p>
+                <WarningModal
+                    title="Lo sentimos"
+                    subtitle={ errorMessage }
+                    onChange={ ()=> setErrorMessage('') }
+                />
             </ModalContainer>
         </>
     )

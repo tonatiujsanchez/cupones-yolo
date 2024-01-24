@@ -10,20 +10,7 @@ import { IClient } from '@/interfaces'
 
 export const useRegisterClient = () => {
 
-    const [ clientRegistered, setClientRegistered ] = useState<IClient>(/* {
-        congratulationTitle: 'Felicidades',
-        congratulationSubtitle: 'Ganaste 2 cupones de descuento',
-        conditions: 'Validos durente el mes de  Febrero del 2024',
-        name: 'Tonatiuj Sánchez',
-        phone: 7571250112,
-        email: null,
-        birthdate : new Date('1938-05-07T00:00:00.000Z'),
-        receivePromotions: true,
-        registeredAt:new Date('2023-11-22T18:05:38.433Z'), 
-        coupons: [],
-        couponsSent: false,
-        status: true
-    } */)
+    const [ clientRegistered, setClientRegistered ] = useState<IClient>()
 
     const clientMutation = useMutation({
         mutationFn: couponActions.createCoupons,
@@ -32,9 +19,9 @@ export const useRegisterClient = () => {
             canvasConfetti()
         },
         onError: ( error:AxiosError<{ msg:string }> )=> {
-            console.log('Hubo un error...')
             const { msg } = error.response!.data
             console.log(msg)
+
         }
     })
 
