@@ -1,7 +1,7 @@
 @import '../../scss/index.scss';
 
 .main-login {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,14 +56,16 @@
 @media (min-width: 640px) {
     .login-container {
         width: 70%;
+        max-width: 50rem;
     }
 
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .login-container {
         grid-template-columns: repeat(2, 1fr);
         width: 95%;
+        max-width: 96rem;
         padding-block: 4rem;
     }
 

@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
-import styles from './ModalContainer.module.scss'
 import { Overlay } from '@/components'
+import styles from './ModalContainer.module.scss'
 
 
 interface Props {

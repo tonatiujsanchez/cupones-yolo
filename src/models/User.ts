@@ -2,7 +2,7 @@ import mongoose, { Model, Schema } from 'mongoose';
 import { IUser } from '../interfaces';
 
 
-export const UserSchema = new Schema({
+export const UserSchema = new Schema<IUser>({
     name    : { 
         type: String,
         required: true 
@@ -16,18 +16,35 @@ export const UserSchema = new Schema({
         required: true,
         unique: true 
     },
+    token   : {
+        type: String
+    },
+    facebook: {
+        type: Boolean,
+        default: false
+    },
+    google  : {
+        type: Boolean,
+        default: false
+    },
+    x : {
+        type: Boolean,
+        default: false
+    },
+    confirmed: {
+        type: Boolean,
+        default: false
+    },
     password: { 
         type: String, 
         required: true 
     },
-    role: {
+    role    : {
         type: String,
-        enum: {
-            values: ['admin', 'editor'],
-            message: '{VALUE} no es un role válido',
-            default: 'admin',
-            required: true
-        }
+        enum: ['admin', 'client'],
+        default: 'client',
+        required: true,
+        message: '{VALUE} no es un role válido',
     },
     photo   : { 
         type: String,
