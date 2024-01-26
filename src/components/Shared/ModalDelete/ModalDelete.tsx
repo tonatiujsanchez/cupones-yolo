@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react'
-import { ButtonDelete, ButtonLight } from '@/components'
+import { ButtonDelete, ButtonOutlineLight } from '@/components'
 import { TrashIcon } from '@/components/Icons'
 
 import styles from './ModalDelete.module.scss'
@@ -25,11 +25,11 @@ export const ModalDelete: FC<Props> = ({ title, subtitle, onChange }) => {
                 </div>
             </div>
             <div className={ styles['modal__actions'] }>
-                <ButtonLight
+                <ButtonOutlineLight
                     onClick={ ()=> onChange(false) }
                 >
                     Cancelar
-                </ButtonLight>
+                </ButtonOutlineLight>
                 <ButtonDelete
                     title="Remover"
                     onClick={ ()=> onChange(true) }

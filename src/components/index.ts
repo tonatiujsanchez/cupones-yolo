@@ -19,6 +19,7 @@ export * from './Buttons/ButtonPrimary'
 export * from './Buttons/ButtonIconsAnimated'
 export * from './Buttons/ButtonDelete'
 export * from './Buttons/ButtonLight'
+export * from './Buttons/ButtonOutlineLight'
 
 export * from './Home/HeroSection'
 export * from './Home/BrandsSection'

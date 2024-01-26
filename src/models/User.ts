@@ -17,13 +17,14 @@ export const UserSchema = new Schema<IUser>({
         unique: true 
     },
     token   : {
-        type: String
+        type: String,
+        default: null
     },
-    facebook: {
+    google  : {
         type: Boolean,
         default: false
     },
-    google  : {
+    facebook: {
         type: Boolean,
         default: false
     },

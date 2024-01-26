@@ -6,8 +6,8 @@ export interface IUser {
     email    : string
     token?   : string
 
-    facebook : boolean
     google   : boolean
+    facebook : boolean
     x        : boolean
     confirmed: boolean
 

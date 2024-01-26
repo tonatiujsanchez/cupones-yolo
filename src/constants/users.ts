@@ -1,0 +1,1 @@
+export const USERS_ROLE_OPTIONS = [ 'admin', 'client' ]

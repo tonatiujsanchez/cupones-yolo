@@ -24,7 +24,7 @@ const LoginPage = () => {
     const onLoginSubmit = ( data:LoginFormData ) => {
         console.log( data )
     }
-    // TODO: SiteLayout añadido al Login
+    
     return (
         <SiteLayout>
             <main className={ `${ fonts.Raleway.className }  ${ styles['main-login'] }` }>

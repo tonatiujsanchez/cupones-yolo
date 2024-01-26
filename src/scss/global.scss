@@ -79,6 +79,12 @@ body.fixed-body {
     margin: 0 auto;
 }
 
+.divider {
+    display: block;
+    border-block-end: 0.1rem solid $gray-light;
+    opacity: 0.3;
+}
+
 .error-message {
     color: $red-message;
     font-size: 1.3rem;
