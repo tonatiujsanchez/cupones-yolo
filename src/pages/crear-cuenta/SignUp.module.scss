@@ -19,7 +19,7 @@
 .login-form {
     padding-block-start: 2rem;
     padding-block-end: 4rem;
-    padding-inline: 4rem;
+    padding-inline: 2rem;
     width: 100%;
 
     .login-form__title {
@@ -29,12 +29,28 @@
         margin-block-end: 2.5rem;
         text-transform: uppercase;
     }
+
     .login-form__content {
         display: flex;
         flex-direction: column;
 
+        .login-form__forgot-password {
+            display: flex;
+            justify-content: flex-end;
+            margin-block-end: 0.5rem;
+            
+            a {
+                color: $orange;
+                &:hover {
+                    color: $primary;
+                    text-decoration: underline;
+                }
+            }
+        }
+
         .login-form__button-container {
-            margin-block-start: 0.5rem;
+            margin-block-start: 1rem;
+
             button {
                 height: 4rem;
             }
@@ -49,12 +65,14 @@
             align-items: center;
             gap: 0.8rem;
             color: $gray;
+
             &::before {
                 flex: 1;
                 content: "";
                 height: 0.1rem;
                 background-color: $gray-light;
             }
+
             &::after {
                 flex: 1;
                 content: "";
@@ -67,6 +85,7 @@
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+
         button {
             display: flex;
             gap: 0.8rem;
@@ -84,9 +103,11 @@
     .login-form__login-link {
         margin-block-start: 2.5rem;
         text-align: center;
+
         a {
-            font-weight: 600;
+            color: $orange;
             &:hover {
+                color: $primary;
                 text-decoration: underline;
             }
         }
@@ -107,6 +128,7 @@
 
     .login-form {
         padding-block-start: 2.5rem;
+        padding-inline: 4rem;
     }
 
 }

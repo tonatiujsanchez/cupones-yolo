@@ -91,6 +91,9 @@ const SignUpPage = () => {
                                 })}
                                 isRequired
                             />
+                            <div className={ styles['login-form__forgot-password'] }>
+                                <NextLink href="/olvide-password">Olvide mi contraseña</NextLink>
+                            </div>
                             <div className={ styles['login-form__button-container'] }>       
                                 <ButtonPrimary type="submit" >
                                     Crear cuenta
