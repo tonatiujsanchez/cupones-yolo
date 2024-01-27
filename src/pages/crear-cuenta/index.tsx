@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { useForm } from 'react-hook-form'
@@ -18,7 +19,7 @@ interface ISignUpFormData {
 
 const SignUpPage = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<ISignUpFormData>({
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<ISignUpFormData>({
         defaultValues: {
             name           : '',
             email          : '',
@@ -26,6 +27,9 @@ const SignUpPage = () => {
             confirmPassword: '',
         }
     })
+
+    const passwordRef = useRef({})
+    passwordRef.current = watch('password', '')
 
     const onLoginSubmit = ( data:ISignUpFormData ) => {
         console.log( data )
@@ -62,8 +66,8 @@ const SignUpPage = () => {
                                 label="Correo"
                                 fieldName="email"
                                 placeholder="Ingrese su contraseña"
-                                error={ errors.password }
-                                { ...register("password", {
+                                error={ errors.email }
+                                { ...register("email", {
                                     required: 'Ingrese su contraseña'
                                 })}
                                 isRequired
@@ -76,7 +80,8 @@ const SignUpPage = () => {
                                 placeholder="Ingrese su contraseña"
                                 error={ errors.password }
                                 { ...register("password", {
-                                        required: 'Ingrese su contraseña'
+                                        required: 'Ingrese una contraseña',
+                                        minLength: { value: 6, message: 'La contraseña es muy corta, ingrese mínimo 6 caracteres' }
                                 })}
                                 isRequired
                             />
@@ -87,7 +92,8 @@ const SignUpPage = () => {
                                 placeholder="Confirme su contraseña"
                                 error={ errors.confirmPassword }
                                 { ...register("confirmPassword", {
-                                        required: 'Confirme su contraseña'
+                                        required: 'Confirme la contraseña',
+                                        validate: ( value ) => value !== passwordRef.current ? 'Las contraseñas no coinciden' : undefined
                                 })}
                                 isRequired
                             />
