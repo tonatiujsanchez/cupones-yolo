@@ -43,7 +43,7 @@ export const RegisterCompleted:FC<Props> = ({ clientRegistered, onCleanClientReg
                 }
             </div>
             <div className={ styles['phone-client__container'] }>
-                <p className="text-xl text-slate-800">Los cupones se enviarán al número <span className="font-bold underline text-slate-800">{ phone }</span></p>
+                <p>Los cupones se enviarán al número <span>{ phone }</span></p>
             </div>
             <div className={styles['button-container']} >
                 <ButtonPrimary

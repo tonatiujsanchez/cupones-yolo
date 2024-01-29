@@ -114,7 +114,7 @@ const signUp = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
             token: newUser.token
         })
 
-        return res.status(200).json({msg: '¡Gracias por registrarte en Yolostyle! 🌟 Revisa tu correo para confirmar tu cuenta y comienza a disfrutar de la mejor experiencia de compra. 🎉 ¡Bienvenido a Yolostyle! '})        
+        return res.status(200).json({msg: '¡Gracias por registrarte en Yolostyle! 🌟 Revisa tu correo para confirmar tu cuenta y comienza a disfrutar de la mejor experiencia de compra. 🎉 '})        
         
     } catch (error) {
         console.log(error)
@@ -123,5 +123,3 @@ const signUp = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     }
 
 }
-
-// TODO: Endpoint de registro de usuario y envio de email de confirmación de cuenta, implementado

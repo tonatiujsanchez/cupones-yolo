@@ -21,7 +21,7 @@ export const signIn = async({ email, name, token }:signInParams) => {
                 <tr>
                     <td style="padding: 30px; text-align: center;">
                         <img src="https://res.cloudinary.com/ton/image/upload/v1706423391/yolostyle/oy59cb6k6i25aizyobju.png" alt="Yolostyle Logo" style="max-width: 150px;">
-                        <h2 style="color: #0F172A; margin-top: 20px;">¡Bienvenida/Bienvenido a Yolostyle.mx!</h2>
+                        <h2 style="color: #0F172A; margin-top: 20px;">¡Bienvenida/o a Yolostyle.mx!</h2>
                         <p style="color: #333; font-size: 16px; margin-top: 20px; line-height: 1.6;">
                             Hola, ${ name }! Gracias por registrarte en la tienda de Yolostyle. Para comenzar a realizar tus compras,
                             necesitamos confirmar tu cuenta. Por favor, haz clic en el botón de abajo para activarla:

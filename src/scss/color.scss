@@ -22,3 +22,6 @@ $blue-facebook: #5475BC;
 
 $gradient-primary: linear-gradient(to right bottom, #ff7954, #f77244, #ee6c33, #e46720,#e76c07);
 $gradient-primary-bright: linear-gradient(to right, #ff7954 ,#fe3b11);
+
+$gradient-bg-primary: radial-gradient(100% 50% at -5% 35%,hsla(13, 100%, 66%, 0.3) 0%,hsla(54,100%,75%,0) 70%),
+radial-gradient(50% 50% at 95% 35%,hsla(13, 100%, 66%, 0.3) 0%,hsla(313,100%,58%,0) 70%);
