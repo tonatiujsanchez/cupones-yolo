@@ -56,7 +56,8 @@ const SignUpPage = () => {
                                 placeholder="Ingrese su usuario"
                                 error={ errors.name }
                                 { ...register("name", {
-                                    required: 'Ingrese su usuario'
+                                    required: 'Ingrese su usuario',
+                                    minLength: { value: 2, message: 'El nombre es muy corto, debe tener mínimo 2 caracteres' }
                                 })}
                                 isRequired
                             />

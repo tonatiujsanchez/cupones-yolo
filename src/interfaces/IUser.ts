@@ -22,4 +22,14 @@ export interface IUser {
     updatedAt?: string
 }
 
-type IUserRol = 'admin' | 'client'
+export type IUserRol = 'super_admin' | 'admin' | 'client'
+
+
+export interface IUserAuth {
+    uid      : string
+    name     : string
+    username : string
+    email    : string
+    role     : IUserRol
+    photo?   : string
+}

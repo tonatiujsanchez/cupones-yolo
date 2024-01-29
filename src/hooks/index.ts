@@ -7,3 +7,5 @@ export * from './coupons/useUpdateCouponSettingsPage'
 export * from './coupons/useGetCouponSettingsPage'
 
 export * from './routes/useGetPublicRoutes'
+
+export * from './users/useSignUp'

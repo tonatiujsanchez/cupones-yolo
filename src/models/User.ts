@@ -1,20 +1,22 @@
-import mongoose, { Model, Schema } from 'mongoose';
-import { IUser } from '../interfaces';
+import mongoose, { Model, Schema } from 'mongoose'
+import { USERS_ROLE_OPTIONS, USER_ROLES } from '@/constants'
+import { IUser, IUserRol } from '../interfaces'
 
 
 export const UserSchema = new Schema<IUser>({
     name    : { 
         type: String,
-        required: true 
+        required: true
     },
     username: { 
         type: String,
-        required: true 
+        required: true,
+        unique: true
     },
     email   : { 
         type: String,
         required: true,
-        unique: true 
+        unique: true
     },
     token   : {
         type: String,
@@ -38,26 +40,26 @@ export const UserSchema = new Schema<IUser>({
     },
     password: { 
         type: String, 
-        required: true 
+        required: true
     },
     role    : {
         type: String,
-        enum: ['admin', 'client'],
-        default: 'client',
+        enum: USERS_ROLE_OPTIONS,
+        default: USER_ROLES.client as IUserRol,
         required: true,
         message: '{VALUE} no es un role válido',
     },
     photo   : { 
         type: String,
-        default: null
+        default: null,
     },
     active  : { 
         type: Boolean, 
-        default: true 
+        default: true
     },
     status  : {
         type: Boolean,
-        default: true,
+        default: true
     }
 },{
     timestamps: true,
