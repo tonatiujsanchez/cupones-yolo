@@ -1,0 +1,57 @@
+@import '../../scss/index.scss';
+
+.confirm-account {
+    background: $gradient-bg-primary;
+    height: 70vh;
+}
+
+.confirm-account__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding-inline: 2rem;
+    max-width: 65rem;
+    margin-inline: auto;
+    margin-block-start: 8rem;
+}
+
+.confirm-account__icon {
+    height: 6rem;
+    width: 6rem;
+    color: $green;
+}
+
+.confirm-account__title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.confirm-account__msg {
+    text-align: center;
+    line-height: 1.6;
+    font-size: 1.8rem;
+    text-wrap: pretty;
+    font-weight: 500;
+}
+
+.confirm-account__link {
+    margin-block-start: 2rem;
+    color: $orange;
+
+    &:hover {
+        color: $primary;
+        text-decoration: underline;
+    }
+
+    &:last-of-type {
+        font-size: 1.8rem;
+    }
+}
+
+@media (min-width: 640px) {
+    .confirm-account {
+        margin-block-start: 12rem;
+    }
+}

@@ -34,6 +34,12 @@
 @media (min-width: 640px) {
     .msg-success {
         padding-block: 20rem;
-        padding-inline: 2.4rem;
+        padding-inline: 2.6rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .msg-success {
+        border-inline-end: dashed 0.1rem $gray-light;
     }
 }
