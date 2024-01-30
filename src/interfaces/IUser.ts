@@ -4,7 +4,7 @@ export interface IUser {
     name     : string
     username : string
     email    : string
-    token?   : string
+    token    : string | null
 
     google   : boolean
     facebook : boolean
