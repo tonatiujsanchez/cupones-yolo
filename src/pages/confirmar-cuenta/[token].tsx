@@ -1,11 +1,34 @@
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import NextLink from 'next/link'
-import { SiteLayout } from '@/components'
+import { useConfirmAccount } from '@/hooks'
+import { LoadingYolostyle, SiteLayout } from '@/components'
 import { CheckCircleIcon } from '@/components/Icons'
 import styles from './ConfirmAccount.module.scss'
 
 
 const ConfirmAccountPage = () => {
     
+    const router = useRouter()
+    //FIXME: Obtener token
+    const { confirmAccountMutation } = useConfirmAccount()
+
+    useEffect(()=>{
+        const { token } = router.query as { token: string }
+        if( token ){
+            // confirmAccountMutation.mutate({ token })
+            console.log(token)            
+        }
+    },[router])
+
+
+    if( !confirmAccountMutation.isPending ){
+        return (
+            <div className={ styles['loader-container'] }>
+                <LoadingYolostyle />   
+            </div>
+        )
+    }   
     
     return (
         <SiteLayout>

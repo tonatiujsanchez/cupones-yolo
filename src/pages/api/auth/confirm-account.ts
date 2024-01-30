@@ -8,6 +8,7 @@ type Data = {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+
     switch (req.method) {
 
         case 'POST':
@@ -54,7 +55,8 @@ const confirmAccount = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
         // Confirmar cuenta y eliminar token
         user.confirmed = true
         user.token = null
-        
+
+        await user.save()
         await db.disconnect()
 
         return res.status(200).json({ msg: 'Cuenta confirmada ✅' })

@@ -21,6 +21,8 @@ export * from './Buttons/ButtonDelete'
 export * from './Buttons/ButtonLight'
 export * from './Buttons/ButtonOutlineLight'
 
+export * from './Loadings/LoadingYolostyle'
+
 export * from './Home/HeroSection'
 export * from './Home/BrandsSection'
 export * from './Home/CouponsSection'
