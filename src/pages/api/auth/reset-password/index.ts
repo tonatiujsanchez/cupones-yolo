@@ -55,7 +55,7 @@ const sendEmailForResetPassword = async(req: NextApiRequest, res: NextApiRespons
             token: user.token
         })
         
-        return res.status(200).json({ msg: `Hemos enviado un correo a ${user.email} con un enlace para restablecer tu contraseña. Si no encuentras el correo en tu bandeja de entrada, verifica la carpeta de Spam.` })
+        return res.status(200).json({ msg: user.email })
 
     } catch (error) {
         console.log(error)

@@ -54,5 +54,6 @@ export * from './FormComponents/Dropdown'
 export * from './FormComponents/Toggle'
 
 export * from './Users/SignUpMsgSuccess'
+export * from './Users/MsgSuccessAuth'
 
 

@@ -79,7 +79,7 @@ export const resetPassword = async({ email, name, token }:ResetPasswordParams) =
                         <p style="color: #007BFF; font-size: 14px; word-wrap: break-word;">
                             ${ process.env.NEXT_PUBLIC_BASE_URL }/restablecer-contrasena/${ token }
                         </p>
-                        <p style="color: #333; font-size: 16px; margin-top: 30px;">Si tú no solicitaste restablecer tu contraseña, puedes simplemente ignorar este mensaje. Tu cuenta esta segura.</p>
+                        <p style="color: #333; font-size: 16px; margin-top: 30px;">Si tú no solicitaste restablecer tu contraseña, puedes simplemente ignorar este mensaje. Tu cuenta esta segura y este enlace expira en 24 horas.</p>
                         <p style="color: #333; font-size: 16px; margin-top: 30px;">¡Esperamos que continúes disfrutando de la experiencia yolostyle.mx!</p>
                         <p style="color: ${ PRIMARY_COLOR }; font-size: 16px;">Encuentra tu estilo con Yolostyle</p>
                     </td>

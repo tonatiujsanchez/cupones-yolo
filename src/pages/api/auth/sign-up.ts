@@ -58,7 +58,7 @@ const signUp = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
 
         await db.connect()
 
-        const user = await User.findOne({ email: email.trim() })
+        const user = await User.findOne({ email })
 
         if( user && !user.status ){
             // En caso de que el usuario fue eliminado, volver a activar al usuario
@@ -74,13 +74,7 @@ const signUp = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
                 token: user.token
             })
 
-            return res.status(200).json({
-                uid      : user._id,
-                name     : user.name,
-                username : user.username,
-                email    : user.email,
-                role     : user.role,
-            })  
+            return res.status(200).json({msg: '¡Gracias por registrarte en Yolostyle! 🌟 Revisa tu correo para confirmar tu cuenta y comienza a disfrutar de la mejor experiencia de compra. 🎉'})  
         }
 
         // En caso de que el usuario fue bloqueado, no hacer el registro

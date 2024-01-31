@@ -7,13 +7,12 @@ import { usersActions } from '@/services'
 
 export const useResetPassword = () => {
 
-    const [msg, setMsg] = useState<string>()
-
+    const [msgSuccess, setMsgSuccess] = useState<string>()
     
     const resetPasswordMutation = useMutation({
         mutationFn: usersActions.resetPassword,
         onSuccess: ( data )=> {
-            setMsg(data.msg)
+            setMsgSuccess(data.msg)
         },
         onError: ( error:AxiosError<{ msg:string }> )=> {
             const { msg } = error.response!.data
@@ -23,6 +22,6 @@ export const useResetPassword = () => {
     
     return {
         resetPasswordMutation,
-        msg
+        msgSuccess
     }
 }
