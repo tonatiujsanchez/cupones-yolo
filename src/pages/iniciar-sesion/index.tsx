@@ -1,29 +1,28 @@
-import Image from "next/image"
+import Image from 'next/image'
 import NextLink from 'next/link'
-import { useForm } from "react-hook-form"
-import { fonts } from "@/fonts"
-
-import { ButtonLight, ButtonPrimary, InputText, SiteLayout } from "@/components"
+import { useForm } from 'react-hook-form'
+import { fonts } from '@/fonts'
+import { ButtonLight, ButtonPrimary, InputText, SiteLayout } from '@/components'
+import { FacebookIcon, GoogleIcon } from '@/components/Icons'
+import { BLUE_FACEBOOK_COLOR } from '@/constants'
 import styles from './LoginPage.module.scss'
-import { FacebookIcon, GoogleIcon } from "@/components/Icons"
-import { BLUE_FACEBOOK_COLOR } from "@/constants"
 
 
-interface LoginFormData {
+interface ILoginFormData {
     user    : string
     password: string
 }
 
 const LoginPage = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>({
+    const { register, handleSubmit, formState: { errors } } = useForm<ILoginFormData>({
         defaultValues: {
             user: '',
             password: ''
         }
     })
 
-    const onLoginSubmit = ( data:LoginFormData ) => {
+    const onLoginSubmit = ( data:ILoginFormData ) => {
         console.log( data )
     }
     
@@ -62,7 +61,7 @@ const LoginPage = () => {
                                 isRequired
                             />
                             <div className={ styles['login-form__forgot-password'] }>
-                                <NextLink href="/olvide-password">Olvide mi contraseña</NextLink>
+                                <NextLink href="/restablecer-contrasena">Olvide mi contraseña</NextLink>
                             </div>
                             <div className={ styles['login-form__button-container'] }>       
                                 <ButtonPrimary type="submit" >

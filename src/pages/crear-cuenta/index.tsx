@@ -73,7 +73,7 @@ const SignUpPage = () => {
                                         type="email"
                                         label="Correo"
                                         fieldName="email"
-                                        placeholder="Ingrese su contraseña"
+                                        placeholder="Ingrese su correo"
                                         error={ errors.email }
                                         { ...register("email", {
                                             required: 'Ingrese su contraseña'
@@ -106,7 +106,7 @@ const SignUpPage = () => {
                                         isRequired
                                     />
                                     <div className={ styles['login-form__forgot-password'] }>
-                                        <NextLink href="/olvide-password">Olvide mi contraseña</NextLink>
+                                        <NextLink href="/restablecer-contrasena">Olvide mi contraseña</NextLink>
                                     </div>
                                     <div className={ styles['login-form__button-container'] }>       
                                         <ButtonPrimary 

@@ -1,6 +1,7 @@
 
 export * from './Layouts/DashboardLayout'
 export * from './Layouts/SiteLayout'
+export * from './Layouts/AuthLayout'
 
 export * from './Shared/Navbar'
 export * from './Shared/Sidebar'

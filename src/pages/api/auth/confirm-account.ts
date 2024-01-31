@@ -52,6 +52,14 @@ const confirmAccount = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
             return res.status(400).json({ msg: 'Este usuario a sido bloqueado, por favor hable con un administrador' })
         }
 
+        if( user.confirmed ) {
+            return res.status(400).json({ msg: 'Token no válido' })
+        }
+
+        if( !user.token ) {
+            return res.status(400).json({ msg: 'Token no válido' })
+        }
+
         // Confirmar cuenta y eliminar token
         user.confirmed = true
         user.token = null
@@ -59,7 +67,7 @@ const confirmAccount = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
         await user.save()
         await db.disconnect()
 
-        return res.status(200).json({ msg: 'Cuenta confirmada ✅' })
+        return res.status(200).json({ msg: 'Cuenta confirmada' })
 
     } catch (error) {
         console.log(error)
