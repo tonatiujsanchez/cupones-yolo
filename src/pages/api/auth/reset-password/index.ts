@@ -42,7 +42,34 @@ const sendEmailForResetPassword = async(req: NextApiRequest, res: NextApiRespons
         if( !user ){
             return res.status(400).json({ msg: 'Usuario no encontrado' })
         }
+
+        if( user && !user.status) {
+            return res.status(400).json({ msg: 'Usuario no encontrado' })
+        }
+    
+        if( user && !user.active) {
+            return res.status(400).json({ msg: 'Este usuario a sido bloqueado, por favor hable con un administrador' })
+        }
         
+        // Si la cuenta NO esta confirmada, reenviar el correo para confirmar su cuenta
+        if( user && !user.confirmed) {
+
+            user.token = jwt.signToken( user._id, '30d' )
+
+            await user.save()
+            await db.disconnect()
+    
+            // Enviar email 
+            sendEmail.signIn({
+                email: user.email, 
+                name : user.name, 
+                token: user.token
+            })
+            
+            return res.status(400).json({ msg: 'Su cuenta no ha sido confirmada, por favor revisa tu correo y confirma tu cuenta' })
+        }
+
+        // Si la cuenta SI esta confirmada, enviar el correo para restablecer la contraseña
         user.token = jwt.signToken( user._id, '1d' )
 
         await user.save()
