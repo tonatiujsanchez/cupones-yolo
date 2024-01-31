@@ -2,7 +2,7 @@
 import jwt from 'jsonwebtoken'
 
 
-export const signToken = ( uid: string ) => {
+export const signToken = ( uid: string, expiresIn='30d' ) => {
 
     if( !process.env.JWT_SECRET_SEED ){
         throw new Error('No hay semilla de JWT - Revisar variables de entorno')
@@ -11,7 +11,7 @@ export const signToken = ( uid: string ) => {
     return jwt.sign(
         { uid },
         process.env.JWT_SECRET_SEED,
-        { expiresIn: '30d' }
+        { expiresIn }
     )
 }
 

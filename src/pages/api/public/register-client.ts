@@ -43,6 +43,11 @@ const registerClient = async( req: NextApiRequest, res: NextApiResponse<Data> ) 
         return res.status(400).json({ msg: 'Fecha de nacimiento requerida' })
     }
 
+    // TODO: Validar Email si viene
+    // if( !isValidEmail(email) ){
+        // return res.status(400).json({ msg: 'El correo no es válido' })
+    // }
+
     try {
         await db.connect()
         const [couponSettingsPage, route, clients] = await Promise.all([

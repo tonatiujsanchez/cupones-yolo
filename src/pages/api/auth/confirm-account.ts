@@ -70,6 +70,7 @@ const confirmAccount = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
         return res.status(200).json({ msg: 'Cuenta confirmada' })
 
     } catch (error) {
+        await db.disconnect()
         console.log(error)
         return res.status(500).json({ msg: 'Error en el servidor, hable con el administrador' })
     }

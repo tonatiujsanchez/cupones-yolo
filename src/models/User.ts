@@ -65,6 +65,16 @@ export const UserSchema = new Schema<IUser>({
     timestamps: true,
 })
 
+UserSchema.pre('save', async function( next ) {
+
+    if( this.isModified('email') ){
+        this.email = this.email.toLowerCase()
+    }
+    
+    next()
+})
+
+
 UserSchema.methods.toJSON = function() {
     const { __v, _id, ...user } = this.toObject()
     return {
