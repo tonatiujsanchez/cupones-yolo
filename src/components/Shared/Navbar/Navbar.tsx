@@ -35,6 +35,7 @@ export const Navbar = () => {
             window.removeEventListener('scroll', scrollEvent )
         }
     },[])
+
     
     return (
         <header 

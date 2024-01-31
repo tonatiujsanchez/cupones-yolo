@@ -1,9 +1,8 @@
 import { FC,  ReactNode } from 'react'
 import Head from 'next/head'
 import { fonts } from '@/fonts'
-
-
 import { Navbar } from "@/components"
+
 
 interface Props{
     children:  ReactNode

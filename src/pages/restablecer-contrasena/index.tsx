@@ -1,5 +1,6 @@
 import NextLink from 'next/link'
 import { useForm } from 'react-hook-form'
+import { useResetPassword } from '@/hooks'
 import { AuthLayout, ButtonPrimary, InputText } from '@/components'
 import { isValidEmail } from '@/utils'
 import styles from './ResetPassword.module.scss'
@@ -16,10 +17,10 @@ const ResetPassword = () => {
         }
     })
 
-    const onResetPassword = (data:IResetPasswordFormData) => {
-        console.log(data)
-        // TODO: Hacer mutacion
-        
+    const { resetPasswordMutation, msg } = useResetPassword()
+
+    const onResetPassword = ({ email }:IResetPasswordFormData) => {
+        resetPasswordMutation.mutate({ email })       
     }
 
     
@@ -47,18 +48,17 @@ const ResetPassword = () => {
                     />
                     <div className={ styles['login-form__button-container'] }>       
                         <ButtonPrimary 
-                            // disabled={ signUpMutation.isPending }
+                            disabled={ resetPasswordMutation.isPending }
                             type="submit"
                         >
-                            {/* {
-                                signUpMutation.isPending
+                            {
+                                resetPasswordMutation.isPending
                                 ? (
                                     <div className="custom-loader-white"></div>
                                 ):(
                                     'Enviar'
                                     )
-                            } */}
-                            Enviar
+                            }
                         </ButtonPrimary>
                     </div>
                 </form>

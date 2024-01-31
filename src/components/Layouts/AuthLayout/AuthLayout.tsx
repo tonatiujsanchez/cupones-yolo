@@ -1,6 +1,5 @@
 import { FC, ReactNode } from 'react'
 import Image from 'next/image'
-import { fonts } from '@/fonts'
 import { SiteLayout } from '@/components'
 import styles from './AuthLayout.module.scss'
 
@@ -9,9 +8,10 @@ interface Props {
     image?  : string
 }
 export const AuthLayout:FC<Props> = ({ children, image='/images/shopping.svg'  }) => {
+
     return (
         <SiteLayout>
-            <main className={`${fonts.Raleway.className}  ${styles['main-login']}`}>
+            <main className={ styles['main-login'] }>
                 <section className={styles['login-container']}>
                     <article className={styles['login-form']}>
                     {

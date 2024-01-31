@@ -20,3 +20,12 @@ export const confirmAccount = async({ token }:ConfirmAccountParams):Promise<{ ms
     const { data } = await yolostyleApi.post('/auth/confirm-account', { token })
     return data
 }
+
+
+interface ResetPasswordParams {
+    email: string
+}
+export const resetPassword = async({ email }: ResetPasswordParams):Promise<{ msg:string }> =>{
+    const { data } = await yolostyleApi.post('/auth/reset-password', { email })
+    return data 
+}
