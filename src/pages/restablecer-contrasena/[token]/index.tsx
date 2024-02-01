@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-import { AuthLayout, ButtonPrimary, InputText, LoadingYolostyle } from '@/components'
 import { useChangePassword, useCheckPasswordToken } from '@/hooks'
+import { AuthLayout, ButtonPrimary, InputText, LoadingYolostyle, MsgSuccessAuth } from '@/components'
 import styles from './ResetPasswordToken.module.scss'
 
 interface IResetPasswordToken {
@@ -20,7 +20,7 @@ const ResetPasswordToken = () => {
     })
 
     const { checkPasswordTokenMutation, msgSuccess } = useCheckPasswordToken()
-    const { changePasswordMutation ,msgSuccess:msgChangePasswordSuccess } = useChangePassword()
+    const { changePasswordMutation, msgChangePasswordSuccess } = useChangePassword()
 
     // Hacer petición para validar token
     useEffect(()=>{
@@ -30,17 +30,16 @@ const ResetPasswordToken = () => {
         }
     },[router])
 
-
-
     const passwordRef = useRef({})
     passwordRef.current = watch('password', '')
 
+
     const onResetPassword = ({ password }: IResetPasswordToken) => {
+
         const { token } = router.query as { token: string }
-        
-        // Enviar y guardar la nueva contraseña
         changePasswordMutation.mutate({ password, token })
     }
+
 
     if( checkPasswordTokenMutation.isPending || !msgSuccess ){
         return (
@@ -48,59 +47,71 @@ const ResetPasswordToken = () => {
                 <LoadingYolostyle />   
             </div>
         )
-    }   
-
+    }
+    
     return (
         <AuthLayout>
             <div className={ styles['form-container'] }>
-                <h1>Nueva contraseña</h1>
-                <p className={ styles['form-container__description'] }> <strong>¡Hola { msgSuccess } 👋!</strong>, que bueno tenerte de vuelta, por favor, ingresa tu nueva contraseña y presiona en guardar para recuperar tu acceso a <strong>Yolostyle</strong></p>
-                <form
-                    onSubmit={ handleSubmit( onResetPassword ) }
-                    className={ styles['form'] }
-                >
-                    <InputText
-                        autoComplete="off"
-                        type="password"
-                        label="Contraseña"
-                        fieldName="password"
-                        placeholder="Ingrese su contraseña"
-                        error={ errors.password }
-                        { ...register("password", {
-                                required: 'Ingrese una contraseña',
-                                minLength: { value: 6, message: 'La contraseña es muy corta, ingrese mínimo 6 caracteres' }
-                        })}
-                        isRequired
-                    />
-                    <InputText
-                        type="password"
-                        label="Confirme su contraseña"
-                        fieldName="confirmPassword"
-                        placeholder="Confirme su contraseña"
-                        error={ errors.confirmPassword }
-                        { ...register("confirmPassword", {
-                                required: 'Confirme su contraseña',
-                                validate: ( value ) => value !== passwordRef.current ? 'Las contraseñas no coinciden' : undefined
-                        })}
-                        isRequired
-                    />
-                    <div className={ styles['login-form__button-container'] }>       
-                        <ButtonPrimary 
-                            // disabled={ changePasswordMutation.isPending }
-                            type="submit"
+                {
+                    msgChangePasswordSuccess
+                    ?(
+                        <MsgSuccessAuth
+                            title="Contraseña Actualizada"
                         >
-                            {
-                                // changePasswordMutation.isPending
-                                false
-                                ? (
-                                    <div className="custom-loader-white"></div>
-                                ):(
-                                    'Guardar'
-                                    )
-                            }
-                        </ButtonPrimary>
-                    </div>
-                </form>
+                            { msgChangePasswordSuccess }
+                        </MsgSuccessAuth>
+                    ):(
+                        <>
+                            <h1>Nueva contraseña</h1>
+                            <p className={ styles['form-container__description'] }> <strong>¡Hola { msgSuccess } 👋!</strong>, que bueno tenerte de vuelta, por favor, ingresa tu nueva contraseña y presiona en guardar para recuperar tu acceso a <strong>Yolostyle</strong></p>
+                            <form
+                                onSubmit={ handleSubmit( onResetPassword ) }
+                                className={ styles['form'] }
+                            >
+                                <InputText
+                                    autoComplete="off"
+                                    type="password"
+                                    label="Contraseña"
+                                    fieldName="password"
+                                    placeholder="Ingrese su contraseña"
+                                    error={ errors.password }
+                                    { ...register("password", {
+                                            required: 'Ingrese una contraseña',
+                                            minLength: { value: 6, message: 'La contraseña es muy corta, ingrese mínimo 6 caracteres' }
+                                    })}
+                                    isRequired
+                                />
+                                <InputText
+                                    type="password"
+                                    label="Confirme su contraseña"
+                                    fieldName="confirmPassword"
+                                    placeholder="Confirme su contraseña"
+                                    error={ errors.confirmPassword }
+                                    { ...register("confirmPassword", {
+                                            required: 'Confirme su contraseña',
+                                            validate: ( value ) => value !== passwordRef.current ? 'Las contraseñas no coinciden' : undefined
+                                    })}
+                                    isRequired
+                                />
+                                <div className={ styles['login-form__button-container'] }>       
+                                    <ButtonPrimary 
+                                        disabled={ changePasswordMutation.isPending }
+                                        type="submit"
+                                    >
+                                        {
+                                            changePasswordMutation.isPending
+                                            ? (
+                                                <div className="custom-loader-white"></div>
+                                            ):(
+                                                'Guardar'
+                                            )
+                                        }
+                                    </ButtonPrimary>
+                                </div>
+                            </form>
+                        </>
+                    )
+                }
             </div>
         </AuthLayout>
     )

@@ -7,12 +7,12 @@ import { toastError } from "@/libs"
 
 export const useChangePassword = () => {
     
-    const [msgSuccess, setMsgSuccess] = useState<string>()
+    const [msgChangePasswordSuccess, setMsgChangePasswordSuccess] = useState<string>()
 
     const changePasswordMutation = useMutation({
         mutationFn: usersActions.changePassword,
         onSuccess: ( data )=> {
-            setMsgSuccess( data.msg )
+            setMsgChangePasswordSuccess( data.msg )
         },
         onError: ( error:AxiosError<{ msg: string }> ) =>{
             const { msg } = error.response!.data
@@ -22,6 +22,6 @@ export const useChangePassword = () => {
     
     return {
         changePasswordMutation,
-        msgSuccess
+        msgChangePasswordSuccess
     }
 }

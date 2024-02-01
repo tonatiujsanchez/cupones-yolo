@@ -139,7 +139,7 @@ const updatePassword = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
         await user.save()
         await db.disconnect()
         
-        return res.status(200).json({ msg: 'Su contraseña a sido actualizada correctamente' })
+        return res.status(200).json({ msg: 'Tu contraseña a sido actualizada correctamente, ahora puedes volver a acceder a tu cuenta de Yolostyle' })
 
     } catch (error) {
         await db.disconnect()
