@@ -14,9 +14,10 @@ export const signUp = async( { name, email, password }: SignUpParams ):Promise<{
 
 
 interface ConfirmAccountParams {
-    token:string
+    token: string
 }
 export const confirmAccount = async({ token }:ConfirmAccountParams):Promise<{ msg: string }> => {
+
     const { data } = await yolostyleApi.post('/auth/confirm-account', { token })
     return data
 }
@@ -26,15 +27,28 @@ interface ResetPasswordParams {
     email: string
 }
 export const resetPassword = async({ email }: ResetPasswordParams):Promise<{ msg:string }> =>{
+
     const { data } = await yolostyleApi.post('/auth/reset-password', { email })
     return data 
 }
 
 
-interface CheckPasswordToken {
-    token:string
+interface CheckPasswordTokenParams {
+    token: string
 }
-export const checkPasswordToken = async({ token }:CheckPasswordToken):Promise<{ msg: string }> => {
-    const { data } = await yolostyleApi.post(`/auth/reset-password/${token}`)
+export const checkPasswordToken = async({ token }:CheckPasswordTokenParams):Promise<{ msg: string }> => {
+
+    const { data } = await yolostyleApi.post(`/auth/reset-password/${ token }`)
+    return data
+}
+
+
+interface ChangePasswordParams {
+    password: string
+    token   : string
+}
+export const changePassword = async({ password, token }:ChangePasswordParams):Promise<{ msg: string }> => {
+                                                
+    const { data } = await yolostyleApi.put(`/auth/reset-password/${ token }`,{ password })
     return data
 }

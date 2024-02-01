@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { AuthLayout, ButtonPrimary, InputText, LoadingYolostyle } from '@/components'
-import { useCheckPasswordToken } from '@/hooks'
+import { useChangePassword, useCheckPasswordToken } from '@/hooks'
 import styles from './ResetPasswordToken.module.scss'
 
 interface IResetPasswordToken {
@@ -20,7 +20,7 @@ const ResetPasswordToken = () => {
     })
 
     const { checkPasswordTokenMutation, msgSuccess } = useCheckPasswordToken()
-
+    const { changePasswordMutation ,msgSuccess:msgChangePasswordSuccess } = useChangePassword()
 
     // Hacer petición para validar token
     useEffect(()=>{
@@ -35,9 +35,12 @@ const ResetPasswordToken = () => {
     const passwordRef = useRef({})
     passwordRef.current = watch('password', '')
 
-    const onResetPassword = (data: IResetPasswordToken) => {
-        console.log(data)
+    const onResetPassword = ({ password }: IResetPasswordToken) => {
         // TODO: Enviar y guardar la nueva contraseña
+        const { token } = router.query as { token: string }
+
+        changePasswordMutation.mutate({ password, token })
+
     }
 
     if( checkPasswordTokenMutation.isPending || !msgSuccess ){

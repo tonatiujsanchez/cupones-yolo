@@ -53,6 +53,7 @@ const checkToken = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
             return res.status(400).json({ msg: 'Este usuario a sido bloqueado, por favor hable con un administrador' })
         }
 
+        // Verificar que la cuenta del usuario este confirmada 
         if( user && !user.confirmed) {
             return res.status(400).json({ msg: 'Su cuenta no ha sido confirmada, por favor revisa tu correo y confirma tu cuenta' })
         }
