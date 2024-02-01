@@ -36,11 +36,10 @@ const ResetPasswordToken = () => {
     passwordRef.current = watch('password', '')
 
     const onResetPassword = ({ password }: IResetPasswordToken) => {
-        // TODO: Enviar y guardar la nueva contraseña
         const { token } = router.query as { token: string }
-
+        
+        // Enviar y guardar la nueva contraseña
         changePasswordMutation.mutate({ password, token })
-
     }
 
     if( checkPasswordTokenMutation.isPending || !msgSuccess ){
