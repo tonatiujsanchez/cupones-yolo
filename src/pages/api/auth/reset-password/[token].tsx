@@ -11,7 +11,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
    
     switch (req.method) {
 
-        case 'GET':
+        case 'POST':
             return checkToken( req, res )
     
         default:
@@ -61,7 +61,7 @@ const checkToken = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
             return res.status(400).json({ msg: 'Token no válido' })
         }
         
-        return res.status(200).json({ msg: 'Token válido ✅' })
+        return res.status(200).json({ msg: user.name })
 
     } catch (error) {
         await db.disconnect()

@@ -29,3 +29,12 @@ export const resetPassword = async({ email }: ResetPasswordParams):Promise<{ msg
     const { data } = await yolostyleApi.post('/auth/reset-password', { email })
     return data 
 }
+
+
+interface CheckPasswordToken {
+    token:string
+}
+export const checkPasswordToken = async({ token }:CheckPasswordToken):Promise<{ msg: string }> => {
+    const { data } = await yolostyleApi.post(`/auth/reset-password/${token}`)
+    return data
+}
