@@ -4,7 +4,7 @@ import NextLink from 'next/link'
 import Image from 'next/image'
 import { useGetPublicRoutes } from '@/hooks'
 import { Overlay } from '@/components'
-import { FacebookIcon, InstagramIcon, MunuIcon, WhatsAppIcon } from '@/components/Icons'
+import { FacebookIcon, HeartIcon, InstagramIcon, MunuIcon, SearchIcon, ShoppingCartIcon, UserCircleIcon, WhatsAppIcon } from '@/components/Icons'
 
 import styles from './Navbar.module.scss'
 
@@ -58,6 +58,12 @@ export const Navbar = () => {
                 )}
                 <div className={`${styles['navbar-content']} ${ showMenu ? styles['show-menu'] : '' }`} >
                     <nav className={styles.navbar}>
+                        {/* <NextLink 
+                            href={'/dashboard'} 
+                            className={`${ styles['nav-link'] } ${styles['nav-link__my-account'] } ${ asPath === '/dashboard' ? styles.active : ''}`}
+                        >
+                            My cuenta
+                        </NextLink> */}
                         <NextLink 
                             href={'/'} 
                             className={`${styles['nav-link']} ${asPath === '/' ? styles.active : ''}`}
@@ -84,6 +90,12 @@ export const Navbar = () => {
                                 ))
                             )
                         }
+                        <NextLink 
+                            href={'/iniciar-sesion'} 
+                            className={`${styles['nav-link']} ${ styles['nav-link__login'] } ${ asPath === '/iniciar-sesion' || asPath === '/crear-cuenta' ? styles.active : ''}`}
+                        >
+                            Ingresar
+                        </NextLink>
                     </nav>
                     <div className={ styles.social }>
                         <a
@@ -109,12 +121,36 @@ export const Navbar = () => {
                         </a>
                     </div>
                 </div>
-                <button
-                    onClick={ ()=> setShowMenu(true) }
-                    className={ styles['menu-button'] }
-                >
-                    <MunuIcon />
-                </button>
+                <div className={ styles['menu-button__container'] }>
+                    <button
+                        className={`${ styles['menu-button'] } ${ styles['search-button'] }` }
+                    >
+                        <SearchIcon />
+                    </button>
+                    <button
+                        className={`${ styles['menu-button'] } ${ styles['favorites-button'] }` }
+                    >
+                        <HeartIcon />
+                    </button>
+                    <button
+                        className={`${ styles['menu-button'] } ${ styles['cart-button'] }`}
+                    >
+                        <ShoppingCartIcon />
+                    </button>
+                    <NextLink
+                        className={`${ styles['menu-button'] } ${ styles['login-link'] } `} 
+                        href={'/iniciar-sesion'}
+                    >
+                        <UserCircleIcon />
+                    </NextLink>
+                    <button
+                        onClick={ ()=> setShowMenu(true) }
+                        className={ styles['menu-button'] }
+                    >
+                        <MunuIcon />
+                    </button>
+
+                </div>
             </div>
         </header>
     )

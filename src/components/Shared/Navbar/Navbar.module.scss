@@ -19,7 +19,7 @@
     padding-inline: 2rem;
 
     .navbar-logo {
-        max-width: 12rem;
+        max-width: 10rem;
         transition: all 0.5s;
     }
 }
@@ -27,7 +27,6 @@
 .navbar-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 5rem;
     background-color: $white;
     
@@ -38,7 +37,7 @@
 
     padding-block-start: 4rem;
     padding-block-end: 4rem;
-    padding-inline-start: 7rem;
+    padding-inline-start: 5rem;
     padding-inline-end: 12rem;
     
     transform: translateX(-100%);
@@ -57,12 +56,14 @@
 }
 
 .nav-link {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.7rem;
+    
     &:hover {
         color: $primary;
     }
 }
+
 .nav-link.active {
     color: $primary;
 }
@@ -77,40 +78,73 @@
     }
 }
 
+.menu-button__container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .menu-button {
     padding: 0.4rem;
     cursor: pointer;
     border: none;
     border-radius: 0.4rem;
     background: none;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, color 0.3s;
+    color: $black;
+    
     &:hover {
         transform: scale(1.1);
+        color: $primary;
     }
+
     &:active {
         transform: scale(1);
         transition: transform 0.1s ease;
     }
+
+    &.favorites-button {
+        svg {
+            width: 2.4rem;
+            height: 2.4rem;
+        }
+    }
+
+    &.cart-button {
+        svg {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+    }
+
+    &.login-link {
+        display: none;
+        svg {
+            width: 2.6rem;
+            height: 2.5rem;
+        }
+    }
+
+    &.search-button {
+        display: none;
+        svg {
+            width: 2.6rem;
+            height: 2.5rem;
+        }
+    }
 }
+
 
 @media (min-width: 768px) {
     .header {
-        position: relative;
         box-shadow: none;
-
+        position: sticky;
+        transition: box-shadow 0.5s;
         &.scroll-active {
-            position: sticky;
-            box-shadow : -0.4rem 0 0.5rem $gray-light;
-            .navbar-container{
-                padding-block: 0;
-                .navbar-logo {
-                    max-width: 11rem;
-                }
-            }
+            box-shadow: -0.4rem 0 0.5rem $gray-light;
         }
     }
     .navbar-container{
-        margin-block: 1rem;
         transition: all 0.5s;
     }
 
@@ -125,8 +159,8 @@
         box-shadow: none;
         padding-inline-start: 0;
         padding-inline-end: 0;
-        padding-block-start: 2rem;
-        padding-block-end: 2rem;
+        padding-block-start: 2.5rem;
+        padding-block-end: 2.5rem;
         transform: translateX(0);
     
     }
@@ -134,8 +168,46 @@
     .navbar {
         flex-direction: row;
     }
+
+    .nav-link {
+        &.nav-link__my-account {
+            display: none;
+        }
+        
+        &.nav-link__login {
+            display: none;
+        }
+    }
+
+    .social {
+        display: none;
+    }
     
     .menu-button {
         display: none;
+
+        &.search-button {
+            display: block;
+        }
+
+        &.favorites-button {
+            display: block;
+        }
+
+        &.cart-button {
+            display: block;
+        }
+
+        &.favorites-button {
+            display: block;
+        }
+
+        &.cart-button {
+            display: block;
+        }
+
+        &.login-link {
+            display: block;
+        }
     }
 }
