@@ -5,7 +5,8 @@ import bcryptjs from 'bcryptjs'
 
 import { db } from '@/database'
 import { User } from '@/models'
-import { isValidEmail, jwt } from '../../../utils'
+import { jwt } from '@/libs'
+import { isValidEmail } from '../../../utils'
 
 
 type Data = 
