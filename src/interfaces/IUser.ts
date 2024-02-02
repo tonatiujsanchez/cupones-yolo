@@ -13,7 +13,7 @@ export interface IUser {
 
     password : string
     role     : IUserRol
-    photo?   : string
+    photo    : string | null
 
     active   : boolean
     status   : boolean
