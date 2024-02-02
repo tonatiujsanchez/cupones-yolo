@@ -1,4 +1,16 @@
 import { yolostyleApi } from "@/apis"
+import { IUserAuth } from "@/interfaces"
+
+
+interface LoginParams {
+    user    : string
+    password: string
+}
+export const login = async( { user, password }: LoginParams ):Promise<{ token: string, user : IUserAuth }> => {
+    
+    const { data } = await yolostyleApi.post('/auth/login', { user, password })
+    return data
+}
 
 
 interface SignUpParams {

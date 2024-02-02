@@ -8,6 +8,7 @@ export * from './coupons/useGetCouponSettingsPage'
 
 export * from './routes/useGetPublicRoutes'
 
+export * from './users/useAuth'
 export * from './users/useSignUp'
 export * from './users/useConfirmAccount'
 export * from './users/useResetPassword'

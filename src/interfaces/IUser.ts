@@ -31,5 +31,5 @@ export interface IUserAuth {
     username : string
     email    : string
     role     : IUserRol
-    photo?   : string
+    photo?   : string | null
 }

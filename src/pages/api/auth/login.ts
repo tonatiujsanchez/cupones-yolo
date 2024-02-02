@@ -1,21 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import bcryptjs from 'bcryptjs'
 import { db } from '@/database'
-import { User } from '@/models'
 import { jwt } from '@/libs'
-import { IUserRol } from '@/interfaces'
+import { User } from '@/models'
+import { IUserAuth } from '@/interfaces'
 
 type Data = 
     | { msg: string }
     | {
         token: string
-        user : {
-            uid  : string
-            name : string
-            email: string
-            photo: string | null
-            role : IUserRol
-        }
+        user : IUserAuth
       }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -67,13 +61,14 @@ const login = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         }
 
         const token = jwt.signToken( userDB._id ) //jwt
-        const { _id, name, email, photo, role } = userDB
+        const { _id, name, username, email, photo, role } = userDB
 
         return res.status(200).json({
             token,
             user: {
                 uid: _id,
                 name,
+                username,
                 email,
                 photo,
                 role
@@ -84,6 +79,5 @@ const login = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         console.log(error)
         await db.disconnect()
         return res.status(500).json({ msg: 'Al salio mal, hable con el administrador' })
-
     }
 }

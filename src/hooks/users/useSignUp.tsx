@@ -12,7 +12,6 @@ export const useSignUp = () => {
     const signUpMutation = useMutation({
         mutationFn: usersActions.signUp,
         onSuccess: ( data:{ msg:string } )=> {
-            console.log( data )
             setMsgSuccess( data.msg )
         },
         onError: ( error:AxiosError<{ msg:string }> )=> {
