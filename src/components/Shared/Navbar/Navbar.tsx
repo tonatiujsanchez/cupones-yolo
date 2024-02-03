@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import Image from 'next/image'
-import { useGetPublicRoutes } from '@/hooks'
+import { useAuth, useGetPublicRoutes } from '@/hooks'
 import { Overlay } from '@/components'
 import { FacebookIcon, HeartIcon, InstagramIcon, MunuIcon, SearchIcon, ShoppingCartIcon, UserCircleIcon, WhatsAppIcon } from '@/components/Icons'
 
@@ -18,7 +18,9 @@ export const Navbar = () => {
     const router = useRouter()
     const { asPath } = router
 
+    
     const { routesQuery } = useGetPublicRoutes()
+    const { user } = useAuth()
 
     const scrollEvent = () => {
         const navbarContainer = headerRef.current
@@ -127,29 +129,47 @@ export const Navbar = () => {
                     >
                         <SearchIcon />
                     </button>
-                    <button
-                        className={`${ styles['menu-button'] } ${ styles['favorites-button'] }` }
-                    >
-                        <HeartIcon />
-                    </button>
+                    {
+                        user && (
+                            <button
+                                className={`${ styles['menu-button'] } ${ styles['favorites-button'] }` }
+                            >
+                                <HeartIcon />
+                            </button>
+                        )
+                    }
                     <button
                         className={`${ styles['menu-button'] } ${ styles['cart-button'] }`}
                     >
                         <ShoppingCartIcon />
                     </button>
-                    <NextLink
-                        className={`${ styles['menu-button'] } ${ styles['login-link'] } `} 
-                        href={'/iniciar-sesion'}
-                    >
-                        <UserCircleIcon />
-                    </NextLink>
+
+                    {
+                        user
+                        ?(
+                            <NextLink
+                                className={`${ styles['menu-button'] } ${ styles['login-user'] } `} 
+                                href={'/dashboard'}
+                            >
+                                <div>
+                                    { user.name.slice(0, 1) }
+                                </div>
+                            </NextLink>
+                        ):(
+                            <NextLink
+                                className={`${ styles['menu-button'] } ${ styles['login-link'] } `} 
+                                href={'/iniciar-sesion'}
+                            >
+                                <UserCircleIcon />
+                            </NextLink>
+                        )
+                    }
                     <button
                         onClick={ ()=> setShowMenu(true) }
                         className={ styles['menu-button'] }
                     >
                         <MunuIcon />
                     </button>
-
                 </div>
             </div>
         </header>

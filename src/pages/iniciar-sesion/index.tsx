@@ -2,6 +2,7 @@ import Image from 'next/image'
 import NextLink from 'next/link'
 import { useForm } from 'react-hook-form'
 import { fonts } from '@/fonts'
+import { useAuth } from '../../hooks'
 import { ButtonLight, ButtonPrimary, InputText, SiteLayout } from '@/components'
 import { FacebookIcon, GoogleIcon } from '@/components/Icons'
 import { BLUE_FACEBOOK_COLOR } from '@/constants'
@@ -22,8 +23,10 @@ const LoginPage = () => {
         }
     })
 
+    const { loginMutation } = useAuth()
+
     const onLoginSubmit = ( data:ILoginFormData ) => {
-        console.log( data )
+        loginMutation.mutate( data )
     }
     
     return (
@@ -65,7 +68,14 @@ const LoginPage = () => {
                             </div>
                             <div className={ styles['login-form__button-container'] }>       
                                 <ButtonPrimary type="submit" >
-                                    Iniciar Sesión
+                                    {
+                                        loginMutation.isPending
+                                        ? (
+                                            <div className="custom-loader-white"></div>
+                                        ):(
+                                            'Iniciar Sesión'
+                                        )
+                                    }
                                 </ButtonPrimary>
                             </div>
                         </form>

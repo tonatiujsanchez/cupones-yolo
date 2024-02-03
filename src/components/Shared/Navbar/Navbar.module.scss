@@ -132,6 +132,18 @@
             height: 2.5rem;
         }
     }
+
+    &.login-user {
+        display: block;
+        padding: 1rem;
+        background-color: $primary-light;
+        border-radius: 50%;
+        height: 3.6rem;
+        width: 3.6rem;
+        display: none;
+        font-weight: 700;
+        color: $primary;
+    }
 }
 
 
@@ -208,6 +220,12 @@
 
         &.login-link {
             display: block;
+        }
+
+        &.login-user {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }
