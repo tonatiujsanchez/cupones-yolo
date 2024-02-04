@@ -54,7 +54,7 @@ const sendEmailForResetPassword = async(req: NextApiRequest, res: NextApiRespons
         // Si la cuenta NO esta confirmada, reenviar el correo para confirmar su cuenta
         if( user && !user.confirmed) {
 
-            user.token = jwt.signToken( user._id, '30d' )
+            user.token = jwt.signToken({ uid: user._id } )
 
             await user.save()
             await db.disconnect()
@@ -70,7 +70,7 @@ const sendEmailForResetPassword = async(req: NextApiRequest, res: NextApiRespons
         }
 
         // Si la cuenta SI esta confirmada, enviar el correo para restablecer la contraseña
-        user.token = jwt.signToken( user._id, '1d' )
+        user.token = jwt.signToken( { uid: user._id, expiresIn: '1d' } )
 
         await user.save()
         await db.disconnect()

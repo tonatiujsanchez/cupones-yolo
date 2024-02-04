@@ -64,8 +64,9 @@ const checkAuth = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
             return res.status(400).json({ msg: 'Not authorized' })
         }
 
-        const token = jwt.signToken( user._id ) //jwt
         const { _id, name, username, email, photo, role } = user
+        
+        const token = jwt.signToken({ uid:user._id, role }) //jwt
 
         return res.status(200).json({
             token,

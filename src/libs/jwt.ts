@@ -1,15 +1,21 @@
-
 import jwt from 'jsonwebtoken'
+import { USER_ROLES } from '@/constants'
+import { IUserRol } from '@/interfaces'
 
 
-export const signToken = ( uid: string, expiresIn='30d' ) => {
+interface SignTokenParams {
+    uid       : string
+    expiresIn?: string
+    role?     : IUserRol
+} 
+export const signToken = ({ uid, expiresIn='30d', role=USER_ROLES.client as IUserRol }:SignTokenParams ) => {
 
     if( !process.env.JWT_SECRET_SEED ){
         throw new Error('No hay semilla de JWT - Revisar variables de entorno')
     }
 
     return jwt.sign(
-        { uid },
+        { uid, role },
         process.env.JWT_SECRET_SEED,
         { expiresIn }
     )

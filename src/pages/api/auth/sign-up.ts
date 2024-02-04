@@ -63,7 +63,7 @@ const signUp = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         if( user && !user.status ){
             // En caso de que el usuario fue eliminado, volver a activar al usuario
             user.status = true
-            user.token = jwt.signToken( user._id )
+            user.token = jwt.signToken({ uid: user._id })
 
             await user.save()
             await db.disconnect()
@@ -96,7 +96,7 @@ const signUp = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
             email,
             password: bcryptjs.hashSync( password ),
         })
-        newUser.token = jwt.signToken( newUser._id )
+        newUser.token = jwt.signToken({ uid: newUser._id })
 
         await newUser.save()
         await db.disconnect()

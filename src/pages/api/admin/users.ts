@@ -94,7 +94,7 @@ const registerUser = async( req:NextApiRequest, res:NextApiResponse<Data> ) => {
         await newUser.save({ validateBeforeSave: true })
         await db.disconnect()
 
-        const token = jwt.signToken(newUser._id, newUser.email)
+        const token = jwt.signToken({ uid: newUser._id, role: newUser.role })
 
         return res.status(201).json({
             token,

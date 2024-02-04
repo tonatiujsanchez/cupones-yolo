@@ -60,8 +60,9 @@ const login = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
             return res.status(400).json({ msg: 'Usuario o Contraseña no válidos' })
         }
 
-        const token = jwt.signToken( userDB._id ) //jwt
         const { _id, name, username, email, photo, role } = userDB
+
+        const token = jwt.signToken({ uid: _id, role }) //jwt
 
         return res.status(200).json({
             token,
