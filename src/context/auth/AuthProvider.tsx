@@ -2,8 +2,10 @@ import { FC, useReducer } from 'react'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import { AuthContext, authReducer } from './'
+import { useCheckAuth } from '@/hooks'
 import { AuthStatus, COOKIE_AUTH_KEY } from '@/constants'
 import { IUserAuth } from '@/interfaces'
+import { LoadingYolostyle } from '@/components'
 
 
 interface Props {
@@ -26,16 +28,17 @@ export const AuthProvider: FC<Props> = ({ children }) => {
     const router = useRouter()
     const [state, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE)
 
-
     const login = ( token:string, user:IUserAuth )=> {
         Cookies.set(COOKIE_AUTH_KEY, token)
         dispatch({ type: '[Auth] - Login', payload: user })
     }
 
-    const logout = ():void => {
+    const logout = () => {
         Cookies.remove( COOKIE_AUTH_KEY )
         router.reload()
     }
+
+    useCheckAuth({ login, logout })
 
     return (
         <AuthContext.Provider value={{

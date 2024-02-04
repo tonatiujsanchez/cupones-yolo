@@ -64,3 +64,13 @@ export const changePassword = async({ password, token }:ChangePasswordParams):Pr
     const { data } = await yolostyleApi.put(`/auth/reset-password/${ token }`,{ password })
     return data
 }
+
+
+interface CheckTokenParams {
+    token   : string
+}
+export const checkToken = async({ token }:CheckTokenParams):Promise<{ msg: string }> => {
+                                                
+    const { data } = await yolostyleApi.get(`/auth/validate-session/${token}`)
+    return data
+}

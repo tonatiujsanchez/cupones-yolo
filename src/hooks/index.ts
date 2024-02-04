@@ -10,6 +10,7 @@ export * from './routes/useGetPublicRoutes'
 
 export * from './users/useAuth'
 export * from './users/useSignUp'
+export * from './users/useCheckAuth'
 export * from './users/useConfirmAccount'
 export * from './users/useResetPassword'
 export * from './users/useCheckPasswordToken'

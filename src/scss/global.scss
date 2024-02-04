@@ -95,6 +95,14 @@ body.fixed-body {
 }
 
 // === === === Loaders === === ===
+.main-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
 .custom-loader-primary {
     min-width:24px;
     min-height:24px;
