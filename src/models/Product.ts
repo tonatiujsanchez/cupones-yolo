@@ -43,11 +43,11 @@ const ProductSchema = new Schema<IProduct>({
         ref: 'Type',
         required: true
     },
-    category:{
+    category:[{
         type: mongoose.Types.ObjectId,
         ref: 'Category',
         required: true
-    },
+    }],
     active  : { 
         type: Boolean, 
         default: true

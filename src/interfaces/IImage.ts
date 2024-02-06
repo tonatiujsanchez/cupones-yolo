@@ -8,7 +8,7 @@ export interface IImage {
     publicId: string
     url     : string
     title?  : string
-    alt?    : string | null
+    alt?    : string
     width   : number
     height  : number
 

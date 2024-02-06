@@ -1,7 +1,7 @@
 import mongoose, { Model, Schema, model } from 'mongoose'
-import { IType } from '@/interfaces'
+import { ICategory } from '@/interfaces'
 
-const TypeSchema = new Schema<IType>({
+const CategorySchema = new Schema<ICategory>({
     title: {
         type: String,
         required: true
@@ -21,11 +21,11 @@ const TypeSchema = new Schema<IType>({
     status: {
         type: Boolean,
         default: true
-    } 
+    }
 },{
     timestamps: true
 })
 
-const Type: Model<IType> = mongoose.models.Type || model('Type', TypeSchema)
+const Category: Model<ICategory> = mongoose.models.Category || model('Category', CategorySchema)
 
-export default Type
+export default Category
