@@ -593,6 +593,41 @@ export const SearchIcon: FC<IconProps> = ({ fill = 'none', stroke = 'currentColo
     )
 }
 
+export const LayerIcon: FC<IconProps> = ({ fill = 'none', stroke = 'currentColor', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill={ fill } 
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+    )
+}
+
+export const ShieldIcon: FC<IconProps> = ({ fill = 'none', stroke = 'currentColor', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            fill={ fill }
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={36}
+                d="M463.1 112.37C373.68 96.33 336.71 84.45 256 48c-80.71 36.45-117.68 48.33-207.1 64.37C32.7 369.13 240.58 457.79 256 464c15.42-6.21 223.3-94.87 207.1-351.63z"
+            />
+        </svg>
+    )
+}
+
 export const ArchiveBoxArrowDownIcon: FC<IconProps> = ({ fill = 'none', stroke = 'currentColor', strokeWidth = 1.5 }) => {
     return (
         <svg 

@@ -4,8 +4,10 @@ import {
     BuildingIcon,
     CouponIcon,
     HeartIcon,
+    LayerIcon,
     LogoutIcon,
     PackageIcon,
+    ShieldIcon,
     ShirtIcon,
     ShoppingCartIcon,
     TruckIcon,
@@ -17,19 +19,29 @@ import styles from './Sidebar.module.scss'
 
 const linksAdmin = [
     {
-        icon: <ShirtIcon strokeWidth={1.5} />,
-        label: 'Productos',
+        icon: <LayerIcon />,
+        label: 'Dashboard',
         path: '/dashboard'
+    },
+    {
+        icon: <ShirtIcon />,
+        label: 'Productos',
+        path: '/dashboard/productos'
     },
     {
         icon: <TruckIcon />,
         label: 'Pedidos',
-        path: '/dashboard'
+        path: '/dashboard/pedidos'
     },
     {
         icon: <CouponIcon strokeWidth={1.4} />,
         label: 'Cupones',
         path: '/dashboard/cupones'
+    },
+    {
+        icon: <ShieldIcon />,
+        label: 'Usuarios',
+        path: '/dashboard/usuarios'
     },
 ]
 
@@ -44,21 +56,21 @@ const linksUser = [
         label: 'Carrito',
         path: '/dashboard'
     },
-    // {
-    //     icon: <HeartIcon />,
-    //     label: 'Mis favoritos',
-    //     path: '/dashboard'
-    // },
-    // {
-    //     icon: <PackageIcon />,
-    //     label: 'Mis Pedidos',
-    //     path: '/dashboard'
-    // },
-    // {
-    //     icon: <BuildingIcon />,
-    //     label: 'Mis direcciones',
-    //     path: '/dashboard'
-    // },
+    {
+        icon: <HeartIcon />,
+        label: 'Mis favoritos',
+        path: '/dashboard'
+    },
+    {
+        icon: <PackageIcon />,
+        label: 'Mis Pedidos',
+        path: '/dashboard'
+    },
+    {
+        icon: <BuildingIcon />,
+        label: 'Mis direcciones',
+        path: '/dashboard'
+    },
 ]
 
 
