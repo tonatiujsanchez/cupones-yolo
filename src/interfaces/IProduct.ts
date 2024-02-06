@@ -1,7 +1,7 @@
 import { IImage } from ".";
 
 export interface IProduct {
-    _id?       : string;
+    _id?       : string
 
     title      : string
     description: string

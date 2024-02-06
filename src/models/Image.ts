@@ -3,7 +3,7 @@ import { IImage, ISectionImage } from '../interfaces'
 import { IMAGES_SECTIONS, IMAGES_SECTIONS_OPTIONS } from '@/constants'
 
 
-export const imageSchema = new Schema<IImage>({
+export const ImageSchema = new Schema<IImage>({
     publicId: { 
         type: String,
         required: true
@@ -52,6 +52,6 @@ export const imageSchema = new Schema<IImage>({
 
 
 
-const Image:Model<IImage> = mongoose.models.Image || mongoose.model('Image', imageSchema)
+const Image:Model<IImage> = mongoose.models.Image || mongoose.model('Image', ImageSchema)
 
 export default Image

@@ -1,6 +1,6 @@
 import { IUser } from "."
 
-export type ISectionImage = 'products' | 'covers'
+export type ISectionImage = 'products' | 'covers' | 'users'
 
 export interface IImage {
     _id?    : string
