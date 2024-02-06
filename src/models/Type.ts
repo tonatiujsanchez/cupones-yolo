@@ -1,7 +1,7 @@
 import mongoose, { Model, Schema, model } from 'mongoose'
-import { ISize } from '@/interfaces'
+import { IType } from '@/interfaces'
 
-const SizeSchema = new Schema<ISize>({
+const TypeSchema = new Schema<IType>({
     value: {
         type: String,
         required: true
@@ -10,14 +10,18 @@ const SizeSchema = new Schema<ISize>({
         type: String,
         required: true
     },
+    cover: {
+        type: String,
+        default: null
+    },
     status: {
         type: Boolean,
         default: true
-    }    
+    } 
 },{
     timestamps: true
 })
 
-const Size: Model<ISize> = mongoose.models.Size || model('Size', SizeSchema)
+const Type: Model<IType> = mongoose.models.Size || model('Type', TypeSchema)
 
-export default Size
+export default Type

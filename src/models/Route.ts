@@ -1,5 +1,5 @@
-import { IRoute } from "@/interfaces";
-import { Model, Schema, model, models } from "mongoose";
+import { Model, Schema, model, models } from 'mongoose'
+import { IRoute } from '@/interfaces'
 
 
 export const RouteSchema = new Schema<IRoute>({
@@ -19,6 +19,8 @@ export const RouteSchema = new Schema<IRoute>({
         type: Boolean, 
         default: true 
     }
+},{
+    timestamps: true
 })
 
 const Route:Model<IRoute> = models.Route || model('Route', RouteSchema )

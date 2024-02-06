@@ -1,4 +1,4 @@
-import { IImage } from ".";
+import { IImage, ISize, IType } from ".";
 
 export interface IProduct {
     _id?       : string
@@ -9,9 +9,9 @@ export interface IProduct {
     slug       : string
     inStock    : number
     images     : IImage[]
-    sizes      : ISize[]  //FIXME:
+    sizes      : ISize[]  
     tags       : string[] //FIXME:
-    type       : IType    //FIXME:
+    type       : IType   
     category   : string   //FIXME:
 
     active     : boolean
@@ -21,6 +21,6 @@ export interface IProduct {
     updatedAt? : string
 }
 
-export type ISize     = 'XS'|'S'|'M'|'L'|'XL'|'XXL' | 'ONE_SIZE'
-export type IType     = 'shirts'|'pants'|'hoodies'|'hats'
+// export type ISize     = 'XS'|'S'|'M'|'L'|'XL'|'XXL' | 'ONE_SIZE'
+// export type IType     = 'shirts'|'pants'|'hoodies'|'hats'
 export type ICategory = 'men'|'women'|'kids'|'unisex'
