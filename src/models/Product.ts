@@ -38,16 +38,21 @@ const ProductSchema = new Schema<IProduct>({
         ref: 'Tag',
         required: true
     }],
-    type:{
+    type:[{
         type: mongoose.Types.ObjectId,
         ref: 'Type',
         required: true
-    },
+    }],
     category:[{
         type: mongoose.Types.ObjectId,
         ref: 'Category',
         required: true
     }],
+    sku: {
+        type: String,
+        required: true,
+        unique: true
+    },
     active  : { 
         type: Boolean, 
         default: true

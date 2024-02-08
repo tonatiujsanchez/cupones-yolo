@@ -11,8 +11,9 @@ export interface IProduct {
     images     : IImage[]
     sizes      : ISize[]  
     tags       : ITag[]
-    type       : IType   
+    type       : IType[]
     category   : ICategory[]
+    sku        : string
 
     active     : boolean
     status     : boolean

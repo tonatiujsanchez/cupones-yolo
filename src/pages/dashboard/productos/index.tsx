@@ -1,10 +1,16 @@
-import { DashboardLayout } from "@/components"
-
+import { DashboardLayout, LinkPrimary } from '@/components'
+import styles from './ProductsAdminPage.module.scss'
 
 const ProductsAdminPage = () => {
   return (
     <DashboardLayout headding="Productos">
-      HOla
+      <div className={ styles['products__link-container'] }>        
+        <LinkPrimary
+          href={'/dashboard/productos/nuevo'}
+        >
+            Nuevo producto
+        </LinkPrimary>
+      </div>
     </DashboardLayout>
   )
 }

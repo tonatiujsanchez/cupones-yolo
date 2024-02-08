@@ -1,0 +1,12 @@
+.products__link-container {
+    padding-block: 2rem;
+    padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+    .products__link-container {
+        display: flex;
+        padding-inline: 2rem;
+        justify-content: flex-end;
+    }
+}

@@ -16,6 +16,8 @@ export * from './Shared/ModalFormHeader'
 export * from './Shared/ModalDelete'
 export * from './Shared/WarningModal'
 
+export * from './Links/LinkPrimary'
+
 export * from './Buttons/ButtonPrimary'
 export * from './Buttons/ButtonIconsAnimated'
 export * from './Buttons/ButtonDelete'
@@ -41,6 +43,10 @@ export * from './Coupons/CouponListItem'
 export * from './Coupons/CouponsSectionFilter'
 export * from './Coupons/CouponSettingsSection'
 export * from './Coupons/CouponAddForm'
+
+
+export * from './Products/ProductForm'
+
 
 export * from './FormComponents/DatePicker'
 export * from './FormComponents/Checkbox'
