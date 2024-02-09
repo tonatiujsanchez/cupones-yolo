@@ -15,3 +15,5 @@ export * from './users/useConfirmAccount'
 export * from './users/useResetPassword'
 export * from './users/useCheckPasswordToken'
 export * from './users/useChangePassword'
+
+export * from './categories/usePostCategory'

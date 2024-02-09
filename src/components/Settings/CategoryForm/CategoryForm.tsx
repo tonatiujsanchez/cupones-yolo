@@ -1,9 +1,10 @@
 import { FC } from 'react'
+import { useForm } from 'react-hook-form'
 import { ButtonPrimary, Dropzone, InputText, ModalFormHeader, } from '@/components'
 import { ICategory } from '@/interfaces'
 
 import styles from './CategoryForm.module.scss'
-import { useForm } from 'react-hook-form'
+import { usePostCategory } from '@/hooks'
 
 
 interface Props {
@@ -13,9 +14,13 @@ interface Props {
 export const CategoryForm:FC<Props> = ({ category, onClose }) => {
 
     const { register, handleSubmit, formState:{ errors } } = useForm<ICategory>()
+    const { categoryPostMutation } = usePostCategory()
 
-    const onCategorySubmit = () => {
-        console.log('Hola')
+    const onCategorySubmit = ( data:ICategory ) => {
+        if( category ){
+            return console.log('Editar catería')
+        }
+        categoryPostMutation.mutate({ category:data })
     }
 
     return (
