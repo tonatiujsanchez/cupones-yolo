@@ -58,8 +58,13 @@ export * from './FormComponents/WYSIWYGEditorLite'
 export * from './FormComponents/CouponCards'
 export * from './FormComponents/Dropdown'
 export * from './FormComponents/Toggle'
+export * from './FormComponents/Dropzone'
 
 export * from './Users/SignUpMsgSuccess'
 export * from './Users/MsgSuccessAuth'
+
+
+export * from './Settings/SettingsListSection'
+export * from './Settings/CategoryForm'
 
 

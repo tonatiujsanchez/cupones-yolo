@@ -1,0 +1,31 @@
+@import '../../../scss/index.scss';
+
+.category-form {
+    background-color: $white;
+    border-radius: 0.5rem;
+    padding-inline: 2rem;
+    padding-block-start: 2rem;
+    padding-block-end: 2.5rem;
+    min-width: 30rem;
+}
+
+.category-form__fields {
+    display: flex;
+    flex-direction: column;
+    padding-block-start: 2rem;
+}
+
+.category-form__cover {
+    margin-block-end: 1.5rem;
+    height: 12rem;
+}
+
+.button-container {
+    margin-block-start: 1rem;
+}
+
+@media (min-width: 640px) {
+    .category-form {
+        min-width: 40rem;
+    }
+}

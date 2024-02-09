@@ -1,0 +1,15 @@
+.settings-section {
+
+    button {
+        width: auto;
+        svg {
+            width: 2.4rem;
+        }
+    }
+}
+
+.settings-section__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

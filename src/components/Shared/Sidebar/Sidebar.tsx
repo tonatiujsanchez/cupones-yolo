@@ -2,6 +2,7 @@ import NextLink from 'next/link'
 import Image from 'next/image'
 import { 
     BuildingIcon,
+    CogIcon,
     CouponIcon,
     HeartIcon,
     LayerIcon,
@@ -42,6 +43,11 @@ const linksAdmin = [
         icon: <ShieldIcon />,
         label: 'Usuarios',
         path: '/dashboard/usuarios'
+    },
+    {
+        icon: <CogIcon />,
+        label: 'Ajustes',
+        path: '/dashboard/ajustes'
     },
 ]
 

@@ -1,0 +1,10 @@
+
+.settings {
+    padding-block: 1rem;
+    padding-inline: 1rem;
+}
+@media (min-width: 640px) {
+    .settings {
+        padding-inline: 2rem;
+    }   
+} 

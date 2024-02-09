@@ -53,6 +53,9 @@ const ProductSchema = new Schema<IProduct>({
         required: true,
         unique: true
     },
+    discountRate: {
+        type: Number,
+    },
     active  : { 
         type: Boolean, 
         default: true

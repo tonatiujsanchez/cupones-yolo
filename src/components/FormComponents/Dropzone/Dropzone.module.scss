@@ -1,0 +1,26 @@
+@import '../../../scss/index.scss';
+
+.dropzone{
+    border-radius: 0.5rem;
+    border: $border-dashed-gray-light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    padding: 1rem;
+    cursor: pointer;
+    color: $gray-light;
+    svg {
+        width: 2.4rem;
+    }
+
+    &:hover {
+        color: $primary;
+        border-color: $primary;
+    }
+}
+
+.dropzone__dimensions {
+    font-size: 1.1rem;
+}
