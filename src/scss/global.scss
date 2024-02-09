@@ -94,6 +94,13 @@ body.fixed-body {
     color: $red-dark;
 }
 
+.input-slug {
+    color: $gray-light;
+    &:focus {
+        color: $black;
+    }
+}
+
 // === === === Loaders === === ===
 .main-loader {
     display: flex;

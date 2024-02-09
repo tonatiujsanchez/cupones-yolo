@@ -1,10 +1,11 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
+import { getSlug, isValidSlug } from '@/libs'
+import { usePostCategory } from '@/hooks'
 import { ButtonPrimary, Dropzone, InputText, ModalFormHeader, } from '@/components'
 import { ICategory } from '@/interfaces'
 
 import styles from './CategoryForm.module.scss'
-import { usePostCategory } from '@/hooks'
 
 
 interface Props {
@@ -13,8 +14,27 @@ interface Props {
 }
 export const CategoryForm:FC<Props> = ({ category, onClose }) => {
 
-    const { register, handleSubmit, formState:{ errors } } = useForm<ICategory>()
+    const { register, handleSubmit, watch, formState:{ errors }, getValues, setValue } = useForm<ICategory>()
     const { categoryPostMutation } = usePostCategory()
+
+    const slugRef = useRef({})
+    slugRef.current = watch('slug', '')
+
+    useEffect(()=>{
+        const { unsubscribe } = watch( (value, { name } )=>{
+            
+            if( name === 'title' && value.title){        
+                if( category ){ return }
+                handleChangeSlug()
+            }
+        })
+        return () => unsubscribe()
+    },[ watch ])
+
+    const handleChangeSlug = () => {
+        const slug = getSlug( getValues('title') )
+        setValue('slug', slug, { shouldValidate: true })
+    }
 
     const onCategorySubmit = ( data:ICategory ) => {
         if( category ){
@@ -58,10 +78,13 @@ export const CategoryForm:FC<Props> = ({ category, onClose }) => {
                     placeholder="nombre-de-la-categoria"
                     isRequired
                     { ...register('slug', {
-                        required: 'El slug es requerido'
+                        required: 'El slug es requerido',
+                        validate: ( value )=> !isValidSlug( value ) && 'El slug no es válido' 
                     })}
                     error={ errors.slug }
+                    className={'input-slug'}
                 />
+                
             </div>
             <div className={ styles['button-container'] }>
                 <ButtonPrimary
