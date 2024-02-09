@@ -28,7 +28,8 @@ const CouponSchema = new Schema<ICoupon>({
         default: null
     },
     folio: {
-        type: String, 
+        type: String,
+        unique : true,
         required: true
     },
     client: {

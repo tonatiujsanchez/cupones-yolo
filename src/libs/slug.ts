@@ -5,7 +5,7 @@ export const getSlug = (text:string):string => {
     const options = {
         replacement: '-',
         lower: true,
-        remove: /[*+~.()'"!:@,[\]{}?¿=#/\\;°¡¨`^¬]/g
+        remove: /[*+~.()'"!:@,[\]{}?¿=#/\\;°¡¨`^¬´]/g
     }
 
     const slug = slugify(text, options )

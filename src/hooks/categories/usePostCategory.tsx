@@ -4,12 +4,13 @@ import { toastError, toastSuccess } from '@/libs'
 import { categoriesActions } from '@/services'
 
 
-export const usePostCategory = () => {
+export const usePostCategory = (reset:()=>void) => {
 
     const categoryPostMutation = useMutation({
         mutationFn: categoriesActions.newCategory,
         onSuccess: ( data ) => {
             toastSuccess('Categoría agregada')
+            reset()
             // FIXME: Agregar la nueva categoría al cache
         },
         onError: ( error:AxiosError<{ msg:string }> ) => {

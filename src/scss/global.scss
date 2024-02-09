@@ -95,10 +95,16 @@ body.fixed-body {
 }
 
 .input-slug {
-    color: $gray-light;
+    color: $gray;
     &:focus {
         color: $black;
     }
+}
+
+.input-label {
+    font-size: 1.6rem;
+    color: $gray;
+    font-weight: 500;
 }
 
 // === === === Loaders === === ===

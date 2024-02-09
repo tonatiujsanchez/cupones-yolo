@@ -8,6 +8,7 @@ const TypeSchema = new Schema<IType>({
     },
     slug: {
         type: String,
+        unique : true,
         required: true
     },
     cover: {

@@ -8,11 +8,16 @@ const CategorySchema = new Schema<ICategory>({
     },
     slug: {
         type: String,
+        unique : true,
         required: true
     },
     cover: {
         type: String,
         default: null
+    },
+    pinned: {
+        type: Boolean,
+        default: true
     },
     active: {
         type: Boolean,

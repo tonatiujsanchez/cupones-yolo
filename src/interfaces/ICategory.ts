@@ -4,7 +4,8 @@ export interface ICategory {
     title     : string
     slug      : string
     cover     : string | null
-
+    pinned    : boolean
+    
     active    : boolean
     status    : boolean
 

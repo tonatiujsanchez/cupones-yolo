@@ -16,6 +16,7 @@ const ProductSchema = new Schema<IProduct>({
     },
     slug: {
         type: String,
+        unique : true,
         required: true
     },
     inStock: {

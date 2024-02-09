@@ -1,8 +1,8 @@
 import { FC, useEffect, useRef } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { getSlug, isValidSlug } from '@/libs'
 import { usePostCategory } from '@/hooks'
-import { ButtonPrimary, Dropzone, InputText, ModalFormHeader, } from '@/components'
+import { ButtonPrimary, Dropzone, InputText, ModalFormHeader, Toggle, } from '@/components'
 import { ICategory } from '@/interfaces'
 
 import styles from './CategoryForm.module.scss'
@@ -14,8 +14,13 @@ interface Props {
 }
 export const CategoryForm:FC<Props> = ({ category, onClose }) => {
 
-    const { register, handleSubmit, watch, formState:{ errors }, getValues, setValue } = useForm<ICategory>()
-    const { categoryPostMutation } = usePostCategory()
+    const { register, handleSubmit, watch, formState:{ errors }, control, getValues, setValue, reset } = useForm<ICategory>({
+        defaultValues: {
+            active: true,
+            pinned: true
+        }
+    })
+    const { categoryPostMutation } = usePostCategory(reset)
 
     const slugRef = useRef({})
     slugRef.current = watch('slug', '')
@@ -79,18 +84,65 @@ export const CategoryForm:FC<Props> = ({ category, onClose }) => {
                     isRequired
                     { ...register('slug', {
                         required: 'El slug es requerido',
-                        validate: ( value )=> !isValidSlug( value ) && 'El slug no es válido' 
+                        validate: ( value )=> !isValidSlug( value ) ? 'El slug no es válido' : undefined 
                     })}
                     error={ errors.slug }
                     className={'input-slug'}
                 />
-                
+                <div className={ styles['category-form__toggles-container'] }>
+                    <div className={ styles['category-form__toggle'] }>
+                        <label 
+                            htmlFor="active"
+                            className="input-label"
+                        >
+                                Activo
+                        </label>
+                        <Controller
+                            control={ control }
+                            name="active"
+                            render={({ field })=>(
+                                <Toggle
+                                    fieldName="active" 
+                                    value={ field.value } 
+                                    onChange={ field.onChange }
+                                />
+                            )}
+                        />
+                    </div>
+                    <div className={ styles['category-form__toggle'] }>
+                        <label 
+                            htmlFor="pinned"
+                            className="input-label"
+                        >
+                            Destacado
+                        </label>
+                        <Controller
+                            control={ control }
+                            name="pinned"
+                            render={({ field })=>(
+                                <Toggle
+                                    fieldName="pinned" 
+                                    value={ field.value } 
+                                    onChange={ field.onChange }
+                                />
+                            )}
+                        />
+                    </div>
+                </div>
             </div>
             <div className={ styles['button-container'] }>
                 <ButtonPrimary
                     type="submit"
+                    disabled={ categoryPostMutation.isPending }
                 >
-                    { category ? 'Editar' : 'Agregar' }
+                    {
+                        categoryPostMutation.isPending 
+                        ?(
+                            <div className="custom-loader-white"></div>
+                        ):(
+                            category ? 'Editar' : 'Agregar'
+                        )
+                    }
                 </ButtonPrimary>
             </div>
         </form>

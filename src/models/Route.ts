@@ -9,7 +9,8 @@ export const RouteSchema = new Schema<IRoute>({
     },
     slug: {
         type: String,
-        required: true,
+        unique : true,
+        required: true
     },
     active: { 
         type: Boolean, 

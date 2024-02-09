@@ -10,13 +10,13 @@ export const UserSchema = new Schema<IUser>({
     },
     username: { 
         type: String,
-        required: true,
-        unique: true
+        unique: true,
+        required: true
     },
     email   : { 
         type: String,
-        required: true,
-        unique: true
+        unique: true,
+        required: true
     },
     token   : {
         type: String,
