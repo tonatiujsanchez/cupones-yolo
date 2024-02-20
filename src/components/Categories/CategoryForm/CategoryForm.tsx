@@ -43,7 +43,7 @@ export const CategoryForm:FC<Props> = ({ category, onClose }) => {
 
     const onCategorySubmit = ( data:ICategory ) => {
         if( category ){
-            return console.log('Editar catería')
+            return console.log('Editar catería') //FIXME:
         }
         categoryPostMutation.mutate({ category:data })
     }

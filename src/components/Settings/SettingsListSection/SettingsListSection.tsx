@@ -1,46 +1,31 @@
-import { FC, useState } from 'react'
-import { ButtonPrimary, CategoryForm, ModalContainer } from '@/components'
+import { FC, ReactNode } from 'react'
+import { ButtonPrimary } from '@/components'
 import { PlusCircleIcon } from '@/components/Icons'
 
 import styles from './SettingsListSection.module.scss'
 
-
-type ISectionType = 'categories' | 'types' | 'sizes'
-
 interface Props {
+    children: ReactNode
     title: string
-    sectionSelected: ISectionType
+    onClick: ()=> void
 }
-export const SettingsListSection:FC<Props> = ({ title, sectionSelected }) => {
+export const SettingsListSection:FC<Props> = ({ children, title, onClick }) => {
     
-    const [openFormSeccion, setOpenFormSeccion] = useState<ISectionType>()
-
-
-    const onCloseFormSectionModal = () => {
-        setOpenFormSeccion(undefined)
-    }
-
     return (
         <>
             <section className={styles['settings-section']}>
                 <div className={styles['settings-section__header']}>
                     <h3>{ title }</h3>
                     <ButtonPrimary
-                        onClick={ () => setOpenFormSeccion( sectionSelected ) }
+                        onClick={ onClick }
                     >
                         <PlusCircleIcon />
                     </ButtonPrimary>
                 </div>
-                Lista de { title }
+                <div>
+                    { children }
+                </div>
             </section>
-            <ModalContainer
-                show={ !!openFormSeccion }
-                onHidden={ onCloseFormSectionModal }
-            >
-                { openFormSeccion === 'categories' && <CategoryForm onClose={ onCloseFormSectionModal  }  /> }
-                { openFormSeccion === 'types' && 'Tipos' }
-                { openFormSeccion === 'sizes' && 'Tallas' }
-            </ModalContainer>
         </>
     )
 }

@@ -65,6 +65,8 @@ export * from './Users/MsgSuccessAuth'
 
 
 export * from './Settings/SettingsListSection'
-export * from './Settings/CategoryForm'
+
+export * from './Categories/CategoryForm'
+export * from './Categories/CategoryList'
 
 
