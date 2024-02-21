@@ -17,3 +17,4 @@ export * from './users/useCheckPasswordToken'
 export * from './users/useChangePassword'
 
 export * from './categories/usePostCategory'
+export * from './categories/useGetCategories'

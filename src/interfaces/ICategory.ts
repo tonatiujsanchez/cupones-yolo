@@ -12,3 +12,11 @@ export interface ICategory {
     createdAt?: string
     updatedAt?: string
 }
+
+export type ICategoriesResp = {
+    currentPage    : number
+    totalPages     : number
+    pageSize       : number
+    totalCategories: number
+    categories     : ICategory[]
+}
