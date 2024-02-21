@@ -1,7 +1,7 @@
 @import '../../../scss/index.scss';
 
 .button {
-    background-color: $red;
+    background-color: $blue;
     color: $white;
     padding: 0.6rem 1.2rem;
     border-radius: 0.5rem;
@@ -12,22 +12,22 @@
     transition: all 0.3s;
 
     &:hover {
-        background: $red-dark;
-        box-shadow: 0 0.2rem 1rem $red;
+        background: $blue-dark;
+        box-shadow: 0 0.2rem 1rem $blue;
     }
 
     svg {
-        max-width: 1.4rem;
+        max-width: 1.5rem;
         stroke-width: 1.8;
     }
 }
 
 .button-outline {
-    background: $red-light;
-    color: $red;
+    background: $blue-light;
+    color: $blue-dark;
 
     &:hover {
-        background-color: $red;
+        background-color: $blue;
         color: $white;
         box-shadow: none;
     }
