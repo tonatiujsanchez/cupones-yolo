@@ -7,6 +7,7 @@ const SettingsPage = () => {
         <DashboardLayout headding="Ajustes">
             <div className={ styles['settings'] }>
                 <CategoryList />
+                <CategoryList />
             </div>
         </DashboardLayout>
     )

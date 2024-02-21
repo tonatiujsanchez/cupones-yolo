@@ -15,6 +15,7 @@ export * from './Shared/Overlay'
 export * from './Shared/ModalFormHeader'
 export * from './Shared/ModalDelete'
 export * from './Shared/WarningModal'
+export * from './Shared/TablePrimary'
 
 export * from './Links/LinkPrimary'
 
@@ -68,5 +69,6 @@ export * from './Settings/SettingsListSection'
 
 export * from './Categories/CategoryForm'
 export * from './Categories/CategoryList'
+export * from './Categories/CategoryTable'
 
 

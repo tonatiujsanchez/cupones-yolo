@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import { CategoryForm, ModalContainer, SettingsListSection } from '@/components'
+import { CategoryForm, CategoryTable, ErrorMessage, ModalContainer, SettingsListSection } from '@/components'
 import { useGetCategories } from '@/hooks'
+
+import styles from './CategoryList.module.scss'
 
 
 export const CategoryList = () => {
@@ -16,19 +18,29 @@ export const CategoryList = () => {
     return (
         <>        
             <SettingsListSection
-                title="Categorias"
+                title="Categorías"
                 onClick = { ()=> setOpenFormCategory(true) }
             >
-                 {
-                    categoriesQuery.data
-                    ?(
-                        categoriesQuery.data.categories.map( category => (
-                            <p key={ category._id }>{ category.title }</p>
-                        ))
-                    ):(
-                        <p>Sin data</p>
+                {    categoriesQuery.isLoading && (
+                        <div className={ styles['loader-container'] }>
+                            <span className="loader-cube"></span>
+                        </div>
                     )
-                 }
+                }
+                { categoriesQuery.error && (
+                    <ErrorMessage
+                        message="Hubo un error al cargar las categorías"
+                    />
+                    )
+                }
+                {
+                    categoriesQuery.data && (
+                        <CategoryTable 
+                            categories={ categoriesQuery.data.categories }
+                            currentPage={ categoriesQuery.data.currentPage }
+                        />
+                    )
+                }
             </SettingsListSection>
             <ModalContainer
                 show={ openFormCategory }
