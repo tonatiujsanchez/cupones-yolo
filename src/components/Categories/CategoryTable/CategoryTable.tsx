@@ -1,9 +1,10 @@
 import { FC } from 'react'
-import { MessageWithoutResults, TablePrimary } from '@/components'
+import { ButtonDanger, MessageWithoutResults, TablePrimary } from '@/components'
 import { CATEGORIES_PAGE_SIZE } from '@/constants'
 import { ICategory } from '@/interfaces'
 
 import styles from './CategoryTable.module.scss'
+import { TrashIcon } from '@/components/Icons'
 
 
 interface Props {
@@ -48,7 +49,14 @@ export const CategoryTable:FC<Props> = ({ categories, currentPage }) => {
                                     <td className={ styles['category-name'] }>{ category.title }</td>
                                     <td>{ category.slug }</td>
                                     <td>{ category.active.toString() }</td>
-                                    <td>Botones</td>
+                                    <td className={ styles['category-actions'] }>
+                                        <ButtonDanger
+                                            onClick={ ()=>{} }
+                                            outline
+                                        >
+                                            <TrashIcon />
+                                        </ButtonDanger>
+                                    </td>
                                 </TablePrimary.TRow>
                             )}
                         )

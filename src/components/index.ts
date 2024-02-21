@@ -24,6 +24,7 @@ export * from './Buttons/ButtonIconsAnimated'
 export * from './Buttons/ButtonDelete'
 export * from './Buttons/ButtonLight'
 export * from './Buttons/ButtonOutlineLight'
+export * from './Buttons/ButtonDanger'
 
 export * from './Loadings/LoadingYolostyle'
 
