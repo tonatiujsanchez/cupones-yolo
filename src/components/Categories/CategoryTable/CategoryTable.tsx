@@ -10,8 +10,9 @@ import styles from './CategoryTable.module.scss'
 interface Props {
     categories: ICategory[]
     currentPage: number
+    onEditCategory: ( category:ICategory )=> void
 }
-export const CategoryTable:FC<Props> = ({ categories, currentPage }) => {
+export const CategoryTable:FC<Props> = ({ categories, currentPage, onEditCategory }) => {
     return (
 
         categories.length === 0
@@ -51,7 +52,7 @@ export const CategoryTable:FC<Props> = ({ categories, currentPage }) => {
                                     <td>{ category.active.toString() }</td>
                                     <td className={ styles['category-actions'] }>
                                         <ButtonInfo
-                                            onClick={ ()=>{} }
+                                            onClick={()=> onEditCategory( category )}
                                             outline
                                         >
                                             <EditIcon />

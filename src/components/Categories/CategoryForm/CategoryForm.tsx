@@ -26,6 +26,18 @@ export const CategoryForm:FC<Props> = ({ category, onClose }) => {
     slugRef.current = watch('slug', '')
 
     useEffect(()=>{
+        if(category){
+            reset({
+                cover: category.cover,
+                title: category.title,
+                slug: category.slug,
+                active: category.active,
+                pinned: category.pinned,
+            })
+        }
+    },[category])
+
+    useEffect(()=>{
         const { unsubscribe } = watch( (value, { name } )=>{
             
             if( name === 'title' && value.title){        

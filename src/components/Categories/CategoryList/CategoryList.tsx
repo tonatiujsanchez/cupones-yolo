@@ -3,17 +3,24 @@ import { CategoryForm, CategoryTable, ErrorMessage, ModalContainer, SettingsList
 import { useGetCategories } from '@/hooks'
 
 import styles from './CategoryList.module.scss'
+import { ICategory } from '@/interfaces'
 
 
 export const CategoryList = () => {
 
     const [openFormCategory, setOpenFormCategory] = useState<boolean>(false)
+    const [categoryEdit, setCategoryEdit] = useState<ICategory>()
     const {  categoriesQuery  } = useGetCategories({ page: 1 })
 
     const onCloseFormSectionModal = () => {
         setOpenFormCategory(false)
+        setCategoryEdit( undefined )
+        
     }
     
+    const onEditCategory = (category:ICategory) => {
+        setCategoryEdit(category)
+    }
 
     return (
         <>        
@@ -38,15 +45,19 @@ export const CategoryList = () => {
                         <CategoryTable 
                             categories={ categoriesQuery.data.categories }
                             currentPage={ categoriesQuery.data.currentPage }
+                            onEditCategory={ onEditCategory }
                         />
                     )
                 }
             </SettingsListSection>
             <ModalContainer
-                show={ openFormCategory }
+                show={ openFormCategory || !!categoryEdit }
                 onHidden={ onCloseFormSectionModal }
             >
-                <CategoryForm onClose={ onCloseFormSectionModal  }  />
+                <CategoryForm
+                    onClose={ onCloseFormSectionModal }
+                    category={ categoryEdit }
+                />
             </ModalContainer>
         </>
     )

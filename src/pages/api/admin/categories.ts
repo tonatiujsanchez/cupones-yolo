@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { FilterQuery } from 'mongoose'
+import { FilterQuery, isValidObjectId } from 'mongoose'
 import { db } from '@/database'
 import { isValidSlug } from '@/libs'
 import { Category } from '@/models'
@@ -22,6 +22,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         case 'POST':
             return addNewCategory( req, res )
             
+        case 'PUT':
+            return updateCategory( req, res )
+            
         default:
             return res.status(400).json({ msg: 'Bad Request' })
     }
@@ -33,7 +36,6 @@ const addNewCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
     let { title='', slug='', cover, pinned=true,  active=true  } = req.body
     title = title.trim()
     slug = slug.trim()
-    console.log(req.body.title)
 
     if( title === '' ){
         return res.status(400).json({ msg: 'El titulo de la categoría es requerido' })
@@ -124,6 +126,50 @@ const getCategories = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
     } catch (error) {
         await db.disconnect()
         console.log(error)
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
+}
+
+const updateCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+    
+    const { _id  } = req.body
+
+    if( !isValidObjectId(_id) ){
+        return res.status(400).json({ msg: 'ID de categoria no válido' })
+    }
+
+    try {
+        await db.connect()
+        const category = await Category.findById(_id)
+
+        if( !category ){
+            await db.disconnect()
+            return res.status(400).json({ msg: 'Categoría no encontrada' })
+        }
+
+        const {
+           title  = category.title, 
+           slug   = category.slug, 
+           cover  = category.cover,
+           pinned = category.pinned,
+           active = category.active,
+        } = req.body
+
+        category.title  = title
+        category.slug   = slug
+        category.cover  = cover
+        category.pinned = pinned
+        category.active = active
+
+        await category.save()
+        await db.disconnect()
+
+        return res.status(200).json( category )
+        
+    } catch (error) {
+        console.log(error)
+        await db.disconnect()        
         return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
     }
 
