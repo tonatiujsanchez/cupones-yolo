@@ -57,6 +57,7 @@ export const CategoryList = () => {
                 <CategoryForm
                     onClose={ onCloseFormSectionModal }
                     category={ categoryEdit }
+                    currentPage={ categoriesQuery.data?.currentPage || 1 }
                 />
             </ModalContainer>
         </>

@@ -23,3 +23,13 @@ export const getCategories = async({ page }:GetCategoriesParams):Promise<ICatego
     const { data } = await yolostyleApi.get('/admin/categories', { params })
     return data
 } 
+
+
+interface UpdateCategoryParams {
+    category: ICategory
+}
+export const updateCategory = async( { category }:UpdateCategoryParams ):Promise<ICategory> => {
+    
+    const { data } = await yolostyleApi.put('/admin/categories', category )
+    return data
+}

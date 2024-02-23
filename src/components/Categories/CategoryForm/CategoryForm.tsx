@@ -6,13 +6,15 @@ import { ButtonPrimary, Dropzone, InputText, ModalFormHeader, Toggle, } from '@/
 import { ICategory } from '@/interfaces'
 
 import styles from './CategoryForm.module.scss'
+import { useUpdateCategory } from '@/hooks/categories/useUpdateCategory'
 
 
 interface Props {
-    category?: ICategory
-    onClose  : ()=> void
+    category?  : ICategory
+    currentPage: number
+    onClose    : ()=> void
 }
-export const CategoryForm:FC<Props> = ({ category, onClose }) => {
+export const CategoryForm:FC<Props> = ({ category, currentPage, onClose }) => {
 
     const { register, handleSubmit, watch, formState:{ errors }, control, getValues, setValue, reset } = useForm<ICategory>({
         defaultValues: {
@@ -21,6 +23,7 @@ export const CategoryForm:FC<Props> = ({ category, onClose }) => {
         }
     })
     const { categoryPostMutation } = usePostCategory(reset)
+    const { categoryUpdateMutation  } = useUpdateCategory( onClose, currentPage )
 
     const slugRef = useRef({})
     slugRef.current = watch('slug', '')
@@ -55,7 +58,7 @@ export const CategoryForm:FC<Props> = ({ category, onClose }) => {
 
     const onCategorySubmit = ( data:ICategory ) => {
         if( category ){
-            return console.log('Editar catería') //FIXME:
+            return categoryUpdateMutation.mutate({ category: { ...category, ...data } })
         }
         categoryPostMutation.mutate({ category:data })
     }
@@ -145,10 +148,10 @@ export const CategoryForm:FC<Props> = ({ category, onClose }) => {
             <div className={ styles['button-container'] }>
                 <ButtonPrimary
                     type="submit"
-                    disabled={ categoryPostMutation.isPending }
+                    disabled={ categoryPostMutation.isPending || categoryUpdateMutation.isPending  }
                 >
                     {
-                        categoryPostMutation.isPending 
+                        categoryPostMutation.isPending || categoryUpdateMutation.isPending  
                         ?(
                             <div className="custom-loader-white"></div>
                         ):(
