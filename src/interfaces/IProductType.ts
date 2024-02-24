@@ -1,4 +1,4 @@
-export interface IType {
+export interface IProductType {
     _id?      : string
 
     title     : string

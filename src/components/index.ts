@@ -74,4 +74,7 @@ export * from './Categories/CategoryForm'
 export * from './Categories/CategoryList'
 export * from './Categories/CategoryTable'
 
+export * from './ProductTypes/ProductTypesList'
+export * from './ProductTypes/ProductTypesForm'
+
 

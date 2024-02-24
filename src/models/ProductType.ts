@@ -1,7 +1,7 @@
 import mongoose, { Model, Schema, model } from 'mongoose'
-import { IType } from '@/interfaces'
+import { IProductType } from '@/interfaces'
 
-const TypeSchema = new Schema<IType>({
+const ProductTypeSchema = new Schema<IProductType>({
     title: {
         type: String,
         required: true
@@ -27,6 +27,6 @@ const TypeSchema = new Schema<IType>({
     timestamps: true
 })
 
-const Type: Model<IType> = mongoose.models.Type || model('Type', TypeSchema)
+const ProductType: Model<IProductType> = mongoose.models.ProductType || model('ProductType', ProductTypeSchema)
 
-export default Type
+export default ProductType

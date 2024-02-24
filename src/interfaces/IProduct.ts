@@ -1,4 +1,4 @@
-import { ICategory, IImage, ISize, ITag, IType } from ".";
+import { ICategory, IImage, ISize, ITag, IProductType } from ".";
 
 export interface IProduct {
     _id?         : string
@@ -11,7 +11,7 @@ export interface IProduct {
     images       : IImage[]
     sizes        : ISize[]  
     tags         : ITag[]
-    type         : IType[]
+    ProductType  : IProductType[]
     category     : ICategory[]
     sku          : string
     discountRate?: number

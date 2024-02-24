@@ -51,7 +51,7 @@ export const CategoryList = () => {
         <>        
             <SettingsListSection
                 title="Categorías"
-                onClick = { ()=> setOpenFormCategory(true) }
+                onClickAdd = { ()=> setOpenFormCategory(true) }
                 onClickRefresh={ categoriesQuery.refetch }
             >
                 {   categoriesQuery.isFetching && (

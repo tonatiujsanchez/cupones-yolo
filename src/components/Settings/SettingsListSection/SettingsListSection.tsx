@@ -7,10 +7,10 @@ import styles from './SettingsListSection.module.scss'
 interface Props {
     children: ReactNode
     title: string
-    onClick: ()=> void
+    onClickAdd: ()=> void
     onClickRefresh: ()=> void
 }
-export const SettingsListSection:FC<Props> = ({ children, title, onClick, onClickRefresh }) => {
+export const SettingsListSection:FC<Props> = ({ children, title, onClickAdd, onClickRefresh }) => {
     
     return (
         <>
@@ -23,7 +23,7 @@ export const SettingsListSection:FC<Props> = ({ children, title, onClick, onClic
                         />
                     </div>
                     <ButtonPrimary
-                        onClick={ onClick }
+                        onClick={ onClickAdd }
                         className={ styles['settings-section__add-button'] }
                     >
                         <PlusCircleIcon />
