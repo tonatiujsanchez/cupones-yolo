@@ -6,11 +6,12 @@ import styles from './ModalDelete.module.scss'
 
 
 interface Props {
-    title   : string
-    subtitle: ReactNode
-    onChange: ( confirm: boolean )=> void
+    title      : string
+    subtitle   : ReactNode
+    onChange   : ( confirm: boolean )=> void
+    isDeleting?: boolean
 }
-export const ModalDelete: FC<Props> = ({ title, subtitle, onChange }) => {
+export const ModalDelete: FC<Props> = ({ title, subtitle, onChange, isDeleting=false }) => {
     return (
         <div className={ styles['modal'] }>
             <div className={ styles['modal__content'] }>
@@ -33,6 +34,7 @@ export const ModalDelete: FC<Props> = ({ title, subtitle, onChange }) => {
                 <ButtonDelete
                     title="Remover"
                     onClick={ ()=> onChange(true) }
+                    isDeleting={ isDeleting }
                 />
             </div>
         </div>

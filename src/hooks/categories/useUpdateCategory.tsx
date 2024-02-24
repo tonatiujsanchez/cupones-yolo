@@ -13,7 +13,7 @@ export const useUpdateCategory = ( onClose: ()=> void, currentPage:number ) => {
     const categoryUpdateMutation = useMutation({
         mutationFn: categoriesActions.updateCategory,
         onSuccess: ( categoryUpdated ) => {
-            console.log(categoryUpdated)
+            
             queryClient.setQueryData<ICategoriesResp>(
                 [ CATEGORIES_QUERY_KEY, { page: currentPage } ],
                 ( oldData ) => {

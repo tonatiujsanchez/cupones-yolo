@@ -18,3 +18,5 @@ export * from './users/useChangePassword'
 
 export * from './categories/usePostCategory'
 export * from './categories/useGetCategories'
+export * from './categories/useUpdateCategory'
+export * from './categories/useDeleteCategory'

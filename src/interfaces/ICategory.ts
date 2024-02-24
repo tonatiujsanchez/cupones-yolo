@@ -7,7 +7,7 @@ export interface ICategory {
     pinned    : boolean
     
     active    : boolean
-    status    : boolean
+    status?   : boolean
 
     createdAt?: string
     updatedAt?: string

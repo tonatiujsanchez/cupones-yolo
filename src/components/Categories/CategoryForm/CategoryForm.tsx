@@ -1,13 +1,11 @@
 import { FC, useEffect, useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { getSlug, isValidSlug } from '@/libs'
-import { usePostCategory } from '@/hooks'
+import { usePostCategory, useUpdateCategory } from '@/hooks'
 import { ButtonPrimary, Dropzone, InputText, ModalFormHeader, Toggle, } from '@/components'
 import { ICategory } from '@/interfaces'
 
 import styles from './CategoryForm.module.scss'
-import { useUpdateCategory } from '@/hooks/categories/useUpdateCategory'
-
 
 interface Props {
     category?  : ICategory

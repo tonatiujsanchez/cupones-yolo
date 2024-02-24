@@ -25,6 +25,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         case 'PUT':
             return updateCategory( req, res )
             
+        case 'DELETE':
+            return deleteCategory( req, res )
+            
         default:
             return res.status(400).json({ msg: 'Bad Request' })
     }
@@ -76,6 +79,10 @@ const addNewCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
         await newCategory.save()
         await db.disconnect()
         
+        delete newCategory.createdAt
+        delete newCategory.updatedAt
+        delete newCategory.status
+        
         return res.status(200).json(newCategory)
         
     } catch (error) {
@@ -111,7 +118,8 @@ const getCategories = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
             Category.find( query )
                 .skip(skip)
                 .limit(limit)
-                .sort({ registeredAt: 'desc'}),
+                .sort({ registeredAt: 'desc'})
+                .select('-status -createdAt -updatedAt'),
                 Category.countDocuments(query)
         ])
         await db.disconnect()
@@ -141,7 +149,10 @@ const updateCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
 
     try {
         await db.connect()
+
         const category = await Category.findById(_id)
+            .where('status').equals(true)
+            .select('-status -createdAt -updatedAt')
 
         if( !category ){
             await db.disconnect()
@@ -156,6 +167,12 @@ const updateCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
            active = category.active,
         } = req.body
 
+        const categoryBySlug  = await Category.findOne({ slug })
+
+        if(categoryBySlug && categoryBySlug._id.toString() !== category._id.toString() ){ 
+            return res.status(400).json({ msg: `Ya existe una categoría con el slug "${ categoryBySlug.slug }"` })
+        }
+
         category.title  = title
         category.slug   = slug
         category.cover  = cover
@@ -164,6 +181,39 @@ const updateCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
 
         await category.save()
         await db.disconnect()
+
+        return res.status(200).json( category )
+        
+    } catch (error) {
+        console.log(error)
+        await db.disconnect()        
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
+}
+
+const deleteCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+    
+    const { idCategory } = req.query
+
+    if( !isValidObjectId(idCategory) ){
+        return res.status(400).json({ msg: 'ID de categoria no válido' })
+    }
+
+    try {
+
+        await db.connect()
+        const category = await Category.findById(idCategory)
+            .where('status').equals(true)
+            .select('-status -createdAt -updatedAt')
+
+        if( !category ){
+            await db.disconnect()
+            return res.status(400).json({ msg: 'Categoría no encontrada' })
+        }
+
+        category.status = false
+        await category.save()
 
         return res.status(200).json( category )
         

@@ -31,6 +31,12 @@ const CategorySchema = new Schema<ICategory>({
     timestamps: true
 })
 
+CategorySchema.methods.toJSON = function(){
+    const { __v, ...category } = this.toObject()
+    return category
+}
+
 const Category: Model<ICategory> = mongoose.models.Category || model('Category', CategorySchema)
+
 
 export default Category

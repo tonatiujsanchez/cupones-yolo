@@ -4,18 +4,24 @@ import { ButtonType } from '@/interfaces'
 import styles from './ButtonDelete.module.scss'
 
 interface Props {
-    title? : string
-    type?  : ButtonType
-    onClick: ()=> void
+    onClick    : ()=> void
+    title?     : string
+    type?      : ButtonType
+    isDeleting?: boolean
 }
-export const ButtonDelete:FC<Props> = ({ title='Eliminar', type='button', onClick }) => {
+export const ButtonDelete:FC<Props> = ({ onClick, title='Eliminar', type='button', isDeleting=false }) => {
     return (
         <button
             type={ type }
             className={ styles['button'] }
             onClick={ onClick }
+            disabled={ isDeleting }
         >
-            { title }
+            { 
+                isDeleting
+                ?( <div className="custom-loader-white"></div> )
+                :( title )
+            }
         </button>
     )
 }

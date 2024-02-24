@@ -10,16 +10,18 @@ interface Props {
     type?        : ButtonType
     disabled?    : boolean
     stylesInline?: CSSProperties
+    className?   : string
 }
-export const ButtonPrimary:FC<Props> = ({ children, onClick, type='button', stylesInline }) => {
+export const ButtonPrimary:FC<Props> = ({ children, onClick, type='button', className='', stylesInline, disabled }) => {
     return (
         <button 
             type={ type }
-            className={ styles.button }
+            className={`${ styles['button'] } ${ className }`}
             style={{
                 ...stylesInline
             }}
             onClick={onClick}
+            disabled={ disabled }
         >
             { children }
         </button>

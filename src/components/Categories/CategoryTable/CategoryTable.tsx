@@ -8,11 +8,12 @@ import styles from './CategoryTable.module.scss'
 
 
 interface Props {
-    categories: ICategory[]
-    currentPage: number
-    onEditCategory: ( category:ICategory )=> void
+    categories      : ICategory[]
+    currentPage     : number
+    onEditCategory  : ( category:ICategory )=> void
+    onDeleteCategory: ( category:ICategory )=> void
 }
-export const CategoryTable:FC<Props> = ({ categories, currentPage, onEditCategory }) => {
+export const CategoryTable:FC<Props> = ({ categories, currentPage, onEditCategory, onDeleteCategory }) => {
     return (
 
         categories.length === 0
@@ -58,7 +59,7 @@ export const CategoryTable:FC<Props> = ({ categories, currentPage, onEditCategor
                                             <EditIcon />
                                         </ButtonInfo>
                                         <ButtonDanger
-                                            onClick={ ()=>{} }
+                                            onClick={ ()=> onDeleteCategory( category ) }
                                             outline
                                         >
                                             <TrashIcon />

@@ -33,3 +33,16 @@ export const updateCategory = async( { category }:UpdateCategoryParams ):Promise
     const { data } = await yolostyleApi.put('/admin/categories', category )
     return data
 }
+
+
+interface DeleteCategoryParams {
+    idCategory: string
+}
+export const deleteCategory = async( { idCategory }:DeleteCategoryParams ):Promise<ICategory> => {
+    
+    const params = new URLSearchParams()
+    params.append('idCategory', idCategory )
+
+    const { data } = await yolostyleApi.delete('/admin/categories', { params })
+    return data
+}
