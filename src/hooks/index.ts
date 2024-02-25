@@ -20,3 +20,5 @@ export * from './categories/usePostCategory'
 export * from './categories/useGetCategories'
 export * from './categories/useUpdateCategory'
 export * from './categories/useDeleteCategory'
+
+export * from './sections/usePostSection'

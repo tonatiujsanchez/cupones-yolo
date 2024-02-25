@@ -54,17 +54,19 @@ const addNewCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
 
     try {
 
-        await db.disconnect()
+        await db.connect()
         const [ categoryByTitle, categoryBySlug ] = await Promise.all([
             Category.findOne({ title }),
             Category.findOne({ slug })
         ])
 
         if( categoryByTitle ){
+            await db.disconnect()
             return res.status(400).json({ msg: `Ya existe una categoría llamada "${ categoryByTitle.title }"` })
         }
 
         if( categoryBySlug ){
+            await db.disconnect()
             return res.status(400).json({ msg: `Ya existe una categoría con el slug "${ categoryBySlug.slug }"` })
         }
 
@@ -83,7 +85,7 @@ const addNewCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
         delete newCategory.updatedAt
         delete newCategory.status
         
-        return res.status(200).json(newCategory)
+        return res.status(200).json( newCategory )
         
     } catch (error) {
         await db.disconnect()
@@ -170,6 +172,7 @@ const updateCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
         const categoryBySlug  = await Category.findOne({ slug })
 
         if(categoryBySlug && categoryBySlug._id.toString() !== category._id.toString() ){ 
+            await db.disconnect()
             return res.status(400).json({ msg: `Ya existe una categoría con el slug "${ categoryBySlug.slug }"` })
         }
 

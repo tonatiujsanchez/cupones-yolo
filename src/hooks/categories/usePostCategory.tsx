@@ -7,7 +7,7 @@ import { CATEGORIES_QUERY_KEY } from '@/constants'
 import { ICategoriesResp } from '@/interfaces'
 
 
-export const usePostCategory = (reset:()=>void) => {
+export const usePostCategory = ( reset:()=>void ) => {
 
     const queryClient = useQueryClient()
 

@@ -39,9 +39,9 @@ const ProductSchema = new Schema<IProduct>({
         ref: 'Tag',
         required: true
     }],
-    ProductType:[{
+    sections:[{
         type: mongoose.Types.ObjectId,
-        ref: 'ProductType',
+        ref: 'Section',
         required: true
     }],
     category:[{

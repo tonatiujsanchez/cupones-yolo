@@ -1,30 +1,33 @@
 import { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { ButtonPrimary, Dropzone, InputText, ModalFormHeader, Toggle } from '@/components'
-import { IProductType } from '@/interfaces'
+import { usePostSection } from '@/hooks'
 import { getSlug, isValidSlug } from '@/libs'
+import { ButtonPrimary, Dropzone, InputText, ModalFormHeader, Toggle } from '@/components'
+import { ISection } from '@/interfaces'
 
-import styles from './ProductTypesForm.module.scss'
+import styles from './SectionForm.module.scss'
 
 
 interface Props {
-    productType?: IProductType
+    section?: ISection
     // currentPage : number
     onClose     : ()=> void
 }
-export const ProductTypesForm:FC<Props> = ({ productType, onClose }) => {
+export const SectionForm:FC<Props> = ({ section, onClose }) => {
 
-    const { register, control, handleSubmit, watch, formState:{ errors }, getValues, setValue } = useForm<IProductType>({
+    const { register, control, handleSubmit, watch, formState:{ errors }, getValues, setValue, reset } = useForm<ISection>({
         defaultValues: {
             active: true
         }
     })
 
+    const { sectionPostMutation } = usePostSection( reset )
+
     useEffect(()=>{
         const { unsubscribe } = watch( (value, { name } )=>{
             
             if( name === 'title' && value.title){        
-                if( productType ){ return }
+                if( section ){ return }
                 handleChangeSlug()
             }
         })
@@ -36,26 +39,26 @@ export const ProductTypesForm:FC<Props> = ({ productType, onClose }) => {
         setValue('slug', slug, { shouldValidate: true })
     }
 
-    const onProductTypeSubmit = ( data:IProductType ) => {
+    const onSectionSubmit = ( data:ISection ) => {
 
-        if(productType){
-            return console.log('Editando =>', productType)
+        if(section){
+            return console.log('Editando =>', section)
         }
         
-        console.log('Nuevo',data)
+        sectionPostMutation.mutate({ section: data })
     }
 
     return (
         <form
-        onSubmit={ handleSubmit( onProductTypeSubmit ) }
-            className={ styles['product-type-form'] }
+        onSubmit={ handleSubmit( onSectionSubmit ) }
+            className={ styles['section-form'] }
         >
             <ModalFormHeader
-                title={ productType ? 'Editar Tipo de Producto ' : 'Nuevo Tipo de Producto' }
+                title={ section ? 'Editar Sección ' : 'Nueva Sección' }
                 onClose={ onClose }
             />
-            <div className={ styles['category-form__fields'] }>
-                <div className={styles['category-form__cover']}>
+            <div className={ styles['section-form__fields'] }>
+                <div className={styles['section-form__cover']}>
                     <Dropzone
                         onClick={ ()=>{} }
                         placeholder="Añade una portada"
@@ -64,9 +67,9 @@ export const ProductTypesForm:FC<Props> = ({ productType, onClose }) => {
                 </div>
                 <InputText
                     type="text"
-                    fieldName="titleProductType"
+                    fieldName="titleSection"
                     label="Nombre"
-                    placeholder="Nombre del tipo de producto"
+                    placeholder="Nombre de la sección"
                     isRequired
                     { ...register('title', {
                         required: 'El nombre es requerido'
@@ -75,9 +78,9 @@ export const ProductTypesForm:FC<Props> = ({ productType, onClose }) => {
                 />
                 <InputText
                     type="text"
-                    fieldName="slugProductType"
+                    fieldName="slugSection"
                     label="Slug"
-                    placeholder="nombre-del-tipo-de-producto"
+                    placeholder="slug-de-la-seccion"
                     isRequired
                     { ...register('slug', {
                         required: 'El slug es requerido',
@@ -86,8 +89,8 @@ export const ProductTypesForm:FC<Props> = ({ productType, onClose }) => {
                     error={ errors.slug }
                     className={'input-slug'}
                 />
-                <div className={ styles['category-form__toggles-container'] }>
-                    <div className={ styles['category-form__toggle'] }>
+                <div className={ styles['section-form__toggles-container'] }>
+                    <div className={ styles['section-form__toggle'] }>
                         <label 
                             htmlFor="active"
                             className="input-label"
@@ -111,15 +114,14 @@ export const ProductTypesForm:FC<Props> = ({ productType, onClose }) => {
             <div className={ styles['button-container'] }>
                 <ButtonPrimary
                     type="submit"
-                    // disabled={ categoryPostMutation.isPending || categoryUpdateMutation.isPending  }
+                    disabled={ sectionPostMutation.isPending /* || sectionUpdateMutation.isPending */  }
                 >
                     {
-                        // categoryPostMutation.isPending || categoryUpdateMutation.isPending  
-                        false
+                        sectionPostMutation.isPending /* || sectionUpdateMutation.isPending  */ 
                         ?(
                             <div className="custom-loader-white"></div>
                         ):(
-                            productType ? 'Editar' : 'Agregar'
+                            section ? 'Editar' : 'Agregar'
                         )
                     }
                 </ButtonPrimary>

@@ -1,7 +1,7 @@
 import mongoose, { Model, Schema, model } from 'mongoose'
-import { IProductType } from '@/interfaces'
+import { ISection } from '@/interfaces'
 
-const ProductTypeSchema = new Schema<IProductType>({
+const SectionSchema = new Schema<ISection>({
     title: {
         type: String,
         required: true
@@ -27,6 +27,6 @@ const ProductTypeSchema = new Schema<IProductType>({
     timestamps: true
 })
 
-const ProductType: Model<IProductType> = mongoose.models.ProductType || model('ProductType', ProductTypeSchema)
+const Section: Model<ISection> = mongoose.models.Section || model('Section', SectionSchema)
 
-export default ProductType
+export default Section

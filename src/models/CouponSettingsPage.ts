@@ -60,6 +60,6 @@ const CouponSettingsPageSchema = new Schema<ICouponSettingsPage>({
     timestamps: true
 })
 
-const CouponSettingsPage:Model<ICouponSettingsPage> = mongoose.models.CouponSettingsPage || model('CouponSettingsPage', CouponSettingsPageSchema)
+const CouponSettingsPage:Model<ICouponSettingsPage> = mongoose.models.CouponSettingsPage || model('CouponSettingsPage', CouponSettingsPageSchema, 'coupon_settings_page')
 
 export default CouponSettingsPage

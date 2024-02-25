@@ -1,6 +1,6 @@
 @import '../../../scss/index.scss';
 
-.product-type-form {
+.section-form {
     background-color: $white;
     border-radius: 0.5rem;
     padding-inline: 2rem;
@@ -10,25 +10,25 @@
     width: calc(100vw - 2rem);
 }
 
-.category-form__fields {
+.section-form__fields {
     display: flex;
     flex-direction: column;
     padding-block-start: 2rem;
 }
 
-.category-form__cover {
+.section-form__cover {
     margin-block-end: 1.5rem;
     height: 12rem;
 }
 
 
-.category-form__toggles-container {
+.section-form__toggles-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.category-form__toggle {
+.section-form__toggle {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -42,7 +42,7 @@
 
 
 @media (min-width: 640px) {
-    .product-type-form {
+    .section-form {
         min-width: 40rem;
         width: auto;
     }
