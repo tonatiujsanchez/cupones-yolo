@@ -4,7 +4,7 @@ import { isValidSlug } from '@/libs'
 import { Section } from '@/models'
 import { ISection, ISectionsResp } from '@/interfaces'
 import { SECTIONS_PAGE_SIZE } from '@/constants'
-import { FilterQuery } from 'mongoose'
+import { FilterQuery, isValidObjectId } from 'mongoose'
 
 type Data = 
     | { msg: string }
@@ -20,6 +20,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     
         case 'POST':
             return addNewSection( req, res )
+    
+        case 'PUT':
+            return updateSection( req, res )
     
         default:
             return res.status(400).json({ msg: 'Bad request' })
@@ -129,6 +132,58 @@ const getSections = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     } catch (error) {
         await db.disconnect()
         console.log(error)
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
+}
+
+
+const updateSection = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
+
+    const { _id  } = req.body
+
+    if( !isValidObjectId(_id) ){
+        return res.status(400).json({ msg: 'ID de sección no válido' })
+    }
+
+    try {
+        await db.connect()
+        const section = await Section.findById(_id)
+        .where('status').equals(true)
+        .select('-status -createdAt -updatedAt')
+
+        if( !section ){
+            await db.disconnect()
+            return res.status(400).json({ msg: 'Sección no encontrada' })
+        }
+
+        const {
+            title  = section.title,
+            slug   = section.slug,
+            cover  = section.cover,
+            active = section.active,
+        } = req.body
+
+        const sectionBySlug = await Section.findOne({ slug })
+
+        if( sectionBySlug && sectionBySlug?._id.toString() !== section._id.toString()){
+            await db.disconnect()
+            return res.status(400).json({ msg: `Ya existe una sección con el slug "${ sectionBySlug.slug }"` })
+        }
+
+        section.title  = title 
+        section.slug   = slug 
+        section.cover  = cover 
+        section.active = active
+        
+        await section.save()
+        await db.disconnect()
+
+        return res.status(200).json( section )
+
+    } catch (error) {
+        console.log(error)
+        await db.disconnect()        
         return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
     }
 

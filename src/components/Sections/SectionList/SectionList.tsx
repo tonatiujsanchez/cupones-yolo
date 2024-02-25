@@ -34,7 +34,7 @@ export const SectionList = () => {
             <SettingsListSection
                 title='Secciones'
                 onClickAdd={ ()=> setOpenSectionForm(true) }
-                onClickRefresh={ ()=>{} }
+                onClickRefresh={ sectionsQuery.refetch }
             >
                 { sectionsQuery.isFetching && (
                         <div className={ styles['loader-container'] }>
@@ -74,8 +74,6 @@ export const SectionList = () => {
                     )
 
                 }
-
-
             </SettingsListSection>
             <ModalContainer
                 show={ openSectionForm || !!sectionEdit }
@@ -84,6 +82,7 @@ export const SectionList = () => {
                 <SectionForm
                     section={ sectionEdit }
                     onClose={ onCloseSectionForm }
+                    currentPage={ sectionsQuery.data?.currentPage ?? 1 }
                 />
             </ModalContainer>
         </>

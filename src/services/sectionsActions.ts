@@ -23,3 +23,13 @@ export const getSections = async({ page }:GetSectionsParams):Promise<ISectionsRe
     const { data } = await yolostyleApi.get('/admin/sections', { params } )
     return data
 }
+
+
+interface UpdateSectionParams {
+    section: ISection
+}
+export const updateSection = async({ section }: UpdateSectionParams):Promise<ISection> => {
+
+    const { data } = await yolostyleApi.put('/admin/sections', section )
+    return data
+} 

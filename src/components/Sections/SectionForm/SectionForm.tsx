@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { usePostSection } from '@/hooks'
+import { usePostSection, useUpdateSection } from '@/hooks'
 import { getSlug, isValidSlug } from '@/libs'
 import { ButtonPrimary, Dropzone, InputText, ModalFormHeader, Toggle } from '@/components'
 import { ISection } from '@/interfaces'
@@ -10,10 +10,10 @@ import styles from './SectionForm.module.scss'
 
 interface Props {
     section?: ISection
-    // currentPage : number
+    currentPage : number
     onClose     : ()=> void
 }
-export const SectionForm:FC<Props> = ({ section, onClose }) => {
+export const SectionForm:FC<Props> = ({ section, onClose, currentPage }) => {
 
     const { register, control, handleSubmit, watch, formState:{ errors }, getValues, setValue, reset } = useForm<ISection>({
         defaultValues: {
@@ -22,6 +22,19 @@ export const SectionForm:FC<Props> = ({ section, onClose }) => {
     })
 
     const { sectionPostMutation } = usePostSection( reset )
+    const { sectionUpdateMutation  } = useUpdateSection( onClose, currentPage )
+
+    useEffect(()=> {
+        if( section ){
+            reset({
+                cover: section.cover,
+                title: section.title,
+                slug: section.slug,
+                active: section.active,
+            })
+        }
+    },[section])
+
 
     useEffect(()=>{
         const { unsubscribe } = watch( (value, { name } )=>{
@@ -42,7 +55,8 @@ export const SectionForm:FC<Props> = ({ section, onClose }) => {
     const onSectionSubmit = ( data:ISection ) => {
 
         if(section){
-            return console.log('Editando =>', section)
+            data._id = section._id
+            return sectionUpdateMutation.mutate({ section: data })
         }
         
         sectionPostMutation.mutate({ section: data })
@@ -114,10 +128,10 @@ export const SectionForm:FC<Props> = ({ section, onClose }) => {
             <div className={ styles['button-container'] }>
                 <ButtonPrimary
                     type="submit"
-                    disabled={ sectionPostMutation.isPending /* || sectionUpdateMutation.isPending */  }
+                    disabled={ sectionPostMutation.isPending || sectionUpdateMutation.isPending  }
                 >
                     {
-                        sectionPostMutation.isPending /* || sectionUpdateMutation.isPending  */ 
+                        sectionPostMutation.isPending || sectionUpdateMutation.isPending  
                         ?(
                             <div className="custom-loader-white"></div>
                         ):(
