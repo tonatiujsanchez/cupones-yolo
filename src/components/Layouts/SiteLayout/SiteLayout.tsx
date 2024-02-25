@@ -4,14 +4,24 @@ import { fonts } from '@/fonts'
 import { Navbar } from "@/components"
 
 
-interface Props{
-    children:  ReactNode
+const metatagsDefault = {
+    title: 'YoloStyle - Encuentra tu estilo'
 }
-export const SiteLayout:FC<Props> = ({ children }) => {
+
+interface Props {
+    children:  ReactNode
+    metatags?: {
+        title: string
+    }
+}
+export const SiteLayout:FC<Props> = ({ children, metatags = metatagsDefault }) => {
+    
+    const { title } = metatags
+
     return (
         <>
             <Head>
-                <title>YoloStyle - Encuentra tu estilo</title>
+                <title>{ title }</title>
                 <meta name="description" content="YoloStyle - Encuentra tu estilo" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
 

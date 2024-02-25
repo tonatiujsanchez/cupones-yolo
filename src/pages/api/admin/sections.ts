@@ -3,6 +3,8 @@ import { db } from '@/database'
 import { isValidSlug } from '@/libs'
 import { Section } from '@/models'
 import { ISection, ISectionsResp } from '@/interfaces'
+import { SECTIONS_PAGE_SIZE } from '@/constants'
+import { FilterQuery } from 'mongoose'
 
 type Data = 
     | { msg: string }
@@ -12,6 +14,10 @@ type Data =
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   
     switch (req.method) {
+
+        case 'GET':
+            return getSections( req, res )
+    
         case 'POST':
             return addNewSection( req, res )
     
@@ -73,6 +79,53 @@ const addNewSection = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
         
         return res.status(200).json( newSection )
 
+    } catch (error) {
+        await db.disconnect()
+        console.log(error)
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
+}
+
+
+const pageSize = SECTIONS_PAGE_SIZE;
+const getSections = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+
+    const { page = 1, count = pageSize } = req.query
+
+    let skip = Number( page ) - 1
+    let limit = Number(count)
+
+    if( skip < 0 ){ skip = 0 }
+    if( limit < 0 ){ limit = pageSize }
+
+    skip = skip * limit
+
+
+    let query:FilterQuery<ISection> = { 
+        status: true
+    }
+
+    try {
+        await db.connect()
+        const [ sections, total ] = await Promise.all([
+            Section.find( query )
+                .skip(skip)
+                .limit(limit)
+                .sort({ registeredAt: 'desc'})
+                .select('-status -createdAt -updatedAt'),
+            Section.countDocuments(query)
+        ])
+        await db.disconnect()
+
+        return res.status(200).json({
+            currentPage  : Number(page),
+            totalPages   : Math.ceil( total / Number(count) ),
+            pageSize     : sections.length,
+            totalSections: total,
+            sections
+        })
+        
     } catch (error) {
         await db.disconnect()
         console.log(error)

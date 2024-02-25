@@ -1,45 +1,46 @@
 import { FC } from 'react'
 import { ButtonDanger, ButtonInfo, MessageWithoutResults, TablePrimary } from '@/components'
-import { EditIcon, TrashIcon } from '@/components/Icons'
-import { CATEGORIES_PAGE_SIZE } from '@/constants'
-import { ICategory } from '@/interfaces'
+import { ISection } from '@/interfaces'
 
-import styles from './CategoryTable.module.scss'
+import styles from './SectionTable.module.scss'
+import { SECTIONS_PAGE_SIZE } from '@/constants'
+import { EditIcon, TrashIcon } from '@/components/Icons'
 
 
 interface Props {
-    categories      : ICategory[]
-    currentPage     : number
-    onEditCategory  : ( category:ICategory )=> void
-    onDeleteCategory: ( category:ICategory )=> void
+    sections       : ISection[]
+    currentPage    : number
+    onEditSection  : ( section:ISection )=> void
+    onDeleteSection: ( section:ISection )=> void
 }
-export const CategoryTable:FC<Props> = ({ categories, currentPage, onEditCategory, onDeleteCategory }) => {
+export const SectionTable:FC<Props> = ({ sections, currentPage, onEditSection, onDeleteSection }) => {
     return (
-        categories.length === 0
+        sections.length === 0
         ?(
             <MessageWithoutResults />
         ):(
             <TablePrimary>
                 <TablePrimary.THead>
-                    <TablePrimary.TRow >
+                    <TablePrimary.TRow>
                         <th>#</th>
                         <th>Portada</th>
                         <th>Nombre</th>
                         <th>Slug</th>
                         <th>Activo</th>
                         <th>Acciones</th>
-                    </TablePrimary.TRow >
+                    </TablePrimary.TRow>
                 </TablePrimary.THead>
                 <tbody>
                     {
-                        categories.map( (category, idx) => {
-                            const index = (CATEGORIES_PAGE_SIZE * (currentPage - 1)) + (idx + 1)
+                        sections.map( (section, idx) => {
+                            const index = (SECTIONS_PAGE_SIZE * (currentPage - 1)) + (idx + 1)
+                            
                             return (
-                                <TablePrimary.TRow key={ category._id } >
-                                    <td className={ styles['category-index'] }>{ index }</td>
-                                    <td className={ styles['category-cover'] }>
+                                <TablePrimary.TRow key={ section._id } >
+                                    <td className={ styles['section-index'] }>{ index }</td>
+                                    <td className={ styles['section-cover'] }>
                                         {
-                                            category.cover 
+                                            section.cover 
                                             ?(
                                                 <p>cover</p>
                                             ):(
@@ -47,30 +48,29 @@ export const CategoryTable:FC<Props> = ({ categories, currentPage, onEditCategor
                                             )
                                         }
                                     </td>
-                                    <td className={ styles['category-name'] }>{ category.title }</td>
-                                    <td>{ category.slug }</td>
-                                    <td>{ category.active.toString() }</td>
-                                    <td className={ styles['category-actions'] }>
+                                    <td className={ styles['section-name'] }>{ section.title }</td>
+                                    <td>{ section.slug }</td>
+                                    <td>{ section.active.toString() }</td>
+                                    <td className={ styles['section-actions'] }>
                                         <ButtonInfo
-                                            onClick={()=> onEditCategory( category )}
+                                            onClick={()=> onEditSection( section )}
                                             outline
                                         >
                                             <EditIcon />
                                         </ButtonInfo>
                                         <ButtonDanger
-                                            onClick={ ()=> onDeleteCategory( category ) }
+                                            onClick={ ()=> onDeleteSection( section ) }
                                             outline
                                         >
                                             <TrashIcon />
                                         </ButtonDanger>
                                     </td>
                                 </TablePrimary.TRow>
-                            )}
-                        )
+                            )
+                        })
                     }
                 </tbody>
             </TablePrimary>
         )
     )
 }
-

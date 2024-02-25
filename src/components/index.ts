@@ -76,5 +76,6 @@ export * from './Categories/CategoryTable'
 
 export * from './Sections/SectionList'
 export * from './Sections/SectionForm'
+export * from './Sections/SectionTable'
 
 
