@@ -32,4 +32,17 @@ export const updateSection = async({ section }: UpdateSectionParams):Promise<ISe
 
     const { data } = await yolostyleApi.put('/admin/sections', section )
     return data
-} 
+}
+
+
+interface DeleteSectionParams {
+    idSection: string
+}
+export const deleteSection = async( { idSection }:DeleteSectionParams ):Promise<ISection> => {
+
+    const params = new URLSearchParams()
+    params.append('idSection', idSection)
+
+    const { data } = await yolostyleApi.delete('/admin/sections', { params })
+    return data
+}

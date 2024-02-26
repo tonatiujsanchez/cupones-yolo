@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useGetSections } from '@/hooks'
-import { ErrorMessage, ModalContainer, Pagination, RegisterCount, SectionForm, SectionTable, SettingsListSection } from '@/components'
+import { useDeleteSection, useGetSections } from '@/hooks'
+import { ErrorMessage, ModalContainer, ModalDelete, Pagination, RegisterCount, SectionForm, SectionTable, SettingsListSection } from '@/components'
 import { ISection } from '@/interfaces'
 
 import styles from './SectionList.module.scss'
@@ -14,6 +14,15 @@ export const SectionList = () => {
 
     const { sectionsQuery, handlePageClick } = useGetSections({ page: 1 })
 
+    const { sectionDeleteMutation } = useDeleteSection({
+        currentPage: sectionsQuery.data?.currentPage ?? 1,
+        onClose: () => setDeleteSection(undefined)
+    })
+
+
+    const onCloseDeleteSectionModal = () => {
+        setDeleteSection(undefined)
+    }
 
     const onCloseSectionForm = () => {
         setOpenSectionForm(false)
@@ -27,6 +36,15 @@ export const SectionList = () => {
     const onSetDeleteSection = (section:ISection) => {
         setDeleteSection(section)
     }
+
+    const onDeleteSection = ( confirm:boolean ) => {
+        if( !confirm || !deleteSection ){
+            return onCloseDeleteSectionModal()
+        }
+
+        sectionDeleteMutation.mutate({ idSection: deleteSection._id! })
+    }
+
 
 
     return (
@@ -83,6 +101,21 @@ export const SectionList = () => {
                     section={ sectionEdit }
                     onClose={ onCloseSectionForm }
                     currentPage={ sectionsQuery.data?.currentPage ?? 1 }
+                />
+            </ModalContainer>
+            <ModalContainer
+                show={ !!deleteSection }
+                onHidden={ onCloseDeleteSectionModal }
+            >
+                <ModalDelete
+                    title="Eliminar sección"
+                    subtitle={
+                        <p>
+                            ¿Desea eliminar la sección <strong>{ deleteSection?.title }</strong>?
+                        </p>
+                    }
+                    onChange={ onDeleteSection }
+                    isDeleting={ sectionDeleteMutation.isPending }
                 />
             </ModalContainer>
         </>

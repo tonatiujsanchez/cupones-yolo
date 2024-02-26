@@ -56,19 +56,43 @@ const addNewCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
 
         await db.connect()
         const [ categoryByTitle, categoryBySlug ] = await Promise.all([
-            Category.findOne({ title }),
+            Category.findOne({ title })
+                .select('-createdAt -updatedAt'),
             Category.findOne({ slug })
+                .select('-createdAt -updatedAt'),
         ])
 
-        if( categoryByTitle ){
+        if( categoryByTitle && categoryByTitle.status){
             await db.disconnect()
             return res.status(400).json({ msg: `Ya existe una categoría llamada "${ categoryByTitle.title }"` })
         }
 
-        if( categoryBySlug ){
+        if( categoryBySlug && categoryBySlug.status){
             await db.disconnect()
             return res.status(400).json({ msg: `Ya existe una categoría con el slug "${ categoryBySlug.slug }"` })
         }
+
+        if( categoryByTitle && !categoryByTitle.status ){
+            categoryByTitle.status = true
+
+            await categoryByTitle.save()
+            await db.disconnect()
+
+            delete categoryByTitle.status
+            return res.status(200).json( categoryByTitle )
+        }
+
+        if( categoryBySlug && !categoryBySlug.status ){
+            categoryBySlug.status = true
+
+            await categoryBySlug.save()
+            await db.disconnect()
+
+            delete categoryBySlug.status
+            
+            return res.status(200).json( categoryBySlug )
+        }
+
 
         const newCategory = new Category({
             title,
@@ -217,6 +241,7 @@ const deleteCategory = async(req: NextApiRequest, res: NextApiResponse<Data>) =>
 
         category.status = false
         await category.save()
+        await db.disconnect()
 
         return res.status(200).json( category )
         

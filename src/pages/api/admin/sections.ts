@@ -24,6 +24,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         case 'PUT':
             return updateSection( req, res )
     
+        case 'DELETE':
+            return deleteSection( req, res )
+    
         default:
             return res.status(400).json({ msg: 'Bad request' })
     }
@@ -52,20 +55,45 @@ const addNewSection = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
     try {
         await db.connect()
         const [ sectionByTitle, sectionBySlug ] = await Promise.all([
-            Section.findOne({ title }),
+            Section.findOne({ title })
+                .select('-createdAt -updatedAt'),
             Section.findOne({ slug })
+                .select('-createdAt -updatedAt'),
         ])
 
-        if( sectionByTitle ){
+        if( sectionByTitle && sectionByTitle.status ){
             await db.disconnect()
             return res.status(400).json({ msg: `Ya existe una sección llamada "${ sectionByTitle.title }"` })
         }
 
-        if( sectionBySlug ){
+        if( sectionBySlug && sectionBySlug.status ){
             await db.disconnect()
             return res.status(400).json({ msg: `Ya existe una sección con el slug "${ sectionBySlug.slug }"` })
         }
 
+        if( sectionByTitle && !sectionByTitle.status ){
+            sectionByTitle.status = true
+            
+            await sectionByTitle.save()
+            await db.disconnect()
+
+            delete sectionByTitle.status
+
+            return res.status(200).json( sectionByTitle )
+        }
+
+        if( sectionBySlug && !sectionBySlug.status ){
+            sectionBySlug.status = true
+            
+            await sectionBySlug.save()
+            await db.disconnect()
+
+            delete sectionBySlug.status
+
+            return res.status(200).json( sectionBySlug )
+        }
+
+        
         const newSection = new Section({
             title,
             slug,
@@ -166,10 +194,17 @@ const updateSection = async( req: NextApiRequest, res: NextApiResponse<Data> ) =
 
         const sectionBySlug = await Section.findOne({ slug })
 
+        if( sectionBySlug && sectionBySlug?._id.toString() !== section._id.toString() && !section.status){
+            await db.disconnect()
+            return res.status(400).json({ msg: `El slug "${ sectionBySlug.slug }" no esta disponible, hable con el administrador` })
+        }
+
+
         if( sectionBySlug && sectionBySlug?._id.toString() !== section._id.toString()){
             await db.disconnect()
             return res.status(400).json({ msg: `Ya existe una sección con el slug "${ sectionBySlug.slug }"` })
         }
+
 
         section.title  = title 
         section.slug   = slug 
@@ -181,6 +216,40 @@ const updateSection = async( req: NextApiRequest, res: NextApiResponse<Data> ) =
 
         return res.status(200).json( section )
 
+    } catch (error) {
+        console.log(error)
+        await db.disconnect()        
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
+}
+
+const deleteSection = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
+
+    const { idSection } = req.query
+
+    if( !isValidObjectId(idSection) ){
+        return res.status(400).json({ msg: 'ID de sección no válido' })
+    }
+
+    try {
+
+        await db.connect()
+        const section = await Section.findById(idSection)
+            .where('status').equals(true)
+            .select('-status -createdAt -updatedAt')
+
+        if( !section ){
+            await db.disconnect()
+            return res.status(400).json({ msg: 'Sección no encontrada' })
+        }
+
+        section.status = false
+        await section.save()
+        await db.disconnect()
+
+        return res.status(200).json( section )
+        
     } catch (error) {
         console.log(error)
         await db.disconnect()        
