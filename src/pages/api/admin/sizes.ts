@@ -23,6 +23,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     
         case 'PUT':
             return updateSize( req, res )
+
+        case 'DELETE':
+            return deleteSize( req, res )
     
         default:
             return res.status(400).json({ msg: 'Bad request' })
@@ -45,9 +48,20 @@ const addNewSize = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     try {
         await db.connect()
         const size = await Size.findOne({ value })
+            .select(' -createdAt -updatedAt')
         
-        if( size ){
+        if( size && size.status ){
+            await db.disconnect()
             return res.status(400).json({ msg: `Ya existe una talla llamada ${ size.label }` })
+        }
+
+        if( size && !size.status ){
+            size.status = true
+            await size.save()
+            await db.disconnect()
+            
+            delete size.status
+            return res.status(200).json(size)
         }
 
         const newSize = new Size({
@@ -154,7 +168,7 @@ const updateSize = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         let sizeByLabel
         if( size.label !== label ){
             sizeByLabel = await Size.findOne({ value, _id: { $ne: _id } })
-                .select('-status -createdAt -updatedAt')
+                .select('-createdAt -updatedAt')
         }
 
         if( sizeByLabel && sizeByLabel.status ){
@@ -175,6 +189,40 @@ const updateSize = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         size.label = label 
         size.active = active
 
+        await size.save()
+        await db.disconnect()
+
+        return res.status(200).json( size )
+        
+    } catch (error) {
+        console.log(error)
+        await db.disconnect()        
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
+}
+
+const deleteSize = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+    
+    const { idSize } = req.query
+
+    if( !isValidObjectId(idSize) ){
+        return res.status(400).json({ msg: 'ID de sección no válido' })
+    }
+
+    try {
+
+        await db.connect()
+        const size = await Size.findById(idSize)
+            .where('status').equals(true)
+            .select('-status -createdAt -updatedAt')
+
+        if( !size ){
+            await db.disconnect()
+            return res.status(400).json({ msg: 'Talla no encontrada' })
+        }
+
+        size.status = false
         await size.save()
         await db.disconnect()
 

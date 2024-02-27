@@ -1,21 +1,24 @@
-import { FC, useState } from 'react'
-import { useGetSizes } from '@/hooks'
-import { ErrorMessage, ModalContainer, Pagination, RegisterCount, SettingsListSection, SizeForm, SizeTable } from '@/components'
+import { useState } from 'react'
+import { useDeleteSize, useGetSizes } from '@/hooks'
+import { ErrorMessage, ModalContainer, ModalDelete, Pagination, RegisterCount, SettingsListSection, SizeForm, SizeTable } from '@/components'
+import { SIZES_PAGE_SIZE } from '@/constants'
 import { ISize } from '@/interfaces'
 
 import styles from './SizeList.module.scss'
-import { SIZES_PAGE_SIZE } from '@/constants'
 
 
-export const SizeList:FC = () => {
-
+export const SizeList = () => {
 
     const [openSizeForm, setOpenSizeForm] = useState<boolean>(false)
     const [sizeEdit, setSizeEdit] = useState<ISize>()
     const [deleteSize, setDeleteSize] = useState<ISize>()
 
-
     const { sizesQuery, handlePageClick } = useGetSizes({ page: 1 })
+
+    const { sizeDeleteMutation } = useDeleteSize({
+        currentPage: sizesQuery.data?.currentPage ?? 1,
+        onClose: () => setDeleteSize(undefined)
+    })
 
 
     const onCloseSizeForm = () => {
@@ -31,6 +34,18 @@ export const SizeList:FC = () => {
         setDeleteSize(size)
     }
 
+    const onCloseDeleteSizeModal = () => {
+        setDeleteSize(undefined)
+    }
+
+    const onDeleteSize = ( confirm: boolean ) => {
+        if( !confirm || !deleteSize ){
+            return onCloseDeleteSizeModal()
+        }
+
+        sizeDeleteMutation.mutate({ idSize: deleteSize._id! })
+
+    }
 
     return (
         <>
@@ -85,6 +100,21 @@ export const SizeList:FC = () => {
                     size={ sizeEdit }
                     onClose={ onCloseSizeForm }
                     currentPage={ sizesQuery.data?.currentPage ?? 1 }
+                />
+            </ModalContainer>
+            <ModalContainer
+                show={ !!deleteSize }
+                onHidden={ onCloseDeleteSizeModal }
+            >
+                <ModalDelete
+                    title="Eliminar talla"
+                    subtitle={
+                        <p>
+                            ¿Desea eliminar la talla <strong>{ deleteSize?.label }</strong>?
+                        </p>
+                    }
+                    onChange={ onDeleteSize }
+                    isDeleting={ sizeDeleteMutation.isPending }
                 />
             </ModalContainer>
         </>
