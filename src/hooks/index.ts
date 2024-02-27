@@ -25,3 +25,6 @@ export * from './sections/usePostSection'
 export * from './sections/useGetSections'
 export * from './sections/useUpdateSection'
 export * from './sections/useDeleteSection'
+
+export * from './sizes/useGetSizes'
+export * from './sizes/usePostSize'

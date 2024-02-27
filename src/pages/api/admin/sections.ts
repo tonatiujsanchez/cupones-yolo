@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { FilterQuery, isValidObjectId } from 'mongoose'
 import { db } from '@/database'
 import { isValidSlug } from '@/libs'
 import { Section } from '@/models'
-import { ISection, ISectionsResp } from '@/interfaces'
 import { SECTIONS_PAGE_SIZE } from '@/constants'
-import { FilterQuery, isValidObjectId } from 'mongoose'
+import { ISection, ISectionsResp } from '@/interfaces'
 
 type Data = 
     | { msg: string }

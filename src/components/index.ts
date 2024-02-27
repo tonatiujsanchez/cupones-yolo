@@ -78,4 +78,6 @@ export * from './Sections/SectionList'
 export * from './Sections/SectionForm'
 export * from './Sections/SectionTable'
 
-export * from './Sizes/SizesList'
+export * from './Sizes/SizeList'
+export * from './Sizes/SizeForm'
+export * from './Sizes/SizeTable'

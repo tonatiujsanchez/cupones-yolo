@@ -9,9 +9,9 @@ import styles from './SectionForm.module.scss'
 
 
 interface Props {
-    section?: ISection
-    currentPage : number
-    onClose     : ()=> void
+    section?   : ISection
+    currentPage: number
+    onClose    : ()=> void
 }
 export const SectionForm:FC<Props> = ({ section, onClose, currentPage }) => {
 
@@ -64,7 +64,7 @@ export const SectionForm:FC<Props> = ({ section, onClose, currentPage }) => {
 
     return (
         <form
-        onSubmit={ handleSubmit( onSectionSubmit ) }
+            onSubmit={ handleSubmit( onSectionSubmit ) }
             className={ styles['section-form'] }
         >
             <ModalFormHeader

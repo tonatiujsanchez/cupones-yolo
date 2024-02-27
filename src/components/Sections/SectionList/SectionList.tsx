@@ -90,7 +90,6 @@ export const SectionList = () => {
                             </div>
                         </>
                     )
-
                 }
             </SettingsListSection>
             <ModalContainer

@@ -1,4 +1,4 @@
-import { CategoryList, DashboardLayout, SectionList } from '@/components'
+import { CategoryList, DashboardLayout, SectionList, SizeList } from '@/components'
 import styles from './Settings.module.scss'
 
 const SettingsPage = () => {
@@ -8,6 +8,7 @@ const SettingsPage = () => {
             <div className={ styles['settings'] }>
                 <CategoryList />
                 <SectionList />
+                <SizeList />
             </div>
         </DashboardLayout>
     )

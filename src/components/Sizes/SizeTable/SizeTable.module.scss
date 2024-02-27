@@ -1,0 +1,26 @@
+@import '../../../scss/index.scss';
+
+.size-index {
+    font-weight: 800;
+}
+
+.size-name {
+    max-width: 22rem;
+    font-weight: 700;
+}
+
+.size-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    svg {
+        width: 1.5rem;
+    }
+}

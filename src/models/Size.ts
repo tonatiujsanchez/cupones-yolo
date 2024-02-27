@@ -10,6 +10,10 @@ const SizeSchema = new Schema<ISize>({
         type: String,
         required: true
     },
+    active: {
+        type: Boolean,
+        default: true
+    },    
     status: {
         type: Boolean,
         default: true

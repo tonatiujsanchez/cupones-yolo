@@ -11,7 +11,6 @@ export const usePostSection = ( reset:()=>void ) => {
 
     const queryClient = useQueryClient()
 
-    
     const sectionPostMutation = useMutation({
         mutationFn: sectionsActions.addNewSection,
         onSuccess : ( newSection ) => {

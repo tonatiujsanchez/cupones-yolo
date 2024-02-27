@@ -1,10 +1,19 @@
 export interface ISize {
-    _id?       : string
-    value      : string
-    label      : string
+    _id?      : string
+    value     : string
+    label     : string
 
-    status     : boolean
+    active    : boolean
+    status?   : boolean
 
-    createdAt? : string
-    updatedAt? : string
+    createdAt?: string
+    updatedAt?: string
+}
+
+export interface ISizesResp {
+    currentPage: number
+    totalPages : number
+    pageSize   : number
+    totalSizes : number
+    sizes      : ISize[]
 }
