@@ -24,3 +24,12 @@ export const getSizes = async({ page }:GetSizesParams):Promise<ISizesResp> => {
     return data
 }
 
+
+interface UpdateSizeParams {
+    size: ISize
+}
+export const updateSize = async({ size }:UpdateSizeParams):Promise<ISize> => {
+    
+    const { data } = await yolostyleApi.put('/admin/sizes', size)
+    return data
+}

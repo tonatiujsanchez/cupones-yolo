@@ -1,6 +1,6 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { usePostSize } from '@/hooks'
+import { usePostSize, useUpdateSize } from '@/hooks'
 import { ButtonPrimary, InputText, ModalFormHeader, Toggle } from '@/components'
 import { ISize } from '@/interfaces'
 
@@ -20,10 +20,23 @@ export const SizeForm:FC<Props> = ({ size, onClose, currentPage }) => {
     })
 
     const { sizePostMutation } = usePostSize( reset )
+    const { sizeUpdateMutation  } = useUpdateSize( onClose, currentPage )
+
+    useEffect(()=>{
+        if( size ){
+            reset({
+                label: size.label,
+                active: size.active,
+            })
+        }
+    },[ size ])
+    
 
     const onSizeSubmit = ( data:ISize ) => {
+        
         if( size ){
-            return console.log('Editar...')
+            data._id = size._id
+            return sizeUpdateMutation.mutate({ size: data })
         }
 
         sizePostMutation.mutate({ size: data })
@@ -75,10 +88,10 @@ export const SizeForm:FC<Props> = ({ size, onClose, currentPage }) => {
             <div className={ styles['button-container'] }>
                 <ButtonPrimary
                     type="submit"
-                    disabled={ sizePostMutation.isPending /* || sizeUpdateMutation.isPending */  }
+                    disabled={ sizePostMutation.isPending || sizeUpdateMutation.isPending  }
                 >
                     {
-                        sizePostMutation.isPending /* || sizeUpdateMutation.isPending */  
+                        sizePostMutation.isPending || sizeUpdateMutation.isPending  
                         ?(
                             <div className="custom-loader-white"></div>
                         ):(

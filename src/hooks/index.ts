@@ -28,3 +28,4 @@ export * from './sections/useDeleteSection'
 
 export * from './sizes/useGetSizes'
 export * from './sizes/usePostSize'
+export * from './sizes/useUpdateSize'

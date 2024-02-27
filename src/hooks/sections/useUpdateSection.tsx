@@ -20,7 +20,7 @@ export const useUpdateSection = ( onClose: ()=> void, currentPage: number ) => {
                         return {
                             ...oldData,
                             sections: oldData.sections.map(
-                                ( section ) => section._id === sectionUpdated._id ? sectionUpdated: section
+                                ( section ) => section._id === sectionUpdated._id ? sectionUpdated : section
                             )
                         }
                     }

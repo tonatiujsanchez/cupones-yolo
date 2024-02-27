@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { FilterQuery } from 'mongoose'
+import { FilterQuery, isValidObjectId } from 'mongoose'
 import { db } from '@/database'
 import { getSlug } from '@/libs'
 import { Size } from '@/models'
@@ -20,6 +20,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
         case 'POST':
             return addNewSize( req, res )
+    
+        case 'PUT':
+            return updateSize( req, res )
     
         default:
             return res.status(400).json({ msg: 'Bad request' })
@@ -119,3 +122,68 @@ const getSizes = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
 
 }
 
+
+const updateSize = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+    
+    const { _id } = req.body
+
+    if( !isValidObjectId( _id ) ){
+        return res.status(400).json({ msg: 'ID de la talla no válido' })
+    }
+
+    try {
+        await db.connect()
+
+        const size = await Size.findById(_id)
+            .where('status').equals(true)
+            .select('-status -createdAt -updatedAt')
+
+        if( !size ){
+            await db.disconnect()
+            return res.status(400).json({ msg: 'Talla no encontrada' })
+        }
+
+        let {
+            label= size.label,
+            active= size.active
+        } = req.body
+
+        label = label.trim()
+        const value = getSlug( label )
+
+        let sizeByLabel
+        if( size.label !== label ){
+            sizeByLabel = await Size.findOne({ value, _id: { $ne: _id } })
+                .select('-status -createdAt -updatedAt')
+        }
+
+        if( sizeByLabel && sizeByLabel.status ){
+            await db.disconnect()
+            return res.status(400).json({ msg: `Ya existe una talla ${ sizeByLabel.label }` })
+        }
+
+        if( sizeByLabel && !sizeByLabel.status ){
+
+            sizeByLabel.status = true
+            await sizeByLabel.save() 
+            await db.disconnect()
+
+            return res.status(200).json( sizeByLabel )
+        }
+
+        size.value = value
+        size.label = label 
+        size.active = active
+
+        await size.save()
+        await db.disconnect()
+
+        return res.status(200).json( size )
+        
+    } catch (error) {
+        console.log(error)
+        await db.disconnect()        
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
+}
