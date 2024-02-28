@@ -63,6 +63,7 @@ export * from './FormComponents/CouponCards'
 export * from './FormComponents/Dropdown'
 export * from './FormComponents/Toggle'
 export * from './FormComponents/Dropzone'
+export * from './FormComponents/CustomSelectMultiple'
 
 export * from './Users/SignUpMsgSuccess'
 export * from './Users/MsgSuccessAuth'

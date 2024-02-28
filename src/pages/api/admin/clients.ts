@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-
 import { FilterQuery, isValidObjectId } from 'mongoose'
-
 import { db } from '@/database'
 import { Client } from '@/models'
 import { CLIENTS_PAGE_SIZE, COUPONS_SENT_OPTIONS } from '@/constants'

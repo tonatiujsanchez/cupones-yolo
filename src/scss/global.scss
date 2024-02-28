@@ -107,6 +107,27 @@ body.fixed-body {
     font-weight: 500;
 }
 
+
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.items-start {
+    align-items: flex-start;
+}
+
+.items-center {
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .flex {
+        flex-direction: row;
+        gap: 1rem;
+    }
+}
+
 // === === === Loaders === === ===
 .main-loader {
     display: flex;

@@ -1,0 +1,147 @@
+@import '../../../scss/index.scss';
+
+.select {
+    position: relative;
+    width: 100%;
+    padding-block-end: 2.2rem;
+
+    label {
+        display: inline-block;
+        margin-block-end: 0.7rem;
+        font-weight: 500;
+    }
+}
+
+.select-content {
+    position: relative;
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 0.1rem solid $gray-light;
+    border-radius: 0.5rem;
+    padding-inline-start: 1rem;
+    padding-inline-end: 1rem;
+    padding-block: 0.7rem;
+    &:hover {
+        border: $border-primary;
+    }
+}
+
+.select-container__focus {
+    outline: 0.2rem solid $primary;
+    border-radius: 0.5rem;
+    .select-content {
+        border-color: transparent;
+    }
+    
+}
+
+.select-content__item {
+    display: flex;
+    align-items: center;
+    background: $gray-ultra-light;
+    padding-block: 0.4rem;
+    padding-inline-end: 0.8rem;
+    border-radius: 0.4rem;
+
+    button {
+        display: flex;
+        color: $gray-light;
+        cursor: pointer;
+        padding-inline: 0.4rem;
+        
+        &:hover {
+            color: $black;
+        }
+
+        svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            stroke-width: 2.5;
+        }
+    }
+}
+
+.select-content__input-content {
+    flex: 1;
+}
+
+.select-content__input {
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    appearance: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    padding-block: 0.5rem;
+    min-width: 3rem;
+}
+
+.select-list-options {
+    position: absolute;
+    inset-block-start: calc(100% - 2.1rem);
+    background: $white;
+    min-width: 100%;
+    box-shadow: 0 0 2rem $gray-ultra-light;
+    border: $border-primary;
+    border-radius: 0.5rem;
+    z-index: 1;
+
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+
+    .option {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        padding-block: 1rem;
+        padding-inline: 0.6rem;
+        cursor: pointer;
+        
+        &:hover {
+            background-color: $gray-ultra-light;
+        }     
+
+        .option__icon {
+            max-width: 2rem;
+            max-height: 2rem;
+            color: $gray;
+            visibility: hidden;
+            opacity: 0.8;
+
+            svg {
+                stroke-width: 0;
+            }
+        }     
+    }
+    .option-added {
+        .option__icon {
+            visibility: visible;
+        }
+    }
+
+    .option__no-result {
+        padding-block: 0.7rem;
+        padding-inline: 0.6rem;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+
+    &.select-list-options__open {
+        transition: all 0.3s ease;
+        height: auto;
+        opacity: 1;
+    }
+}
+
+.error-message {
+    position: absolute;
+    inset-block-end: 0.5rem;
+    color: $red-message;
+    font-size: 1.3rem;
+    padding-block-start: 0.3rem;
+    padding-inline: 0.4rem;
+}
