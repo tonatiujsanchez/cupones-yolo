@@ -10,7 +10,7 @@ export interface IProduct {
     inStock      : number
     images       : IImage[]
     sizes        : ISize[]  
-    tags         : ITag[]
+    tags         : string[]
     sections     : ISection[]
     category     : ICategory[]
     sku          : string

@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { useGetCategories, useGetSections } from '@/hooks'
-import { ButtonPrimary, CustomSelectMultiple, InputText, WYSIWYGEditorLite } from '@/components'
-import { getOptionsOfCategories, getOptionsOfSections } from '@/utils'
-import { ICategory, IProduct, ISection, ISelectOption } from '@/interfaces'
+import { useGetCategories, useGetSections, useGetSizes } from '@/hooks'
+import { ButtonPrimary, CustomSelectMultiple, InputTags, InputText, WYSIWYGEditorLite } from '@/components'
+import { getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes } from '@/utils'
+import { ICategory, IProduct, ISection, ISelectOption, ISize } from '@/interfaces'
 
 import styles from './ProductForm.module.scss'
 
@@ -17,6 +17,8 @@ export const ProductForm: FC<Props> = ({ product }) => {
             discountRate: 0,
             sections: [],
             category: [],
+            sizes   : [],
+            tags    : []
         }
     })
 
@@ -25,6 +27,9 @@ export const ProductForm: FC<Props> = ({ product }) => {
 
     const { categoriesQuery } = useGetCategories({ page: 1 })
     const categories = categoriesQuery.data?.categories ?? []
+
+    const { sizesQuery } = useGetSizes({ page: 1 })
+    const sizes = sizesQuery.data?.sizes ?? []
 
 
 
@@ -55,6 +60,21 @@ export const ProductForm: FC<Props> = ({ product }) => {
         } else {
             const sectionToAdded = categories.find( section => section.slug === option.value )
             return [ ...categoriesProduct, sectionToAdded! ]
+        }
+        
+    }
+
+    const onChangeSizes = ( option:ISelectOption ):ISize[] =>{
+
+        const sizesProduct = getValues('sizes')
+
+        const existOption = sizesProduct.find( size => size.value === option.value )
+
+        if( existOption ){
+            return sizesProduct.filter( size => size.value !== option.value )
+        } else {
+            const sizeToAdded = sizes.find( size => size.value === option.value )
+            return [ ...sizesProduct, sizeToAdded! ]
         }
         
     }
@@ -175,16 +195,45 @@ export const ProductForm: FC<Props> = ({ product }) => {
                         )
                     }
                 </div>
-                <InputText
-                    type="text"
-                    label="Etiquetas"
-                    fieldName="tagsProduct"
-                    placeholder="Etiquetas del producto"
-                    { ...register('tags', {
-                        validate: ( value )=> value.length === 0 ? 'Añada al menos una etiqueta al producto' : undefined
-                    })}
-                    isRequired
-                    // error={ errors.tags }
+                <div>
+                {
+                    sectionsQuery.isFetching
+                        ? <p>Cargando tallas...</p>
+                        :(
+                            <Controller
+                                control={ control }
+                                name="sizes"
+                                render={({ field })=>(
+                                    <CustomSelectMultiple
+                                        fieldName='sizesProduct'
+                                        label='Tallas'
+                                        options={ getOptionsOfSizes( sizes ) }
+                                        optionsSelected={ getOptionsOfSizes(field.value) }
+                                        onChange={ ( value )=>  field.onChange( onChangeSizes(value) ) }
+                                        placeholder='Añade las tallas del producto'
+                                        error={ errors.sizes }
+                                        isRequired
+                                    />
+                                )}
+                                rules={{
+                                    validate: ( value )=> value.length === 0 ? 'Añada al menos una sección al producto' : undefined
+                                }}
+                            />
+                        )
+                }
+                </div>
+                <Controller
+                    control={ control }
+                    name="tags"
+                    render={({ field })=>(
+                        <InputTags
+                            tags={ field.value }
+                            onChange={ field.onChange }
+                            label="Etiquetas"
+                            fieldName="tagsProducts"
+                            placeholder="Presiona [coma] para agregar"
+                        />
+                    )}
                 />
                 <Controller
                     control={ control }

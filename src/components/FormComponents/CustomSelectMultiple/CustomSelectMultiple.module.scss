@@ -31,6 +31,7 @@
 .select-container__focus {
     outline: 0.2rem solid $primary;
     border-radius: 0.5rem;
+
     .select-content {
         border-color: transparent;
     }
@@ -44,6 +45,8 @@
     padding-block: 0.4rem;
     padding-inline-end: 0.8rem;
     border-radius: 0.4rem;
+    color: $black;
+    font-weight: 500;
 
     button {
         display: flex;
@@ -124,7 +127,7 @@
     }
 
     .option__no-result {
-        padding-block: 0.7rem;
+        padding-block: 1rem;
         padding-inline: 0.6rem;
         pointer-events: none;
         cursor: not-allowed;
