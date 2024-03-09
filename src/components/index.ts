@@ -65,6 +65,7 @@ export * from './FormComponents/Toggle'
 export * from './FormComponents/Dropzone'
 export * from './FormComponents/CustomSelectMultiple'
 export * from './FormComponents/InputTags'
+export * from './FormComponents/ReloadableInput'
 
 export * from './Users/SignUpMsgSuccess'
 export * from './Users/MsgSuccessAuth'

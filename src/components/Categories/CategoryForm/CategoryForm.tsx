@@ -41,7 +41,7 @@ export const CategoryForm:FC<Props> = ({ category, currentPage, onClose }) => {
     useEffect(()=>{
         const { unsubscribe } = watch( (value, { name } )=>{
             
-            if( name === 'title' && value.title){        
+            if( name === 'title' && value.title ){        
                 if( category ){ return }
                 handleChangeSlug()
             }

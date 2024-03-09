@@ -9,6 +9,7 @@ interface Props {
 export const ButtonRefresh:FC<Props> = ({ onClick }) => {
     return (
         <button
+            type="button"
             onClick={ onClick }
             className={ styles['button'] }
         >

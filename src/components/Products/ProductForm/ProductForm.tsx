@@ -1,24 +1,28 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useGetCategories, useGetSections, useGetSizes } from '@/hooks'
-import { ButtonPrimary, CustomSelectMultiple, InputTags, InputText, WYSIWYGEditorLite } from '@/components'
-import { getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes } from '@/utils'
+import { ButtonPrimary, CustomSelectMultiple, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
+import { getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes, getSku } from '@/utils'
 import { ICategory, IProduct, ISection, ISelectOption, ISize } from '@/interfaces'
 
 import styles from './ProductForm.module.scss'
+import { getSlug, isValidSlug } from '@/libs'
 
 interface Props {
     product?: IProduct
 }
 export const ProductForm: FC<Props> = ({ product }) => {
 
-    const { register, control, handleSubmit, formState:{ errors }, getValues } = useForm<IProduct>({
+    const { register, control, handleSubmit, formState:{ errors }, getValues, setValue, watch } = useForm<IProduct>({
         defaultValues: {
             discountRate: 0,
             sections: [],
             category: [],
             sizes   : [],
-            tags    : []
+            tags    : [],
+            slug    : '',
+            sku     : '',
+            _id     : '',
         }
     })
 
@@ -32,6 +36,33 @@ export const ProductForm: FC<Props> = ({ product }) => {
     const sizes = sizesQuery.data?.sizes ?? []
 
 
+    useEffect(()=>{
+        if(!product) {
+            handleChangeSku()
+        }
+    },[])
+
+    useEffect(()=>{
+        const { unsubscribe } = watch( (value, { name } )=>{
+            
+            if( name === 'title' && value.title ){        
+                if( product ){ return }
+                handleChangeSlug()
+            }
+        })
+        return () => unsubscribe()
+    },[ watch ])
+
+
+    const handleChangeSlug = () => {
+        const slug = getSlug( getValues('title') )
+        setValue('slug', slug, { shouldValidate: true })
+    }
+
+    const handleChangeSku = () => {
+        const sku = getSku()
+        setValue('sku', sku, { shouldValidate: true })
+    }
 
 
     const onChangeSections = ( option:ISelectOption ):ISection[] =>{
@@ -99,7 +130,8 @@ export const ProductForm: FC<Props> = ({ product }) => {
                     placeholder="Nombre del producto"
                     error={ errors.title }
                     { ...register('title', {
-                        required: 'El título del producto es requerido'
+                        required: 'El título del producto es requerido',
+                        validate: (val) => val && val.trim().length === 0 ? 'El título del producto es requerido' : undefined
                     })}
                     isRequired
                 />
@@ -113,7 +145,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
                         error={ errors.price }
                         { ...register('price', {
                             required: 'El precio del producto es requerido',
-                            validate: ( value )=> Number(value) <= 0 ? 'Valor no válido' : undefined
+                            validate: ( value )=> Number(value) <= 0 ? 'Valor no válido' : undefined,
                         })}
                         isRequired
                     />
@@ -252,6 +284,59 @@ export const ProductForm: FC<Props> = ({ product }) => {
                     )}
                     rules={{ required: 'La descripción del producto es requerida' }}
                 />
+
+                <Controller
+                    control={ control }
+                    name="slug"
+                    render={({ field })=>(
+                        <ReloadableInput
+                            fieldName="slugProduct"
+                            label="Slug"
+                            value={ field.value }
+                            onChange={ field.onChange }
+                            reload={ handleChangeSlug }
+                            error={ errors.slug }
+                            isRequired
+                        />
+                    )}
+                    rules={{
+                        required: 'El slug es requerido',
+                        validate: ( value )=> !isValidSlug( value ) ? 'El slug no es válido' : undefined 
+                    }}
+                />
+                <div className="flex">
+                    <Controller
+                        control={ control }
+                        name="sku"
+                        render={({ field })=>(
+                            <ReloadableInput
+                                label="SKU"
+                                fieldName="skuProduct"
+                                value={ field.value }
+                                onChange={ field.onChange }
+                                reload={ handleChangeSku }
+                                placeholder="SKU del producto"
+                                error={ errors.sku }
+                                disabled
+                                isRequired
+                            />
+                        )}
+                        rules={{
+                            required: 'El SKU del producto es requerido',
+                            validate: (val) => val && val.trim().length === 0 ? 'El SKU del producto es requerido' : undefined
+                        }}
+                    />
+                    <InputText
+                        type="text"
+                        label="ID del producto"
+                        fieldName="idProduct"
+                        placeholder="El ID se generará automáticamente al guardar"
+                        error={ errors._id }
+                        { ...register('_id')}
+                        disabled
+                        isRequired
+                    />
+                </div>
                 <div className={ styles['button-container'] }>
                     <ButtonPrimary type="submit">
                         {
