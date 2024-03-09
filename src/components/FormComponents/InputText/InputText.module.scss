@@ -31,6 +31,9 @@
             border: 0.1rem solid transparent;
             outline: 0.2rem solid $primary;
         }
+        &:disabled:hover {
+            border: 0.1rem solid $gray-light;
+        }
     }
     .error-message {
         position: absolute;
