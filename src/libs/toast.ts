@@ -1,13 +1,22 @@
-import { toast } from 'sonner'
+import { toast }  from 'sonner'
 
-export const toastSuccess = ( title:string, description = '' ) => {
-    return toast.success(title, { description })
+type Position = 
+    | 'top-center' 
+    | 'top-right' 
+    | 'top-left' 
+    | 'bottom-center' 
+    | 'bottom-right' 
+    | 'bottom-left' 
+    | undefined 
+
+export const toastSuccess = ( title:string, description = '', position:Position='top-center' ) => {
+    return toast.success(title, { description, position })
 }
 
-export const toastError = ( title:string, description = '' ) => {
-    return toast.error(title, { description })
+export const toastError = ( title:string, description = '', position:Position='top-center' ) => {
+    return toast.error(title, { description, position })
 }
 
-export const toastBasic = ( title:string, description = '' ) => {
-    return toast(title, { description })
+export const toastBasic = ( title:string, description = '', position:Position='top-center' ) => {
+    return toast(title, { description, position })
 }
