@@ -1,6 +1,5 @@
 import { FC,  ReactNode } from 'react'
 import Head from 'next/head'
-import { fonts } from '@/fonts'
 import { Navbar } from "@/components"
 
 
@@ -26,7 +25,7 @@ export const SiteLayout:FC<Props> = ({ children, metatags = metatagsDefault }) =
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
             </Head>
-            <div className={ fonts.Raleway.className }>
+            <div>
                 <Navbar />
                 { children }
             </div>
