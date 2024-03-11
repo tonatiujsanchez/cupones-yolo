@@ -20,6 +20,7 @@ export * from './Shared/TablePrimary'
 export * from './Links/LinkPrimary'
 
 export * from './Buttons/ButtonPrimary'
+export * from './Buttons/ButtonOutlinePrimary'
 export * from './Buttons/ButtonIconsAnimated'
 export * from './Buttons/ButtonDelete'
 export * from './Buttons/ButtonLight'

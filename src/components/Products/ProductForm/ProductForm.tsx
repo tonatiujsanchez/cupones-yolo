@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useGetCategories, useGetSections, useGetSizes } from '@/hooks'
-import { ButtonPrimary, CustomSelectMultiple, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
+import { ButtonLight, ButtonOutlinePrimary, ButtonPrimary, CustomSelectMultiple, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
 import { getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes, getSku } from '@/utils'
 import { ICategory, IProduct, ISection, ISelectOption, ISize } from '@/interfaces'
 
@@ -229,7 +229,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
                 </div>
                 <div>
                 {
-                    sectionsQuery.isFetching
+                    sizesQuery.isFetching
                         ? <p>Cargando tallas...</p>
                         :(
                             <Controller
@@ -337,12 +337,34 @@ export const ProductForm: FC<Props> = ({ product }) => {
                         isRequired
                     />
                 </div>
-                <div className={ styles['button-container'] }>
-                    <ButtonPrimary type="submit">
+            </div>
+            <h6 className={ styles['form-product__subtitle'] }>Fotos</h6>
+            <div>
+                
+            </div>
+
+
+            <div className={ styles['buttons'] }>
+                <div className={ styles['button__cancel'] }>
+                    <ButtonLight
+                        onClick={ ()=>{} }
+                    >
+                        Cancelar
+                    </ButtonLight>
+                </div>
+                <div className={ styles['buttons__content'] }>
+                    <ButtonOutlinePrimary type="submit">
                         {
                             false
                             ? ( <div className="custom-loader-white"></div> )
                             : ( 'Guardar' )
+                        }
+                    </ButtonOutlinePrimary>
+                    <ButtonPrimary type="submit">
+                        {
+                            false
+                            ? ( <div className="custom-loader-white"></div> )
+                            : ( 'Publicar' )
                         }
                     </ButtonPrimary>
                 </div>
