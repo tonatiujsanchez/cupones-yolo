@@ -21,6 +21,7 @@ export * from './Links/LinkPrimary'
 
 export * from './Buttons/ButtonPrimary'
 export * from './Buttons/ButtonOutlinePrimary'
+export * from './Buttons/ButtonSoftPrimary'
 export * from './Buttons/ButtonIconsAnimated'
 export * from './Buttons/ButtonDelete'
 export * from './Buttons/ButtonLight'

@@ -1,0 +1,27 @@
+@import '../../../scss/index.scss';
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 2.5rem;
+    border-radius: 0.5rem;
+    color: $primary;
+    background-color: $primary-light;
+    font-weight: 700;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    width: 100%;
+    height: 3.8rem;
+
+    &:hover{
+        color: $white;
+        background: $gradient-primary-bright;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
