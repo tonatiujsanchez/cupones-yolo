@@ -1,18 +1,21 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
 import { Controller, useForm } from 'react-hook-form'
+import { getSlug, isValidSlug } from '@/libs'
 import { useGetCategories, useGetSections, useGetSizes } from '@/hooks'
-import { ButtonLight, ButtonOutlinePrimary, ButtonPrimary, CustomSelectMultiple, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
+import { ButtonLight, ButtonOutlinePrimary, ButtonPrimary, CustomSelectMultiple, DropzoneMultiple, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
 import { getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes, getSku } from '@/utils'
 import { ICategory, IProduct, ISection, ISelectOption, ISize } from '@/interfaces'
 
 import styles from './ProductForm.module.scss'
-import { getSlug, isValidSlug } from '@/libs'
 
 interface Props {
     product?: IProduct
 }
 export const ProductForm: FC<Props> = ({ product }) => {
 
+    const router = useRouter()
+    const formRef = useRef<HTMLFormElement>(null)
     const { register, control, handleSubmit, formState:{ errors }, getValues, setValue, watch } = useForm<IProduct>({
         defaultValues: {
             discountRate: 0,
@@ -23,6 +26,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
             slug    : '',
             sku     : '',
             _id     : '',
+            active  : true
         }
     })
 
@@ -110,19 +114,28 @@ export const ProductForm: FC<Props> = ({ product }) => {
         
     }
 
+    
+    const onCancel = () => {
+        router.replace('/dashboard/productos')
+    }
 
+    const onSaveProducto = ( data:IProduct ) => {
+        data.active = false
+        console.log(data)
+    }
 
-    const onProductSubmit = (data:IProduct) => {
+    const onProductSubmit = ( data:IProduct ) => {
         console.log(data)
     }
 
     return (
         <form 
             onSubmit={ handleSubmit( onProductSubmit ) }
+            ref={ formRef }
             className={ styles['form-product'] }
         >
             <h6 className={ styles['form-product__subtitle'] }>Información principal</h6>
-            <div>
+            <div className={ styles['form-product__information-container'] }>
                 <InputText
                     type="text"
                     label="Nombre del producto"
@@ -339,21 +352,28 @@ export const ProductForm: FC<Props> = ({ product }) => {
                 </div>
             </div>
             <h6 className={ styles['form-product__subtitle'] }>Fotos</h6>
-            <div>
-                
+            <div className={ styles['form-product__dropzone-container'] }>
+                <DropzoneMultiple
+                    values={ [] }
+                    onChange={()=> console.log('Dropzone') }
+                    placeholder="Añada fotos del producto"
+                />
             </div>
 
 
             <div className={ styles['buttons'] }>
                 <div className={ styles['button__cancel'] }>
                     <ButtonLight
-                        onClick={ ()=>{} }
+                        onClick={ onCancel }
                     >
                         Cancelar
                     </ButtonLight>
                 </div>
                 <div className={ styles['buttons__content'] }>
-                    <ButtonOutlinePrimary type="submit">
+                    <ButtonOutlinePrimary
+                        type="button"
+                        onClick={ handleSubmit( onSaveProducto ) }
+                    >
                         {
                             false
                             ? ( <div className="custom-loader-white"></div> )
