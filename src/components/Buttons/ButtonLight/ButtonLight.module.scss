@@ -9,7 +9,13 @@
     cursor: pointer;
     background-color: $gray-ultra-light;
     transition: all 300ms ease;
+
     &:hover {
         background-color: $gray-light-silver;
+    }
+
+    &:disabled:hover {
+        background-color: $gray-ultra-light;
+        cursor: default;
     }
 }

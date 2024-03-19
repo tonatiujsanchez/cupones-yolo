@@ -21,7 +21,21 @@
         background: $gradient-primary-bright;
     }
 
+    &:disabled:hover {
+        color: $primary;
+        background: $primary-light;
+        cursor: default;
+    }
+
     &:active {
         transform: scale(0.95);
+    }
+
+    &:disabled:active {
+        transform: scale(1);
+    }
+
+    &:disabled {
+        opacity: 0.7;
     }
 }
