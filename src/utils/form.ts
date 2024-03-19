@@ -15,3 +15,11 @@ export const getOptionsOfCategories = ( categories:ICategory[] ):ISelectOption[]
 export const getOptionsOfSizes = ( sizes:ISize[] ):ISelectOption[] => {
     return sizes.map( size => ({ value: size.value, label: size.label }) )
 }
+
+export const arrayFilesToFileList = (array: File[]): FileList => {
+    const dataTransfer = new DataTransfer()
+    array.forEach(file => {
+        dataTransfer.items.add(file)
+    })
+    return dataTransfer.files
+}
