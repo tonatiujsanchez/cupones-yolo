@@ -2,7 +2,6 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { useForm } from 'react-hook-form'
-import { fonts } from '@/fonts'
 import { useSignUp } from '@/hooks'
 import { ButtonLight, ButtonPrimary, InputText, SignUpMsgSuccess, SiteLayout } from '@/components'
 import { FacebookIcon, GoogleIcon } from '@/components/Icons'
@@ -37,7 +36,7 @@ const SignUpPage = () => {
     
     return (
         <SiteLayout>
-            <main className={ `${ fonts.Raleway.className }  ${ styles['main-login'] }` }>
+            <main className={ ` ${ styles['main-login'] }` }>
                 <section className={ styles['login-container'] }>
                     {
                         msgSuccess
