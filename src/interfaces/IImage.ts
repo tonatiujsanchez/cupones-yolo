@@ -6,6 +6,8 @@ export interface IImage {
     _id?    : string
 
     publicId: string
+    filename: string
+    originalFilename: string
     url     : string
     title?  : string
     alt?    : string

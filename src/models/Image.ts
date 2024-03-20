@@ -8,6 +8,14 @@ export const ImageSchema = new Schema<IImage>({
         type: String,
         required: true
     },
+    filename: {
+        type: String,
+        required: true
+    },
+    originalFilename: {
+        type: String,
+        required: true
+    },
     url: {
         type: String,
         required: true
@@ -49,7 +57,6 @@ export const ImageSchema = new Schema<IImage>({
 },{
     timestamps: true,
 })
-
 
 
 const Image:Model<IImage> = mongoose.models.Image || mongoose.model('Image', ImageSchema)
