@@ -30,3 +30,5 @@ export * from './sizes/useGetSizes'
 export * from './sizes/usePostSize'
 export * from './sizes/useUpdateSize'
 export * from './sizes/useDeleteSize'
+
+export * from './images/useUploadImage'

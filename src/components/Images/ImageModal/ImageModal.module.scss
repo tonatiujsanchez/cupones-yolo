@@ -1,0 +1,58 @@
+@import '../../../scss/index.scss';
+
+.image-modal {
+    background-color: $white;
+    border-radius: 0.5rem;
+    padding-inline: 2rem;
+    padding-block-start: 2rem;
+    padding-block-end: 2.5rem;
+    min-width: 30rem;
+    width: calc(100vw - 2rem);
+}
+
+.image-modal__upload {
+    border-block-end: $border-gray-light;
+}
+
+
+.image-modal__images-list {
+    padding-block: 4rem;
+}
+
+.image-modal__footer {
+    display: flex;
+    flex-direction: column;
+
+    .footer__actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .footer__actions--button-add {
+        min-width: 16rem;
+    }
+}
+
+@media (min-width: 640px) {
+    
+    .image-modal__footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        
+        .footer__actions {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+}
+
+@media (min-width: 768px) {
+    .image-modal {
+        min-width: 76rem;
+        width: auto;
+    }
+}

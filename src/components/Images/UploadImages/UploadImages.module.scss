@@ -1,0 +1,72 @@
+@import '../../../scss/index.scss';
+
+.upload {
+    padding-block: 1rem;
+}
+
+.upload-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-block-end: 1rem;
+
+    .upload-actions__button {
+        max-width: 14rem;
+
+        svg {
+            width: 2rem;
+            stroke-width: 2;
+        }
+    }
+
+    &:hover .upload-actions__button-loader {
+        background-color: $white;
+    }
+}
+
+.files-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .files-preview__item {
+        position: relative;
+        background-color: $gray-ultra-light;
+        border: $border-gray-light;
+        border-radius: 0.2rem;
+        width: 7rem;
+        height: 7rem;
+    }
+
+    .files-preview__img {
+        object-fit: contain;
+    }
+
+    .files-preview__button-remove {
+        position: absolute;
+        inset-block-start: -0.8rem;
+        inset-inline-end: -1.4rem;
+        cursor: pointer;
+        color: $gray;
+
+        &:hover {
+            transform: scale(1.1);
+            color: $black;
+        }
+
+        svg {
+            width: 1.4rem;
+            height: 1.4rem;
+            stroke-width: 2;
+        }
+    }
+}
+
+@media (min-width: 640px) {
+
+    .upload-actions {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

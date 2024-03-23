@@ -6,8 +6,9 @@ cloudinary.config( process.env.CLOUDINARY_URL || '' )
 
 import { db } from '@/database'
 import { Image } from '@/models'
-import { IMAGES_SECTIONS_OPTIONS } from '@/constants'
+import { COOKIE_AUTH_KEY, IMAGES_SECTIONS_OPTIONS } from '@/constants'
 import { IImage, ISectionImage } from '@/interfaces'
+import { jwt } from '@/libs'
 
 type Data = 
     | { msg: string }
@@ -31,10 +32,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     }
 }
 
-const saveFile = async(files: File[], section:ISectionImage,  users:string[]):Promise<IImage> => {
+const saveFile = async(files: File[], section:ISectionImage,  uid:string):Promise<IImage> => {
 
     const file = files[0]
-    const user = users[0]
+    const user = uid
 
     const image = await cloudinary.uploader.upload( file.filepath, { folder: process.env.CLOUDINARY_FOLDER  } )
     const { public_id, original_filename, secure_url, bytes, format, width, height } = image
@@ -54,7 +55,7 @@ const saveFile = async(files: File[], section:ISectionImage,  users:string[]):Pr
     }        
 }
 
-const parseFiles = (req: NextApiRequest):Promise<IImage> => {
+const parseFiles = (req: NextApiRequest, uid:string):Promise<IImage> => {
     return new Promise(( resolve, reject ) =>{
 
         const form = new IncomingForm()
@@ -72,8 +73,8 @@ const parseFiles = (req: NextApiRequest):Promise<IImage> => {
                 return reject({ msg: 'Sección de imagen NO valida' })
             }
 
-            if(!fields.user){
-                return reject({ msg: 'Es necesario un usuario para subir una imagen' })
+            if(!uid){
+                return reject({ msg: 'Not authorized - Usuario encontrado' })
             }
 
             if (!files.file) {
@@ -83,7 +84,7 @@ const parseFiles = (req: NextApiRequest):Promise<IImage> => {
             const image = await saveFile( 
                 files.file,
                 fields.section[0] as ISectionImage, 
-                fields.user
+                uid
             )
 
            return resolve(image)
@@ -95,9 +96,22 @@ const parseFiles = (req: NextApiRequest):Promise<IImage> => {
 
 const uploadImage = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
 
+    const token = req.cookies[COOKIE_AUTH_KEY]
+
+    if(!token){
+        return res.status(400).json({ msg: 'Not authorized' })
+    }
+    
+    let uid = ''
+    try {
+        uid = await jwt.isValidToken( token )
+    } catch (error) {
+        return res.status(401).json({ msg: 'Not authorized' })
+    }
+
     try {
         
-        const image = await parseFiles( req )
+        const image = await parseFiles( req, uid )
         const newImage = new Image(image)
 
         await db.connect()
