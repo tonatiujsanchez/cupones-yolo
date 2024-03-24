@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { UploadCloudIcon } from '@/components/Icons'
-import { IImage } from '@/interfaces'
+import { IImage, ISectionImage } from '@/interfaces'
 
 import styles from './DropzoneMultiple.module.scss'
 import { ModalContainer, ImageModal } from '@/components'
@@ -8,10 +8,11 @@ import { ModalContainer, ImageModal } from '@/components'
 interface Props {
     values      : IImage[]
     onChange    : ( value:IImage[] )=>void
+    section     : ISectionImage
     placeholder?: string
     dimensions? : string
 }
-export const DropzoneMultiple:FC<Props> = ({values, onChange, placeholder="Seleccionar imagen", dimensions }) => {
+export const DropzoneMultiple:FC<Props> = ({values, onChange, section, placeholder="Seleccionar imagen", dimensions }) => {
 
     const [showImageModal, setShowImageModal] = useState(false)
 
@@ -43,6 +44,7 @@ export const DropzoneMultiple:FC<Props> = ({values, onChange, placeholder="Selec
             >
                 <ImageModal
                     onClose={ onCloseImageModal }
+                    section={ section }
                 />
             </ModalContainer>
         </>

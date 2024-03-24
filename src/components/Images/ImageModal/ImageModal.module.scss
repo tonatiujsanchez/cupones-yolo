@@ -3,11 +3,14 @@
 .image-modal {
     background-color: $white;
     border-radius: 0.5rem;
-    padding-inline: 2rem;
+    padding-inline: 1rem;
     padding-block-start: 2rem;
     padding-block-end: 2.5rem;
     min-width: 30rem;
     width: calc(100vw - 2rem);
+    display: flex;
+    flex-direction: column;
+    max-height: 98vh;
 }
 
 .image-modal__upload {
@@ -16,7 +19,9 @@
 
 
 .image-modal__images-list {
-    padding-block: 4rem;
+    padding-block: 2rem;
+    flex: 1;
+    overflow-y: auto;
 }
 
 .image-modal__footer {
@@ -53,6 +58,11 @@
 @media (min-width: 768px) {
     .image-modal {
         min-width: 76rem;
+        padding-inline: 2rem;
         width: auto;
+    }
+
+    .image-modal__images-list {
+        padding-block: 3rem;
     }
 }

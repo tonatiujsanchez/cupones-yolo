@@ -32,3 +32,4 @@ export * from './sizes/useUpdateSize'
 export * from './sizes/useDeleteSize'
 
 export * from './images/useUploadImage'
+export * from './images/useGetImage'

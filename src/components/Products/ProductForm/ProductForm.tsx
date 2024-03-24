@@ -5,9 +5,10 @@ import { getSlug, isValidSlug } from '@/libs'
 import { useGetCategories, useGetSections, useGetSizes } from '@/hooks'
 import { ButtonLight, ButtonOutlinePrimary, ButtonPrimary, CustomSelectMultiple, DropzoneMultiple, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
 import { getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes, getSku } from '@/utils'
-import { ICategory, IProduct, ISection, ISelectOption, ISize } from '@/interfaces'
+import { ICategory, IProduct, ISection, ISectionImage, ISelectOption, ISize } from '@/interfaces'
 
 import styles from './ProductForm.module.scss'
+import { IMAGES_SECTIONS } from '@/constants'
 
 interface Props {
     product?: IProduct
@@ -357,6 +358,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
                     values={ [] }
                     onChange={()=> console.log('Dropzone') }
                     placeholder="Añada fotos del producto"
+                    section={ IMAGES_SECTIONS.products as ISectionImage }
                 />
             </div>
 

@@ -6,25 +6,24 @@ import { ButtonSelectFiles, ButtonSoftPrimary } from '@/components'
 import { UploadCloudIcon, XIcon } from '@/components/Icons'
 import { arrayFilesToFileList } from '@/utils'
 import { TYPE_OF_ACCEPTED_IMAGES } from '@/constants'
-import { ISectionImage } from '@/interfaces'
+import { ISectionImage, ISelectOption } from '@/interfaces'
 
 import styles from './UploadImages.module.scss'
 
 
 interface Props {
-    section: ISectionImage
+    section      : ISectionImage
+    curentSection: ISelectOption
+    page         : number
 }
-export const UploadImages:FC<Props> = ({ section='products' }) => {
+export const UploadImages:FC<Props> = ({ section, curentSection, page }) => {
 
     const [files, setFiles] = useState<FileList | null>(null)
     const [fileDataURLs, setFileDataURLs] = useState<string[]>([])
-    const fileInputRef = useRef<HTMLInputElement>(null)
     const [loading, setLoading] = useState(false)
+    const fileInputRef = useRef<HTMLInputElement>(null)
 
-
-    const { uploadImageMutation } = useUploadImage()
-
-
+    const { uploadImageMutation } = useUploadImage({ curentSection, page })
     
     const handleFileChange = (e:ChangeEvent<HTMLInputElement>) => {
 
@@ -68,16 +67,22 @@ export const UploadImages:FC<Props> = ({ section='products' }) => {
 
 
     const onRemoveFile = ( idx: number ) => {
-        setFileDataURLs( fileDataURLs.filter( (_, index) => index !== idx ) )
+        
 
         const updatedFileListArray = Array.from(files!).filter((_, index) => index !== idx)
         const updatedFileList = arrayFilesToFileList(updatedFileListArray)
-        setFiles(updatedFileList)
+        if( updatedFileList.length === 0 ){
+            return onClearImages()
+        }
+        setFileDataURLs( fileDataURLs.filter( (_, index) => index !== idx ) )
+        setFiles( updatedFileList )
     }
 
     const onClearImages = async() => {
         setFiles(null)
         setFileDataURLs([])
+        fileInputRef.current!.value = ''
+
     }
 
     const uploadImages = async() => {
@@ -112,7 +117,7 @@ export const UploadImages:FC<Props> = ({ section='products' }) => {
                 <ButtonSelectFiles
                     onClick={ ()=> fileInputRef.current?.click() }
                     lengthFiles={ files?.length ?? 0 }
-                    disabled={ loading } //FIXME:
+                    disabled={ loading }
                 />
                 <input
                     type="file"
@@ -129,7 +134,7 @@ export const UploadImages:FC<Props> = ({ section='products' }) => {
                     disabled={ !files || files.length === 0 || loading }
                 >
                     {
-                        loading //FIXME:
+                        loading
                             ? <>
                                 <div className={` custom-loader-primary ${ styles['upload-actions__button-loader'] }`}></div>
                                 <span className="ml-2">Subiendo...</span>
@@ -156,6 +161,7 @@ export const UploadImages:FC<Props> = ({ section='products' }) => {
                                 type="button"
                                 onClick={ () => onRemoveFile( idx ) }
                                 className={ styles['files-preview__button-remove'] }
+                                disabled={ loading }
                             >
                                 <XIcon />
                             </button>

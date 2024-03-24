@@ -1,0 +1,19 @@
+@import '../../../scss/index.scss';
+
+
+.image-item{
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.4rem;
+    border: $border-gray-light-silver;
+    transition: 0.5s;
+}
+
+.image-item__content {
+    height: 10rem;
+    background: $gray-ultra-light;
+}
+
+.image-item__img {
+    object-fit: contain;
+}

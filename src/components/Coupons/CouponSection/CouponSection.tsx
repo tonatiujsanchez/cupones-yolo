@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { useGetCoupons } from '@/hooks'
 import { CouponList, CouponsSectionFilter, ErrorMessage, Pagination, RegisterCount } from '@/components'
 import { COUPONS_PAGE_SIZE, STATUS_OPTIONS_COUPON_EXCHANGE } from '@/constants'
+import { ISelectOption, IStatusCouponExchange, IStatusCouponExchangeOptions } from '@/interfaces'
 
 import styles from './CouponSection.module.scss'
-import { ISelectOption, IStatusCouponExchange, IStatusCouponExchangeOptions } from '@/interfaces'
 
 
 export const CouponSection = () => {
