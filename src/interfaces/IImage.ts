@@ -9,8 +9,8 @@ export interface IImage {
     filename: string
     originalFilename: string
     url     : string
-    title?  : string
-    alt?    : string
+    title   : null | string
+    alt     : null | string
     width   : number
     height  : number
 
@@ -21,4 +21,12 @@ export interface IImage {
 
     createdAt?: string
     updatedAt?: string
+}
+
+export interface IImagesResp {
+    currentPage  : number,
+    totalPages   : number,
+    pageSize     : number,
+    totalImages: number,
+    images       : IImage[],
 }
