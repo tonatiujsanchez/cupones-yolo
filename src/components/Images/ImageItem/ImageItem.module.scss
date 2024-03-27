@@ -12,8 +12,15 @@
 }
 
 .image-item__content {
+    position: relative;
     height: 10rem;
     background: $gray-ultra-light;
+}
+
+.image-item__selected {
+    opacity: 0.9;
+    transform: scale(0.9);
+    background: $primary-light;
 }
 
 .image-item__img {

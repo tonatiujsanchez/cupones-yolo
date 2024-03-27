@@ -17,7 +17,7 @@ export const ImageItem:FC<Props> = ({ image, isSelectedImage, onChangeSelectedIm
             onClick={ ()=> onChangeSelectedImages( image ) } 
             className={ styles['image-item'] }
         >
-            <div className={ styles['image-item__content'] }>
+            <div className={`${ styles['image-item__content'] } ${ isSelectedImage ? styles['image-item__selected'] : '' }`}>
                 <Image
                     src={ image.url }
                     alt={ image.originalFilename }

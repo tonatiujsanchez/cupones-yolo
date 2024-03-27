@@ -7,9 +7,6 @@
     padding: 1rem;
     cursor: pointer;
     color: $gray-light;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     svg {
         width: 2.4rem;
@@ -21,7 +18,8 @@
     }
 }
 
-.dropzone__content {
+.dropzone__msg-content {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,4 +28,26 @@
 
 .dropzone__dimensions {
     font-size: 1.1rem;
+}
+
+.dropzone__img-content {
+    max-width: 15rem;
+}
+
+.dropzone__images {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dropzone__img {
+    object-fit: contain;
+}
+
+@media (min-width: 768px) {
+    .dropzone__images { 
+        gap: 3rem;
+    }
+
 }

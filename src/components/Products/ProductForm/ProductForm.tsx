@@ -5,10 +5,10 @@ import { getSlug, isValidSlug } from '@/libs'
 import { useGetCategories, useGetSections, useGetSizes } from '@/hooks'
 import { ButtonLight, ButtonOutlinePrimary, ButtonPrimary, CustomSelectMultiple, DropzoneMultiple, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
 import { getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes, getSku } from '@/utils'
+import { IMAGES_SECTIONS } from '@/constants'
 import { ICategory, IProduct, ISection, ISectionImage, ISelectOption, ISize } from '@/interfaces'
 
 import styles from './ProductForm.module.scss'
-import { IMAGES_SECTIONS } from '@/constants'
 
 interface Props {
     product?: IProduct
