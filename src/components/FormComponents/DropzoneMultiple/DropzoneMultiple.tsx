@@ -17,7 +17,7 @@ export const DropzoneMultiple:FC<Props> = ({values, onChange, section, placehold
     const [showImageModal, setShowImageModal] = useState(false)
 
     const showModalimages = () => {
-        // Abrir el modal de imágenes y ejecutar el onChange cuando haya un cambio en el array de imágenes selecionadas
+        setShowImageModal(true)
     }
 
     const onCloseImageModal = ()=> {
@@ -27,7 +27,7 @@ export const DropzoneMultiple:FC<Props> = ({values, onChange, section, placehold
     return (
         <>        
             <div 
-                onClick={ ()=> setShowImageModal(true) }
+                onClick={ showModalimages }
                 className={ styles['dropzone'] }
             >
                 <div className={ styles['dropzone__content'] }>
@@ -43,8 +43,10 @@ export const DropzoneMultiple:FC<Props> = ({values, onChange, section, placehold
                 onHidden={ onCloseImageModal }
             >
                 <ImageModal
-                    onClose={ onCloseImageModal }
+                    values={ values }
+                    onChange={ onChange }
                     section={ section }
+                    onClose={ onCloseImageModal }
                 />
             </ModalContainer>
         </>

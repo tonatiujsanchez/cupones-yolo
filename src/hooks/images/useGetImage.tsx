@@ -2,8 +2,6 @@ import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { imagesActions } from '@/services'
 import { IMAGES_QUERY_KEY } from '@/constants'
-import { ISectionImage } from '@/interfaces'
-
 
 interface Props {
     section: string

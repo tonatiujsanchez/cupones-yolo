@@ -6,12 +6,13 @@ import styles from './Checkbox.module.scss'
 
 
 interface Props {
-    checked : boolean
-    onChange: ( value:boolean ) => void
-    text    : string
+    checked    : boolean
+    onChange   : ( value:boolean ) => void
+    text       : string
+    borderColor?: string
 }
 
-export const Checkbox:FC<Props> = ({ checked, onChange, text }) => {
+export const Checkbox:FC<Props> = ({ checked, onChange, text, borderColor = GRAY_COLOR }) => {
     return (
         <label
             htmlFor="checkbox-form"
@@ -28,7 +29,7 @@ export const Checkbox:FC<Props> = ({ checked, onChange, text }) => {
                 className={ styles['custom-check']}
                 style={{
                     background: checked ? PRIMARY_COLOR : WHITE_COLOR,
-                    border: checked ? 'none' : `0.1rem solid ${ GRAY_COLOR }`
+                    border: checked ? 'none' : `0.1rem solid ${ borderColor }`
                 }}
             >
                 { checked && <CheckIcon fill={ WHITE_COLOR } stroke={ 'none' } />}

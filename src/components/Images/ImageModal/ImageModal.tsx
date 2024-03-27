@@ -1,22 +1,44 @@
 import { FC, useState } from 'react'
-import { ButtonOutlineLight, ButtonPrimary, ModalFormHeader, UploadImages } from '@/components'
+import { ButtonOutlineLight, ButtonPrimary, ModalFormHeader, UploadImages, ImageList } from '@/components'
 import { useGetImage } from '@/hooks'
 import { OPTIONS_IMAGES_SECTIONS } from '@/constants'
-import { ImageList } from '@/components'
-import { ISectionImage, ISelectOption } from '@/interfaces'
+import { includesImage } from '@/utils'
+import { IImage, ISectionImage, ISelectOption } from '@/interfaces'
+
 import styles from './ImageModal.module.scss'
 
 interface Props {
-    onClose : () => void
+    values  : IImage[]
+    onChange: ( values: IImage[] )=> void
     section : ISectionImage
+    onClose : () => void
     
 }
-export const ImageModal:FC<Props> = ({ onClose, section }) => {
-    const [curentSection, setCurentSection] = useState<ISelectOption>(OPTIONS_IMAGES_SECTIONS[0])
+export const ImageModal:FC<Props> = ({ values, onChange, section, onClose  }) => {
 
+    const [curentSection, setCurentSection] = useState<ISelectOption>(OPTIONS_IMAGES_SECTIONS[0])
+    const [selectedImages, setSelectedImages] = useState<IImage[]>( values )
+    
     const { imagesQuery, handlePageClick } = useGetImage({ section: curentSection.value, page: 1 })
 
-    console.log(imagesQuery.data)
+    const onChangeSelectedImages = ( image: IImage ) => {
+
+        const imageIsSelected = includesImage( image, selectedImages )
+
+        if( imageIsSelected ){
+            // Quitar imagen
+            const selectedImagesUpdated = selectedImages.filter( img => img.url !== image.url )
+            return setSelectedImages(selectedImagesUpdated)
+        }
+
+        // Añadir imagen 
+        setSelectedImages([ ...selectedImages, image ])
+    }
+
+    const handleChangeImages = () => {
+        onChange( selectedImages )
+        onClose()
+    }
 
     return (
         <div className={ styles['image-modal'] }>
@@ -34,6 +56,8 @@ export const ImageModal:FC<Props> = ({ onClose, section }) => {
             <div className={ `custom-scroll ${ styles['image-modal__images-list'] }` }>
                 <ImageList
                     images={ imagesQuery.data?.images ?? [] }
+                    selectedImages={ selectedImages }
+                    onChangeSelectedImages={ onChangeSelectedImages }
                 />
             </div>
             <footer className={ styles['image-modal__footer'] }>
@@ -49,10 +73,10 @@ export const ImageModal:FC<Props> = ({ onClose, section }) => {
                     </ButtonOutlineLight>
                     <ButtonPrimary
                         type="button"
-                        onClick={ ()=>{} }
+                        onClick={ handleChangeImages }
                         className={ styles['footer__actions--button-add'] }            
                     >
-                        Añadir
+                        Aceptar
                     </ButtonPrimary>
                 </div>
             </footer>

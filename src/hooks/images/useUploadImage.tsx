@@ -31,7 +31,6 @@ export const useUploadImage = ({ curentSection, page }:Props) => {
                     return oldData
                 }   
             )
-            console.log(newImage)
             toastSuccess('Imagen cargada')
         },
         onError: (error:AxiosError<{ msg:string }>)=> {

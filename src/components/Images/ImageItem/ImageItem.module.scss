@@ -1,12 +1,14 @@
 @import '../../../scss/index.scss';
 
 
-.image-item{
+.image-item {
+    position: relative;
     display: flex;
     flex-direction: column;
     border-radius: 0.4rem;
     border: $border-gray-light-silver;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .image-item__content {
@@ -16,4 +18,20 @@
 
 .image-item__img {
     object-fit: contain;
+}
+
+.image-item__original-filename {
+    font-size: 1.2rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-block: 0.4rem;
+    padding: 0.4rem;
+}
+
+.image-item__check {
+    position: absolute;
+    inset-block-start: -0.6rem;
+    inset-inline-start: -0.5rem;
 }

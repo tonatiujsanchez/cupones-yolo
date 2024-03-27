@@ -27,6 +27,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
             slug    : '',
             sku     : '',
             _id     : '',
+            images  : [],
             active  : true
         }
     })
@@ -354,14 +355,23 @@ export const ProductForm: FC<Props> = ({ product }) => {
             </div>
             <h6 className={ styles['form-product__subtitle'] }>Fotos</h6>
             <div className={ styles['form-product__dropzone-container'] }>
-                <DropzoneMultiple
-                    values={ [] }
-                    onChange={()=> console.log('Dropzone') }
-                    placeholder="Añada fotos del producto"
-                    section={ IMAGES_SECTIONS.products as ISectionImage }
+                <Controller
+                    control={ control }
+                    name="images"
+                    render={({ field })=>(
+                        <DropzoneMultiple
+                            values={ field.value }
+                            onChange={ field.onChange }
+                            placeholder="Añada fotos del producto"
+                            section={ IMAGES_SECTIONS.products as ISectionImage }
+                        />
+                    )}
+                    rules={{
+                        required: 'Añada imágenes al producto',
+                        validate: (value) => value && value.length < 2 ? 'Añada al menos 2 imagenes' : undefined
+                    }}
                 />
             </div>
-
 
             <div className={ styles['buttons'] }>
                 <div className={ styles['button__cancel'] }>
