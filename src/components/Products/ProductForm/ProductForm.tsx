@@ -2,7 +2,7 @@ import { FC, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { Controller, useForm } from 'react-hook-form'
 import { getSlug, isValidSlug } from '@/libs'
-import { useGetCategories, useGetSections, useGetSizes } from '@/hooks'
+import { useGetCategories, useGetSections, useGetSizes, usePostProduct } from '@/hooks'
 import { ButtonLight, ButtonOutlinePrimary, ButtonPrimary, CustomSelectMultiple, DropzoneMultiple, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
 import { getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes, getSku } from '@/utils'
 import { IMAGES_SECTIONS } from '@/constants'
@@ -31,6 +31,8 @@ export const ProductForm: FC<Props> = ({ product }) => {
             active  : true
         }
     })
+    
+    const { productPostMutation } = usePostProduct()
 
     const { sectionsQuery } = useGetSections({ page: 1 })
     const sections = sectionsQuery.data?.sections ?? []
@@ -123,11 +125,11 @@ export const ProductForm: FC<Props> = ({ product }) => {
 
     const onSaveProducto = ( data:IProduct ) => {
         data.active = false
-        console.log(data)
+        productPostMutation.mutate({ product: data })
     }
 
     const onProductSubmit = ( data:IProduct ) => {
-        console.log(data)
+        productPostMutation.mutate({ product: data })
     }
 
     return (
@@ -156,6 +158,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
                         label="Precio"
                         fieldName="priceProduct"
                         placeholder="250"
+                        step="any"
                         min={ 1 }
                         error={ errors.price }
                         { ...register('price', {
@@ -364,11 +367,12 @@ export const ProductForm: FC<Props> = ({ product }) => {
                             onChange={ field.onChange }
                             placeholder="Añada fotos del producto"
                             section={ IMAGES_SECTIONS.products as ISectionImage }
+                            error={ errors.images }
                         />
                     )}
                     rules={{
                         required: 'Añada imágenes al producto',
-                        validate: (value) => value && value.length < 2 ? 'Añada al menos 2 imagenes' : undefined
+                        validate: (value) => value && value.length < 2 ? 'Se requiere al menos 2 imágenes' : undefined
                     }}
                 />
             </div>
@@ -384,17 +388,21 @@ export const ProductForm: FC<Props> = ({ product }) => {
                 <div className={ styles['buttons__content'] }>
                     <ButtonOutlinePrimary
                         type="button"
+                        disabled={productPostMutation.isPending}
                         onClick={ handleSubmit( onSaveProducto ) }
                     >
                         {
-                            false
-                            ? ( <div className="custom-loader-white"></div> )
+                            productPostMutation.isPending
+                            ? ( <div className="custom-loader-primary"></div> )
                             : ( 'Guardar' )
                         }
                     </ButtonOutlinePrimary>
-                    <ButtonPrimary type="submit">
+                    <ButtonPrimary 
+                        type="submit"
+                        disabled={ productPostMutation.isPending }
+                    >
                         {
-                            false
+                            productPostMutation.isPending
                             ? ( <div className="custom-loader-white"></div> )
                             : ( 'Publicar' )
                         }

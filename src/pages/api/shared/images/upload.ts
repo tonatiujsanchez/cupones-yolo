@@ -7,8 +7,8 @@ cloudinary.config( process.env.CLOUDINARY_URL || '' )
 import { db } from '@/database'
 import { Image } from '@/models'
 import { COOKIE_AUTH_KEY, IMAGES_SECTIONS_OPTIONS } from '@/constants'
-import { IImage, ISectionImage } from '@/interfaces'
 import { jwt } from '@/libs'
+import { IImage, ISectionImage } from '@/interfaces'
 
 type Data = 
     | { msg: string }

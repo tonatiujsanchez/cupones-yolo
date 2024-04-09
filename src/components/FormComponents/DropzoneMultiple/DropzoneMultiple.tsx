@@ -1,10 +1,11 @@
 import { FC, useState } from 'react'
+import Image from 'next/image'
+import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
+import { ModalContainer, ImageModal } from '@/components'
 import { UploadCloudIcon } from '@/components/Icons'
 import { IImage, ISectionImage } from '@/interfaces'
 
 import styles from './DropzoneMultiple.module.scss'
-import { ModalContainer, ImageModal } from '@/components'
-import Image from 'next/image'
 
 interface Props {
     values      : IImage[]
@@ -12,8 +13,9 @@ interface Props {
     section     : ISectionImage
     placeholder?: string
     dimensions? : string
+    error?      : Merge<FieldError, Merge<FieldError, FieldErrorsImpl<IImage[]>>>
 }
-export const DropzoneMultiple:FC<Props> = ({values, onChange, section, placeholder="Seleccionar imagen", dimensions }) => {
+export const DropzoneMultiple:FC<Props> = ({values, onChange, section, placeholder="Seleccionar imagen", dimensions, error }) => {
 
     const [showImageModal, setShowImageModal] = useState(false)
 
@@ -61,6 +63,10 @@ export const DropzoneMultiple:FC<Props> = ({values, onChange, section, placehold
                     )
                 }
             </div>
+            {
+                error &&
+                <span className="error-message">{error.message}</span>
+            }
             <ModalContainer
                 show={ showImageModal }
                 onHidden={ onCloseImageModal }

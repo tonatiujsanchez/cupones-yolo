@@ -39,6 +39,12 @@
     gap: 1rem;
 }
 
+.buttons__content {
+    button {
+        min-width: 14rem;
+    }
+}
+
 .form-product__dropzone-container {
     margin-block-start: 2rem;
     margin-block-end: 4rem;

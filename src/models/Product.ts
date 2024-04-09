@@ -34,10 +34,8 @@ const ProductSchema = new Schema<IProduct>({
         ref: 'Size',
         required: true
     }],
-    tags:[{
-        type: mongoose.Types.ObjectId,
-        ref: 'Tag',
-        required: true
+    tags:[{ 
+        type: String 
     }],
     sections:[{
         type: mongoose.Types.ObjectId,
@@ -56,6 +54,7 @@ const ProductSchema = new Schema<IProduct>({
     },
     discountRate: {
         type: Number,
+        default: 0
     },
     active  : { 
         type: Boolean, 

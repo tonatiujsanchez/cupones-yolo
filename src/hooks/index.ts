@@ -33,3 +33,5 @@ export * from './sizes/useDeleteSize'
 
 export * from './images/useUploadImage'
 export * from './images/useGetImage'
+
+export * from './products/usePostProduct'
