@@ -14,10 +14,10 @@ interface Props {
     product?: IProduct
 }
 export const ProductForm: FC<Props> = ({ product }) => {
-
+    
     const router = useRouter()
     const formRef = useRef<HTMLFormElement>(null)
-    const { register, control, handleSubmit, formState:{ errors }, getValues, setValue, watch } = useForm<IProduct>({
+    const { register, control, handleSubmit, formState:{ errors }, getValues, setValue, watch, reset } = useForm<IProduct>({
         defaultValues: {
             discountRate: 0,
             sections: [],
@@ -43,6 +43,12 @@ export const ProductForm: FC<Props> = ({ product }) => {
     const { sizesQuery } = useGetSizes({ page: 1 })
     const sizes = sizesQuery.data?.sizes ?? []
 
+    useEffect(() => {
+        if(product){
+            reset({...product})   
+        }        
+    }, [product])
+    
 
     useEffect(()=>{
         if(!product) {
@@ -124,11 +130,17 @@ export const ProductForm: FC<Props> = ({ product }) => {
     }
 
     const onSaveProducto = ( data:IProduct ) => {
+        if(product){
+            return console.log('Editar')
+        }
         data.active = false
         productPostMutation.mutate({ product: data })
     }
 
     const onProductSubmit = ( data:IProduct ) => {
+        if(product){
+            return console.log('Editar')
+        }
         productPostMutation.mutate({ product: data })
     }
 
@@ -138,6 +150,26 @@ export const ProductForm: FC<Props> = ({ product }) => {
             ref={ formRef }
             className={ styles['form-product'] }
         >
+            <h6 className={ styles['form-product__subtitle'] }>Fotos</h6>
+            <div className={ styles['form-product__dropzone-container'] }>
+                <Controller
+                    control={ control }
+                    name="images"
+                    render={({ field })=>(
+                        <DropzoneMultiple
+                            values={ field.value }
+                            onChange={ field.onChange }
+                            placeholder="Añada fotos del producto"
+                            section={ IMAGES_SECTIONS.products as ISectionImage }
+                            error={ errors.images }
+                        />
+                    )}
+                    rules={{
+                        required: 'Añada imágenes al producto',
+                        validate: (value) => value && value.length < 2 ? 'Se requiere al menos 2 imágenes' : undefined
+                    }}
+                />
+            </div>
             <h6 className={ styles['form-product__subtitle'] }>Información principal</h6>
             <div className={ styles['form-product__information-container'] }>
                 <InputText
@@ -355,26 +387,6 @@ export const ProductForm: FC<Props> = ({ product }) => {
                         isRequired
                     />
                 </div>
-            </div>
-            <h6 className={ styles['form-product__subtitle'] }>Fotos</h6>
-            <div className={ styles['form-product__dropzone-container'] }>
-                <Controller
-                    control={ control }
-                    name="images"
-                    render={({ field })=>(
-                        <DropzoneMultiple
-                            values={ field.value }
-                            onChange={ field.onChange }
-                            placeholder="Añada fotos del producto"
-                            section={ IMAGES_SECTIONS.products as ISectionImage }
-                            error={ errors.images }
-                        />
-                    )}
-                    rules={{
-                        required: 'Añada imágenes al producto',
-                        validate: (value) => value && value.length < 2 ? 'Se requiere al menos 2 imágenes' : undefined
-                    }}
-                />
             </div>
 
             <div className={ styles['buttons'] }>

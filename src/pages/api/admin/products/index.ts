@@ -3,7 +3,7 @@ import { db } from '@/database'
 import { Product } from '@/models'
 import { ICategory, IProduct, ISection, ISize } from '@/interfaces'
 import { isValidSlug } from '@/libs'
-import { IImage } from '../../../interfaces'
+import { IImage } from '../../../../interfaces'
 
 type Data = 
     | { msg: string }
