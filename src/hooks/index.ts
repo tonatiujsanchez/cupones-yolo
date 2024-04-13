@@ -36,3 +36,4 @@ export * from './images/useGetImage'
 
 export * from './products/usePostProduct'
 export * from './products/useGetProduct'
+export * from './products/useGetProducts'

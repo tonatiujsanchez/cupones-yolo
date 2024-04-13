@@ -53,7 +53,8 @@ export * from './Coupons/CouponAddForm'
 
 
 export * from './Products/ProductForm'
-
+export * from './Products/ProductList'
+export * from './Products/ProductTable'
 
 export * from './FormComponents/DatePicker'
 export * from './FormComponents/Checkbox'

@@ -1,0 +1,26 @@
+@import '../../../scss/index.scss';
+
+.product-index {
+    font-weight: 800;
+}
+
+.product-title {
+    max-width: 22rem;
+    font-weight: 700;
+}
+
+.product-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    svg {
+        width: 1.5rem;
+    }
+}

@@ -1,26 +1,84 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '@/database'
 import { Product } from '@/models'
-import { ICategory, IProduct, ISection, ISize } from '@/interfaces'
 import { isValidSlug } from '@/libs'
-import { IImage } from '../../../../interfaces'
+import { PRODUCTS_PAGE_SIZE } from '@/constants'
+import { ICategory, IImage, IProduct, IProductsResp, ISection, ISize } from '@/interfaces'
+import { FilterQuery } from 'mongoose'
 
 type Data = 
     | { msg: string }
     | IProduct
+    | IProductsResp
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     
     switch (req.method) {
         
+        case 'GET':
+            return getProducts( req, res )
+            
         case 'POST':
             return addNewProduct( req, res )
             
+
         default:
             return res.status(400).json({ msg: 'Bad Request' })
     }
 
 }
+
+const pageSize = PRODUCTS_PAGE_SIZE;
+const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+
+    const { page = 1, count = pageSize, category, sections, sizes, brand, searchTerm = '' } = req.query
+
+    let skip = Number( page ) - 1
+    let limit = Number( count )
+
+    if( skip < 0 ){ skip = 0 }
+    if( limit < 0 ){ limit = pageSize }
+
+    skip = skip * limit
+
+    let query:FilterQuery<IProduct> = {
+        status: true
+    }
+
+    try {
+        
+        await db.connect()
+        const [ products, total ] = await Promise.all([
+            Product.find( query )
+                .populate('images')
+                .populate('category')
+                .populate('sections')
+                .populate('sizes')
+                .skip( skip )
+                .limit( limit )
+                .sort({ registeredAt: 'desc' }),
+            Product.countDocuments( query )
+        ])        
+        await db.disconnect()
+        
+        return res.status(200).json({
+            currentPage  : Number(page),
+            totalPages   : Math.ceil( total / Number(count) ),
+            pageSize     : products.length,
+            totalProducts: total,
+            products,
+        })
+        
+
+
+    } catch (error) {
+        await db.disconnect()
+        console.log(error)
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
+}
+
 
 const addNewProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     
@@ -145,3 +203,4 @@ const addNewProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
         return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
     }
 }
+

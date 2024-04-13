@@ -22,3 +22,11 @@ export interface IProduct {
     createdAt?   : string
     updatedAt?   : string
 }
+
+export interface IProductsResp {
+    currentPage  : number
+    totalPages   : number
+    pageSize     : number
+    totalProducts: number
+    products     : IProduct[]
+}

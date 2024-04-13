@@ -1,5 +1,5 @@
 import { yolostyleApi } from '@/apis'
-import { IProduct } from '@/interfaces'
+import { IProduct, IProductsResp } from '@/interfaces'
 
 
 interface NewProductParams {
@@ -16,7 +16,22 @@ interface GetProductParams {
     idProduct: string
 }
 export const getProduct = async({ idProduct }:GetProductParams):Promise<IProduct> => {
-    console.log(idProduct)
+   
     const { data } = await yolostyleApi.get<IProduct>(`/admin/products/${ idProduct }`)
+    return data
+}
+
+
+interface GetProductsParams {
+    page       : number,
+    searchTerm :string
+}
+export const getProducts = async({ page, searchTerm }:GetProductsParams):Promise<IProductsResp> => {
+    
+    const params = new URLSearchParams()
+    params.append('page', page.toString())
+    params.append('searchTerm', searchTerm)
+
+    const { data } = await yolostyleApi.get<IProductsResp>('/admin/products', { params })
     return data
 }
