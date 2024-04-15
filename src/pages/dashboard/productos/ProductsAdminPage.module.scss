@@ -3,10 +3,19 @@
     padding-inline: 1rem;
 }
 
+.products__list-container {
+    padding-inline: 1rem;
+}
+
 @media (min-width: 640px) {
+    
     .products__link-container {
         display: flex;
         padding-inline: 2rem;
         justify-content: flex-end;
+    }
+
+    .products__list-container {
+        padding-inline: 2rem;
     }
 }

@@ -29,6 +29,7 @@ export const ProductTable:FC<Props> = ({ products, currentPage, onDeleteProduct 
                         <th>#</th>
                         <th>Foto</th>
                         <th>Nombre</th>
+                        <th>Acciones</th>
                     </TablePrimary.TRow>
                 </TablePrimary.THead>
                 <tbody>
@@ -38,30 +39,33 @@ export const ProductTable:FC<Props> = ({ products, currentPage, onDeleteProduct 
                             return (
                                 <TablePrimary.TRow key={ product._id } >
                                     <td className={ styles['product-index'] }> { index } </td>
-                                    <td>
-                                        <figure>
+                                    <td className={ styles['product-image'] }>
+                                        <figure className={ styles['product-image__figure'] }>
                                             <Image
                                                 src={ product.images[0].url }
                                                 alt={ product.title }
                                                 width={100}
                                                 height={100}
+                                                className={ styles['product-image__img'] }
                                             />
                                         </figure>
                                     </td>
                                     <td className={ styles['product-title'] }> { product.title } </td>
                                     <td className={ styles['product-actions'] }>
-                                        <ButtonInfo
-                                            onClick={()=> router.push(`/dashboard/productos/${ product._id }`) }
-                                            outline
-                                        >
-                                            <EditIcon />
-                                        </ButtonInfo>
-                                        <ButtonDanger
-                                            onClick={ ()=> onDeleteProduct( product ) }
-                                            outline
-                                        >
-                                            <TrashIcon />
-                                        </ButtonDanger>
+                                        <div className={ styles['product-actions__content'] }>                  
+                                            <ButtonInfo
+                                                onClick={()=> router.push(`/dashboard/productos/${ product._id }`) }
+                                                outline
+                                            >
+                                                <EditIcon />
+                                            </ButtonInfo>
+                                            <ButtonDanger
+                                                onClick={ ()=> onDeleteProduct( product ) }
+                                                outline
+                                            >
+                                                <TrashIcon />
+                                            </ButtonDanger>
+                                        </div>
                                     </td>
                                 </TablePrimary.TRow>
                             )

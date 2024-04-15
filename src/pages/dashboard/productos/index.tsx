@@ -5,14 +5,16 @@ const ProductsAdminPage = () => {
 
     return (
         <DashboardLayout headding="Productos">
-            <div className={styles['products__link-container']}>
+            <div className={ styles['products__link-container']} >
                 <LinkPrimary
                     href={'/dashboard/productos/nuevo'}
                 >
                     Nuevo producto
                 </LinkPrimary>
             </div>
-            <ProductList />
+            <div className={ styles['products__list-container'] } >
+                <ProductList />
+            </div>
         </DashboardLayout>
     )
 }

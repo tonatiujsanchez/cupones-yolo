@@ -4,7 +4,7 @@ import { Product } from '@/models'
 import { isValidSlug } from '@/libs'
 import { PRODUCTS_PAGE_SIZE } from '@/constants'
 import { ICategory, IImage, IProduct, IProductsResp, ISection, ISize } from '@/interfaces'
-import { FilterQuery } from 'mongoose'
+import { FilterQuery, isValidObjectId } from 'mongoose'
 
 type Data = 
     | { msg: string }
@@ -20,6 +20,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
             
         case 'POST':
             return addNewProduct( req, res )
+            
+        case 'PUT':
+            return updateProduct( req, res )
+            
+        case 'DELETE':
+            return deleteProduct( req, res )
             
 
         default:
@@ -204,3 +210,42 @@ const addNewProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
     }
 }
 
+
+const updateProduct = (req: NextApiRequest, res: NextApiResponse<Data>) => {
+    throw new Error('Function not implemented.')
+}
+
+
+const deleteProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+
+    let { id = '' } = req.query
+
+    if( !isValidObjectId( id ) ){
+        return res.status(400).json({ msg: 'Producto no encontrado' })
+    }
+
+    try {
+        
+        await db.connect()
+        const product = await Product.findById(id)
+            .where('status').equals(true)
+            .select('-status -createdAt -updatedAt')
+        
+        if( !product ){
+            await db.disconnect()
+            return res.status(400).json({ msg: 'Producto no encontrado' })
+        }
+
+        product.status = false
+        await product.save()
+        await db.disconnect()
+        
+        return res.status(200).json( product )
+
+    } catch (error) {
+        console.log(error)
+        await db.disconnect()        
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
+}

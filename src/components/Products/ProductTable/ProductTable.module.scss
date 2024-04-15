@@ -6,12 +6,26 @@
 
 .product-title {
     max-width: 22rem;
+    min-width: 18rem;
     font-weight: 700;
 }
 
-.product-actions {
+.product-image__figure {
+    width: 5rem;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 0.4rem;
+    margin: 0;
+}
+
+.product-image__img {
+    object-fit: cover;
+}
+
+.product-actions__content {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
     
     button {
