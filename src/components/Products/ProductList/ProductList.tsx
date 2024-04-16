@@ -1,14 +1,13 @@
 import { useState } from 'react'
-import { useGetProducts } from '@/hooks'
-
-import styles from './ProductList.module.scss'
+import { useDeleteProduct, useGetProducts } from '@/hooks'
 import { ModalContainer, ModalDelete, ProductTable } from '@/components'
 import { IProduct } from '@/interfaces'
+import styles from './ProductList.module.scss'
+
 
 
 export const ProductList = () => {
 
-    
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [deleteProduct, setDeleteProduct] = useState<IProduct>()
 
@@ -16,10 +15,16 @@ export const ProductList = () => {
         page: 1,
         searchTerm
     })
-
+    
     const onCloseModal = () => {
         setDeleteProduct(undefined)
     }
+
+    const { productDeleteMutation } =  useDeleteProduct({ 
+        currentPage: 1, 
+        searchTerm, 
+        onClose: onCloseModal 
+    })
 
     const onSetDeleteProduct = (product:IProduct) => {
         setDeleteProduct(product)
@@ -30,7 +35,7 @@ export const ProductList = () => {
             return onCloseModal()
         }
 
-        // categoryDeleteMutation.mutate({ idCategory: deleteCategory._id! })
+        productDeleteMutation.mutate({ idProduct: deleteProduct._id! })
     }
 
 
@@ -71,8 +76,8 @@ export const ProductList = () => {
                             ¿Desea eliminar el producto <strong>{ deleteProduct?.title }</strong>?
                         </p>
                     }
-                    onChange={ onCloseModal }
-                    isDeleting={ false }
+                    onChange={ onDeleteProduct }
+                    isDeleting={ productDeleteMutation.isPending }
                 />
             </ModalContainer>
         </>
