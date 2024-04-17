@@ -1,4 +1,4 @@
-import { ICategory, ISection, ISelectOption, ISize } from "@/interfaces"
+import { ICategory, ISection, ISelectOption, ISize } from '@/interfaces'
 
 export const includesOptionSelect = ( option:ISelectOption, options:ISelectOption[] ):boolean => {
     return options.some( opt => opt.value === option.value )

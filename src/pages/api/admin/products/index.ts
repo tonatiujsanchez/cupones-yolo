@@ -62,7 +62,7 @@ const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
                 .populate('sizes')
                 .skip( skip )
                 .limit( limit )
-                .sort({ registeredAt: 'desc' }),
+                .sort({ createdAt: 'desc' }),
             Product.countDocuments( query )
         ])        
         await db.disconnect()

@@ -49,3 +49,11 @@ export const getDay = (date: Date|string ) => {
 
     return Number( day )
 }
+
+
+export const currencyFormatMXN = ( number:number ) => {
+    return number.toLocaleString('es-MX', {
+        style: 'currency',
+        currency: 'MXN'
+    })
+}
