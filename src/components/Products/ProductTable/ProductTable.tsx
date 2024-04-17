@@ -42,7 +42,6 @@ export const ProductTable:FC<Props> = ({ products, currentPage, onDeleteProduct 
                     {
                         products.map(( product, idx ) => {
                             const index = (PRODUCTS_PAGE_SIZE * (currentPage - 1)) + (idx + 1)
-                            console.log(product)
                             return (
                                 <TablePrimary.TRow key={ product._id } >
                                     <td className={ styles['product-index'] }> { index } </td>

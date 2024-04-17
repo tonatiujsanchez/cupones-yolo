@@ -2,7 +2,7 @@ import { FC, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { Controller, useForm } from 'react-hook-form'
 import { getSlug, isValidSlug } from '@/libs'
-import { useGetCategories, useGetSections, useGetSizes, usePostProduct } from '@/hooks'
+import { useGetCategories, useGetSections, useGetSizes, usePostProduct, useUpdateProduct } from '@/hooks'
 import { ButtonLight, ButtonOutlinePrimary, ButtonPrimary, CustomSelectMultiple, DropzoneMultiple, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
 import { getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes, getSku } from '@/utils'
 import { IMAGES_SECTIONS } from '@/constants'
@@ -33,6 +33,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
     })
     
     const { productPostMutation } = usePostProduct()
+    const { productUpdateMutation } = useUpdateProduct()
 
     const { sectionsQuery } = useGetSections({ page: 1 })
     const sections = sectionsQuery.data?.sections ?? []
@@ -130,19 +131,24 @@ export const ProductForm: FC<Props> = ({ product }) => {
     }
 
     const onSaveProducto = ( data:IProduct ) => {
-        if(product){
-            return console.log('Editar')
-        }
         data.active = false
+
+        if(product){
+            productUpdateMutation.mutate({ product: { ...data, _id: product._id } })
+            return
+        }
+
         productPostMutation.mutate({ product: data })
     }
 
     const onProductSubmit = ( data:IProduct ) => {
         if(product){
-            return console.log('Editar')
+            productUpdateMutation.mutate({ product: { ...data, _id: product._id } })
+            return
         }
         productPostMutation.mutate({ product: data })
     }
+ 
 
     return (
         <form 
@@ -392,7 +398,9 @@ export const ProductForm: FC<Props> = ({ product }) => {
             <div className={ styles['buttons'] }>
                 <div className={ styles['button__cancel'] }>
                     <ButtonLight
+                        type="button"
                         onClick={ onCancel }
+                        disabled={ productPostMutation.isPending || productUpdateMutation.isPending }
                     >
                         Cancelar
                     </ButtonLight>
@@ -400,7 +408,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
                 <div className={ styles['buttons__content'] }>
                     <ButtonOutlinePrimary
                         type="button"
-                        disabled={productPostMutation.isPending}
+                        disabled={ productPostMutation.isPending || productUpdateMutation.isPending }
                         onClick={ handleSubmit( onSaveProducto ) }
                     >
                         {
@@ -411,7 +419,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
                     </ButtonOutlinePrimary>
                     <ButtonPrimary 
                         type="submit"
-                        disabled={ productPostMutation.isPending }
+                        disabled={ productPostMutation.isPending || productUpdateMutation.isPending }
                     >
                         {
                             productPostMutation.isPending

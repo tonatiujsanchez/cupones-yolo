@@ -211,8 +211,90 @@ const addNewProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
 }
 
 
-const updateProduct = (req: NextApiRequest, res: NextApiResponse<Data>) => {
-    throw new Error('Function not implemented.')
+const updateProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+    
+    let { _id = '', slug, discountRate } = req.body
+    
+    if( !isValidObjectId( _id ) ){
+        return res.status(400).json({ msg: 'Producto no encontrado' })
+    }
+    
+    if(!isValidSlug( slug )) {
+        return res.status(400).json({ msg: 'El slug no es válido' })
+    }
+
+    if( discountRate < 0 ){
+        discountRate = 0
+    }
+
+    if( discountRate > 100 ){
+        discountRate = 100
+    }
+
+    try {
+    
+        await db.connect()
+        const product = await Product.findById(_id)
+            .where('status').equals(true)
+            .select('-status -createdAt -updatedAt')
+            .populate('category')
+            .populate('sections')
+            .populate('sizes')
+            .populate('images')
+        
+        if( !product ){
+            await db.disconnect()
+            return res.status(400).json({ msg: 'Producto no encontrado' })
+        }
+
+        let {
+           title       = product.title,
+           description = product.description,
+           price       = product.price,
+           slug        = product.slug,
+           inStock     = product.inStock,
+           images      = product.images,
+           sizes       = product.sizes,
+           tags        = product.tags,
+           sections    = product.sections,
+           category    = product.category,
+           sku         = product.sku,
+           discountRate= product.discountRate,
+           active      = product.active,
+        } = req.body
+
+        const productBySlug  = await Product.findOne({ slug })
+
+        if(productBySlug && productBySlug._id.toString() !== product._id.toString() ){
+            await db.disconnect()
+            return res.status(400).json({ msg: `Ya existe un producto con el slug "${ productBySlug.slug }"` }) 
+        }
+
+        product.title       = title.trim()
+        product.description = description.trim()
+        product.price       = price
+        product.slug        = slug.trim()
+        product.inStock     = inStock
+        product.images      = images
+        product.sizes       = sizes
+        product.tags        = tags
+        product.sections    = sections
+        product.category    = category
+        product.sku         = sku.trim()
+        product.discountRate= discountRate
+        product.active      = active
+
+        await product.save()
+        await db.disconnect()
+
+        return res.status(200).json( product )
+        
+    } catch (error) {
+        console.log(error)
+        await db.disconnect()
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
 }
 
 

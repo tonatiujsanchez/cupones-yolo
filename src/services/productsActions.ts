@@ -36,6 +36,15 @@ export const getProducts = async({ page, searchTerm }:GetProductsParams):Promise
     return data
 }
 
+interface UpdateProductParams {
+    product:IProduct
+}
+export const updateProduct = async({ product }:UpdateProductParams ):Promise<IProduct> => {
+
+    const { data } = await yolostyleApi.put<IProduct>('/admin/products', product)
+    return data
+}
+
 
 interface DeleteProductParams {
     idProduct: string
