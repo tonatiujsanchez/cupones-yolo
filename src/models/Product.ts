@@ -19,19 +19,21 @@ const ProductSchema = new Schema<IProduct>({
         unique : true,
         required: true
     },
-    inStock: {
-        type: Number,
-        required: true,
-        default: 0
-    },
+    inStock: [{
+        size: { 
+            type: mongoose.Types.ObjectId,
+            ref: 'Size',
+            required: true
+        },
+        quantity: {
+            type: Number,
+            required: true,
+            default: 0
+        }
+    }],
     images:[{
         type: mongoose.Types.ObjectId,
         ref: 'Image',
-        required: true
-    }],
-    sizes:[{
-        type: mongoose.Types.ObjectId,
-        ref: 'Size',
         required: true
     }],
     tags:[{ 

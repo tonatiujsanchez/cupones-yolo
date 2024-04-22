@@ -1,4 +1,4 @@
-import { ICategory, IImage, ISize, ITag, ISection } from ".";
+import { ICategory, IImage, ISize, ISection } from ".";
 
 export interface IProduct {
     _id?         : string
@@ -7,9 +7,10 @@ export interface IProduct {
     description  : string
     price        : number
     slug         : string
-    inStock      : number
+    // inStock      : number
+    inStock      : IInStockProduct[]
     images       : IImage[]
-    sizes        : ISize[]  
+    // sizes        : ISize[]  
     tags         : string[]
     sections     : ISection[]
     category     : ICategory[]
@@ -29,4 +30,9 @@ export interface IProductsResp {
     pageSize     : number
     totalProducts: number
     products     : IProduct[]
+}
+
+export interface IInStockProduct {
+    size    : ISize
+    quantity: number
 }

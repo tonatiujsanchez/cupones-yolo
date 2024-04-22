@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useDeleteProduct, useGetProducts } from '@/hooks'
-import { ModalContainer, ModalDelete, ProductTable } from '@/components'
+import { ModalContainer, ModalDelete, Pagination, ProductTable, RegisterCount } from '@/components'
 import { IProduct } from '@/interfaces'
 import styles from './ProductList.module.scss'
+import { PRODUCTS_PAGE_SIZE } from '@/constants'
 
 
 
@@ -61,6 +62,19 @@ export const ProductList = () => {
                                 onDeleteProduct={ onSetDeleteProduct }
 
                             />
+                            <div className={ styles['pagination-container'] }>
+                                <Pagination
+                                    currentPage={ productsQuery.data.currentPage }
+                                    onPageChange={ handlePageClick }
+                                    pageCount={ productsQuery.data.totalPages }
+                                />
+                                <RegisterCount
+                                    pageSize={ PRODUCTS_PAGE_SIZE }
+                                    currentPage={ productsQuery.data.currentPage }
+                                    currentPageSize={ productsQuery.data.pageSize }
+                                    totalClientes={ productsQuery.data.totalProducts }
+                                />
+                            </div>
                         </>
                     )
                 }

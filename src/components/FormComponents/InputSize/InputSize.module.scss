@@ -1,0 +1,55 @@
+@import '../../../scss/index.scss';
+
+.input-size {
+    display: flex;
+    border: 0.1rem solid $gray-light;
+    border-radius: 0.5rem;
+
+    .input-size__label {
+        background-color: $gray-ultra-light;
+        color: $gray;
+        border-inline-end: 0.1rem solid $gray-light;
+        min-width: 4.4rem;
+        padding: 0.4rem 1rem;
+        border-start-start-radius: 0.5rem;
+        border-end-start-radius: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+    }
+    
+    .input-size__input {
+        padding: 1.2rem 1.2rem;
+        border-start-end-radius: 0.5rem;
+        border-end-end-radius: 0.5rem;
+        font-size: 1.6rem;
+        font-weight: 500;
+        max-width: 9rem;
+        border: 0.1rem solid transparent;
+        
+        -webkit-appearance: unset;
+        -moz-appearance: unset;
+        /* Oculta las flechas */
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          display: block;
+        }
+    
+        &::placeholder {
+            color: $gray-light;
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+        &:hover {
+            border: 0.1rem solid $primary;
+        }
+        &:focus {
+            border: 0.1rem solid transparent;
+            outline: 0.2rem solid $primary;
+        }
+        &:disabled:hover {
+            border: 0.1rem solid $gray-light;
+        }
+    }
+}

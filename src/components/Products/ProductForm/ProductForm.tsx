@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Controller, useForm } from 'react-hook-form'
 import { getSlug, isValidSlug } from '@/libs'
 import { useGetCategories, useGetSections, useGetSizes, usePostProduct, useUpdateProduct } from '@/hooks'
-import { ButtonLight, ButtonOutlinePrimary, ButtonPrimary, CustomSelectMultiple, DropzoneMultiple, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
+import { ButtonLight, ButtonOutlinePrimary, ButtonPrimary, CustomSelectMultiple, DropzoneMultiple, InStock, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
 import { getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes, getSku } from '@/utils'
 import { IMAGES_SECTIONS } from '@/constants'
 import { ICategory, IProduct, ISection, ISectionImage, ISelectOption, ISize } from '@/interfaces'
@@ -22,7 +22,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
             discountRate: 0,
             sections: [],
             category: [],
-            sizes   : [],
+            inStock : [],
             tags    : [],
             slug    : '',
             sku     : '',
@@ -109,22 +109,6 @@ export const ProductForm: FC<Props> = ({ product }) => {
         }
         
     }
-
-    const onChangeSizes = ( option:ISelectOption ):ISize[] =>{
-
-        const sizesProduct = getValues('sizes')
-
-        const existOption = sizesProduct.find( size => size.value === option.value )
-
-        if( existOption ){
-            return sizesProduct.filter( size => size.value !== option.value )
-        } else {
-            const sizeToAdded = sizes.find( size => size.value === option.value )
-            return [ ...sizesProduct, sizeToAdded! ]
-        }
-        
-    }
-
     
     const onCancel = () => {
         router.replace('/dashboard/productos')
@@ -142,6 +126,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
     }
 
     const onProductSubmit = ( data:IProduct ) => {
+
         if(product){
             productUpdateMutation.mutate({ product: { ...data, _id: product._id } })
             return
@@ -217,19 +202,6 @@ export const ProductForm: FC<Props> = ({ product }) => {
                             validate: ( value )=> value && Number(value) < 0 || Number(value) > 100 ? 'Valor no válido, min 1 - max 100' : undefined
                         })}
                     />
-                    <InputText
-                        type="number"
-                        label="Stock"
-                        fieldName="stockProduct"
-                        placeholder="15"
-                        min={ 0 }
-                        error={ errors.inStock }
-                        { ...register('inStock', {
-                            required: 'La cantidad de producto es requerido',
-                            validate: ( value )=> Number(value) <= 0 ? 'Valor no válido' : undefined
-                        })}
-                        isRequired
-                    />
                 </div>
                 <div className="flex items-start">
                     {
@@ -286,28 +258,24 @@ export const ProductForm: FC<Props> = ({ product }) => {
                 <div>
                 {
                     sizesQuery.isFetching
-                        ? <p>Cargando tallas...</p>
-                        :(
-                            <Controller
-                                control={ control }
-                                name="sizes"
-                                render={({ field })=>(
-                                    <CustomSelectMultiple
-                                        fieldName='sizesProduct'
-                                        label='Tallas'
-                                        options={ getOptionsOfSizes( sizes ) }
-                                        optionsSelected={ getOptionsOfSizes(field.value) }
-                                        onChange={ ( value )=>  field.onChange( onChangeSizes(value) ) }
-                                        placeholder='Añade las tallas del producto'
-                                        error={ errors.sizes }
-                                        isRequired
-                                    />
-                                )}
-                                rules={{
-                                    validate: ( value )=> value.length === 0 ? 'Añada al menos una sección al producto' : undefined
-                                }}
-                            />
-                        )
+                    ?(<p>Cargando tallas...</p>)
+                    :(
+                        <Controller
+                            control={ control }
+                            name="inStock"
+                            render={({ field })=>(
+                                <InStock 
+                                    sizes={ sizes }
+                                    inStockSizes={ field.value }
+                                    setInStockSizes={ field.onChange }
+                                    error={ errors.inStock }
+                                />
+                            )}
+                            rules={{
+                                validate: ( value )=> value.length === 0 ? 'Añada al menos una talla al producto' : undefined
+                            }}
+                        />
+                    )
                 }
                 </div>
                 <Controller

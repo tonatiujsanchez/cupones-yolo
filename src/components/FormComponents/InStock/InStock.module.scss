@@ -1,0 +1,8 @@
+@import '../../../scss/index.scss';
+
+.in-stock__list {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-block-end: 2.2rem;
+}

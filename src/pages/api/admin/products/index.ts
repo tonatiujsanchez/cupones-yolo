@@ -59,7 +59,7 @@ const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
                 .populate('images')
                 .populate('category')
                 .populate('sections')
-                .populate('sizes')
+                .populate('inStock')
                 .skip( skip )
                 .limit( limit )
                 .sort({ createdAt: 'desc' }),
@@ -88,7 +88,7 @@ const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
 
 const addNewProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     
-    let { title, description, price, slug, inStock, images=[], sizes=[], tags=[], sections=[], category=[], sku, discountRate=0, active = true } = req.body
+    let { title, description, price, slug, inStock=[], images=[], tags=[], sections=[], category=[], sku, discountRate=0, active = true } = req.body
 
     title       = title.trim()
     description = description.trim()
@@ -119,16 +119,12 @@ const addNewProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
         return res.status(400).json({ msg: 'El stock del producto es requerido' })
     }
 
-    if( !inStock ){
-        return res.status(400).json({ msg: 'El stock del producto es requerido' })
+    if( inStock.length < 1 ){
+        return res.status(400).json({ msg: 'Añada al menos un talla al producto' })
     }
 
     if( images.length < 2 ){
         return res.status(400).json({ msg: 'Se requiere al menos 2 fotos del producto' })
-    }
-
-    if( sizes.length < 1 ){
-        return res.status(400).json({ msg: 'Se requiere al menos una talla del producto' })
     }
 
     if( sections.length < 1 ){
@@ -181,7 +177,6 @@ const addNewProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
             slug, 
             inStock, 
             images: (images as IImage[]).map( img => img._id ), 
-            sizes: (sizes as ISize[]).map( size => size._id ), 
             tags, 
             sections: ( sections as ISection[] ).map( section => section._id ), 
             category: ( category as ICategory[] ).map( cat => cat._id ), 
@@ -196,7 +191,7 @@ const addNewProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
         const product = {
             ...JSON.parse( JSON.stringify( newProduct ) ),
             images,
-            sizes,
+            inStock,
             sections,
             category,
         }
@@ -239,7 +234,7 @@ const updateProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
             .select('-status -createdAt -updatedAt')
             .populate('category')
             .populate('sections')
-            .populate('sizes')
+            .populate('inStock.size')
             .populate('images')
         
         if( !product ){
@@ -254,7 +249,6 @@ const updateProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
            slug        = product.slug,
            inStock     = product.inStock,
            images      = product.images,
-           sizes       = product.sizes,
            tags        = product.tags,
            sections    = product.sections,
            category    = product.category,
@@ -276,7 +270,6 @@ const updateProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
         product.slug        = slug.trim()
         product.inStock     = inStock
         product.images      = images
-        product.sizes       = sizes
         product.tags        = tags
         product.sections    = sections
         product.category    = category

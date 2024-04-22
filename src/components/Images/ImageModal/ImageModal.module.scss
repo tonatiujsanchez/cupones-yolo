@@ -27,6 +27,7 @@
 .image-modal__footer {
     display: flex;
     flex-direction: column;
+    border-block-start: $border-gray-light-silver;
 
     .footer__actions {
         display: flex;
@@ -39,12 +40,25 @@
     }
 }
 
+.footer__pagination {
+    padding-block: 1.6rem;
+}
+
+.loader-container {
+    min-height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 @media (min-width: 640px) {
     
     .image-modal__footer {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        border-block-start: $border-gray-light-silver;
 
         
         .footer__actions {

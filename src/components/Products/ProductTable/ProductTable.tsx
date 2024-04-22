@@ -42,6 +42,7 @@ export const ProductTable:FC<Props> = ({ products, currentPage, onDeleteProduct 
                     {
                         products.map(( product, idx ) => {
                             const index = (PRODUCTS_PAGE_SIZE * (currentPage - 1)) + (idx + 1)
+                            const stock = product.inStock.reduce((acc, stockSize) => acc + stockSize.quantity, 0)
                             return (
                                 <TablePrimary.TRow key={ product._id } >
                                     <td className={ styles['product-index'] }> { index } </td>
@@ -63,7 +64,7 @@ export const ProductTable:FC<Props> = ({ products, currentPage, onDeleteProduct 
                                             <span key={ cat._id }>{ cat.title }</span>
                                         ))
                                     } </td>
-                                    <td className={ styles['product-inStock'] }> { product.inStock } </td>
+                                    <td className={ styles['product-inStock'] }> { stock } </td>
                                     <td className={ styles['product-price'] }>
                                         { 
                                             product.discountRate

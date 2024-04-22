@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { ButtonOutlineLight, ButtonPrimary, ModalFormHeader, UploadImages, ImageList } from '@/components'
+import { ButtonOutlineLight, ButtonPrimary, ModalFormHeader, UploadImages, ImageList, Pagination } from '@/components'
 import { useGetImage } from '@/hooks'
 import { OPTIONS_IMAGES_SECTIONS } from '@/constants'
 import { includesImage } from '@/utils'
@@ -54,15 +54,29 @@ export const ImageModal:FC<Props> = ({ values, onChange, section, onClose  }) =>
                />
             </div>
             <div className={ `custom-scroll ${ styles['image-modal__images-list'] }` }>
-                <ImageList
-                    images={ imagesQuery.data?.images ?? [] }
-                    selectedImages={ selectedImages }
-                    onChangeSelectedImages={ onChangeSelectedImages }
-                />
+                {
+                    imagesQuery.isPending
+                    ?(
+                        <div className={ styles['loader-container'] }>
+                            <span className="loader-cube"></span>
+                        </div>
+                    ):(
+
+                        <ImageList
+                            images={ imagesQuery.data?.images ?? [] }
+                            selectedImages={ selectedImages }
+                            onChangeSelectedImages={ onChangeSelectedImages }
+                        />
+                    )
+                }
             </div>
             <footer className={ styles['image-modal__footer'] }>
                 <div className={styles['footer__pagination']}>
-                    Pagination
+                    <Pagination
+                        currentPage={ imagesQuery.data?.currentPage ?? 1 }
+                        pageCount={ imagesQuery.data?.totalPages ?? 1 }
+                        onPageChange={ handlePageClick }
+                    />
                 </div>
                 <div className={ styles['footer__actions'] }>
                     <ButtonOutlineLight

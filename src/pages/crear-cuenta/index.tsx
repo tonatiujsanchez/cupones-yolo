@@ -75,7 +75,7 @@ const SignUpPage = () => {
                                         placeholder="Ingrese su correo"
                                         error={ errors.email }
                                         { ...register("email", {
-                                            required: 'Ingrese su contraseña'
+                                            required: 'Ingrese su correo'
                                         })}
                                         isRequired
                                     />

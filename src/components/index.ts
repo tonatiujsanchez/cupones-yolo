@@ -71,6 +71,8 @@ export * from './FormComponents/CustomSelectMultiple'
 export * from './FormComponents/InputTags'
 export * from './FormComponents/ReloadableInput'
 export * from './FormComponents/DropzoneMultiple'
+export * from './FormComponents/InStock'
+export * from './FormComponents/InputSize'
 
 export * from './Users/SignUpMsgSuccess'
 export * from './Users/MsgSuccessAuth'
