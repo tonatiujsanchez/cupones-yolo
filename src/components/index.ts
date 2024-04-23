@@ -16,6 +16,7 @@ export * from './Shared/ModalFormHeader'
 export * from './Shared/ModalDelete'
 export * from './Shared/WarningModal'
 export * from './Shared/TablePrimary'
+export * from './Shared/SideLink'
 
 export * from './Links/LinkPrimary'
 

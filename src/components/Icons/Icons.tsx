@@ -835,3 +835,73 @@ export const RefreshIcon: FC<IconProps> = ({ fill = 'none', stroke = 'currentCol
         </svg>
     )
 }
+
+export const CategoryIcon: FC<IconProps> = ({ fill = 'none', stroke = 'currentColor', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24"
+            fill={ fill } 
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+        </svg>
+    )
+}
+
+export const SectionIcon: FC<IconProps> = ({ fill = 'none', stroke = 'currentColor', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24"
+            fill={ fill } 
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4.098 19.902a3.75 3.75 0 0 0 5.304 0l6.401-6.402M6.75 21A3.75 3.75 0 0 1 3 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 0 0 3.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008Z" />
+        </svg>
+    )
+}
+
+export const ShoppingBagOutlineIcon: FC<IconProps> = ({ fill = 'none', stroke = 'currentColor', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24"
+            fill={ fill } 
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+        </svg>
+    )
+}
+
+export const HashtagIcon: FC<IconProps> = ({ fill = 'none', stroke = 'currentColor', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24"
+            fill={ fill } 
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5-3.9 19.5m-2.1-19.5-3.9 19.5" />
+        </svg>
+    )
+}
+
+export const ChevronDownIcon: FC<IconProps> = ({ fill = 'currentColor', stroke = 'currentColor', strokeWidth = 1.5 }) => {
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24"
+            fill={ fill } 
+            stroke={ stroke }
+            strokeWidth={ strokeWidth }
+        >
+            <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
+        </svg>
+    )
+}

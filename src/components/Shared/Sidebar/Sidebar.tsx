@@ -1,24 +1,29 @@
-import NextLink from 'next/link'
 import Image from 'next/image'
+import { useAuth } from '@/hooks'
+import { SideLink } from '@/components'
 import { 
     BuildingIcon,
+    CategoryIcon,
     CogIcon,
     CouponIcon,
+    HashtagIcon,
     HeartIcon,
     LayerIcon,
     LogoutIcon,
     PackageIcon,
+    SectionIcon,
     ShieldIcon,
     ShirtIcon,
+    ShoppingBagOutlineIcon,
     ShoppingCartIcon,
     TruckIcon,
     UserIcon 
 } from '@/components/Icons'
-
+import { ISideLink } from '@/interfaces'
 import styles from './Sidebar.module.scss'
 
 
-const linksAdmin = [
+const sideLinksAdmin:ISideLink[] = [
     {
         icon: <LayerIcon />,
         label: 'Dashboard',
@@ -47,11 +52,33 @@ const linksAdmin = [
     {
         icon: <CogIcon />,
         label: 'Ajustes',
-        path: '/dashboard/ajustes'
+        path: '/dashboard/ajustes',
+        subLinks: [
+            {
+                icon: <CategoryIcon />,
+                label: 'Categorías',
+                path: '/dashboard/ajustes/categorias'
+            },
+            {
+                icon: <SectionIcon />,
+                label: 'Secciones',
+                path: '/dashboard/ajustes/secciones'
+            },
+            {
+                icon: <HashtagIcon />,
+                label: 'Tallas',
+                path: '/dashboard/ajustes/tallas'
+            },
+            {
+                icon: <ShoppingBagOutlineIcon />,
+                label: 'Marcas',
+                path: '/dashboard/ajustes/marcas'
+            },
+        ]
     },
 ]
 
-const linksUser = [
+const sideLinksUser = [
     {
         icon: <UserIcon strokeWidth={1.7} />,
         label: 'Mi perfil',
@@ -82,67 +109,50 @@ const linksUser = [
 
 
 export const Sidebar = () => {
+
+    const { user } = useAuth()
+
     return (
         <div className={ styles['siderbar-container'] }>
             <div className={ styles['siderbar-header'] }>
                 <div className={ styles['siderbar-header__photo'] }>
                     {
-                        true
+                        user?.photo
                         ?(
                             <Image
                                 priority
                                 fill
                                 sizes="(max-width: 125px) 125px"
-                                src={'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=560'}
-                                alt={'Foto de usuario'}
-                                title={'Foto de usuario'}
+                                src={ user.photo }
+                                alt={`Foto de ${ user.name }`}
+                                title={`Foto de ${ user.name }`}
                             />
                         ):(
                             <span>
-                                T
+                                { user?.name.slice(0, 1) }
                             </span>
                         )
                     }
                 </div>
-                <p className={ styles['siderbar-header__name'] }>Tonatiuj Sánchez Jiménez</p>
+                <p className={ styles['siderbar-header__name'] }>{ user?.name }<span>@{ user?.username }</span></p>
             </div>
             <div className={ styles['siderbar-divider'] }></div>
             <ul className={ styles['siderbar-list'] }>
                 {
-                    linksAdmin.map( link => (
-                        <li key={link.label}>
-                            <NextLink 
-                                href={ link.path }
-                                className={`${ styles['siderbar-list__link'] } ${ link.label === 'Registros' && styles['link-active'] }`}
-                            >
-                                { link.icon }
-                                <span>{ link.label }</span>
-                            </NextLink>
-                        </li>
+                    sideLinksAdmin.map( sideLink => (
+                        <SideLink key={ sideLink.path } sideLink={ sideLink } />
                     ))
                 }
             </ul>
-            {
-                linksUser.length > 0 &&
-                <>
-                    <div className={ styles['siderbar-divider'] }></div>
-                    <ul className={ styles['siderbar-list'] }>
-                        {
-                            linksUser.map( link => (
-                                <li key={link.label}>
-                                    <NextLink 
-                                        href={ link.path }
-                                        className={ styles['siderbar-list__link'] }
-                                    >
-                                        { link.icon }
-                                        <span>{ link.label }</span>
-                                    </NextLink>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </>
-            }
+            <div className={ styles['siderbar-divider'] }></div>
+            <ul className={ styles['siderbar-list'] }>
+                
+                {
+                    sideLinksUser.map( sideLink => (
+                        <SideLink key={ sideLink.label } sideLink={ sideLink } />
+                    ))
+                }
+            </ul>
             <div className={ styles['siderbar-divider'] }></div>
             <button className={ styles['siderbar__button-logout'] }>
                 <LogoutIcon strokeWidth={2} />

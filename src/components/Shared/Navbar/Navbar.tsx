@@ -60,12 +60,12 @@ export const Navbar = () => {
                 )}
                 <div className={`${styles['navbar-content']} ${ showMenu ? styles['show-menu'] : '' }`} >
                     <nav className={styles.navbar}>
-                        {/* <NextLink 
+                        <NextLink 
                             href={'/dashboard'} 
                             className={`${ styles['nav-link'] } ${styles['nav-link__my-account'] } ${ asPath === '/dashboard' ? styles.active : ''}`}
                         >
                             My cuenta
-                        </NextLink> */}
+                        </NextLink>
                         <NextLink 
                             href={'/'} 
                             className={`${styles['nav-link']} ${asPath === '/' ? styles.active : ''}`}

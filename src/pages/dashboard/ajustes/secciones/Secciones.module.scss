@@ -1,0 +1,14 @@
+.settings {
+    padding-block: 1rem;
+    padding-inline: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+@media (min-width: 640px) {
+    .settings {
+        padding-inline: 2rem;
+        margin-block-start: 1rem;
+    }   
+} 

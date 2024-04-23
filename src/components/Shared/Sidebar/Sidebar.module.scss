@@ -44,7 +44,8 @@
             width: 100%;
             font-weight: 800;
             font-size: 3rem;
-            border: 0.1rem dotted $gray-light;
+            background-color: $primary-light;
+            color: $primary;
         }
     }
 
@@ -52,6 +53,12 @@
         font-size: 1.8rem;
         font-weight: 800;
         text-align: center;
+
+        span {
+            display: block;
+            font-weight: 400;
+            font-size: 1.4rem;
+        }
     }
 }
 
@@ -65,31 +72,6 @@
     flex-direction: column;
     gap: 0.3rem;
     padding-block: 1.5rem;
-
-    .siderbar-list__link {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-
-        border-radius: 0.8rem;
-        padding-block: 0.9rem;
-        padding-inline: 1.2rem;    
-        font-weight: 600;
-        transition: color 0.2s, background 0.3s;
-        svg {
-            width: 1.6rem;
-        }
-
-        &.link-active {
-            background: $primary-light;
-            color: $orange;
-        }
-        &:hover {
-            background: $primary-light;
-            color: $orange;
-        }
-    }
-    
 }
 
 .siderbar__button-logout {
@@ -113,8 +95,12 @@
     }
 }
 
+
+
+
 @media (min-width: 821px) {
     .siderbar-container {
         display: block;
+        min-width: 27rem;
     }
 }
