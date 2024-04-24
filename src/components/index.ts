@@ -99,3 +99,4 @@ export * from './Sizes/SizeTable'
 
 export * from './Brands/BrandList'
 export * from './Brands/BrandForm'
+export * from './Brands/BrandTable'

@@ -1,7 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { FilterQuery } from 'mongoose'
 import { db } from '@/database'
 import { Brand } from '@/models'
 import { isValidSlug } from '@/libs'
+import { BRANDS_PAGE_SIZE } from '@/constants'
 import { IBrand, IBrandsResp } from '@/interfaces'
 
 type Data = 
@@ -10,7 +12,11 @@ type Data =
     | IBrandsResp
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+    
     switch (req.method) {
+
+        case 'GET':
+            return getBrands( req, res )
         
         case 'POST':
             return addNewBrand( req, res )    
@@ -103,5 +109,52 @@ const addNewBrand = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         console.log(error)
         return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
     }
-
 }
+
+
+const pageSize = BRANDS_PAGE_SIZE;
+const getBrands = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+    
+    const { page = 1, count=pageSize } = req.query
+
+    let skip = Number( page ) - 1
+    let limit = Number( count )
+
+    if( skip <0 ){ skip = 0 }
+    if( limit < 0 ) { limit = pageSize }
+
+    skip = skip * limit
+
+    let query:FilterQuery<IBrand> = {
+        status: true
+    }
+
+    try {
+        
+        await db.connect()
+        const [ brands, total ] = await Promise.all([
+            Brand.find( query )
+                .skip( skip )
+                .limit( limit )
+                .sort({ createdAt: 'desc' })
+                .select('-status -createdAt -updatedAt'),
+            Brand.countDocuments( query )
+        ])
+        await db.disconnect()
+
+        return res.status(200).json({
+            currentPage : Number( page ),
+            totalPages  : Math.ceil( total / Number(count) ),
+            pageSize    : brands.length,
+            totalBrands : total,
+            brands
+        })
+
+
+    } catch (error) {
+        await db.disconnect()
+        console.log(error)
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+}
+

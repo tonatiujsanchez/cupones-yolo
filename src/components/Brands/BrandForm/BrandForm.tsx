@@ -1,11 +1,11 @@
 import { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { usePostBrand } from '@/hooks'
 import { ButtonPrimary, Dropzone, InputText, ModalFormHeader, Toggle } from '@/components'
 import { getSlug, isValidSlug } from '@/libs'
 import { IBrand } from '@/interfaces'
 
 import styles from './BrandForm.module.scss'
-import { usePostBrand } from '@/hooks'
 interface Props {
     brand?     : IBrand
     currentPage: number
@@ -49,7 +49,6 @@ export const BrandForm:FC<Props> = ({ brand, onClose, currentPage }) => {
     }
 
     const onBrandSubmit = ( data:IBrand ) => {
-        console.log(data)
 
         if( brand ){
             return console.log('Editar marca')

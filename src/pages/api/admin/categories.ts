@@ -144,7 +144,7 @@ const getCategories = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
             Category.find( query )
                 .skip(skip)
                 .limit(limit)
-                .sort({ registeredAt: 'desc'})
+                .sort({ createdAt: 'desc'})
                 .select('-status -createdAt -updatedAt'),
                 Category.countDocuments(query)
         ])

@@ -1,7 +1,9 @@
-import { toastError, toastSuccess } from '@/libs'
-import { brandsActions } from '@/services'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { toastError, toastSuccess } from '@/libs'
+import { brandsActions } from '@/services'
+import { BRANDS_QUERY_KEY } from '@/constants'
+import { IBrandsResp } from '@/interfaces'
 
 export const usePostBrand = ( reset: ()=> void ) => {
     
@@ -10,8 +12,22 @@ export const usePostBrand = ( reset: ()=> void ) => {
     const brandPostMutation = useMutation({
         mutationFn: brandsActions.newBrand,
         onSuccess: ( newBrand ) => {
-            console.log(newBrand)
-            toastSuccess('Categoría agregada')
+            
+            queryClient.setQueryData<IBrandsResp>(
+                [ BRANDS_QUERY_KEY, { page: 1 } ],
+                ( oldData ) => {
+                    if( oldData ){
+                        return {
+                            ...oldData,
+                            brands: [ ...oldData.brands, newBrand ],
+                            totalBrands: oldData.totalBrands + 1
+                        }
+                    }
+                    return oldData
+                }
+            )
+
+            toastSuccess('Nueva marca agregada')
             reset()
         },
         onError: ( error:AxiosError<{ msg:string }>  )=> {
