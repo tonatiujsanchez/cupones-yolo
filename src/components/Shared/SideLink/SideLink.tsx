@@ -12,8 +12,6 @@ export const SideLink:FC<Props> = ({ sideLink }) => {
 
     const pathname = usePathname()
     const isSelectedLink = sideLink.path.split('/')[2] === pathname.split('/')[2]
-    console.log(sideLink.path.split('/'))
-    console.log( pathname.split('/'))
 
     return (
         <li className={ styles['sidelink-item'] }>

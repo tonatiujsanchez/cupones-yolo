@@ -6,7 +6,7 @@ export interface IBrand {
     image  : string | null
 
     active : boolean
-    status : boolean
+    status?: boolean
     
     createdAt? : string
     updatedAt? : string

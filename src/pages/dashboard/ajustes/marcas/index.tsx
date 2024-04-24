@@ -1,11 +1,11 @@
-import { DashboardLayout } from '@/components'
+import { BrandList, DashboardLayout } from '@/components'
 import styles from './Marcas.module.scss'
 
 const MarcasPage = () => {
     return (
         <DashboardLayout headding="Marcas">
             <div className={styles['settings']}>
-                <div>Marcas List</div>
+                <BrandList />
             </div>
         </DashboardLayout>
     )

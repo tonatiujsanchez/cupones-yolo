@@ -1,0 +1,47 @@
+@import '../../../scss/index.scss';
+
+.brand-form {
+    background-color: $white;
+    border-radius: 0.5rem;
+    padding-inline: 2rem;
+    padding-block-start: 2rem;
+    padding-block-end: 2.5rem;
+    min-width: 30rem;
+    width: calc(100vw - 2rem);
+}
+
+.brand-form__fields {
+    display: flex;
+    flex-direction: column;
+    padding-block-start: 2rem;
+}
+
+.brand-form__cover {
+    margin-block-end: 1.5rem;
+    height: 12rem;
+}
+
+.brand-form__toggles-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand-form__toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.7rem;
+    margin-block-end: 1rem;
+}
+
+.button-container {
+    margin-block-start: 1rem;
+}
+
+@media (min-width: 640px) {
+    .brand-form {
+        min-width: 40rem;
+        width: auto;
+    }
+}

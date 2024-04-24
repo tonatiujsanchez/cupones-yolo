@@ -96,3 +96,6 @@ export * from './Sections/SectionTable'
 export * from './Sizes/SizeList'
 export * from './Sizes/SizeForm'
 export * from './Sizes/SizeTable'
+
+export * from './Brands/BrandList'
+export * from './Brands/BrandForm'
