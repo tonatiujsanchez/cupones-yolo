@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BrandForm, BrandTable, ErrorMessage, ModalContainer, ModalDelete, Pagination, RegisterCount, SettingsListSection } from '@/components'
-import { useGetBrands } from '@/hooks'
+import { useDeleteBrand, useGetBrands } from '@/hooks'
 import { BRANDS_PAGE_SIZE } from '@/constants'
 import { IBrand } from '@/interfaces'
 import styles from './BrandList.module.scss'
@@ -9,12 +9,38 @@ export const BrandList = () => {
 
     const [openFormBrand, setOpenFormBrand] = useState<boolean>(false)
     const [brandEdit, setBrandEdit] = useState<IBrand>()
+    const [deleteBrand, setDeleteBrand] = useState<IBrand>()
 
     const { brandsQuery, handlePageClick } = useGetBrands({ page: 1 })
+
+    const onCloseDeleteBrandModal = () => {
+        setDeleteBrand(undefined)
+    }
+
+    const { brandDeleteMutation } = useDeleteBrand({
+        currentPage: brandsQuery.data?.currentPage ?? 1,
+        onClose: onCloseDeleteBrandModal
+    })
 
     const onCloseFormBrandModal = () => {
         setOpenFormBrand(false)
         setBrandEdit(undefined)
+    }
+
+    const onEditBrand = (brand:IBrand) => {
+        setBrandEdit(brand)
+    }
+
+    const onSetDeleteCategory = (brand:IBrand) => {
+        setDeleteBrand(brand)
+    }
+
+    const onDeleteBrand = ( confirm:boolean ) => {
+        if( !confirm || !deleteBrand ){
+            return onCloseDeleteBrandModal()
+        }
+
+        brandDeleteMutation.mutate({ idBrand: deleteBrand._id! })
     }
 
     return (
@@ -42,8 +68,8 @@ export const BrandList = () => {
                             <BrandTable 
                                 brands={ brandsQuery.data.brands }
                                 currentPage={ brandsQuery.data.currentPage }
-                                onEditBrand={ ()=>{} }
-                                onDeleteBrand={ ()=>{} }
+                                onEditBrand={ onEditBrand }
+                                onDeleteBrand={ onSetDeleteCategory }
                             />
                             <div className={ styles['pagination-container'] }>
                                 <Pagination
@@ -70,6 +96,21 @@ export const BrandList = () => {
                     onClose={ onCloseFormBrandModal }
                     brand={ brandEdit }
                     currentPage={ 1 }
+                />
+            </ModalContainer>
+            <ModalContainer
+                show={ !!deleteBrand }
+                onHidden={ onCloseDeleteBrandModal }
+            >
+                <ModalDelete
+                    title="Eliminar marca"
+                    subtitle={
+                        <p>
+                            ¿Desea eliminar la marca <strong>{ deleteBrand?.title }</strong>?
+                        </p>
+                    }
+                    onChange={ onDeleteBrand }
+                    isDeleting={ brandDeleteMutation.isPending }
                 />
             </ModalContainer>
         </>

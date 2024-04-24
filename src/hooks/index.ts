@@ -42,3 +42,4 @@ export * from './products/useUpdateProduct'
 
 export * from './brands/usePostBrand'
 export * from './brands/useGetBrands'
+export * from './brands/useDeleteBrand'

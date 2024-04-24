@@ -22,3 +22,16 @@ export const getBrands = async({ page }:GetBrandsParams ):Promise<IBrandsResp> =
     const { data } = await yolostyleApi.get('/admin/brands', { params })
     return data
 }
+
+
+interface DeleteBrandParams {
+    idBrand: string
+}
+export const deleteBrand = async({ idBrand }:DeleteBrandParams):Promise<IBrand> => {
+
+    const params = new URLSearchParams()
+    params.append('idBrand', idBrand)
+
+    const { data } = await yolostyleApi.delete<IBrand>('/admin/brands', { params })
+    return data
+} 

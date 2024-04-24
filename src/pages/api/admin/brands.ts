@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { FilterQuery } from 'mongoose'
+import { FilterQuery, isValidObjectId } from 'mongoose'
 import { db } from '@/database'
 import { Brand } from '@/models'
 import { isValidSlug } from '@/libs'
@@ -20,6 +20,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         
         case 'POST':
             return addNewBrand( req, res )    
+            
+        case 'DELETE':
+            return deleteBrand( req, res )    
             
         default:
             return res.status(400).json({ msg: 'Bad Request' })
@@ -156,5 +159,38 @@ const getBrands = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         console.log(error)
         return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
     }
+}
+
+const deleteBrand = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+    
+    const { idBrand } = req.query
+
+    if( !isValidObjectId( idBrand ) ){
+        return res.status(400).json({ msg: 'ID de marca no valido' })
+    }
+
+    try {
+        await db.connect()
+        const brand = await Brand.findById( idBrand )
+            .where('status').equals(true)
+            .select('-status -createdAt -updatedAt')
+
+        if( !brand ){
+            await db.disconnect()
+            return res.status(400).json({ msg: 'Marca no encontrada' })
+        }
+
+        brand.status = false
+        await brand.save()
+        await db.disconnect()
+
+        return res.status(200).json( brand )
+
+    } catch (error) {
+        console.log(error)
+        await db.disconnect()
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
 }
 
