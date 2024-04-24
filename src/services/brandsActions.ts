@@ -24,6 +24,16 @@ export const getBrands = async({ page }:GetBrandsParams ):Promise<IBrandsResp> =
 }
 
 
+interface UpdateBrandParams {
+    brand: IBrand
+}
+export const updateBrand = async({ brand }:UpdateBrandParams):Promise<IBrand> => {
+
+    const { data } = await yolostyleApi.put('/admin/brands', brand )
+    return data
+}
+
+
 interface DeleteBrandParams {
     idBrand: string
 }

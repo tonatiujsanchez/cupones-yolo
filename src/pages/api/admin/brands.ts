@@ -19,7 +19,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
             return getBrands( req, res )
         
         case 'POST':
-            return addNewBrand( req, res )    
+            return addNewBrand( req, res )
+            
+        case 'PUT':
+            return updateBrand( req, res )
             
         case 'DELETE':
             return deleteBrand( req, res )    
@@ -160,6 +163,65 @@ const getBrands = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
         return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
     }
 }
+
+const updateBrand = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
+    
+    let { _id } = req.body
+
+    if( !isValidObjectId( _id ) ){
+        return res.status(400).json({ msg: 'ID de marca no valido' })
+    }
+
+    try {
+        
+        await db.connect()
+        const brand = await Brand.findById( _id )
+            .where('status').equals(true)
+            .select('-createdAt -updatedAt')
+        
+        if( !brand ){
+            await db.disconnect()
+            return res.status(400).json({ msg: 'Marca no encontrada' })
+        }
+
+        const {
+            title = brand.title,
+            slug  = brand.slug,
+            image = brand.image,
+            active = brand.active
+        } = req.body
+
+        const brandBySlug = await Brand.findOne({ slug })
+
+        if( brandBySlug && brandBySlug?._id.toString() !== brand._id.toString() && !brandBySlug.status){
+            await db.disconnect()
+            return res.status(400).json({ msg: `El slug "${ brandBySlug.slug }" no esta disponible, hable con el administrador` })
+        }
+
+        if( brandBySlug && brandBySlug?._id.toString() !== brand._id.toString()){
+            await db.disconnect()
+            return res.status(400).json({ msg: `Ya existe una marca con el slug "${ brandBySlug.slug }"` })
+        }
+
+        brand.title = title
+        brand.slug  = slug
+        brand.image = image
+        brand.active = active
+
+        await brand.save()
+        await db.disconnect()
+
+        return res.status(200).json( brand )
+
+    } catch (error) {
+        await db.disconnect()
+        console.log(error)
+        return res.status(500).json({ msg: 'Error en el servidor, comuníquese con el administrador' })
+    }
+
+}
+
+
 
 const deleteBrand = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     

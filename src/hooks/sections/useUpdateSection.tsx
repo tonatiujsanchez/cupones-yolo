@@ -28,7 +28,7 @@ export const useUpdateSection = ( onClose: ()=> void, currentPage: number ) => {
                 }
             )
 
-            toastSuccess('Seción actualizada')
+            toastSuccess('Sección actualizada')
             onClose()
         },
         onError: ( error:AxiosError<{ msg:string }> ) => {

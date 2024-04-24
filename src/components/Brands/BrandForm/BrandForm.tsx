@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { usePostBrand } from '@/hooks'
+import { usePostBrand, useUpdateBrand } from '@/hooks'
 import { ButtonPrimary, Dropzone, InputText, ModalFormHeader, Toggle } from '@/components'
 import { getSlug, isValidSlug } from '@/libs'
 import { IBrand } from '@/interfaces'
@@ -20,6 +20,7 @@ export const BrandForm:FC<Props> = ({ brand, onClose, currentPage }) => {
     })
 
     const { brandPostMutation } = usePostBrand( reset )
+    const { brandUpdateMutation } = useUpdateBrand( onClose, currentPage )
     
     useEffect(()=> {
         if( brand ){
@@ -51,7 +52,8 @@ export const BrandForm:FC<Props> = ({ brand, onClose, currentPage }) => {
     const onBrandSubmit = ( data:IBrand ) => {
 
         if( brand ){
-            return console.log('Editar marca')
+            data._id = brand._id
+            return brandUpdateMutation.mutate({ brand: data })
         }
 
         brandPostMutation.mutate({ brand: data })
@@ -123,12 +125,10 @@ export const BrandForm:FC<Props> = ({ brand, onClose, currentPage }) => {
                 <div className={ styles['button-container'] }>
                 <ButtonPrimary
                     type="submit"
-                    disabled={ brandPostMutation.isPending }
-                    // disabled={ brandPostMutation.isPending || categoryUpdateMutation.isPending  }
+                    disabled={ brandPostMutation.isPending || brandPostMutation.isPending  }
                 >
                     {
-                        // categoryPostMutation.isPending || categoryUpdateMutation.isPending  
-                        brandPostMutation.isPending
+                        brandPostMutation.isPending || brandUpdateMutation.isPending  
                         ?(
                             <div className="custom-loader-white"></div>
                         ):(
