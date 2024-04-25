@@ -35,6 +35,7 @@ const getProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
             .populate('images')
             .populate('category')
             .populate('sections')
+            .populate('brands')
             .populate('inStock.size')
             .where('status', true)
         await db.disconnect()

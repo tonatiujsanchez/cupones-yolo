@@ -3,7 +3,7 @@ import { db } from '@/database'
 import { Product } from '@/models'
 import { isValidSlug } from '@/libs'
 import { PRODUCTS_PAGE_SIZE } from '@/constants'
-import { ICategory, IImage, IProduct, IProductsResp, ISection, ISize } from '@/interfaces'
+import { IBrand, ICategory, IImage, IProduct, IProductsResp, ISection, ISize } from '@/interfaces'
 import { FilterQuery, isValidObjectId } from 'mongoose'
 
 type Data = 
@@ -59,6 +59,7 @@ const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
                 .populate('images')
                 .populate('category')
                 .populate('sections')
+                .populate('brands')
                 .populate('inStock')
                 .skip( skip )
                 .limit( limit )
@@ -88,7 +89,7 @@ const getProducts = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
 
 const addNewProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     
-    let { title, description, price, slug, inStock=[], images=[], tags=[], sections=[], category=[], sku, discountRate=0, active = true } = req.body
+    let { title, description, price, slug, inStock=[], images=[], tags=[], sections=[], brands=[], category=[], sku, discountRate=0, active = true } = req.body
 
     title       = title.trim()
     description = description.trim()
@@ -180,6 +181,7 @@ const addNewProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
             tags, 
             sections: ( sections as ISection[] ).map( section => section._id ), 
             category: ( category as ICategory[] ).map( cat => cat._id ), 
+            brands: ( brands as IBrand[] ).map( brnd => brnd._id ), 
             sku, 
             discountRate, 
             active
@@ -234,6 +236,7 @@ const updateProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
             .select('-status -createdAt -updatedAt')
             .populate('category')
             .populate('sections')
+            .populate('brands')
             .populate('inStock.size')
             .populate('images')
         
@@ -252,6 +255,7 @@ const updateProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
            tags        = product.tags,
            sections    = product.sections,
            category    = product.category,
+           brands      = product.brands,
            sku         = product.sku,
            discountRate= product.discountRate,
            active      = product.active,
@@ -273,6 +277,7 @@ const updateProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
         product.tags        = tags
         product.sections    = sections
         product.category    = category
+        product.brands      = brands
         product.sku         = sku.trim()
         product.discountRate= discountRate
         product.active      = active

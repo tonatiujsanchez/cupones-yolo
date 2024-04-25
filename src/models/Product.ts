@@ -49,6 +49,11 @@ const ProductSchema = new Schema<IProduct>({
         ref: 'Category',
         required: true
     }],
+    brands:[{
+        type: mongoose.Types.ObjectId,
+        ref: 'Brand',
+        required: true,
+    }],
     sku: {
         type: String,
         required: true,

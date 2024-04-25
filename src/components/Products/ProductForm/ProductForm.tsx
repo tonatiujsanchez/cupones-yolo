@@ -2,11 +2,11 @@ import { FC, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { Controller, useForm } from 'react-hook-form'
 import { getSlug, isValidSlug } from '@/libs'
-import { useGetCategories, useGetSections, useGetSizes, usePostProduct, useUpdateProduct } from '@/hooks'
+import { useGetBrands, useGetCategories, useGetSections, useGetSizes, usePostProduct, useUpdateProduct } from '@/hooks'
 import { ButtonLight, ButtonOutlinePrimary, ButtonPrimary, CustomSelectMultiple, DropzoneMultiple, InStock, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
-import { getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes, getSku } from '@/utils'
+import { getOptionsOfBrands, getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes, getSku } from '@/utils'
 import { IMAGES_SECTIONS } from '@/constants'
-import { ICategory, IProduct, ISection, ISectionImage, ISelectOption, ISize } from '@/interfaces'
+import { IBrand, ICategory, IProduct, ISection, ISectionImage, ISelectOption, ISize } from '@/interfaces'
 
 import styles from './ProductForm.module.scss'
 
@@ -22,6 +22,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
             discountRate: 0,
             sections: [],
             category: [],
+            brands  : [],
             inStock : [],
             tags    : [],
             slug    : '',
@@ -40,6 +41,9 @@ export const ProductForm: FC<Props> = ({ product }) => {
 
     const { categoriesQuery } = useGetCategories({ page: 1 })
     const categories = categoriesQuery.data?.categories ?? []
+
+    const { brandsQuery } = useGetBrands({ page: 1 })
+    const brands = brandsQuery.data?.brands ?? []
 
     const { sizesQuery } = useGetSizes({ page: 1 })
     const sizes = sizesQuery.data?.sizes ?? []
@@ -107,7 +111,20 @@ export const ProductForm: FC<Props> = ({ product }) => {
             const sectionToAdded = categories.find( section => section.slug === option.value )
             return [ ...categoriesProduct, sectionToAdded! ]
         }
+    }
+
+    const onChangeBrands = ( option:ISelectOption ):IBrand[] =>{
+
+        const brandsProduct = getValues('brands')
         
+        const existOption = brandsProduct.find( brand => brand.slug === option.value )
+
+        if( existOption ){
+            return brandsProduct.filter( brand => brand.slug !== option.value )
+        }else {
+            const brandToAdded = brands.find( brand => brand.slug === option.value )
+            return [ ...brandsProduct, brandToAdded! ]
+        }
     }
     
     const onCancel = () => {
@@ -126,7 +143,8 @@ export const ProductForm: FC<Props> = ({ product }) => {
     }
 
     const onProductSubmit = ( data:IProduct ) => {
-
+        data.active = true
+        
         if(product){
             productUpdateMutation.mutate({ product: { ...data, _id: product._id } })
             return
@@ -254,6 +272,26 @@ export const ProductForm: FC<Props> = ({ product }) => {
                             />
                         )
                     }
+                    {
+                        brandsQuery.isFetching
+                        ? <p>Cargando marcas...</p>
+                        :(
+                            <Controller 
+                                control={ control }
+                                name="brands"
+                                render={({ field })=>(
+                                    <CustomSelectMultiple
+                                        fieldName='brandsProduct'
+                                        label='Marca'
+                                        options={ getOptionsOfBrands( brands ) }
+                                        optionsSelected={ getOptionsOfBrands( field.value ) }
+                                        onChange={ ( value )=>  field.onChange( onChangeBrands(value) ) }
+                                        placeholder='Elige una marca'
+                                    />
+                                )}
+                            />
+                        )
+                    }
                 </div>
                 <div>
                 {
@@ -370,7 +408,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
                         onClick={ onCancel }
                         disabled={ productPostMutation.isPending || productUpdateMutation.isPending }
                     >
-                        Cancelar
+                        Regresar
                     </ButtonLight>
                 </div>
                 <div className={ styles['buttons__content'] }>
