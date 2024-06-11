@@ -1,15 +1,61 @@
+@import '../../../scss/index.scss';
 
-.settings {
-    padding-block: 1rem;
-    padding-inline: 1rem;
+
+.settings__nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+    margin-inline: auto;
+    margin-block: 5rem;
+    padding: 1rem;
+}
+
+.settings__navlink {
+    min-width: 15rem;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    align-items: center;
+    gap: 1rem;
+    border: $border-gray-light-silver;
+    border-radius: 1rem;
+    padding: 2rem;
+    color: $gray-light;
+    font-weight: 600;
+    transition: color 0.4s, border-color 0.4s, background-color 0.4s;
+    
+    svg {
+        width: 3rem;
+        stroke-width: 1;
+    }
+}
+
+.settings__navlink:hover {
+    color: $black;
+    border-color: $primary;
+    
+    svg {
+        color: $primary;
+    }
+}
+
+.settings__navlink:active {
+    background-color: $primary;
+    color: $white;
+    transform: scale(0.98);
+
+    svg {
+        color: $white;
+    }
 }
 
 @media (min-width: 640px) {
-    .settings {
-        padding-inline: 2rem;
-        margin-block-start: 1rem;
-    }   
+    .settings__navlink {
+        min-width: 18rem;
+        
+        svg {
+            width: 5rem;
+        }
+    } 
 } 

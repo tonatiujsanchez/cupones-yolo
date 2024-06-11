@@ -26,7 +26,7 @@ export const DashboardLayout:FC<Props> = ({ children, headding }) => {
                         <div className={ styles['main-headding__container'] }>
                             <h1>{ headding }</h1>
                         </div>
-                        <div>
+                        <div className={ styles['main__content'] }>
                             { children }
                         </div>
                      </main>

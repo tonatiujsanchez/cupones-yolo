@@ -4,9 +4,9 @@ import { Controller, useForm } from 'react-hook-form'
 import { getSlug, isValidSlug } from '@/libs'
 import { useGetBrands, useGetCategories, useGetSections, useGetSizes, usePostProduct, useUpdateProduct } from '@/hooks'
 import { ButtonLight, ButtonOutlinePrimary, ButtonPrimary, CustomSelectMultiple, DropzoneMultiple, InStock, InputTags, InputText, ReloadableInput, WYSIWYGEditorLite } from '@/components'
-import { getOptionsOfBrands, getOptionsOfCategories, getOptionsOfSections, getOptionsOfSizes, getSku } from '@/utils'
+import { getOptionsOfBrands, getOptionsOfCategories, getOptionsOfSections, getSku } from '@/utils'
 import { IMAGES_SECTIONS } from '@/constants'
-import { IBrand, ICategory, IProduct, ISection, ISectionImage, ISelectOption, ISize } from '@/interfaces'
+import { IBrand, ICategory, IProduct, ISection, ISectionImage, ISelectOption } from '@/interfaces'
 
 import styles from './ProductForm.module.scss'
 
