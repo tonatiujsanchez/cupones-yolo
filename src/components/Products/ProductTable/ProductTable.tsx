@@ -12,10 +12,11 @@ import styles from './ProductTable.module.scss'
 
 interface Props {
     products       : IProduct[]
-    currentPage    : number
     onDeleteProduct: ( product:IProduct )=> void
+    currentPage    : number
+    searchTerm     : string
 }
-export const ProductTable:FC<Props> = ({ products, currentPage, onDeleteProduct }) => {
+export const ProductTable:FC<Props> = ({ products, onDeleteProduct, currentPage, searchTerm }) => {
 
     const router = useRouter()
 
@@ -95,7 +96,9 @@ export const ProductTable:FC<Props> = ({ products, currentPage, onDeleteProduct 
                                                 <TrashIcon />
                                             </ButtonDanger>
                                             <ButtonInfo
-                                                onClick={()=> router.push(`/dashboard/productos/${ product._id }`) }
+                                                onClick={()=> 
+                                                    router.push(`/dashboard/productos/${ product._id }?page=${currentPage}&searchTerm=${searchTerm}`)
+                                                }
                                                 outline
                                             >
                                                 <EditIcon />

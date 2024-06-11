@@ -4,13 +4,13 @@ import { useQuery } from "@tanstack/react-query"
 
 
 interface Props {
-    idProduct: string
+    idProduct  : string
 }
 export const useGetProduct = ({ idProduct }:Props) => {
     
     const productQuery =  useQuery({
-        queryKey:[ PRODUCTS_QUERY_KEY, { idProduct } ],
-        queryFn: ()=> productsActions.getProduct({ idProduct }),
+        queryKey :[ PRODUCTS_QUERY_KEY, { idProduct } ],
+        queryFn  : ()=> productsActions.getProduct({ idProduct }),
         staleTime: 1000 * 60 * 60,
     })
 

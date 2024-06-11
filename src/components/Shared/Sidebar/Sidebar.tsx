@@ -110,7 +110,7 @@ const sideLinksUser = [
 
 export const Sidebar = () => {
 
-    const { user } = useAuth()
+    const { user, logout } = useAuth()
 
     return (
         <div className={ styles['siderbar-container'] }>
@@ -154,7 +154,10 @@ export const Sidebar = () => {
                 }
             </ul>
             <div className={ styles['siderbar-divider'] }></div>
-            <button className={ styles['siderbar__button-logout'] }>
+            <button
+                onClick={ logout } 
+                className={ styles['siderbar__button-logout'] }
+            >
                 <LogoutIcon strokeWidth={2} />
                 <span>Salir</span>
             </button>

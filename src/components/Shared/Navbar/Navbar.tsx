@@ -60,12 +60,16 @@ export const Navbar = () => {
                 )}
                 <div className={`${styles['navbar-content']} ${ showMenu ? styles['show-menu'] : '' }`} >
                     <nav className={styles.navbar}>
-                        <NextLink 
-                            href={'/dashboard'} 
-                            className={`${ styles['nav-link'] } ${styles['nav-link__my-account'] } ${ asPath === '/dashboard' ? styles.active : ''}`}
-                        >
-                            My cuenta
-                        </NextLink>
+                        {
+                            user && (
+                                <NextLink 
+                                    href={'/dashboard'} 
+                                    className={`${ styles['nav-link'] } ${styles['nav-link__my-account'] } ${ asPath === '/dashboard' ? styles.active : ''}`}
+                                >
+                                    Mi cuenta
+                                </NextLink>
+                            )
+                        }
                         <NextLink 
                             href={'/'} 
                             className={`${styles['nav-link']} ${asPath === '/' ? styles.active : ''}`}
@@ -92,12 +96,16 @@ export const Navbar = () => {
                                 ))
                             )
                         }
-                        <NextLink 
-                            href={'/iniciar-sesion'} 
-                            className={`${styles['nav-link']} ${ styles['nav-link__login'] } ${ asPath === '/iniciar-sesion' || asPath === '/crear-cuenta' ? styles.active : ''}`}
-                        >
-                            Ingresar
-                        </NextLink>
+                        {
+                            !user && (
+                                <NextLink 
+                                    href={'/iniciar-sesion'} 
+                                    className={`${styles['nav-link']} ${ styles['nav-link__login'] } ${ asPath === '/iniciar-sesion' || asPath === '/crear-cuenta' ? styles.active : ''}`}
+                                >
+                                    Ingresar
+                                </NextLink>
+                            )
+                        }
                     </nav>
                     <div className={ styles.social }>
                         <a

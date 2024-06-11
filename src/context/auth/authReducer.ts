@@ -18,6 +18,12 @@ export const authReducer = (state: AuthState, action: AuthActionType): AuthState
                 status: AuthStatus.AUTHENTICATED,
                 user: action.payload
             }
+        case '[Auth] - Logout':
+            return {
+                ...state,
+                status: AuthStatus.NOTAUTHENTICATED,
+                user: undefined
+            }
         default:
             return state
     }

@@ -4,6 +4,7 @@ import { AxiosError } from 'axios'
 import { toastError, toastSuccess } from '@/libs'
 import { productsActions } from '@/services'
 import { PRODUCTS_QUERY_KEY } from '@/constants'
+import { IProductsResp } from '@/interfaces'
 
 
 export const usePostProduct = () => {
@@ -15,7 +16,23 @@ export const usePostProduct = () => {
         mutationFn: productsActions.newProduct,
         onSuccess: ( newProduct )=> {
             
-            // TODO: Agregar el nuevo producto a la lista en el cache: PRODUCTS_QUERY_KEY, { filters }
+            // Agregar el nuevo producto a la lista en el cache: PRODUCTS_QUERY_KEY, { filters }
+            queryClient.setQueryData<IProductsResp>(
+                [ PRODUCTS_QUERY_KEY, { page: 1, searchTerm: '' } ],
+                ( oldData )=> {
+                    if( oldData ){
+                        return {
+                            ...oldData,
+                            products: [
+                                newProduct,
+                                ...oldData.products,
+                            ],
+                            totalProducts: oldData.totalProducts + 1,
+                            pageSize: oldData.pageSize + 1,
+                        }
+                    }
+                }
+            )
 
             // Agregar el nuevo producto a su propio cache
             queryClient.setQueryData(

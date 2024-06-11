@@ -12,8 +12,10 @@ import styles from './ProductForm.module.scss'
 
 interface Props {
     product?: IProduct
+    page?: number
+    searchTerm?: string
 }
-export const ProductForm: FC<Props> = ({ product }) => {
+export const ProductForm: FC<Props> = ({ product, page, searchTerm }) => {
     
     const router = useRouter()
     const formRef = useRef<HTMLFormElement>(null)
@@ -34,7 +36,7 @@ export const ProductForm: FC<Props> = ({ product }) => {
     })
     
     const { productPostMutation } = usePostProduct()
-    const { productUpdateMutation } = useUpdateProduct()
+    const { productUpdateMutation } = useUpdateProduct({ page, searchTerm })
 
     const { sectionsQuery } = useGetSections({ page: 1 })
     const sections = sectionsQuery.data?.sections ?? []
@@ -135,7 +137,9 @@ export const ProductForm: FC<Props> = ({ product }) => {
         data.active = false
 
         if(product){
-            productUpdateMutation.mutate({ product: { ...data, _id: product._id } })
+            productUpdateMutation.mutate({ 
+                product: { ...data, _id: product._id } 
+            })
             return
         }
 
@@ -146,7 +150,9 @@ export const ProductForm: FC<Props> = ({ product }) => {
         data.active = true
         
         if(product){
-            productUpdateMutation.mutate({ product: { ...data, _id: product._id } })
+            productUpdateMutation.mutate({ 
+                product: { ...data, _id: product._id }
+            })
             return
         }
         productPostMutation.mutate({ product: data })

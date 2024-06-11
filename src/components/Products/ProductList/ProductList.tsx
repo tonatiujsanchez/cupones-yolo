@@ -58,8 +58,9 @@ export const ProductList = () => {
                         <>
                             <ProductTable
                                 products={ productsQuery.data.products }
-                                currentPage={ productsQuery.data.currentPage }
                                 onDeleteProduct={ onSetDeleteProduct }
+                                currentPage={ productsQuery.data.currentPage }
+                                searchTerm={ searchTerm }
 
                             />
                             <div className={ styles['pagination-container'] }>

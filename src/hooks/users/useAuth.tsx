@@ -10,7 +10,7 @@ import { toastError, toastSuccess } from '@/libs'
 
 export const useAuth = () => {
     
-    const { login, user } = useContext( AuthContext )
+    const { login, logout, user, status } = useContext( AuthContext )
     const router = useRouter()
     
     const loginMutation = useMutation({
@@ -32,6 +32,8 @@ export const useAuth = () => {
 
     return {
         loginMutation,
-        user
+        logout,
+        user,
+        status
     }
 }

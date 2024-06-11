@@ -196,6 +196,7 @@ const addNewProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
             inStock,
             sections,
             category,
+            brands,
         }
         
         return res.status(200).json(product)
@@ -267,7 +268,7 @@ const updateProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
             await db.disconnect()
             return res.status(400).json({ msg: `Ya existe un producto con el slug "${ productBySlug.slug }"` }) 
         }
-
+        
         product.title       = title.trim()
         product.description = description.trim()
         product.price       = price
@@ -285,7 +286,13 @@ const updateProduct = async(req: NextApiRequest, res: NextApiResponse<Data>) => 
         await product.save()
         await db.disconnect()
 
-        return res.status(200).json( product )
+        return res.status(200).json({
+            ...JSON.parse( JSON.stringify( product ) ),
+            category,
+            sections,
+            brands,
+            images,
+        })
         
     } catch (error) {
         console.log(error)

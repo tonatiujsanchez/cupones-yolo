@@ -11,7 +11,7 @@ interface Props {
 export const SideLink:FC<Props> = ({ sideLink }) => {
 
     const pathname = usePathname()
-    const isSelectedLink = sideLink.path.split('/')[2] === pathname.split('/')[2]
+    const isSelectedLink = sideLink.path.split('/')[2] === pathname?.split('/')[2]
 
     return (
         <li className={ styles['sidelink-item'] }>

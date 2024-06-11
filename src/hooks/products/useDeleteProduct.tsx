@@ -27,7 +27,9 @@ export const useDeleteProduct = ({ currentPage, searchTerm, onClose }:Props) => 
                             ...oldData,
                             products: oldData.products.filter(
                                 product => product._id !== productDeleted._id
-                            )
+                            ),
+                            totalProducts: oldData.totalProducts - 1,
+                            pageSize: oldData.pageSize - 1,
                         }
                     }
                     return oldData
