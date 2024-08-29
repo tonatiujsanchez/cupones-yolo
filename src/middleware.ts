@@ -11,6 +11,27 @@ export async function middleware( req: NextRequest ) {
     
     // ===== ===== ===== API ===== ===== =====
     
+    // Protección de la API del Super Admin ( solo usuarios con role de 'super_admin' )
+    if (req.nextUrl.pathname.startsWith('/api/super-admin')) {
+
+        if (!token) {            
+            return NextResponse.redirect(new URL('/api/unauthorized', req.url))
+        }
+
+        try {
+
+            const { payload } = await jose.jwtVerify(String(token.value), new TextEncoder().encode(process.env.JWT_SECRET_SEED))
+            if(payload.role !== USER_ROLES.superAdmin){
+                return NextResponse.redirect(new URL('/api/unauthorized', req.url))
+            }
+
+            return NextResponse.next()
+
+        } catch (error) {
+            return NextResponse.redirect(new URL('/api/unauthorized', req.url))
+        }
+    }
+
     // Protección de la API del Admin ( solo usuarios con role de 'admin' )
     if (req.nextUrl.pathname.startsWith('/api/admin')) {
 
@@ -56,11 +77,32 @@ export async function middleware( req: NextRequest ) {
     }
 
 
-    // Protección de las páginas del administrador ( solo usuarios con role de 'admin' )
+    // Protección de las páginas del Super Administrador ( solo usuarios con role de 'super_admin' )
     if( 
-        req.nextUrl.pathname.startsWith('/dashboard/cupones'),
-        req.nextUrl.pathname.startsWith('/dashboard/productos'),
-        req.nextUrl.pathname.startsWith('/dashboard/ajustes'),
+        req.nextUrl.pathname.startsWith('/dashboard/usuarios')
+    ){
+
+        if( !token ){
+            return NextResponse.redirect(`${protocol}//${host}/iniciar-sesion`)
+        }
+        try {
+            const { payload } = await jose.jwtVerify(String(token.value), new TextEncoder().encode(process.env.JWT_SECRET_SEED))
+            if(payload.role !== USER_ROLES.superAdmin){
+                return NextResponse.redirect(`${protocol}//${host}/dashboard`)
+            } 
+            
+            return NextResponse.next()
+
+        } catch (error) {
+            return NextResponse.redirect(`${protocol}//${host}/iniciar-sesion`)  
+        }
+    }
+    
+    // Protección de las páginas del Administrador ( solo usuarios con role de 'admin' )
+    if( 
+        req.nextUrl.pathname.startsWith('/dashboard/cupones') ||
+        req.nextUrl.pathname.startsWith('/dashboard/productos') ||
+        req.nextUrl.pathname.startsWith('/dashboard/ajustes') ||
         req.nextUrl.pathname.startsWith('/dashboard/usuarios')
     ){
 
@@ -89,17 +131,20 @@ export async function middleware( req: NextRequest ) {
         }
         
         try {
+            const { payload } = await jose.jwtVerify(String(token.value), new TextEncoder().encode(process.env.JWT_SECRET_SEED))
+            if(
+                payload.role !== USER_ROLES.admin &&
+                payload.role !== USER_ROLES.superAdmin
+            ){
+                return NextResponse.redirect(`${protocol}//${host}/dashboard/perfil`)
+            } 
             
-            await jose.jwtVerify(String(token.value), new TextEncoder().encode(process.env.JWT_SECRET_SEED))   
             return NextResponse.next()
 
         } catch (error) {
             return NextResponse.redirect(`${protocol}//${host}/iniciar-sesion`)
         }
     }
-
-
-    // FIXME: Protección de las páginas del super_admin
 
 }
 
@@ -110,6 +155,8 @@ export const config = {
         '/dashboard/cupones/:path*',
         '/dashboard/productos/:path*',
         '/dashboard/ajustes/:path*',
+
+        // pages - super_admin
         '/dashboard/usuarios/:path*',
         
         //  Auth page routes 
@@ -118,8 +165,6 @@ export const config = {
         '/confirmar-cuenta/:path*',
         '/restablecer-contrasena/:path*',
         
-        
-
         // Api
         '/api/admin/:path*',
         '/api/shared/:path*',
