@@ -7,6 +7,7 @@ import { Overlay } from '@/components'
 import { FacebookIcon, HeartIcon, InstagramIcon, MunuIcon, SearchIcon, ShoppingCartIcon, UserCircleIcon, WhatsAppIcon } from '@/components/Icons'
 
 import styles from './Navbar.module.scss'
+import { AuthStatus } from '@/constants'
 
 
 
@@ -20,7 +21,7 @@ export const Navbar = () => {
 
     
     const { routesQuery } = useGetPublicRoutes()
-    const { user } = useAuth()
+    const { user, status } = useAuth()
 
     const scrollEvent = () => {
         const navbarContainer = headerRef.current
@@ -132,52 +133,58 @@ export const Navbar = () => {
                     </div>
                 </div>
                 <div className={ styles['menu-button__container'] }>
-                    <button
-                        className={`${ styles['menu-button'] } ${ styles['search-button'] }` }
-                    >
-                        <SearchIcon />
-                    </button>
                     {
-                        user && (
-                            <button
-                                className={`${ styles['menu-button'] } ${ styles['favorites-button'] }` }
-                            >
-                                <HeartIcon />
-                            </button>
-                        )
-                    }
-                    <button
-                        className={`${ styles['menu-button'] } ${ styles['cart-button'] }`}
-                    >
-                        <ShoppingCartIcon />
-                    </button>
+                        status !== AuthStatus.CHECKING && (
+                            <>
+                                <button
+                                    className={`${ styles['menu-button'] } ${ styles['search-button'] }` }
+                                >
+                                    <SearchIcon />
+                                </button>
+                                {
+                                    user && (
+                                        <button
+                                            className={`${ styles['menu-button'] } ${ styles['favorites-button'] }` }
+                                        >
+                                            <HeartIcon />
+                                        </button>
+                                    )
+                                }
+                                <button
+                                    className={`${ styles['menu-button'] } ${ styles['cart-button'] }`}
+                                >
+                                    <ShoppingCartIcon />
+                                </button>
 
-                    {
-                        user
-                        ?(
-                            <NextLink
-                                className={`${ styles['menu-button'] } ${ styles['login-user'] } `} 
-                                href={'/dashboard'}
-                            >
-                                <div>
-                                    { user.name.slice(0, 1) }
-                                </div>
-                            </NextLink>
-                        ):(
-                            <NextLink
-                                className={`${ styles['menu-button'] } ${ styles['login-link'] } `} 
-                                href={'/iniciar-sesion'}
-                            >
-                                <UserCircleIcon />
-                            </NextLink>
+                                {
+                                    user
+                                    ?(
+                                        <NextLink
+                                            className={`${ styles['menu-button'] } ${ styles['login-user'] } `} 
+                                            href={'/dashboard'}
+                                        >
+                                            <div>
+                                                { user.name.slice(0, 1) }
+                                            </div>
+                                        </NextLink>
+                                    ):(
+                                        <NextLink
+                                            className={`${ styles['menu-button'] } ${ styles['login-link'] } `} 
+                                            href={'/iniciar-sesion'}
+                                        >
+                                            <UserCircleIcon />
+                                        </NextLink>
+                                    )
+                                }
+                                <button
+                                    onClick={ ()=> setShowMenu(true) }
+                                    className={ styles['menu-button'] }
+                                >
+                                    <MunuIcon />
+                                </button>
+                            </>   
                         )
                     }
-                    <button
-                        onClick={ ()=> setShowMenu(true) }
-                        className={ styles['menu-button'] }
-                    >
-                        <MunuIcon />
-                    </button>
                 </div>
             </div>
         </header>

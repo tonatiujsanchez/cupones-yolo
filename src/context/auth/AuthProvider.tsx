@@ -1,12 +1,10 @@
 import { FC, useEffect, useReducer } from 'react'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
+import { yolostyleApi } from '@/apis'
 import { AuthContext, authReducer } from './'
-import { useCheckAuth } from '@/hooks'
 import { AuthStatus, COOKIE_AUTH_KEY } from '@/constants'
 import { IUserAuth } from '@/interfaces'
-import { LoadingYolostyle } from '@/components'
-import { yolostyleApi } from '@/apis'
 
 
 interface Props {
@@ -35,7 +33,7 @@ export const AuthProvider: FC<Props> = ({ children }) => {
 
     const checkToken = async () => {
 
-        if( !Cookies.get(COOKIE_AUTH_KEY) ){ return }
+        // if( !Cookies.get(COOKIE_AUTH_KEY) ){ return }
 
         try {
             const { data } = await yolostyleApi.get('/auth/validate-session')
@@ -45,7 +43,8 @@ export const AuthProvider: FC<Props> = ({ children }) => {
             login( token, user )
         
         } catch (error) {
-            logout()
+            dispatch({ type: '[Auth] - Logout' })
+            Cookies.remove( COOKIE_AUTH_KEY )
         }
     }
 
@@ -55,12 +54,9 @@ export const AuthProvider: FC<Props> = ({ children }) => {
     }
 
     const logout = () => {
-        dispatch({ type: '[Auth] - Logout' })
         Cookies.remove( COOKIE_AUTH_KEY )
         router.reload()
     }
-
-    // useCheckAuth({ login, logout })
 
     return (
         <AuthContext.Provider value={{

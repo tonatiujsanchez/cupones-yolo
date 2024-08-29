@@ -77,6 +77,7 @@ export * from './FormComponents/InputSize'
 
 export * from './Users/SignUpMsgSuccess'
 export * from './Users/MsgSuccessAuth'
+export * from './Users/UsersList'
 
 export * from './Images/UploadImages'
 export * from './Images/ImageModal'

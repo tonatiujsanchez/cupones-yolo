@@ -57,7 +57,12 @@ export async function middleware( req: NextRequest ) {
 
 
     // Protección de las páginas del administrador ( solo usuarios con role de 'admin' )
-    if( req.nextUrl.pathname.startsWith('/dashboard/cupones') ){
+    if( 
+        req.nextUrl.pathname.startsWith('/dashboard/cupones'),
+        req.nextUrl.pathname.startsWith('/dashboard/productos'),
+        req.nextUrl.pathname.startsWith('/dashboard/ajustes'),
+        req.nextUrl.pathname.startsWith('/dashboard/usuarios')
+    ){
 
         if( !token ){
             return NextResponse.redirect(`${protocol}//${host}/iniciar-sesion`)
@@ -100,14 +105,19 @@ export async function middleware( req: NextRequest ) {
 
 export const config = {
     matcher: [
+        // pages - admin
         '/dashboard/:path*',
         '/dashboard/cupones/:path*',
+        '/dashboard/productos/:path*',
+        '/dashboard/ajustes/:path*',
+        '/dashboard/usuarios/:path*',
         
         //  Auth page routes 
         '/crear-cuenta',
         '/iniciar-sesion',
         '/confirmar-cuenta/:path*',
         '/restablecer-contrasena/:path*',
+        
         
 
         // Api

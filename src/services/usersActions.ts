@@ -1,5 +1,5 @@
 import { yolostyleApi } from "@/apis"
-import { IUserAuth } from "@/interfaces"
+import { IUserAuth, IUsersResp } from "@/interfaces"
 
 
 interface LoginParams {
@@ -72,5 +72,19 @@ interface CheckTokenParams {
 export const checkToken = async({ token }:CheckTokenParams):Promise<{ msg: string }> => {
                                                 
     const { data } = await yolostyleApi.get(`/auth/validate-session/${token}`)
+    return data
+}
+
+interface GetUsersParams {
+    page : number
+    count: number
+}
+export const getUsers = async ({ page, count }:GetUsersParams):Promise<IUsersResp> => {
+
+    const params = new URLSearchParams()
+    params.append('page', page.toString())
+    params.append('count', count.toString())
+    
+    const { data } = await yolostyleApi.get('/super-admin/users', { params })
     return data
 }

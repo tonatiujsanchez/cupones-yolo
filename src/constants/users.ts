@@ -1,3 +1,4 @@
+export const USERS_QUERY_KEY = 'users'
 
 export const USER_ROLES = {
     superAdmin: 'super_admin',
@@ -18,3 +19,7 @@ export const IS_SERVER = typeof window === 'undefined'
 export const COOKIE_AUTH_KEY = IS_SERVER
     ? process.env.COOKIE_AUTH_KEY || ''
     : process.env.NEXT_PUBLIC_COOKIE_AUTH_KEY || ''
+
+
+// Users in dashboard
+export const USERS_PAGE_SIZE = 20

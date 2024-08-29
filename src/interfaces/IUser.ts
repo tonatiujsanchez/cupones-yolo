@@ -33,3 +33,12 @@ export interface IUserAuth {
     role     : IUserRol
     photo?   : string | null
 }
+
+
+export type IUsersResp = {
+    currentPage : number,
+    totalPages  : number
+    totalUsers  : number
+    pageSize    : number
+    users       : IUser[]
+}
