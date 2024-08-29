@@ -17,6 +17,7 @@ export * from './Shared/ModalDelete'
 export * from './Shared/WarningModal'
 export * from './Shared/TablePrimary'
 export * from './Shared/SideLink'
+export * from './Shared/Avatar'
 
 export * from './Links/LinkPrimary'
 
@@ -78,6 +79,7 @@ export * from './FormComponents/InputSize'
 export * from './Users/SignUpMsgSuccess'
 export * from './Users/MsgSuccessAuth'
 export * from './Users/UsersList'
+export * from './Users/UserTable'
 
 export * from './Images/UploadImages'
 export * from './Images/ImageModal'

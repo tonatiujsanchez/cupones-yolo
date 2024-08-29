@@ -9,6 +9,7 @@ import { USERS_QUERY_KEY } from '@/constants'
 interface Props {
     page : number
     count: number
+    searchTerm: string
 }
 export const useGetUsers = ({ page, count }:Props) => {
     

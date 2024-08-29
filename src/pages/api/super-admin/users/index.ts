@@ -47,7 +47,7 @@ const getUsers = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
                 .skip(skip)
                 .limit(limit)
                 .sort({ createdAt: 'desc'})
-                .select('-status -updatedAt -status')
+                .select('-status -updatedAt -password')
                 .lean(),
             User.countDocuments(query)
         ])

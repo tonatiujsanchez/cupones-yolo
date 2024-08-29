@@ -1,0 +1,33 @@
+@import '../../../scss/index.scss';
+
+.avatar__figure {
+    display: block;
+    position: relative;
+    height: 3.6rem;
+    width: 3.6rem;
+    border-radius: 50%;
+    background-color: $white;
+    overflow: hidden;
+    margin: 0;
+}
+
+.avatar__img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.no-avatar {
+    display: grid;
+    place-content: center;
+    padding: 1rem;
+    background-color: $primary-light;
+    border-radius: 50%;
+    height: 3.6rem;
+    width: 3.6rem;
+    font-weight: 800;
+    color: $primary;
+    font-size: 1.4rem;
+    opacity: 0.8;
+}

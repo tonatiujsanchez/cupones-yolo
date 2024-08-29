@@ -1,3 +1,5 @@
+import { ISelectOption } from "@/interfaces"
+
 export const USERS_QUERY_KEY = 'users'
 
 export const USER_ROLES = {
@@ -23,3 +25,19 @@ export const COOKIE_AUTH_KEY = IS_SERVER
 
 // Users in dashboard
 export const USERS_PAGE_SIZE = 20
+
+
+export const USER_ROLES_OPTIONS:ISelectOption[] = [
+    {
+        value: 'super_admin',
+        label: 'Super Admin'
+    },
+    {
+        value: 'admin',
+        label: 'Administrador'
+    },
+    {
+        value: 'client',
+        label: 'Cliente'
+    },
+]
